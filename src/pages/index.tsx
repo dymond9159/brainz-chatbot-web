@@ -1,15 +1,20 @@
+import React from "react";
 import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "next/font/google";
+import { NextPageWithLayout } from "./_app";
+
 import styles from "@/styles/Home.module.css";
 import { MainLayout } from "@/components/layouts";
-import { useEffect } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+const Page: NextPageWithLayout = () => {
+    return <h1>3000</h1>;
+};
+
+Page.getLayout = (children: React.ReactElement) => {
     return (
-        <MainLayout>
+        <React.Fragment>
             <Head>
                 <title>Create Next App</title>
                 <meta
@@ -25,9 +30,11 @@ export default function Home() {
                     href="/favicon.ico"
                 />
             </Head>
-            <main className={`${styles.main} ${inter.className}`}>
-                <h1>3000</h1>
-            </main>
-        </MainLayout>
+            <MainLayout>
+                <main className={"brainz-chat"}>{children}</main>
+            </MainLayout>
+        </React.Fragment>
     );
-}
+};
+
+export default Page;
