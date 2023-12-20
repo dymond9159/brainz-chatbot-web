@@ -9,6 +9,14 @@ export type ChildrenProps = {
 
 // UI-Component types
 
+export type IconType = {
+    color?: string;
+    size?: string | number;
+    //For rest props
+    [x: string]: any;
+};
+
+// Input
 export interface IInputProps extends ChildrenProps {
     type: HTMLInputTypeAttribute;
     placeholder?: string;
@@ -27,4 +35,18 @@ export interface IInputProps extends ChildrenProps {
             | React.KeyboardEvent<HTMLInputElement>
             | React.KeyboardEvent<HTMLTextAreaElement>,
     ) => void;
+}
+
+// Button
+type ButtonType = "button" | "submit" | "reset" | undefined;
+type TFlexDirection = "row" | "col";
+
+export interface IButtonProps extends ChildrenProps {
+    type?: ButtonType;
+    icon?: string;
+}
+
+export interface IButtonGroupProps extends ChildrenProps {
+    direction?: TFlexDirection;
+    gap?: number;
 }

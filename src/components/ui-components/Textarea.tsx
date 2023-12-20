@@ -33,6 +33,7 @@ export const Textarea: React.FC<IInputProps> = (props) => {
                 onChange={_onChange}
                 onKeyUp={props.onKeyUp}
             />
+            {props.children}
         </div>
     );
 };

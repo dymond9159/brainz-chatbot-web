@@ -37,14 +37,10 @@
                 height: 100%;
             }
 
-            .chat-area, .chat-prompts {
-                width: 70%;                
-            }
-
             .chat-area {
                 overflow-y: auto;
                 overflow-x: hidden;
-
+                width: 100%;
                 // padding: 10px 20px;
                 flex: 1 1 0%;
 
@@ -88,6 +84,15 @@
             }
             .chat-prompts {
                 height: 70px;
+
+                .input-area {
+                    position: relative;
+                    .prompt-buttons {
+                        position: absolute;
+                        right: 5px;
+                        top: 0;
+                    }
+                }
             }
         }
     }

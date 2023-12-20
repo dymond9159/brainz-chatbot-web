@@ -1,3 +1,6 @@
+//
+//
+// Basic Layout Css
 .container {
     .full {
         width: 100%;
@@ -28,6 +31,7 @@
     .flex {
         display: flex;
         // flex-wrap: wrap;
+        align-items: center;
     }
 
     .row {
@@ -70,6 +74,21 @@
         align-items: flex-end;
     }
 
+    .gap-0 {
+        gap: 0px;
+    }
+
+    .gap-1 {
+        gap: 1px;
+    }
+
+    .gap-2 {
+        gap: 2px;
+    }        
+
+    .gap-5 {
+        gap: 5px;
+    }
 
     .block {
         display: block;
@@ -77,5 +96,51 @@
 
     .border {
         border-radius: 12px;
+    }
+}
+
+
+// Default tag's css
+input, textarea {
+  display: block;
+  position: relative;
+  width: fit-content;
+  min-width: 30px;
+  height: 3em;
+  min-height: 3em;
+  resize: none;
+  outline: none;
+  padding: 5px 10px;
+  background: none;  
+  color: currentcolor;
+  border: 1px solid var(--background-middle);
+  border-radius: var(--border-radius-small);
+  margin: 5px 0%;
+  -webkit-tap-highlight-color: transparent;
+
+  &:focus {
+    border: 1px solid var(--background-light);
+  }
+}
+
+button {
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 8px 8px;
+    
+    border-radius: var(--border-radius-small);
+    border: 0;
+    background: #FFFFFF10;
+
+    &:hover {
+        background: #FFFFFF25;
+    }
+
+    .button-text {
+        margin-left: 10px;
     }
 }

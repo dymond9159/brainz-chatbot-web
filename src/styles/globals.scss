@@ -19,13 +19,13 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground: #e2e2e2;
-    --background: #161d31;
+    --background: #313951;
     --background-secondary: #283046;
-    --background-middle: #1f2535;
+    --background-middle: #4a5165;
     --background-light: #5b688a;
 
     --background-message-primary: #424b69;
-    --background-message-secondary: #1f2535;
+    --background-message-secondary: #30384f;
 
     --text-primary: #fff;
     --text-secondary: #84898d;
@@ -81,27 +81,15 @@ a {
   text-decoration: none;
 }
 
-input, textarea {
-  display: block;
-  width: fit-content;
-  min-width: 30px;
-  height: 3em;
-  min-height: 3em;
-  resize: none;
-  outline: none;
-  padding: 5px 10px;
-  background: none;
-  letter-spacing: inherit;
-  line-height: 120%;
-  color: currentcolor;
-  border: 1px solid var(--background-middle);
-  border-radius: var(--border-radius-small);
-  margin: 0px;
-  -webkit-tap-highlight-color: transparent;
+p {
+  line-height: 150%;
+}
 
-  &:focus {
-    border: 1px solid var(--background-light);
-  }
+input, textarea {
+  font-family: inherit;
+  color: inherit;
+  line-height: 130%;
+  letter-spacing: inherit;
 }
 
 @media (prefers-color-scheme: dark) {

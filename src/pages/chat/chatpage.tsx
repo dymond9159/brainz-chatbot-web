@@ -11,7 +11,12 @@ import {
     Box,
 } from "@/components/default";
 import { Logo, Navbar, Sidebar } from "@/components/widgets";
-import { Textarea } from "@/components/ui-components";
+import {
+    Button,
+    ButtonGroup,
+    Icon,
+    Textarea,
+} from "@/components/ui-components";
 import { Conversation } from "@/components/widgets/Conversation";
 
 const useRag = false;
@@ -95,22 +100,15 @@ const ChatPage: React.FC = () => {
                                             className="full"
                                             onChange={handleInputChange}
                                             value={input}
-                                        ></Textarea>
-                                        <button
-                                            type="submit"
-                                            className="chatbot-send-button flex rounded-md items-center justify-center px-2.5 origin:px-3"
                                         >
-                                            <svg
-                                                width="20"
-                                                height="20"
-                                                viewBox="0 0 20 20"
-                                            >
-                                                <path d="M2.925 5.025L9.18333 7.70833L2.91667 6.875L2.925 5.025ZM9.175 12.2917L2.91667 14.975V13.125L9.175 12.2917ZM1.25833 2.5L1.25 8.33333L13.75 10L1.25 11.6667L1.25833 17.5L18.75 10L1.25833 2.5Z" />
-                                            </svg>
-                                            <span className="hidden origin:block font-semibold text-sm ml-2">
-                                                Send
-                                            </span>
-                                        </button>
+                                            <ButtonGroup className="prompt-buttons gap-2">
+                                                <Button icon="mic-fill" />
+                                                <Button
+                                                    icon="arrow-up"
+                                                    type="submit"
+                                                />
+                                            </ButtonGroup>
+                                        </Textarea>
                                     </form>
                                 </Wrapper>
                             </Flex>
