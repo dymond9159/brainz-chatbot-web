@@ -1,0 +1,96 @@
+.chat-container {
+    width: 100vw;
+    height: 100vh;
+
+    .left-side {
+        background: var(--background-secondary);
+        width: 280px;
+        min-width: 280px;
+        height: 100%;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 1px 1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
+        
+        .logo-nav {
+            width: 100%;
+            height: var(--header-height);
+        }
+    
+        .shortcut-board {
+            width: 100%;
+            height: calc(100vh - var(--header-height));
+        }
+    }
+
+    .chat-section {
+        width: 100%;
+        height: 100%;
+
+        .chat-nav {
+            width: 100%;
+            height: var(--header-height);
+            // border-bottom: 1px solid #283046;
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px -1px, rgba(0, 0, 0, 0.04) 0px 0px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+        }
+
+        .chat-content {
+            height: calc(100vh - var(--header-height));
+            .flex {
+                height: 100%;
+            }
+
+            .chat-area, .chat-prompts {
+                width: 70%;                
+            }
+
+            .chat-area {
+                overflow-y: auto;
+                overflow-x: hidden;
+
+                // padding: 10px 20px;
+                flex: 1 1 0%;
+
+                .conversations {
+                    width: 100%;
+                    overflow-x: hidden;  
+                    
+                    .conversation {
+                        display: block;
+                        margin-top: 20px;
+                        clear: both;
+
+                        .message {
+                            text-align: left;                            
+                            border-radius: 6px;
+                            padding: 1rem;
+                        }
+                        
+                        .user {
+                            color: var(--text-primary);
+                            background: var(--background-message-primary);
+                        }
+
+                        .assistant {
+                            color: var(--text-medium);
+                            background: var(--background-message-secondary);
+                        }
+                        
+                    }
+
+                    .user {
+                        float: right;
+
+                    }
+
+                    .assistant {
+                        float: left;
+                    }
+
+                }
+            }
+            .chat-prompts {
+                height: 70px;
+            }
+        }
+    }
+
+    
+}

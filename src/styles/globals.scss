@@ -1,0 +1,119 @@
+:root {
+  --max-width: 1100px;
+  --header-height: 70px;
+  --border-radius-small: 5px;
+  --border-radius-medium: 10px;
+  --border-radius-full: 50px;
+  --font-mono: Roboto, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
+    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
+    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+
+  --foreground: #000000;
+  --background: #FFFFFF;
+  --background-secondary: #b6b6b6;
+  --background-middle: #b6b6b6;
+
+  --background-message-primary: 
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground: #e2e2e2;
+    --background: #161d31;
+    --background-secondary: #283046;
+    --background-middle: #1f2535;
+    --background-light: #5b688a;
+
+    --background-message-primary: #424b69;
+    --background-message-secondary: #1f2535;
+
+    --text-primary: #fff;
+    --text-secondary: #84898d;
+    --text-medium: #a6aaae;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+	width: 5px !important;
+	height: 8px !important;
+	background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+	border-radius: 10px;
+	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #ffffff10;
+	border-radius: 8px;
+  &:hover {
+    background-color: #ffffff25;
+  }  
+}
+
+::-webkit-scrollbar-corner {
+	background-color: transparent;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-mono);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input, textarea {
+  display: block;
+  width: fit-content;
+  min-width: 30px;
+  height: 3em;
+  min-height: 3em;
+  resize: none;
+  outline: none;
+  padding: 5px 10px;
+  background: none;
+  letter-spacing: inherit;
+  line-height: 120%;
+  color: currentcolor;
+  border: 1px solid var(--background-middle);
+  border-radius: var(--border-radius-small);
+  margin: 0px;
+  -webkit-tap-highlight-color: transparent;
+
+  &:focus {
+    border: 1px solid var(--background-light);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+@import "./default.scss";
+
+// page styles
+@import "./chatpage.scss";
+
+// component styles
+@import "./components/widgets/index.scss";

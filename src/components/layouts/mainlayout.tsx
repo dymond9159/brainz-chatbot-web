@@ -11,7 +11,7 @@ export const MainLayout = (props: ChildrenProps) => {
     return (
         <>
             <Navbar />
-            <main>{props.children}</main>
+            {props.children}
             <Footer />
         </>
     );
