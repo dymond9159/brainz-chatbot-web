@@ -16,10 +16,9 @@ export const UserProfile: React.FC = (props) => {
                 <h4>Dong</h4>
                 <span>panda.dev1115@gmail.com</span>
             </Flex>
-
             <Button
                 className="logout"
-                icon="arrow-up"
+                icon="box-arrow-right"
             />
         </Flex>
     );

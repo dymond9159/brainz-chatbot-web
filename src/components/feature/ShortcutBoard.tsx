@@ -10,23 +10,19 @@ export const ShortcutBoard: React.FC = (props) => {
             className="shortcut-button full col gap-10 justify-start"
         >
             <Flex className="shortcut row gap-15 full">
-                <Icon name="arrow-up" />
-                <Link href="#">Home</Link>
-            </Flex>
-            <Flex className="shortcut row gap-15 full">
-                <Icon name="arrow-up" />
+                <Icon name="currency-dollar" />
                 <Link href="#">Pricing</Link>
             </Flex>
             <Flex className="shortcut row gap-15 full">
-                <Icon name="arrow-up" />
+                <Icon name="list-ul" />
                 <Link href="#">How To Use</Link>
             </Flex>
             <Flex className="shortcut row gap-15 full">
-                <Icon name="arrow-up" />
+                <Icon name="question-circle" />
                 <Link href="#">FAQ</Link>
             </Flex>
             <Flex className="shortcut row gap-15 full">
-                <Icon name="arrow-up" />
+                <Icon name="chat-right-dot" />
                 <Link href="#">Feedback</Link>
             </Flex>
             {/* <Flex className="shortcut row gap-15 full">
@@ -34,7 +30,7 @@ export const ShortcutBoard: React.FC = (props) => {
                 <Link href="#">Blog</Link>
             </Flex> */}
             <Flex className="shortcut row gap-15 full">
-                <Icon name="arrow-up" />
+                <Icon name="send" />
                 <Link href="#">Contact Us</Link>
             </Flex>
         </ButtonGroup>

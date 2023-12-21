@@ -13,3 +13,5 @@ export * from "./arrow-right-single";
 export * from "./arrow-up-tri";
 export * from "./arrow-up";
 export * from "./arrow-up-cirlce";
+export * from "./box-arrow-in-left";
+export * from "./box-arrow-right";

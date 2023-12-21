@@ -10,7 +10,7 @@ export const ProgramBoard: React.FC = (props) => {
             className="full col gap-10 justify-start items-start"
         >
             <Flex className="shortcut row gap-15 full">
-                <Icon name="arrow-up" />
+                <Icon name="diamond" />
                 <Link href="#">Explore</Link>
             </Flex>
         </ButtonGroup>

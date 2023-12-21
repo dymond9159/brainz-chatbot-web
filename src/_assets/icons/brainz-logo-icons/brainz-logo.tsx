@@ -3,8 +3,8 @@ import React, { FC } from "react";
 
 export const BrainzLogoIcon: FC<IconType> = (props) => (
     <svg
-        width={props.size}
-        height={props.size}
+        width={props.size ?? "64"}
+        height={props.size ?? "63"}
         viewBox="0 0 64 63"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

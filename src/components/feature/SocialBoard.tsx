@@ -9,10 +9,10 @@ export const SocialBoard: React.FC = (props) => {
             groupname="Follow us"
             className="full row gap-10 justify-start"
         >
-            <Button icon="arrow-up"></Button>
-            <Button icon="arrow-up"></Button>
-            <Button icon="arrow-up"></Button>
-            <Button icon="arrow-up"></Button>
+            <Button icon="facebook"></Button>
+            <Button icon="instagram"></Button>
+            <Button icon="tiktok"></Button>
+            <Button icon="snapchat"></Button>
         </ButtonGroup>
     );
 };

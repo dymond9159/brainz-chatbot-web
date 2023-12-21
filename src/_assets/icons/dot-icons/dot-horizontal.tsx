@@ -1,24 +1,15 @@
+import { IconType } from "@/types";
 import React, { FC } from "react";
 
-const DotHorizontalIcon: FC = () => (
+const DotHorizontalIcon: FC<IconType> = (props) => (
     <svg
-        xmlns="https://www.w3.org/2000/svg"
-        height="1em"
-        viewBox="0 0 4 16"
+        xmlns="http://www.w3.org/2000/svg"
+        width={props.size ?? "16"}
+        height={props.size ?? "16"}
+        fill="currentColor"
+        viewBox="0 0 16 16"
     >
-        <g
-            id="Group_11826"
-            data-name="Group 11826"
-            transform="translate(-3848 9506) rotate(90)"
-        >
-            <path
-                id="_Color"
-                data-name=" ↳Color"
-                d="M14,4a2,2,0,1,1,2-2A2,2,0,0,1,14,4ZM8,4a2,2,0,1,1,2-2A2,2,0,0,1,8,4ZM2,4A2,2,0,1,1,4,2,2,2,0,0,1,2,4Z"
-                transform="translate(-9506 -3852)"
-                fill="currentColor"
-            />
-        </g>
+        <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
     </svg>
 );
 
