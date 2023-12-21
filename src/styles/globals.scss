@@ -33,6 +33,94 @@
   }
 }
 
+// breakpoints
+
+$xxs: 285px;
+$xs: 375px;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+$xxl: 1480px;
+
+@mixin m-xxs {
+	@media (max-width:#{$xxs - 1px}) {
+		@content;
+	}
+}
+
+@mixin xxs {
+	@media (max-width:#{$xs - 1px}) {
+		@content;
+	}
+}
+
+@mixin xs {
+	@media (max-width:#{$sm - 1px}) {
+		@content;
+	}
+}
+
+@mixin sm {
+	@media (max-width:#{$md - 1px}) {
+		@content;
+	}
+}
+
+@mixin sm_in {
+	@media (min-width:$sm) and (max-width:#{$md - 1px}) {
+		@content;
+	}
+}
+
+@mixin md {
+	@media (max-width:#{$lg - 1px}) {
+		@content;
+	}
+}
+
+@mixin md_in {
+	@media (min-width:$md) and (max-width:#{$lg - 1px}) {
+		@content;
+	}
+}
+
+@mixin lg {
+	@media (max-width:#{$xl - 1px}) {
+		@content;
+	}
+}
+
+@mixin lg_in {
+	@media (min-width:$lg) and (max-width:#{$xl - 1px}) {
+		@content;
+	}
+}
+
+@mixin lg_up {
+	@media (min-width: $lg) {
+		@content;
+	}
+}
+
+@mixin xl {
+	@media (max-width:#{$xxl - 1px}) {
+		@content;
+	}
+}
+
+@mixin xl_in {
+	@media (min-width:$xl) and (max-width:#{$xxl - 1px}) {
+		@content;
+	}
+}
+
+@mixin xxl {
+	@media (min-width: $xxl) {
+		@content;
+	}
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -54,6 +142,7 @@
 ::-webkit-scrollbar-thumb {
 	background-color: #ffffff10;
 	border-radius: 8px;
+  cursor: pointer;
   &:hover {
     background-color: #ffffff25;
   }  
@@ -85,10 +174,31 @@ p {
   line-height: 150%;
 }
 
+pre {
+  background: var(--background-secondary);
+  margin: 10px 0px;
+  padding: 10px 20px;
+  border-radius: var(--border-radius-small);
+  code {
+    background: inherit;
+    text-wrap: wrap;  
+  }
+}
+
+ol {
+  margin: 10px 20px;
+
+  li {
+    margin: 5px 0px;
+    line-height: 150%;
+  }
+}
+
 input, textarea {
+  font-size: 16px;
   font-family: inherit;
   color: inherit;
-  line-height: 130%;
+  line-height: 110%;
   letter-spacing: inherit;
 }
 

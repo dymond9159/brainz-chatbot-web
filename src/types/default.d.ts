@@ -21,20 +21,22 @@ export interface IInputProps extends ChildrenProps {
     type: HTMLInputTypeAttribute;
     placeholder?: string;
     inputRef?: React.LegacyRef<HTMLInputElement>;
+    disabled?: boolean;
+    value?: string;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+}
+
+// Textarea
+export interface ITextareaProps extends ChildrenProps {
+    type: HTMLInputTypeAttribute;
+    placeholder?: string;
     textareaRef?: React.LegacyRef<HTMLTextAreaElement>;
     disabled?: boolean;
     rows?: number;
     value?: string;
-    onChange?: (
-        event:
-            | React.ChangeEvent<HTMLInputElement>
-            | React.ChangeEvent<HTMLTextAreaElement>,
-    ) => void;
-    onKeyUp?: (
-        event:
-            | React.KeyboardEvent<HTMLInputElement>
-            | React.KeyboardEvent<HTMLTextAreaElement>,
-    ) => void;
+    onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    onKeyUp?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
 }
 
 // Button

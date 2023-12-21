@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import { IInputProps } from "@/types";
+import { ITextareaProps } from "@/types";
 
-export const Textarea: React.FC<IInputProps> = (props) => {
+export const Textarea: React.FC<ITextareaProps> = (props) => {
     const [state, setState] = useState<{
         value?: string | number;
     }>({

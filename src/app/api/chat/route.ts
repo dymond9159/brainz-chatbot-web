@@ -1,6 +1,7 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import OpenAI from "openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
+import _libs from "@/libs";
+
 // import { AstraDB } from "@datastax/astra-db-ts";
 
 const openai = new OpenAI({
@@ -52,10 +53,7 @@ export async function POST(req: Request) {
         const ragPrompt = [
             {
                 role: "system",
-                content: `You are an AI assistant answering questions about Cassandra and Astra DB. Format responses using markdown where applicable.
-          ${docContext}
-          If the answer is not provided in the context, the AI assistant will say, "I'm sorry, I don't know the answer".
-        `,
+                content: _libs.prompts.SYSTEM_PROMPT + docContext,
             },
         ];
 

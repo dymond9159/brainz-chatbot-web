@@ -28,6 +28,8 @@ const ChatPage: React.FC = () => {
         useChat();
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const formRef = useRef<HTMLFormElement>(null);
 
     const scrollToBottom = () => {
         if (messagesEndRef.current)
@@ -36,13 +38,38 @@ const ChatPage: React.FC = () => {
 
     useEffect(() => {
         scrollToBottom();
-        console.log(messages);
     }, [messages]);
+
+    // textarea auto rows
+    useEffect(() => {
+        if (textareaRef && textareaRef.current) {
+            textareaRef.current.style.height = "inherit";
+            textareaRef.current.style.height = `${textareaRef.current?.scrollHeight}px`;
+            textareaRef.current.style.overflow = `${
+                textareaRef?.current?.scrollHeight > 120 ? "auto" : "hidden"
+            }`;
+        }
+    }, [input]);
 
     const handleSend = (e: React.FormEvent<HTMLFormElement>) => {
         handleSubmit(e, {
             options: { body: { useRag, llm, similarityMetric } },
         });
+    };
+
+    const handleKeyUp = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+
+            if (!e.shiftKey) {
+                // submit
+                if (formRef && formRef.current) {
+                }
+            } else {
+                if (textareaRef && textareaRef.current) {
+                }
+            }
+        }
     };
 
     // const handlePrompt = (promptText: string) => {
@@ -91,18 +118,24 @@ const ChatPage: React.FC = () => {
                                     </Box>
                                 </Wrapper>
                             </Content>
-                            <Flex className="chat-prompts row items-center full">
+                            <Flex className="chat-prompts row items-end full">
                                 <Wrapper className="full">
-                                    <form onSubmit={handleSend}>
+                                    <form
+                                        ref={formRef}
+                                        onSubmit={handleSend}
+                                    >
                                         <Textarea
                                             type="textarea"
                                             placeholder="Say here ..."
                                             className="full"
+                                            rows={1}
+                                            textareaRef={textareaRef}
                                             onChange={handleInputChange}
+                                            onKeyUp={handleKeyUp}
                                             value={input}
                                         >
-                                            <ButtonGroup className="prompt-buttons gap-2">
-                                                <Button icon="mic-fill" />
+                                            <ButtonGroup className="prompt-buttons gap-2 items-end">
+                                                {/* <Button icon="mic-fill" /> */}
                                                 <Button
                                                     icon="arrow-up"
                                                     type="submit"
