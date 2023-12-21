@@ -125,6 +125,7 @@ $xxl: 1480px;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  transition: all 0.3s;
 }
 
 ::-webkit-scrollbar {
@@ -171,7 +172,9 @@ a {
 }
 
 p {
+  text-align: left;
   line-height: 150%;
+  margin-bottom: 15px;
 }
 
 pre {

@@ -1,0 +1,24 @@
+.welcome-body {
+    width: 60%;
+    margin:auto;
+    gap: 20px;
+    padding: 0px 20px;
+
+    @include lg {
+        width: 80%;
+    }
+
+    @include md {
+        width: 100%;
+    }
+    
+    .box {
+        width: 60px;
+        height: 60px;
+        border-radius: var(--border-radius-full);
+        background-color: var(--background-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

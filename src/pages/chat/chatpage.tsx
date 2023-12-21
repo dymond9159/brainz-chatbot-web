@@ -10,7 +10,7 @@ import {
     Wrapper,
     Box,
 } from "@/components/default";
-import { Logo, Navbar, Sidebar } from "@/components/widgets";
+import { Logo, Navbar, Sidebar, WelcomeMessage } from "@/components/widgets";
 import {
     Button,
     ButtonGroup,
@@ -105,6 +105,7 @@ const ChatPage: React.FC = () => {
                     <Content className="chat-content">
                         <Flex className="col items-center justify-center full">
                             <Content className="chat-area">
+                                {messages.length === 0 && <WelcomeMessage />}
                                 <Wrapper>
                                     <Box className="conversations">
                                         {messages.length > 0 &&
