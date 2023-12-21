@@ -11,12 +11,7 @@ import {
     Box,
 } from "@/components/default";
 import { Logo, Navbar, Sidebar, WelcomeMessage } from "@/components/widgets";
-import {
-    Button,
-    ButtonGroup,
-    Icon,
-    Textarea,
-} from "@/components/ui-components";
+import { Button, ButtonGroup, Textarea } from "@/components/ui-components";
 import { Conversation } from "@/components/widgets/Conversation";
 
 const useRag = false;
@@ -105,8 +100,10 @@ const ChatPage: React.FC = () => {
                     <Content className="chat-content">
                         <Flex className="col items-center justify-center full">
                             <Content className="chat-area">
-                                {messages.length === 0 && <WelcomeMessage />}
                                 <Wrapper>
+                                    {messages.length === 0 && (
+                                        <WelcomeMessage />
+                                    )}
                                     <Box className="conversations">
                                         {messages.length > 0 &&
                                             messages.map((message, index) => (

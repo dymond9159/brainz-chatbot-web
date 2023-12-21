@@ -1,16 +1,8 @@
 .welcome-body {
-    width: 60%;
+    width: 90%;
     margin:auto;
     gap: 20px;
-    padding: 0px 20px;
-
-    @include lg {
-        width: 80%;
-    }
-
-    @include md {
-        width: 100%;
-    }
+    padding: 0px 20px;   
     
     .box {
         width: 60px;

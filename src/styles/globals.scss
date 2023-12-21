@@ -125,7 +125,8 @@ $xxl: 1480px;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  transition: all 0.3s;
+  transition: all 0.2s;
+  animation: fadeIn 1s ease-in-out forwards;
 }
 
 ::-webkit-scrollbar {
