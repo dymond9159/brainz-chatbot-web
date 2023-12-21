@@ -13,11 +13,50 @@
             width: 100%;
             height: var(--header-height);
         }
-    
-        .shortcut-board {
+
+        .flex-board {
             width: 100%;
             height: calc(100vh - var(--header-height));
+            padding-top: 30px;
+
+            .feature-board, .shortcut-board, .recent-board, .follow-us {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .feature-board {
+                flex-shrink: 0;
+            }
+
+            .recent-board {
+                flex-grow: 1;
+                overflow-y: hidden;               
+            }
+        
+            .shortcut-board {
+                flex-shrink: 0;
+            }
+
+            .follow-us {
+                flex-shrink: 0;
+                
+                .button {
+                    border-radius: var(--border-radius-full);
+                }
+            }
+    
+            .user-profile {
+                flex-shrink: 1;
+                overflow: hidden;
+                border-top: 1px solid #FFFFFF10;
+                padding: 15px  0px;
+            }
+
+            span {
+                cursor: default;
+            }
         }
+
     }
 
     .chat-section {

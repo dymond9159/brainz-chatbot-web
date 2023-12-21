@@ -18,7 +18,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground: #e2e2e2;
+    --foreground: #c0c0c0;
     --background: #313951;
     --background-secondary: #283046;
     --background-middle: #4a5165;
@@ -168,14 +168,25 @@ body {
 }
 
 a {
+  font-size: medium;
   color: inherit;
   text-decoration: none;
+  
+  &:hover {
+    color: var(--text-primary);
+    text-decoration:underline;
+  }
 }
 
 p {
+  font-size: medium;
   text-align: left;
   line-height: 150%;
   margin-bottom: 15px;
+}
+
+label, span {
+  font-size: small;
 }
 
 pre {
@@ -219,3 +230,5 @@ input, textarea {
 
 // component styles
 @import "./components/widgets/index.scss";
+@import "./components/ui-components/index.scss";
+@import "./components/features/index.scss"

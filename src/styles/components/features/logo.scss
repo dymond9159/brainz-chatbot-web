@@ -1,0 +1,16 @@
+.logo {
+    cursor: pointer;
+    .brainz-logo {
+        width: 48px;
+        height: 48px;
+        background: #485065;
+        border-radius: 10px;
+        margin-right: 15px;
+    }
+    
+    .logo-text {
+        font-size: larger;
+        color: var(--text-primary);
+        margin-left: 10px;
+    }
+}

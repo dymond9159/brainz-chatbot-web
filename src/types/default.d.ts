@@ -51,4 +51,5 @@ export interface IButtonProps extends ChildrenProps {
 export interface IButtonGroupProps extends ChildrenProps {
     direction?: TFlexDirection;
     gap?: number;
+    groupname?: string;
 }

@@ -10,9 +10,18 @@ import {
     Wrapper,
     Box,
 } from "@/components/default";
-import { Logo, Navbar, Sidebar, WelcomeMessage } from "@/components/widgets";
+import { Navbar, Sidebar } from "@/components/widgets";
 import { Button, ButtonGroup, Textarea } from "@/components/ui-components";
-import { Conversation } from "@/components/widgets/Conversation";
+import {
+    Conversation,
+    Logo,
+    ProgramBoard,
+    RecentBoard,
+    ShortcutBoard,
+    SocialBoard,
+    UserProfile,
+    WelcomeMessage,
+} from "@/components/feature";
 
 const useRag = false;
 const llm = "gpt3.5-turbo-1106";
@@ -86,7 +95,23 @@ const ChatPage: React.FC = () => {
                                 <Logo />
                             </Flex>
                         </Navbar>
-                        <Section className="shortcut-board"></Section>
+                        <Flex className="flex-board col items-start justify-start">
+                            <Section className="feature-board">
+                                <ProgramBoard />
+                            </Section>
+                            <Section className="recent-board">
+                                <RecentBoard />
+                            </Section>
+                            <Section className="shortcut-board">
+                                <ShortcutBoard />
+                            </Section>
+                            <Section className="follow-us">
+                                <SocialBoard />
+                            </Section>
+                            <Section className="user-profile">
+                                <UserProfile />
+                            </Section>
+                        </Flex>
                     </Wrapper>
                 </Sidebar>
                 <Section className="chat-section">

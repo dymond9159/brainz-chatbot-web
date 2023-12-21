@@ -1,12 +1,23 @@
 import React from "react";
 
-import { Flex } from "../default";
+import { Box, Flex } from "../default";
 import { IButtonGroupProps } from "@/types";
 
 export const ButtonGroup: React.FC<IButtonGroupProps> = (props) => {
     return (
-        <Flex className={`${props.direction ?? "row"} ${props.className}`}>
-            {props.children}
-        </Flex>
+        <Box className="button-group">
+            {props.groupname && (
+                <div className="group-name">
+                    <label>{props.groupname}</label>
+                </div>
+            )}
+            <Flex
+                className={`button-list ${props.direction ?? "row"} ${
+                    props.className
+                }`}
+            >
+                {props.children}
+            </Flex>
+        </Box>
     );
 };

@@ -5,7 +5,7 @@ import { Icon } from "../ui-components";
 const LOGO_TEXT = "Brainz Health";
 export const Logo = () => {
     return (
-        <Flex className="row items-center">
+        <Flex className="logo row items-center">
             <Icon
                 name="brainz-logo"
                 size={32}

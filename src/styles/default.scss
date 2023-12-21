@@ -90,6 +90,14 @@
         gap: 5px;
     }
 
+    .gap-10 {
+        gap: 10px;
+    }
+
+    .gap-15 {
+        gap: 15px;
+    }
+
     .block {
         display: block;
     }
@@ -130,6 +138,7 @@ button {
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    gap:5px;
     padding: 8px 8px;
     
     border-radius: var(--border-radius-small);
@@ -139,8 +148,6 @@ button {
     &:hover {
         background: #FFFFFF25;
     }
-
-    .button-text {
-        margin-left: 10px;
-    }
+    
 }
+
