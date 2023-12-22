@@ -46,6 +46,9 @@ type TFlexDirection = "row" | "col";
 export interface IButtonProps extends ChildrenProps {
     type?: ButtonType;
     icon?: string;
+    onClick?: (
+        event: React.MouseEventHandler<HTMLButtonElement, MouseEvent>,
+    ) => void;
 }
 
 export interface IButtonGroupProps extends ChildrenProps {

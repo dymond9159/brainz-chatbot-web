@@ -16,6 +16,7 @@ import {
     Conversation,
     Logo,
     ProgramBoard,
+    PromptSuggestionRow,
     RecentBoard,
     ShortcutBoard,
     SocialBoard,
@@ -76,14 +77,16 @@ const ChatPage: React.FC = () => {
         }
     };
 
-    // const handlePrompt = (promptText: string) => {
-    //     const msg: Message = {
-    //         id: crypto.randomUUID(),
-    //         content: promptText,
-    //         role: "user",
-    //     };
-    //     append(msg, { options: { body: { useRag, llm, similarityMetric } } });
-    // };
+    const handlePrompt = (promptText: string) => {
+        alert(1);
+
+        const msg: Message = {
+            id: crypto.randomUUID(),
+            content: promptText,
+            role: "user",
+        };
+        append(msg, { options: { body: { useRag, llm, similarityMetric } } });
+    };
 
     return (
         <Container className="chat-container">
@@ -143,6 +146,12 @@ const ChatPage: React.FC = () => {
                             </Content>
                             <Flex className="chat-prompts row items-end full">
                                 <Wrapper className="full">
+                                    {!messages ||
+                                        (messages.length === 0 && (
+                                            <PromptSuggestionRow
+                                                onPromptClick={handlePrompt}
+                                            />
+                                        ))}
                                     <form
                                         ref={formRef}
                                         onSubmit={handleSend}

@@ -4,6 +4,7 @@ export * from "./Logo";
 // chat page - welcome message
 export * from "./WelcomeMessage";
 export * from "./Conversation";
+export * from "./PromptSuggestionsRow";
 
 // chat sidebar
 // user profile

@@ -13,28 +13,16 @@ export const WelcomeMessage: React.FC = () => {
             </Box>
             <div>
                 <p>
-                    {`Are you struggling with the emotional aftermath of a
-                    distressing event? You're not alone, and we're here to help.`}
+                    {`Are you struggling with the emotional aftermath of a distressing event? '\n\You're not alone, and we're here to help.`}
                 </p>
                 <p>
-                    {`Our Personal Mental Health Assistant is designed to guide
-                    you through the complexities of trauma, providing you with
-                    the tools to protect yourself and heal.`}
+                    {`We're committed to helping you navigate the challenging path of posttraumatic stress disorder (PTSD) and other trauma-related disorders such as depression, anxiety, etc. Our assistant prioritizes your mental well-being, helping you regulate your emotions and maintain healthy relationships. With our Personal Mental Health Assistant, you're not just surviving, you're thriving.`}
                 </p>
                 <p>
-                    {`We're committed to helping you navigate the challenging path
-                    of posttraumatic stress disorder (PTSD) and other
-                    trauma-related disorders such as depression, anxiety, etc.`}
+                    {`Take the first step towards healing today. Your journey to recovery starts here.`}
                 </p>
                 <p>
-                    {`Our assistant prioritizes your mental well-being, helping
-                    you regulate your emotions and maintain healthy
-                    relationships. With our Personal Mental Health Assistant,
-                    you're not just surviving, you're thriving.`}
-                </p>
-                <p>
-                    {`Take the first step towards healing today. Your journey to
-                    recovery starts here.`}
+                    {`How are you feeling today? Could you share any challenges or difficult situations you are currently facing?`}
                 </p>
             </div>
         </Flex>
