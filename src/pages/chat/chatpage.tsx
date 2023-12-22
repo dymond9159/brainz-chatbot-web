@@ -28,6 +28,21 @@ const useRag = false;
 const llm = "gpt3.5-turbo-1106";
 const similarityMetric = "";
 
+const messages0: Message[] = [
+    {
+        id: "1",
+        role: "user",
+        content: "I felt down-hearted and blue",
+    },
+    {
+        id: "2",
+        role: "assistant",
+        content:
+            "Your feelings of being down-hearted and blue suggest a possible mood issue.\n\n - Not at all\n - Several Days\n\n Let's explore this further. <button>AAA</button>'\n" +
+            "Over the last two weeks, have you been bothered by little interest or pleasure in doing things?' <a href='https://www.tiktok.com/@brainz.health' target='_blank'>Here</a>",
+    },
+];
+
 const ChatPage: React.FC = () => {
     const { append, messages, input, handleInputChange, handleSubmit } =
         useChat();
@@ -78,8 +93,6 @@ const ChatPage: React.FC = () => {
     };
 
     const handlePrompt = (promptText: string) => {
-        alert(1);
-
         const msg: Message = {
             id: crypto.randomUUID(),
             content: promptText,
@@ -133,12 +146,13 @@ const ChatPage: React.FC = () => {
                                         <WelcomeMessage />
                                     )}
                                     <Box className="conversations">
-                                        {messages.length > 0 &&
-                                            messages.map((message, index) => (
+                                        {messages0.length > 0 &&
+                                            messages0.map((message, index) => (
                                                 <Conversation
                                                     ref={messagesEndRef}
                                                     key={index}
                                                     content={message}
+                                                    onAnswerClick={handlePrompt}
                                                 />
                                             ))}
                                     </Box>
