@@ -2,6 +2,7 @@ import React from "react";
 import { Flex } from "../default";
 import { Button, ButtonGroup, Icon } from "../ui-components";
 import Link from "next/link";
+import _utils from "@/utils";
 
 export const SocialBoard: React.FC = (props) => {
     return (
@@ -9,10 +10,30 @@ export const SocialBoard: React.FC = (props) => {
             groupname="Follow us"
             className="full row gap-10 justify-start"
         >
-            <Button icon="facebook"></Button>
-            <Button icon="instagram"></Button>
-            <Button icon="tiktok"></Button>
-            <Button icon="snapchat"></Button>
+            <Link
+                href={_utils.routes.FACEBOOK}
+                target="_blank"
+            >
+                <Button icon="facebook"></Button>
+            </Link>
+            <Link
+                href={_utils.routes.INSTAGRAM}
+                target="_blank"
+            >
+                <Button icon="instagram"></Button>
+            </Link>
+            <Link
+                href={_utils.routes.TIKTOK}
+                target="_blank"
+            >
+                <Button icon="tiktok"></Button>
+            </Link>
+            <Link
+                href={_utils.routes.SNAPCHAT}
+                target="_blank"
+            >
+                <Button icon="snapchat"></Button>
+            </Link>
         </ButtonGroup>
     );
 };

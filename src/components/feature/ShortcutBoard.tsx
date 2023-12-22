@@ -2,6 +2,7 @@ import React from "react";
 import { Flex } from "../default";
 import { ButtonGroup, Icon } from "../ui-components";
 import Link from "next/link";
+import _utils from "@/utils";
 
 export const ShortcutBoard: React.FC = (props) => {
     return (
@@ -11,7 +12,12 @@ export const ShortcutBoard: React.FC = (props) => {
         >
             <Flex className="shortcut row gap-15 full">
                 <Icon name="currency-dollar" />
-                <Link href="#">Pricing</Link>
+                <Link
+                    href={_utils.routes.PRICING}
+                    target="_blank"
+                >
+                    Pricing
+                </Link>
             </Flex>
             <Flex className="shortcut row gap-15 full">
                 <Icon name="list-ul" />
