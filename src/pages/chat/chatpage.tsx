@@ -25,7 +25,7 @@ import {
 } from "@/components/feature";
 
 const useRag = false;
-const llm = "gpt3.5-turbo-1106";
+const llm = "gpt3.5-turbo";
 const similarityMetric = "";
 
 const messages0: Message[] = [

@@ -1,4 +1,4 @@
-const WEB_URL = "https://www.nasih.ai";
+const WEB_URL = "https://www.brainz.ai";
 const routes = {
     HOME: `${WEB_URL}`,
     PRICING: `${WEB_URL}/pricing`,
