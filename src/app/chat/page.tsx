@@ -23,10 +23,43 @@ import {
     UserProfile,
     WelcomeMessage,
 } from "@/components/feature";
+import { ChatRequest, FunctionCallHandler } from "ai";
 
 const useRag = false;
 const llm = "gpt-3.5-turbo-1106";
 const similarityMetric = "";
+
+const handlerFunctionCall: FunctionCallHandler = async (
+    chatMessages,
+    functionCall,
+) => {
+    if (functionCall.name === "suggest_answers") {
+        let parsedFunctionCallArguments = {};
+        if (functionCall.arguments) {
+            parsedFunctionCallArguments = JSON.parse(functionCall.arguments);
+            // You now have access to the parsed arguments here (assuming the JSON was valid)
+            // If JSON is invalid, return an appropriate message to the model so that it may retry?
+            console.log(parsedFunctionCallArguments);
+        }
+
+        const functionResponse: ChatRequest = {
+            messages: [
+                ...chatMessages,
+                {
+                    id: crypto.randomUUID(),
+                    name: "survey",
+                    role: "function" as const,
+                    content: JSON.stringify(parsedFunctionCallArguments),
+                },
+            ],
+        };
+        return functionResponse;
+    }
+};
+
+const handlerFinish = (message: Message) => {
+    console.log(message);
+};
 
 const ChatPage: React.FC = () => {
     const {
@@ -37,7 +70,10 @@ const ChatPage: React.FC = () => {
         handleSubmit,
         isLoading,
         error,
-    } = useChat();
+    } = useChat({
+        experimental_onFunctionCall: handlerFunctionCall,
+        onFinish: handlerFinish,
+    });
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -139,14 +175,31 @@ const ChatPage: React.FC = () => {
                                     )}
                                     <Box className="conversations">
                                         {messages.length > 0 &&
-                                            messages.map((message, index) => (
-                                                <Conversation
-                                                    ref={messagesEndRef}
-                                                    key={index}
-                                                    content={message}
-                                                    onAnswerClick={handlePrompt}
-                                                />
-                                            ))}
+                                            messages.map((message, index) =>
+                                                message.role !== "function" ? (
+                                                    <Conversation
+                                                        ref={messagesEndRef}
+                                                        key={index}
+                                                        content={message}
+                                                        onAnswerClick={
+                                                            handlePrompt
+                                                        }
+                                                    />
+                                                ) : (
+                                                    <PromptSuggestionRow
+                                                        key={index}
+                                                        onPromptClick={
+                                                            handlePrompt
+                                                        }
+                                                        suggestAnswers={[
+                                                            "Not at all",
+                                                            "Several Days",
+                                                            "Often",
+                                                            "Heavy",
+                                                        ]}
+                                                    />
+                                                ),
+                                            )}
                                     </Box>
                                 </Wrapper>
                             </Content>

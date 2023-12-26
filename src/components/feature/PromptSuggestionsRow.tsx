@@ -4,25 +4,29 @@ import { Flex } from "../default";
 
 interface IProps {
     onPromptClick: (e: string) => void;
+    suggestAnswers?: string[];
 }
-export const PromptSuggestionRow: React.FC<IProps> = ({ onPromptClick }) => {
-    const prompts = [
-        "I feel down-heart and blue",
-        "I feel that life was meaningless",
-        "I am troubled by attacks of nausea",
-        "My hands and feet are usually warm",
-        "I have a great deal of stomach trouble.",
-    ];
 
+const PROMPTS = [
+    "I feel down-heart and blue",
+    "I feel that life was meaningless",
+    "I am troubled by attacks of nausea",
+    "My hands and feet are usually warm",
+];
+
+export const PromptSuggestionRow: React.FC<IProps> = ({
+    onPromptClick,
+    suggestAnswers = PROMPTS,
+}) => {
     return (
         <Flex className="wrap justify-start items-center gap-10">
-            {prompts.map((prompt, index) => (
+            {suggestAnswers.map((answer, index) => (
                 // <PromptSuggestionButton key={`suggestion-${index}`} text={prompt} onClick={() => onPromptClick(prompt)} />
                 <Button
                     key={index}
-                    onClick={(e) => onPromptClick(prompt)}
+                    onClick={(e) => onPromptClick(answer)}
                 >
-                    {prompt}
+                    {answer}
                 </Button>
             ))}
         </Flex>
