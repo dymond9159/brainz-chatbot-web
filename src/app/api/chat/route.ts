@@ -16,7 +16,7 @@ const openai = new OpenAI({
 //     process.env.ASTRA_DB_NAMESPACE,
 // );
 
-export const runtime = "edge";
+// export const runtime = "edge";
 
 // Suggest Answers Function definition:
 const functions = [
@@ -122,64 +122,61 @@ export async function POST(req: Request) {
             model: llm,
             messages: [...ragPrompt, ...messages],
             stream: true,
-            functions,
+            // functions,
         });
 
         const stream = OpenAIStream(response, {
-            experimental_onFunctionCall: async (
-                { name, arguments: args },
-                createFunctionCallMessages,
-            ) => {
-                // if you skip the function call and return nothing, the `function_call`
-                // message will be sent to the client for it to handle
-                if (name === "get_current_weather") {
-                    // Call a weather API here
-                    const weatherData = {
-                        temperature: 20,
-                        unit: args.format === "celsius" ? "C" : "F",
-                    };
-
-                    // `createFunctionCallMessages` constructs the relevant "assistant" and "function" messages for you
-                    const newMessages = createFunctionCallMessages(weatherData);
-                    return openai.chat.completions.create({
-                        model: llm,
-                        messages: [...messages, ...newMessages],
-                        stream: true,
-                        // see "Recursive Function Calls" below
-                        functions,
-                    });
-                }
-
-                if (name === "get_suggest_answers") {
-                    const answerData = {
-                        question: "",
-                        answers: {
-                            items: [
-                                {
-                                    answer: "",
-                                    score: 0,
-                                    color: "#333",
-                                },
-                                {
-                                    answer: "",
-                                    score: 0,
-                                    color: "#333",
-                                },
-                            ],
-                        },
-                    };
-
-                    // `createFunctionCallMessages` constructs the relevant "assistant" and "function" messages for you
-                    const newMessages = createFunctionCallMessages(answerData);
-                    return openai.chat.completions.create({
-                        model: llm,
-                        messages: [...messages, ...newMessages],
-                        stream: true,
-                        // see "Recursive Function Calls" below
-                        functions,
-                    });
-                }
-            },
+            // experimental_onFunctionCall: async (
+            //     { name, arguments: args },
+            //     createFunctionCallMessages,
+            // ) => {
+            //     // if you skip the function call and return nothing, the `function_call`
+            //     // message will be sent to the client for it to handle
+            //     if (name === "get_current_weather") {
+            //         // Call a weather API here
+            //         const weatherData = {
+            //             temperature: 20,
+            //             unit: args.format === "celsius" ? "C" : "F",
+            //         };
+            //         // `createFunctionCallMessages` constructs the relevant "assistant" and "function" messages for you
+            //         const newMessages = createFunctionCallMessages(weatherData);
+            //         return openai.chat.completions.create({
+            //             model: llm,
+            //             messages: [...messages, ...newMessages],
+            //             stream: true,
+            //             // see "Recursive Function Calls" below
+            //             functions,
+            //         });
+            //     }
+            //     if (name === "get_suggest_answers") {
+            //         const answerData = {
+            //             question: "",
+            //             answers: {
+            //                 items: [
+            //                     {
+            //                         answer: "",
+            //                         score: 0,
+            //                         color: "#333",
+            //                     },
+            //                     {
+            //                         answer: "",
+            //                         score: 0,
+            //                         color: "#333",
+            //                     },
+            //                 ],
+            //             },
+            //         };
+            //         // `createFunctionCallMessages` constructs the relevant "assistant" and "function" messages for you
+            //         const newMessages = createFunctionCallMessages(answerData);
+            //         return openai.chat.completions.create({
+            //             model: llm,
+            //             messages: [...messages, ...newMessages],
+            //             stream: true,
+            //             // see "Recursive Function Calls" below
+            //             functions,
+            //         });
+            //     }
+            // },
         });
 
         // send to client stream of assistant includes function

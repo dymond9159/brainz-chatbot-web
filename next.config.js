@@ -1,9 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-    env: {
-        OPENAI_API_KEY: process.env.OPENAI_API_KEY ?? "",
-    },
-    reactStrictMode: true,
-};
+const nextConfig = {}
 
-module.exports = nextConfig;
+module.exports = nextConfig

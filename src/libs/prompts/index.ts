@@ -74,4 +74,7 @@ If you finished questionnaire for that disorder, using this format.
 '''    
 `;
 
-export default { SYSTEM_PROMPT };
+const prompts = {
+    SYSTEM_PROMPT,
+};
+export default prompts;

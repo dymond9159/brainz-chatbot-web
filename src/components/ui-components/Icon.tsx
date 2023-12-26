@@ -1,6 +1,6 @@
 import React, { FC, useMemo } from "react";
 
-import * as icons from "@/_assets/icons";
+import * as icons from "@/components/icons";
 import { IconType } from "@/types";
 
 interface Props extends IconType {
@@ -38,9 +38,5 @@ export const Icon: FC<Props> = (props) => {
         return list[name];
     }, [name]);
 
-    return component ? (
-        React.createElement(component, { color, size, ...rest })
-    ) : (
-        <></>
-    );
+    return component ? React.createElement(component, { ...rest }) : <></>;
 };
