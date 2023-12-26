@@ -1,5 +1,7 @@
+import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
+// import { AstraDB } from "@datastax/astra-db-ts";
 
 import _libs from "@/libs";
 
@@ -96,7 +98,9 @@ const getRAGContext = async (latestMessage: string) => {
     return "";
 };
 
-export async function POST(req: Request) {
+export const runtime = "edge";
+
+export async function POST(req: NextRequest) {
     try {
         const {
             messages,
@@ -118,68 +122,76 @@ export async function POST(req: Request) {
             },
         ];
 
-        const response = await openai.chat.completions.create({
+        const params: OpenAI.Chat.ChatCompletionCreateParams = {
             model: llm,
-            messages: [...ragPrompt, ...messages],
             stream: true,
-            // functions,
-        });
+            messages: [...ragPrompt, ...messages],
+            functions,
+        };
 
-        const stream = OpenAIStream(response, {
-            // experimental_onFunctionCall: async (
-            //     { name, arguments: args },
-            //     createFunctionCallMessages,
-            // ) => {
-            //     // if you skip the function call and return nothing, the `function_call`
-            //     // message will be sent to the client for it to handle
-            //     if (name === "get_current_weather") {
-            //         // Call a weather API here
-            //         const weatherData = {
-            //             temperature: 20,
-            //             unit: args.format === "celsius" ? "C" : "F",
-            //         };
-            //         // `createFunctionCallMessages` constructs the relevant "assistant" and "function" messages for you
-            //         const newMessages = createFunctionCallMessages(weatherData);
-            //         return openai.chat.completions.create({
-            //             model: llm,
-            //             messages: [...messages, ...newMessages],
-            //             stream: true,
-            //             // see "Recursive Function Calls" below
-            //             functions,
-            //         });
-            //     }
-            //     if (name === "get_suggest_answers") {
-            //         const answerData = {
-            //             question: "",
-            //             answers: {
-            //                 items: [
-            //                     {
-            //                         answer: "",
-            //                         score: 0,
-            //                         color: "#333",
-            //                     },
-            //                     {
-            //                         answer: "",
-            //                         score: 0,
-            //                         color: "#333",
-            //                     },
-            //                 ],
-            //             },
-            //         };
-            //         // `createFunctionCallMessages` constructs the relevant "assistant" and "function" messages for you
-            //         const newMessages = createFunctionCallMessages(answerData);
-            //         return openai.chat.completions.create({
-            //             model: llm,
-            //             messages: [...messages, ...newMessages],
-            //             stream: true,
-            //             // see "Recursive Function Calls" below
-            //             functions,
-            //         });
-            //     }
-            // },
+        const streamResponse = await openai.chat.completions
+            .create(params)
+            .asResponse();
+
+        const stream = OpenAIStream(streamResponse, {
+            experimental_onFunctionCall: async (
+                { name, arguments: args },
+                createFunctionCallMessages,
+            ) => {
+                // if you skip the function call and return nothing, the `function_call`
+                // message will be sent to the client for it to handle
+                if (name === "get_current_weather") {
+                    // Call a weather API here
+                    const weatherData = {
+                        temperature: 20,
+                        unit: args.format === "celsius" ? "C" : "F",
+                    };
+                    // `createFunctionCallMessages` constructs the relevant "assistant" and "function" messages for you
+                    const newMessages = createFunctionCallMessages(weatherData);
+                    return openai.chat.completions.create({
+                        model: llm,
+                        messages: [...messages, ...newMessages],
+                        stream: true,
+                        // see "Recursive Function Calls" below
+                        functions,
+                    });
+                }
+                if (name === "get_suggest_answers") {
+                    const answerData = {
+                        question: "",
+                        answers: {
+                            items: [
+                                {
+                                    answer: "",
+                                    score: 0,
+                                    color: "#333",
+                                },
+                                {
+                                    answer: "",
+                                    score: 0,
+                                    color: "#333",
+                                },
+                            ],
+                        },
+                    };
+                    // `createFunctionCallMessages` constructs the relevant "assistant" and "function" messages for you
+                    const newMessages = createFunctionCallMessages(answerData);
+                    return openai.chat.completions.create({
+                        model: llm,
+                        messages: [...messages, ...newMessages],
+                        stream: true,
+                        // see "Recursive Function Calls" below
+                        functions,
+                    });
+                }
+            },
         });
 
         // send to client stream of assistant includes function
+
+        // const stream = OpenAIStream(streamResponse);
+
+        // Respond with the stream
         return new StreamingTextResponse(stream);
     } catch (err) {
         console.error(err);

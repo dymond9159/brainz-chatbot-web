@@ -38,5 +38,9 @@ export const Icon: FC<Props> = (props) => {
         return list[name];
     }, [name]);
 
-    return component ? React.createElement(component, { ...rest }) : <></>;
+    return component ? (
+        React.createElement(component, { color, size, ...rest })
+    ) : (
+        <></>
+    );
 };

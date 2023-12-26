@@ -25,27 +25,19 @@ import {
 } from "@/components/feature";
 
 const useRag = false;
-const llm = "gpt3.5-turbo-1106";
+const llm = "gpt-3.5-turbo-1106";
 const similarityMetric = "";
 
-const messages0: Message[] = [
-    {
-        id: "1",
-        role: "user",
-        content: "I felt down-hearted and blue",
-    },
-    {
-        id: "2",
-        role: "assistant",
-        content:
-            "Your feelings of being down-hearted and blue suggest a possible mood issue.\n\n - Not at all\n - Several Days\n\n Let's explore this further. <button>AAA</button>'\n" +
-            "Over the last two weeks, have you been bothered by little interest or pleasure in doing things?' <a href='https://www.tiktok.com/@brainz.health' target='_blank'>Here</a>",
-    },
-];
-
 const ChatPage: React.FC = () => {
-    const { append, messages, input, handleInputChange, handleSubmit } =
-        useChat();
+    const {
+        append,
+        messages,
+        input,
+        handleInputChange,
+        handleSubmit,
+        isLoading,
+        error,
+    } = useChat();
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -146,8 +138,8 @@ const ChatPage: React.FC = () => {
                                         <WelcomeMessage />
                                     )}
                                     <Box className="conversations">
-                                        {messages0.length > 0 &&
-                                            messages0.map((message, index) => (
+                                        {messages.length > 0 &&
+                                            messages.map((message, index) => (
                                                 <Conversation
                                                     ref={messagesEndRef}
                                                     key={index}

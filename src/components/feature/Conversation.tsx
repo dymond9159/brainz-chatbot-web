@@ -26,6 +26,7 @@ export const Conversation: React.JSXElementConstructor<IConversationProps> =
                                     <a href={props.href}> {props.children}</a>
                                 ),
                                 ul: (props) => customizeUl(props),
+                                ol: (props) => customizeUl(props),
                                 li: (props) => (
                                     <button
                                         key={props.itemID}

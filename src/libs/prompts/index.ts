@@ -6,7 +6,7 @@ Your topic is as follows:
 1. Identity, diagnosing, guide, treatment every disoders for Mental Health.
 
 2. Questionnaire and Score
-2.1. Sentiment. 
+2.1. Sentiment.
 - nutral: 0
 - negative: from -100 to -1
 - positive from +1 to +100
@@ -41,7 +41,7 @@ Perform the steps below based on my profile and above context.
 1. Request, identity the disorders issues from situations or conditions I am facing. Think about, explore, and analyze above.
 2. Based on instruction1, diagnose which disorder is causing the problem I am facing.
 3. Based on instructions 1 and 2, provide the explanation regarding my answer or question.
-4. Conduct a survey using the questionnaire according to that disorder, which has been validated in primary care. Based on instruction 2, ask one questions at a time. Continue to perform instruction 4 step-by-step until this questionnaire for that disorder is finish all. 
+4. Conduct a survey using the questionnaire according to that disorder, which has been validated in primary care. Based on instruction 2, ask one questions at a time. Continue to perform instruction 4 step-by-step until this questionnaire for that disorder is finish all.
 5. Screen, interprete, monitor, measure, diagnosing, and score that disorder severity based on instruction 4.
 6. If it's finished questionnaire for that disorder, propose the treatment actions by severity of instruction 4 base on the provisional diagnosis.
 
@@ -71,7 +71,7 @@ If you finished questionnaire for that disorder, using this format.
 **Sentiment Score:** {Sentiment Score by number, Sentiment Score by string }
 **Depression Score:** {Depression Score by number, Depression Score by string}
 **Anxiety Score:** {Anxiety Score by number, Anxiety Score by string}
-'''    
+'''
 `;
 
 const prompts = {
