@@ -1,5 +1,11 @@
 import React from "react";
 
+export interface LayoutProps {
+    children?: React.ReactNode;
+
+    params?: any;
+}
+
 // Basic types
 
 export type ChildrenProps = {
@@ -9,12 +15,13 @@ export type ChildrenProps = {
 
 // UI-Component types
 
-export type IconType = {
+export interface IIconProps {
+    name?: string;
     color?: string;
     size?: string | number;
     //For rest props
     [x: string]: any;
-};
+}
 
 // Input
 export interface IInputProps extends ChildrenProps {

@@ -1,10 +1,11 @@
+import { IIconProps } from "@/types";
 import React, { FC } from "react";
 
-export const MicMuteIcon: FC = () => (
+export const MicMuteIcon: FC<IIconProps> = (props) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
+        width={props.size ?? "16"}
+        height={props.size ?? "16"}
         fill="currentColor"
         viewBox="0 0 16 16"
     >

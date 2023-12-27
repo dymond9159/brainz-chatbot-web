@@ -1,7 +1,7 @@
-import { IconType } from "@/types";
+import { IIconProps } from "@/types";
 import React, { FC } from "react";
 
-export const TiktokIcon: FC<IconType> = (props) => (
+export const TiktokIcon: FC<IIconProps> = (props) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         width={props.size ?? "16"}

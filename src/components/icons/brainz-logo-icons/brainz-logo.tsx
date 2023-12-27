@@ -1,7 +1,7 @@
-import { IconType } from "@/types";
+import { IIconProps } from "@/types";
 import React, { FC } from "react";
 
-export const BrainzLogoIcon: FC<IconType> = (props) => (
+export const BrainzLogoIcon: FC<IIconProps> = (props) => (
     <svg
         width={props.size ?? "64"}
         height={props.size ?? "63"}
