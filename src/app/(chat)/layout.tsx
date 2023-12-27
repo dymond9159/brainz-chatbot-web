@@ -1,3 +1,4 @@
+"use client";
 import type { Metadata } from "next";
 // import useSWR from "swr";
 import { Inter } from "next/font/google";
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 
 const AuthLayout = (props: ChildrenProps) => {
     return (
-        <div className="chat">
+        <div>
             <Navbar />
             {props.children}
             <Footer />

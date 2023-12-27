@@ -16,7 +16,7 @@
         flex-grow: 1;
         span {
             width: 120px;
-            color: var(--text-secondary);
+            color: var(--foreground--secondary);
             overflow:hidden;
             text-overflow: ellipsis;
             white-space: nowrap;

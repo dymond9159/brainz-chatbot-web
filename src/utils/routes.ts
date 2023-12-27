@@ -1,7 +1,10 @@
-const WEB_URL = "https://www.brainz.ai";
+const WEB_URL = "https://brainz-health.vercel.app";
 const routes = {
     HOME: `${WEB_URL}`,
+    CHAT: `/`,
     PRICING: `${WEB_URL}/pricing`,
+    FAQ: `${WEB_URL}/faq`,
+    CONTACT: `${WEB_URL}/contact`,
     // social
     FACEBOOK: `https://www.facebook.com/Brainz.Health`,
     INSTAGRAM: `https://www.instagram.com/brainz.health`,

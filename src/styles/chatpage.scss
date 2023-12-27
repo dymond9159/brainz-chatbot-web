@@ -3,7 +3,7 @@
     height: 100vh;
 
     .left-side {
-        background: var(--background-secondary);
+        background: var(--background-sidebar);
         width: 280px;
         min-width: 280px;
         height: 100%;
@@ -118,7 +118,7 @@
                             height: 32px;
                             border-radius: var(--border-radius-full);
                             border: 1px solid var(--background-light);
-                            background-color: var(--background-middle);
+                            background-color: var(--background-medium);
                         }
 
                         .message {
@@ -128,13 +128,21 @@
                         }
                         
                         .user {
-                            color: var(--text-primary);
+                            color: var(--foreground);
                             background: var(--background-message-primary);
                         }
 
                         .assistant {
-                            color: var(--text-color-tetrary);
+                            color: var(--foreground--tetrary);
                             background: var(--background-message-secondary);
+
+                            p {
+                                margin-bottom: 20px;
+
+                                &:last-child {
+                                    margin-bottom: 0px;
+                                }
+                            }
                         }
                         
                     }
