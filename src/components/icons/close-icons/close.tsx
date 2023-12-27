@@ -1,8 +1,10 @@
+import { IIconProps } from "@/types";
 import { FC } from "react";
 
-export const CloseIcon: FC = () => (
+export const CloseIcon: FC<IIconProps> = (props) => (
     <svg
-        width="1em"
+        width={props.size ?? "16"}
+        height={props.size ?? "16"}
         viewBox="0 0 16 16"
         fill="none"
         xmlns="https://www.w3.org/2000/svg"

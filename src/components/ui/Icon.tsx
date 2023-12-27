@@ -1,14 +1,10 @@
 import React, { FC, useMemo } from "react";
 
 import * as icons from "@/components/icons";
-import { IconType } from "@/types";
-
-interface Props extends IconType {
-    name: string;
-}
+import { IIconProps } from "@/types";
 
 export type IconListType = {
-    [key: string]: React.FC;
+    [key: string]: React.FC<IIconProps>;
 };
 
 export const iconList = (): IconListType => {
@@ -27,7 +23,7 @@ export const iconList = (): IconListType => {
     return obj;
 };
 
-export const Icon: FC<Props> = (props) => {
+export const Icon: FC<IIconProps> = (props) => {
     const { name, color = "currentColor", size = "1em", ...rest } = props;
 
     const list = useMemo(() => {
@@ -35,7 +31,7 @@ export const Icon: FC<Props> = (props) => {
     }, []);
 
     const component = useMemo(() => {
-        return list[name];
+        return list[name!];
     }, [name]);
 
     return component ? (

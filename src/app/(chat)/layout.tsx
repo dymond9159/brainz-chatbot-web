@@ -1,22 +1,13 @@
 "use client";
-import type { Metadata } from "next";
 // import useSWR from "swr";
-import { Inter } from "next/font/google";
-import "@/styles/globals.scss";
 
 import { Navbar, Footer } from "@/components/widgets";
-import { ChildrenProps } from "@/types";
+import { LayoutProps } from "@/types";
+import { cn } from "@/utils/functions";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-    title: "Chat - Brainz Health",
-    description: "",
-};
-
-const AuthLayout = (props: ChildrenProps) => {
+const AuthLayout = (props: LayoutProps) => {
     return (
-        <div>
+        <div className={cn("authorized")}>
             <Navbar />
             {props.children}
             <Footer />

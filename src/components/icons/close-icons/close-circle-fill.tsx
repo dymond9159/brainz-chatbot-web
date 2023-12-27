@@ -1,10 +1,12 @@
+import { IIconProps } from "@/types";
 import { FC } from "react";
 
-export const CloseCircleFillIcon: FC = () => {
+export const CloseCircleFillIcon: FC<IIconProps> = (props) => {
     return (
         <svg
             xmlns="https://www.w3.org/2000/svg"
-            width="1em"
+            width={props.size ?? "16"}
+            height={props.size ?? "16"}
             viewBox="0 0 8.711 8.711"
         >
             <path

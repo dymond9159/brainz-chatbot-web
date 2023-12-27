@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { Providers } from "@/components/providers";
-import { Footer, Navbar } from "@/components/widgets";
 
 import "@/styles/globals.scss";
+import { LayoutProps } from "@/types";
+import { cn } from "@/utils/functions";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,13 +20,12 @@ export const viewport: Viewport = {
     ],
 };
 
-export default function RootLayout({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
+export default function RootLayout(props: LayoutProps) {
     return (
-        <html lang="en">
+        <html
+            lang="en"
+            suppressHydrationWarning
+        >
             <body className={inter.className}>
                 <Providers
                     attribute="class"
@@ -33,7 +33,7 @@ export default function RootLayout({
                     enableSystem
                     disableTransitionOnChange
                 >
-                    <main>{children}</main>
+                    <main className={cn("brainz-chat")}>{props.children}</main>
                 </Providers>
             </body>
         </html>
