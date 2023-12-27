@@ -1,6 +1,6 @@
 // import useSWR from "swr";
 
-import { Navbar, Footer } from "@/components/widgets";
+import { Navbar } from "@/components/widgets";
 import { LayoutProps } from "@/types";
 import { cn } from "@/utils/functions";
 
