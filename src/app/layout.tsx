@@ -22,10 +22,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout(props: LayoutProps) {
     return (
-        <html
-            lang="en"
-            suppressHydrationWarning
-        >
+        <html lang="en">
             <body className={inter.className}>
                 <Providers
                     attribute="class"
