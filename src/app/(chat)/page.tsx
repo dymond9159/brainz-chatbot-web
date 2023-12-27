@@ -73,10 +73,7 @@ const ChatPage: React.FC = () => {
         handleSubmit,
         isLoading,
         error,
-    } = useChat({
-        experimental_onFunctionCall: handlerFunctionCall,
-        onFinish: handlerFinish,
-    });
+    } = useChat();
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);

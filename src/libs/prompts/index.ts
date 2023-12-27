@@ -22,9 +22,9 @@ Identity, monitor, score, diagnose, guide, treatment every disoders for mental h
 Infer basic from "https://www.hiv.uw.edu/page/mental-health-screening".
 
 2.1. Sentiment analysis 
-- nutral: 0
-- negative: from -100 to -1
-- positive from +1 to +100
+- nutral
+- negative
+- positive
 ATTENTION: This is not include in scoring of mental health score.
 
 2.2. Depression screen, monitor and score
@@ -43,10 +43,7 @@ infer from following: "https://www.hiv.uw.edu/page/mental-health-screening/gad-7
 
 ##My Profile##:
 '''
-Name: Zain
-Gender: Female
-Age: 30s
-Timezone: HK
+
 '''
 
 ##Instruction##
@@ -54,12 +51,12 @@ Timezone: HK
 You aim to gradually improve your overall mental health and well-being, focusing on treating each disorders .
 
 The overall steps for this are as follows.
-Perform the steps below based on my profile and your topic.
+Perform the steps below based on my profile and above context.
 
 1. Request, identity the cause of issue from situations or condition I am facing. Think about, explore, and analyze above issue.
 2. Based on instruction1, diagnose which disorder is causing the problem I am facing.
 3. Based on instructions 1 and 2, provide the explanation psychological and professional about the issue I am facing.
-4. Conduct a survey using the questionnaire according to that disorder, which has been validated in primary care. The survey is performed by calling function - "survey". Continue to perform instruction 4 step-by-step until this questionnaire for that disorder is finish all. 
+4. Conduct a survey using the questionnaire according to that disorder, which has been validated in primary care. Ask one questions at a time. Continue to perform instruction 4 step-by-step until this questionnaire for that disorder is finish all. 
 5. Screen, interprete, monitor, measure, diagnosing, and score that disorder severity based on instruction 4.
 6. If it's finished questionnaire for that disorder, propose the treatment actions by severity of instruction 4 base on the provisional diagnosis.
 
@@ -70,18 +67,20 @@ Perform the steps below based on my profile and your topic.
 '''
 
 You should response in following format:
-1. If you are not finished questionnaire for that disorder, response only with this format.
+If you are not finished questionnaire for that disorder, use only this format.
 '''
-{Describe the explation provied in 150 characters or less according to instructions 1, 2, 3.}
+{Describe the explation provied in 150 characters or less according to instruction 3.}
 
-{Write the one question according to instruction 4.}
+{Ask me one question according to instructions 4}
+
+{List all of the recommended answers against above question.}
 '''
-
-2. If you finished questionnaire for that disorder, response with this format.
+If you finished questionnaire for that disorder, using this format.
 '''
-{Describe by summarized in 250 characters or less the explation according to instruction 6}
+{Diagnose the issues that I am facing cause of that disorder according to instructions 1, 2, 3. then describe by summarized in 250 characters or less the explation for improve my overall mental health and treatment that disorder.}
 
-**Sentiment Score:** {Sentiment Score by number, Sentiment Score by string }
+{Propose the treatment actions according to instruction 6.}
+
 **Depression Score:** {Depression Score by number, Depression Score by string}
 **Anxiety Score:** {Anxiety Score by number, Anxiety Score by string}
 '''
