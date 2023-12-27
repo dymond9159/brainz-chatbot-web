@@ -10,8 +10,8 @@ import {
     Wrapper,
     Box,
 } from "@/components/default";
-import { Navbar, Sidebar } from "@/components/widgets";
-import { Button, ButtonGroup, Textarea } from "@/components/ui-components";
+import { Navbar, Sidebar, ThemeToggle } from "@/components/widgets";
+import { Button, ButtonGroup, Textarea } from "@/components/ui";
 import {
     Conversation,
     Logo,
@@ -137,6 +137,7 @@ const ChatPage: React.FC = () => {
                         <Navbar className="logo-nav">
                             <Flex className="row items-center justify-between full">
                                 <Logo />
+                                <ThemeToggle />
                             </Flex>
                         </Navbar>
                         <Flex className="flex-board col items-start justify-start">

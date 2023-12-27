@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../ui-components";
+import { Button } from "../ui";
 import { Flex } from "../default";
 
 interface IProps {

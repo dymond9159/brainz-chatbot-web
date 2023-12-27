@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex } from "../default";
-import { Button, ButtonGroup, Icon } from "../ui-components";
+import { Button, ButtonGroup, Icon } from "../ui";
 import Link from "next/link";
 
 export const ProgramBoard: React.FC = (props) => {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex } from "../default";
-import { Icon } from "../ui-components";
+import { Icon } from "../ui";
 
 const LOGO_TEXT = "Brainz Health";
 export const Logo = () => {

@@ -15,13 +15,11 @@ export const metadata: Metadata = {
 
 const AuthLayout = (props: ChildrenProps) => {
     return (
-        <html lang="en">
-            <body className={inter.className}>
-                <Navbar />
-                {props.children}
-                <Footer />
-            </body>
-        </html>
+        <div className="chat">
+            <Navbar />
+            {props.children}
+            <Footer />
+        </div>
     );
 };
 

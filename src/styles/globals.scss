@@ -4,34 +4,41 @@
   --border-radius-small: 5px;
   --border-radius-medium: 10px;
   --border-radius-full: 50px;
-  --font-mono: Roboto, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
+  --font-mono: "Inter", 'Cascadia Mono', 'Segoe UI Mono',
     'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
-  --foreground: #000000;
   --background: #FFFFFF;
-  --background-secondary: #b6b6b6;
+  --background-secondary: #e6e6e6;
   --background-middle: #b6b6b6;
+  --background-light: #8a8a8a;
 
-  --background-message-primary: 
+  --foreground: #000000;
+  --text-primary: #000000;
+  --text-secondary: #242424;
+  --text-color-tetrary: #474747;
+
+  --background-message-primary: #c2ecb4;
+  --background-message-secondary: #f3f3f3;
+
+
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground: #c0c0c0;
+.dark {
     --background: #313951;
     --background-secondary: #283046;
     --background-middle: #4a5165;
     --background-light: #5b688a;
 
-    --background-message-primary: #424b69;
-    --background-message-secondary: #30384f;
-
+    --foreground: #c0c0c0;
     --text-primary: #fff;
     --text-secondary: #84898d;
     --text-color-tetrary: #bcbfc3;
-  }
+
+    --background-message-primary: #424b69;
+    --background-message-secondary: #30384f;
 }
+
 
 // breakpoints
 
@@ -129,6 +136,8 @@ $xxl: 1480px;
   animation: fadeIn 1s ease-in-out forwards;
 }
 
+// Custom scroll styles
+
 ::-webkit-scrollbar {
 	width: 5px !important;
 	height: 8px !important;
@@ -153,6 +162,8 @@ $xxl: 1480px;
 ::-webkit-scrollbar-corner {
 	background-color: transparent;
 }
+
+// Custom default styles
 
 html,
 body {
@@ -215,12 +226,6 @@ input, textarea {
   color: inherit;
   line-height: 110%;
   letter-spacing: inherit;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
 }
 
 @import "./default.scss";

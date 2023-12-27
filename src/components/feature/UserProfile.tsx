@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex } from "../default";
 import Avatar from "react-avatar";
-import { Button } from "../ui-components";
+import { Button } from "../ui";
 
 export const UserProfile: React.FC = (props) => {
     return (

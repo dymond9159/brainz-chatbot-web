@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Flex } from "../default";
-import { Icon } from "../ui-components";
+import { Icon } from "../ui";
 
 export const WelcomeMessage: React.FC = () => {
     return (
