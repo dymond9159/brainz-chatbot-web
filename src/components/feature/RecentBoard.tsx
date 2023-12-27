@@ -9,14 +9,14 @@ export const RecentBoard: React.FC = (props) => {
             groupname="Recently Program"
             className="full col gap-10 justify-start items-start"
         >
-            <Flex className="shortcut row gap-15 full">
+            {/* <Flex className="shortcut row gap-15 full">
                 <Icon name="arrow-up" />
                 <Link href="#">Trauma Assistant</Link>
             </Flex>
             <Flex className="shortcut row gap-15 full">
                 <Icon name="arrow-up" />
                 <Link href="#">Self-Care Advisor</Link>
-            </Flex>
+            </Flex> */}
         </ButtonGroup>
     );
 };

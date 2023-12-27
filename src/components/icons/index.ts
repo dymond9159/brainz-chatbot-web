@@ -10,6 +10,7 @@ export * from "./social-icons";
 
 //menu
 // export * from "./home-icons"
+export * from "./home-icons";
 export * from "./pricing-icons";
 export * from "./list-iconts";
 export * from "./help-icons";
