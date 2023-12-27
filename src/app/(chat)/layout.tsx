@@ -1,5 +1,4 @@
 "use client";
-// import useSWR from "swr";
 
 import { Navbar } from "@/components/widgets";
 import { LayoutProps } from "@/types";
