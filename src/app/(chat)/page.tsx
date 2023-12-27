@@ -10,8 +10,9 @@ import {
     Content,
     Wrapper,
     Box,
-} from "@/components/default";
-import { Navbar, Sidebar, ThemeToggle } from "@/components/widgets";
+    Sidebar,
+    Navbar,
+} from "@/components/basic";
 import { Button, ButtonGroup, Textarea } from "@/components/ui";
 import {
     Conversation,
@@ -21,6 +22,7 @@ import {
     RecentBoard,
     ShortcutBoard,
     SocialBoard,
+    ThemeToggle,
     UserProfile,
     WelcomeMessage,
 } from "@/components/feature";

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box, Flex } from "../default";
+import { Box, Flex } from "../basic";
 import { IButtonGroupProps } from "@/types";
 
 export const ButtonGroup: React.FC<IButtonGroupProps> = (props) => {

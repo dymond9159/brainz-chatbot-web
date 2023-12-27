@@ -1,7 +1,5 @@
-"use client";
-
 import React from "react";
-import { Content, Flex } from "../default";
+import { Content, Flex } from ".";
 import { ChildrenProps } from "@/types";
 
 export const Navbar: React.FC<ChildrenProps> = (props) => {

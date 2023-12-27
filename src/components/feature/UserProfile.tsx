@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex } from "../default";
+import { Flex } from "../basic";
 import Avatar from "react-avatar";
 import { Button } from "../ui";
 

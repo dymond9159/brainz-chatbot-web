@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex } from "../default";
+import { Flex } from "../basic";
 import { ButtonGroup, Icon } from "../ui";
 import Link from "next/link";
 import _utils from "@/utils";

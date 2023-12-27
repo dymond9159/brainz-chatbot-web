@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "../ui";
-import { Flex } from "../default";
+import { Flex } from "../basic";
 
 interface IProps {
     onPromptClick: (e: string) => void;

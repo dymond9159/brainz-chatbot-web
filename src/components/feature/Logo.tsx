@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex } from "../default";
+import { Flex } from "../basic";
 import { Icon } from "../ui";
 
 const LOGO_TEXT = "Brainz Health";

@@ -3,7 +3,7 @@ import React, { forwardRef } from "react";
 import Markdown, { ExtraProps } from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-import { Flex } from "../default";
+import { Flex } from "../basic";
 import { IConversationProps } from "@/types/chat";
 
 export const Conversation: React.JSXElementConstructor<IConversationProps> =
