@@ -29,7 +29,7 @@ import {
 import { ChatRequest, FunctionCallHandler } from "ai";
 
 const useRag = false;
-const llm = "gpt-3.5-turbo-1106";
+const llm = "gpt-4-1106-preview";
 const similarityMetric = "";
 
 const handlerFunctionCall: FunctionCallHandler = async (
