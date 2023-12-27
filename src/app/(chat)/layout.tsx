@@ -1,4 +1,3 @@
-"use client";
 // import useSWR from "swr";
 
 import { Navbar, Footer } from "@/components/widgets";
@@ -10,7 +9,6 @@ const AuthLayout = (props: LayoutProps) => {
         <div className={cn("authorized")}>
             <Navbar />
             {props.children}
-            <Footer />
         </div>
     );
 };

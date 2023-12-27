@@ -1,11 +1,13 @@
+"use client";
+
 import React from "react";
 
 import { cn } from "@/utils/functions";
 import { useSidebar } from "@/hooks/use-sidebar";
 
-export interface SidebarProps extends React.ComponentProps<"div"> {}
+export interface ISidebarProps extends React.ComponentProps<"div"> {}
 
-export function Sidebar({ className, children }: SidebarProps) {
+export const Sidebar: React.FC<ISidebarProps> = ({ className, children }) => {
     const { isSidebarOpen, isLoading } = useSidebar();
 
     return (
@@ -16,4 +18,4 @@ export function Sidebar({ className, children }: SidebarProps) {
             {children}
         </div>
     );
-}
+};
