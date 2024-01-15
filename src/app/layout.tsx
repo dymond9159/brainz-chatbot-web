@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 
 import "@/styles/globals.scss";
 
-import { Providers } from "@/components/providers";
+import { Providers } from "@/components/theme/providers";
 
 import { LayoutProps } from "@/types";
 import { cn } from "@/utils/functions";

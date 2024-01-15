@@ -279,7 +279,10 @@ button {
     
 }
 
-@import "./default.scss";
+@import "./container.scss";
+
+// main styles
+@import "./main.scss";
 
 // page styles
 @import "./chatpage.scss";

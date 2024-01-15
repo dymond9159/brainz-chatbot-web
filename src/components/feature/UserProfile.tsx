@@ -1,11 +1,12 @@
 import React from "react";
-import { Flex } from "../basic";
+import { Flex } from "../container";
 import Avatar from "react-avatar";
 import { Button } from "../ui";
+import { ChildrenProps } from "@/types";
 
-export const UserProfile: React.FC = (props) => {
+export const UserProfile: React.FC<ChildrenProps> = (props) => {
     return (
-        <Flex className="row gap-5">
+        <Flex className={`${props.className} row gap-5`}>
             <Avatar
                 className="user-avatar"
                 name="dong ying"

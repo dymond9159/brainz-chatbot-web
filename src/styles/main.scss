@@ -1,0 +1,105 @@
+/*  ////////////////////////////////////////////////////////
+*   Main Styles
+*/  ////////////////////////////////////////////////////////
+
+// Main Layout
+.main-container {
+    width: 100vw;
+    height: 100vh; 
+
+    .left-side {
+        
+    }
+
+    .main-section {
+        width: 100%;
+        height: 100%;
+        min-width: 280px;
+        min-height: 300px;
+
+        .main-nav {
+            
+        }
+    }
+}
+
+// Sidebar Styles
+.sidebar {
+    background: var(--background-sidebar);
+    width: 280px;
+    min-width: 280px;
+    height: 100vh;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 1px 1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
+
+    .wrapper {
+        padding-right: 0px;
+    }
+    
+    .logo-nav {
+        width: 100%;
+        height: var(--header-height);
+    }
+
+    .flex-board {
+        width: 100%;
+        height: calc(100vh - var(--header-height));
+        padding-top: 30px;
+        padding-right: 20px;
+        overflow-y: auto;
+
+        .feature-board, .shortcut-board, .recent-board, .follow-us {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .feature-board {
+            flex-shrink: 0;
+        }
+
+        .recent-board {
+            flex-grow: 1;
+            overflow-y: hidden;               
+        }
+    
+        .shortcut-board {
+            flex-shrink: 0;
+        }
+
+        .follow-us {
+            flex-shrink: 0;
+            
+            .button {
+                border-radius: var(--border-radius-full);
+            }
+        }
+
+        span {
+            cursor: default;
+        }
+    }
+
+    .user-profile {
+        flex-shrink: 1;
+        // overflow: hidden;
+        border-top: 1px solid #FFFFFF10;
+        padding: 15px  0px;
+    }
+
+    span {
+        cursor: default;
+    }
+}
+
+// Navbar Styles
+.nav {
+    width: 100%;
+    height: var(--header-height);
+
+    .flex {
+        height: 100%;
+    }
+}
+
+.main-nav {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px -1px, rgba(0, 0, 0, 0.04) 0px 0px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+}

@@ -4,6 +4,11 @@ export * from "./Logo";
 // theme
 export * from "./ThemeToggle";
 
+// main
+export * from "./Sidebar";
+export * from "./Navbar";
+export * from "./Footer";
+
 // chat page - welcome message
 export * from "./WelcomeMessage";
 export * from "./Conversation";

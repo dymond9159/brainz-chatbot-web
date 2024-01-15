@@ -10,20 +10,13 @@ import {
     Content,
     Wrapper,
     Box,
-    Sidebar,
-    Navbar,
-} from "@/components/basic";
+} from "@/components/container";
 import { Button, ButtonGroup, Textarea } from "@/components/ui";
 import {
     Conversation,
-    Logo,
-    ProgramBoard,
+    Navbar,
     PromptSuggestionRow,
-    RecentBoard,
-    ShortcutBoard,
-    SocialBoard,
-    ThemeToggle,
-    UserProfile,
+    Sidebar,
     WelcomeMessage,
 } from "@/components/feature";
 import { ChatRequest, FunctionCallHandler } from "ai";
@@ -130,43 +123,11 @@ const ChatPage: React.FC = () => {
     };
 
     return (
-        <Container className="chat-container">
+        <Container className="main-container">
             <Flex>
-                <Sidebar className="left-side">
-                    <Wrapper>
-                        <Navbar className="logo-nav">
-                            <Flex className="row items-center justify-between full">
-                                <Logo />
-                                <ThemeToggle />
-                            </Flex>
-                        </Navbar>
-                        <Flex className="flex-board col items-start justify-start">
-                            <Section className="feature-board">
-                                <ProgramBoard />
-                            </Section>
-                            <Section className="recent-board">
-                                <RecentBoard />
-                            </Section>
-                            <Section className="shortcut-board">
-                                <ShortcutBoard />
-                            </Section>
-                            <Section className="follow-us">
-                                <SocialBoard />
-                            </Section>
-                            <Section className="user-profile">
-                                <UserProfile />
-                            </Section>
-                        </Flex>
-                    </Wrapper>
-                </Sidebar>
-                <Section className="chat-section">
-                    <Navbar className="chat-nav">
-                        <Flex className="row items-center justify-between full">
-                            <Wrapper>
-                                <h4>Mental Health Assistant</h4>
-                            </Wrapper>
-                        </Flex>
-                    </Navbar>
+                <Sidebar className="left-side" />
+                <Section className="main-section">
+                    <Navbar className="main-nav" />
                     <Content className="chat-content">
                         <Flex className="col items-center justify-center full">
                             <Content className="chat-area">
