@@ -1,7 +1,7 @@
 import React from "react";
 
-import { ChildrenProps } from "@/types";
+import { DivProps } from "@/types";
 
-export const Flex: React.FC<ChildrenProps> = (props) => {
+export const Flex: React.FC<DivProps> = (props) => {
     return <div className={`flex ${props.className}`}>{props.children}</div>;
 };

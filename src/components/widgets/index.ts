@@ -11,6 +11,7 @@ export * from "./Footer";
 
 // home page
 export * from "./MoodScale";
+export * from "./Program";
 
 // chat page - welcome message
 export * from "./WelcomeMessage";

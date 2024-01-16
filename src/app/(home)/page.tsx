@@ -23,11 +23,10 @@ const HomePage: React.FC = () => {
                     <Content className="home-content">
                         <Wrapper>
                             <Flex className="col items-center justify-center full gap-15">
-                                <h3>
-                                    {
-                                        "Hey, you're finding strength in adversity today!"
-                                    }
-                                </h3>
+                                <h2>
+                                    Hey, you are finding strength in adversity
+                                    today!
+                                </h2>
                                 <Box className="">
                                     <MoodScale />
                                 </Box>

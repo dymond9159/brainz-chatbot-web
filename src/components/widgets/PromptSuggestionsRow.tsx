@@ -4,7 +4,7 @@ import { Flex } from "../container";
 
 interface IProps {
     onPromptClick: (e: string) => void;
-    suggestAnswers?: string[];
+    suggests?: string[];
 }
 
 const PROMPTS = [
@@ -16,19 +16,20 @@ const PROMPTS = [
 
 export const PromptSuggestionRow: React.FC<IProps> = ({
     onPromptClick,
-    suggestAnswers = PROMPTS,
+    suggests,
 }) => {
     return (
         <Flex className="wrap justify-start items-center gap-10">
-            {suggestAnswers.map((answer, index) => (
-                // <PromptSuggestionButton key={`suggestion-${index}`} text={prompt} onClick={() => onPromptClick(prompt)} />
-                <Button
-                    key={index}
-                    onClick={(e) => onPromptClick(answer)}
-                >
-                    {answer}
-                </Button>
-            ))}
+            {suggests &&
+                suggests.map((answer, index) => (
+                    // <PromptSuggestionButton key={`suggestion-${index}`} text={prompt} onClick={() => onPromptClick(prompt)} />
+                    <Button
+                        key={index}
+                        onClick={(e) => onPromptClick(answer)}
+                    >
+                        {answer}
+                    </Button>
+                ))}
         </Flex>
     );
 };

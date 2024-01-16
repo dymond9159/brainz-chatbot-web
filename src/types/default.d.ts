@@ -8,10 +8,7 @@ export interface LayoutProps {
 
 // Basic types
 
-export type ChildrenProps = {
-    children?: React.ReactNode;
-    className?: string;
-};
+export interface DivProps extends React.ComponentProps<"div"> {}
 
 // UI-Component types
 
@@ -24,7 +21,7 @@ export interface IIconProps {
 }
 
 // Input
-export interface IInputProps extends ChildrenProps {
+export interface IInputProps extends React.ComponentProps<"input"> {
     type: HTMLInputTypeAttribute;
     placeholder?: string;
     inputRef?: React.LegacyRef<HTMLInputElement>;
@@ -35,7 +32,7 @@ export interface IInputProps extends ChildrenProps {
 }
 
 // Textarea
-export interface ITextareaProps extends ChildrenProps {
+export interface ITextareaProps extends React.ComponentProps<"textarea"> {
     type: HTMLInputTypeAttribute;
     placeholder?: string;
     textareaRef?: React.LegacyRef<HTMLTextAreaElement>;
@@ -50,7 +47,7 @@ export interface ITextareaProps extends ChildrenProps {
 type ButtonType = "button" | "submit" | "reset" | undefined;
 type TFlexDirection = "row" | "col";
 
-export interface IButtonProps extends ChildrenProps {
+export interface IButtonProps extends React.ComponentProps<"button"> {
     type?: ButtonType;
     icon?: string;
     onClick?: (
@@ -58,8 +55,18 @@ export interface IButtonProps extends ChildrenProps {
     ) => void;
 }
 
-export interface IButtonGroupProps extends ChildrenProps {
+export interface IButtonGroupProps extends DivProps {
     direction?: TFlexDirection;
     gap?: number;
     groupname?: string;
 }
+
+// Program
+export type ProgramDataType = {
+    numid: number;
+    strid: string;
+    name: string;
+    description: string;
+    src: string;
+    suggests: string[];
+};

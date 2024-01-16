@@ -8,10 +8,9 @@ import {
     Section,
     Content,
     Wrapper,
-    Box,
 } from "@/components/container";
-import { Button } from "@/components/ui";
-import { Navbar, Sidebar } from "@/components/widgets";
+import { Navbar, Program, Sidebar } from "@/components/widgets";
+import _utils from "@/utils";
 
 const ExplorePage: React.FC = () => {
     return (
@@ -19,13 +18,20 @@ const ExplorePage: React.FC = () => {
             <Flex>
                 <Sidebar className="left-side" />
                 <Section className="main-section">
-                    <Navbar className="main-nav">Home</Navbar>
+                    <Navbar className="main-nav"></Navbar>
                     <Content className="home-content">
                         <Wrapper>
                             <Flex className="col items-center justify-center full gap-15">
-                                <h3>
-                                    {"Explore your mental health advisors!"}
-                                </h3>
+                                <h1>Programs</h1>
+                                <p>
+                                    Discover your own mental health tools to
+                                    care your health.
+                                </p>
+                                <Flex className="wrap justify-between gap-10 mt-10">
+                                    <Program
+                                        program={_utils.constants.PROGRAMS[0]}
+                                    />
+                                </Flex>
                             </Flex>
                         </Wrapper>
                     </Content>

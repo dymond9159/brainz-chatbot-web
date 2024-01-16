@@ -1,0 +1,19 @@
+.program {
+    width: 100%;
+    padding: 20px 30px;
+
+    @include sm {
+        width: 100%;
+    }
+}
+
+.program-avatar {
+    border: solid 1px #FFFFFF50;
+    flex-shrink: 0;
+}
+
+.program-desc {
+    color: var(--foreground--secondary);
+    font-weight: 300;
+    margin-top: 10px;
+}

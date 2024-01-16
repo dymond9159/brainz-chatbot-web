@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useChat, Message } from "ai/react";
 
 import {
@@ -20,10 +20,18 @@ import {
     WelcomeMessage,
 } from "@/components/widgets";
 import { ChatRequest, FunctionCallHandler } from "ai";
+import _utils from "@/utils";
+import { ProgramDataType } from "@/types";
 
 const useRag = false;
 const llm = "gpt-4-1106-preview";
 const similarityMetric = "";
+
+export interface ChatPageProps {
+    params: {
+        id: string;
+    };
+}
 
 const handlerFunctionCall: FunctionCallHandler = async (
     chatMessages,
@@ -57,7 +65,7 @@ const handlerFinish = (message: Message) => {
     console.log(message);
 };
 
-const ChatPage: React.FC = () => {
+const ChatPage: React.FC<ChatPageProps> = (props) => {
     const {
         append,
         messages,
@@ -137,31 +145,14 @@ const ChatPage: React.FC = () => {
                                     )}
                                     <Box className="conversations">
                                         {messages.length > 0 &&
-                                            messages.map((message, index) =>
-                                                message.role !== "function" ? (
-                                                    <Conversation
-                                                        ref={messagesEndRef}
-                                                        key={index}
-                                                        content={message}
-                                                        onAnswerClick={
-                                                            handlePrompt
-                                                        }
-                                                    />
-                                                ) : (
-                                                    <PromptSuggestionRow
-                                                        key={index}
-                                                        onPromptClick={
-                                                            handlePrompt
-                                                        }
-                                                        suggestAnswers={[
-                                                            "Not at all",
-                                                            "Several Days",
-                                                            "Often",
-                                                            "Heavy",
-                                                        ]}
-                                                    />
-                                                ),
-                                            )}
+                                            messages.map((message, index) => (
+                                                <Conversation
+                                                    ref={messagesEndRef}
+                                                    key={index}
+                                                    content={message}
+                                                    onAnswerClick={handlePrompt}
+                                                />
+                                            ))}
                                     </Box>
                                 </Wrapper>
                             </Content>
@@ -171,6 +162,10 @@ const ChatPage: React.FC = () => {
                                         (messages.length === 0 && (
                                             <PromptSuggestionRow
                                                 onPromptClick={handlePrompt}
+                                                suggests={
+                                                    _utils.constants.PROGRAMS[0]
+                                                        .suggests
+                                                }
                                             />
                                         ))}
                                     <form

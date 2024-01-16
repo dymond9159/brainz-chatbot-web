@@ -1,9 +1,9 @@
 import React from "react";
 import { Content, Flex, Wrapper } from "../container";
-import { ChildrenProps } from "@/types";
+import { DivProps } from "@/types";
 import { ThemeToggle } from ".";
 
-export const Navbar: React.FC<ChildrenProps> = (props) => {
+export const Navbar: React.FC<DivProps> = (props) => {
     return (
         <Content className={`header nav ${props.className}`}>
             <Flex className="row items-center justify-between full">

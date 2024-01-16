@@ -1,7 +1,8 @@
 import React from "react";
 import { Flex } from "../container";
-import { Button, ButtonGroup, Icon } from "../ui";
+import { ButtonGroup, Icon } from "../ui";
 import Link from "next/link";
+import routes from "@/utils/routes";
 
 export const ProgramBoard: React.FC = (props) => {
     return (
@@ -11,7 +12,7 @@ export const ProgramBoard: React.FC = (props) => {
         >
             <Flex className="shortcut row gap-15 full">
                 <Icon name="diamond" />
-                <Link href="#">Explore</Link>
+                <Link href={`${routes.PROGRAMS}`}>Explore</Link>
             </Flex>
         </ButtonGroup>
     );
