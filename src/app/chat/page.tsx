@@ -127,7 +127,7 @@ const ChatPage: React.FC = () => {
             <Flex>
                 <Sidebar className="left-side" />
                 <Section className="main-section">
-                    <Navbar className="main-nav" />
+                    <Navbar className="main-nav">Trauma</Navbar>
                     <Content className="chat-content">
                         <Flex className="col items-center justify-center full">
                             <Content className="chat-area">

@@ -10,7 +10,7 @@ export const Navbar: React.FC<ChildrenProps> = (props) => {
                 <Flex className="row items-center justify-between full">
                     <Wrapper>
                         <Flex className="row items-center justify-between full">
-                            <h4>Home</h4>
+                            <h4>{props.children}</h4>
                             <ThemeToggle />
                         </Flex>
                     </Wrapper>

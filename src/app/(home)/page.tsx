@@ -102,13 +102,18 @@ const HomePage: React.FC = () => {
             <Flex>
                 <Sidebar className="left-side" />
                 <Section className="main-section">
-                    <Navbar className="main-nav" />
-                    <Content className="chat-content">
-                        <Flex className="col items-center justify-center full">
-                            <Content className="chat-area">
-                                <Wrapper></Wrapper>
-                            </Content>
-                        </Flex>
+                    <Navbar className="main-nav">Home</Navbar>
+                    <Content className="home-content">
+                        <Wrapper>
+                            <Flex className="col items-center justify-center full">
+                                <h3>
+                                    {
+                                        "Hey, you're finding strength in adversity today!"
+                                    }
+                                </h3>
+                                <Box className="mood-scale"></Box>
+                            </Flex>
+                        </Wrapper>
                     </Content>
                 </Section>
             </Flex>
