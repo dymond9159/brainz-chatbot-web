@@ -6,7 +6,7 @@ import Link from "next/link";
 export const RecentBoard: React.FC = (props) => {
     return (
         <ButtonGroup
-            groupname="Recently Program"
+            groupname="Recently Programs"
             className="full col gap-10 justify-start items-start"
         >
             {/* <Flex className="shortcut row gap-15 full">

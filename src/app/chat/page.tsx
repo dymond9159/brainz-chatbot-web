@@ -18,7 +18,7 @@ import {
     PromptSuggestionRow,
     Sidebar,
     WelcomeMessage,
-} from "@/components/feature";
+} from "@/components/widgets";
 import { ChatRequest, FunctionCallHandler } from "ai";
 
 const useRag = false;

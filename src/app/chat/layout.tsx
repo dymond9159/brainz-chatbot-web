@@ -1,5 +1,3 @@
-"use client";
-
 import { LayoutProps } from "@/types";
 import { cn } from "@/utils/functions";
 

@@ -7,7 +7,7 @@ import _utils from "@/utils";
 export const ShortcutBoard: React.FC = (props) => {
     return (
         <ButtonGroup
-            groupname="Shortcut"
+            groupname="Website"
             className="shortcut-button full col gap-10 justify-start"
         >
             <Flex className="shortcut row gap-15 full">

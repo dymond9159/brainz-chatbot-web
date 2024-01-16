@@ -11,9 +11,9 @@ import {
     Box,
 } from "@/components/container";
 import { Button } from "@/components/ui";
-import { MoodScale, Navbar, Sidebar } from "@/components/widgets";
+import { Navbar, Sidebar } from "@/components/widgets";
 
-const HomePage: React.FC = () => {
+const ExplorePage: React.FC = () => {
     return (
         <Container className="main-container">
             <Flex>
@@ -24,17 +24,8 @@ const HomePage: React.FC = () => {
                         <Wrapper>
                             <Flex className="col items-center justify-center full gap-15">
                                 <h3>
-                                    {
-                                        "Hey, you're finding strength in adversity today!"
-                                    }
+                                    {"Explore your mental health advisors!"}
                                 </h3>
-                                <Box className="">
-                                    <MoodScale />
-                                </Box>
-                                <Flex className="row items-center justify-center gap-15 mt-10">
-                                    <Button>Psychometric Test</Button>
-                                    <Button>Programs</Button>
-                                </Flex>
                             </Flex>
                         </Wrapper>
                     </Content>
@@ -44,4 +35,4 @@ const HomePage: React.FC = () => {
     );
 };
 
-export default HomePage;
+export default ExplorePage;

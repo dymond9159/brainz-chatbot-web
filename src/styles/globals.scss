@@ -140,7 +140,7 @@ $xxl: 1480px;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  transition: all 0.2s;
+  // transition: all 0.2s;
   animation: fadeIn 1s ease-in-out forwards;
 }
 
@@ -236,50 +236,11 @@ input, textarea {
   letter-spacing: inherit;
 }
 
-// Default tag's css
-input, textarea {
-  display: block;
-  position: relative;
-  width: fit-content;
-  min-width: 30px;
-  height: 2.5em;
-  min-height: 2.5em;
-  resize: none;
-  outline: none;
-  padding: 10px 10px;
-  background: none;  
-  color: currentcolor;
-  border: 1px solid var(--background-medium);
-  border-radius: var(--border-radius-small);
-  margin: 5px 0%;
-  -webkit-tap-highlight-color: transparent;
-  
-  &:focus {
-      border: 1px solid var(--background-light);
-  }
-}
-    
-button {
-    cursor: pointer;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap:5px;
-    padding: 8px 8px;
-    
-    border-radius: var(--border-radius-small);
-    border: 0;
-    background: var(--background-trans-10);
-
-    &:hover {
-        background: var(--background-trans-25)
-    }
-    
-}
+@import "./ui.scss";
+@import "./widgets/index.scss";
 
 @import "./container.scss";
+@import "./layout.scss";
 
 // main styles
 @import "./main.scss";
@@ -287,8 +248,3 @@ button {
 // page styles
 @import "./homepage.scss";
 @import "./chatpage.scss";
-
-// component styles
-@import "./components/widgets/index.scss";
-@import "./components/ui-components/index.scss";
-@import "./components/features/index.scss"

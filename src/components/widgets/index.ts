@@ -1,7 +1,7 @@
 // logo
 export * from "./Logo";
 
-// theme
+// theme Toggle button
 export * from "./ThemeToggle";
 
 // main
@@ -9,14 +9,15 @@ export * from "./Sidebar";
 export * from "./Navbar";
 export * from "./Footer";
 
+// home page
+export * from "./MoodScale";
+
 // chat page - welcome message
 export * from "./WelcomeMessage";
 export * from "./Conversation";
 export * from "./PromptSuggestionsRow";
 
 // chat sidebar
-
-// user profile
 export * from "./ProgramBoard";
 export * from "./RecentBoard";
 export * from "./ShortcutBoard";
