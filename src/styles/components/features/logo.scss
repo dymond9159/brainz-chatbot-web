@@ -1,16 +1,24 @@
-.logo {
-    cursor: pointer;
-    .brainz-logo {
-        width: 48px;
-        height: 48px;
-        background: #485065;
-        border-radius: 10px;
-        margin-right: 15px;
+.logo-nav {
+    a {
+        &:hover {
+            text-decoration: none;
+        }
     }
-    
-    .logo-text {
-        font-size: larger;
-        color: var(--foreground);
-        margin-left: 10px;
+    .logo {
+        cursor: pointer;
+        .brainz-logo {
+            width: 48px;
+            height: 48px;
+            background: #485065;
+            border-radius: 10px;
+            margin-right: 15px;
+        }
+        
+        .logo-text {
+            font-size: larger;
+            color: var(--foreground);
+            margin-left: 10px;
+            transform:scaleY(1.15);
+        }
     }
 }

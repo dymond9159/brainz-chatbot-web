@@ -11,6 +11,12 @@ export const SocialBoard: React.FC = (props) => {
             className="full row gap-10 justify-start"
         >
             <Link
+                href={_utils.routes.LINKEDIN}
+                target="_blank"
+            >
+                <Button icon="linkedin"></Button>
+            </Link>
+            <Link
                 href={_utils.routes.FACEBOOK}
                 target="_blank"
             >
