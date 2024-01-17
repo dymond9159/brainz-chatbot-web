@@ -20,8 +20,9 @@ export * from "./Program";
 export * from "./WelcomeMessage";
 export * from "./Conversation";
 export * from "./PromptSuggestionsRow";
+export * from "./ChatScrollAnchor";
 
-// chat sidebar
+// sidebar
 export * from "./ProgramBoard";
 export * from "./RecentBoard";
 export * from "./ShortcutBoard";

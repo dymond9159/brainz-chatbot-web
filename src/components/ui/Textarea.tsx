@@ -32,6 +32,9 @@ export const Textarea: React.FC<ITextareaProps> = (props) => {
                 value={state.value}
                 onChange={_onChange}
                 onKeyUp={props.onKeyUp}
+                onKeyDown={props.onKeyDown}
+                spellCheck={props.spellCheck}
+                tabIndex={props.tabIndex}
             />
             {props.children}
         </div>

@@ -3,8 +3,10 @@ import { Content, Flex, Wrapper } from "../container";
 import { DivProps } from "@/types";
 import { ThemeToggle } from ".";
 import { Button } from "../ui";
+import { useSidebar } from "@/hooks";
 
 export const Navbar: React.FC<DivProps> = (props) => {
+    const { toggleSidebar } = useSidebar();
     return (
         <Content className={`header nav ${props.className}`}>
             <Flex className="row items-center justify-between full">
@@ -15,7 +17,9 @@ export const Navbar: React.FC<DivProps> = (props) => {
                                 <Button
                                     className="side-toggle"
                                     icon="list"
-                                    onClick={props.onClick}
+                                    onClick={() => {
+                                        toggleSidebar();
+                                    }}
                                 />
                                 <h4>{props.children}</h4>
                             </Flex>

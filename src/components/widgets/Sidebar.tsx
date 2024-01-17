@@ -5,7 +5,6 @@ import { useSidebar } from "@/hooks/use-sidebar";
 import { Flex, Section, Wrapper } from "../container";
 import {
     Logo,
-    Navbar,
     ProgramBoard,
     RecentBoard,
     ShortcutBoard,

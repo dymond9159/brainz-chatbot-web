@@ -1,4 +1,7 @@
 .logo-nav {
+    width: 100%;
+    height: var(--header-height);
+    padding-right: 20px;
     a {
         &:hover {
             text-decoration: none;
@@ -19,6 +22,13 @@
             color: var(--foreground);
             margin-left: 10px;
             transform:scaleY(1.15);
+        }
+    }
+
+    .sidebar-close {
+        display: none;
+        @include md {
+            display: block;
         }
     }
 }

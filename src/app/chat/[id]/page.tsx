@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useChat, Message } from "ai/react";
 
 import {
@@ -14,6 +14,7 @@ import {
 import { Button, ButtonGroup, Textarea } from "@/components/ui";
 import {
     BrainzAvatar,
+    ChatScrollAnchor,
     Conversation,
     Navbar,
     PromptSuggestionRow,
@@ -22,7 +23,7 @@ import {
 } from "@/components/widgets";
 import { ChatRequest, FunctionCallHandler } from "ai";
 import _utils from "@/utils";
-import { ProgramDataType } from "@/types";
+import { useEnterSubmit } from "@/hooks";
 
 const useRag = false;
 const llm = "gpt-4-1106-preview";
@@ -73,22 +74,22 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
         input,
         handleInputChange,
         handleSubmit,
+        stop,
         isLoading,
         error,
     } = useChat();
 
+    const { formRef, onKeyDown } = useEnterSubmit();
+
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
-    const formRef = useRef<HTMLFormElement>(null);
+    // const formRef = useRef<HTMLFormElement>(null);
 
-    const scrollToBottom = () => {
-        if (messagesEndRef.current)
-            messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    };
-
-    useEffect(() => {
-        scrollToBottom();
-    }, [messages]);
+    React.useEffect(() => {
+        if (textareaRef.current) {
+            textareaRef.current.focus();
+        }
+    }, []);
 
     // textarea auto rows
     useEffect(() => {
@@ -105,21 +106,6 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
         handleSubmit(e, {
             options: { body: { useRag, llm, similarityMetric } },
         });
-    };
-
-    const handleKeyUp = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.key === "Enter") {
-            e.preventDefault();
-
-            if (!e.shiftKey) {
-                // submit
-                if (formRef && formRef.current) {
-                }
-            } else {
-                if (textareaRef && textareaRef.current) {
-                }
-            }
-        }
     };
 
     const handlePrompt = (promptText: string) => {
@@ -170,6 +156,9 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
                                                 />
                                             ))}
                                     </Box>
+                                    <ChatScrollAnchor
+                                        trackVisibility={isLoading}
+                                    />
                                 </Wrapper>
                             </Content>
                             <Flex className="chat-prompts row items-end full">
@@ -193,17 +182,31 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
                                             placeholder="Say here ..."
                                             className="full"
                                             rows={1}
+                                            tabIndex={0}
                                             textareaRef={textareaRef}
                                             onChange={handleInputChange}
-                                            onKeyUp={handleKeyUp}
+                                            onKeyDown={onKeyDown}
                                             value={input}
+                                            spellCheck={false}
                                         >
                                             <ButtonGroup className="prompt-buttons gap-2 items-end">
                                                 {/* <Button icon="mic-fill" /> */}
-                                                <Button
-                                                    icon="arrow-up"
-                                                    type="submit"
-                                                />
+                                                {!isLoading ? (
+                                                    <Button
+                                                        icon="arrow-up"
+                                                        type="submit"
+                                                        disabled={
+                                                            isLoading ||
+                                                            input === ""
+                                                        }
+                                                    />
+                                                ) : (
+                                                    <Button
+                                                        icon="stop-fill"
+                                                        type="button"
+                                                        onClick={stop}
+                                                    />
+                                                )}
                                             </ButtonGroup>
                                         </Textarea>
                                     </form>
