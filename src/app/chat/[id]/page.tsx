@@ -13,6 +13,7 @@ import {
 } from "@/components/container";
 import { Button, ButtonGroup, Textarea } from "@/components/ui";
 import {
+    BrainzAvatar,
     Conversation,
     Navbar,
     PromptSuggestionRow,
@@ -135,13 +136,28 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
             <Flex>
                 <Sidebar className="left-side" />
                 <Section className="main-section">
-                    <Navbar className="main-nav">Trauma</Navbar>
+                    <Navbar className="main-nav">
+                        <Flex className="row gap-10">
+                            <BrainzAvatar
+                                src={
+                                    _utils.functions.getProgram(props.params.id)
+                                        .src
+                                }
+                                size={"40"}
+                            />
+                            {_utils.functions.getProgram(props.params.id).name}
+                        </Flex>
+                    </Navbar>
                     <Content className="chat-content">
                         <Flex className="col items-center justify-center full">
                             <Content className="chat-area">
                                 <Wrapper>
                                     {messages.length === 0 && (
-                                        <WelcomeMessage />
+                                        <WelcomeMessage
+                                            program={_utils.functions.getProgram(
+                                                props.params.id,
+                                            )}
+                                        />
                                     )}
                                     <Box className="conversations">
                                         {messages.length > 0 &&

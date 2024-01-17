@@ -25,20 +25,20 @@ export const Conversation: React.JSXElementConstructor<IConversationProps> =
                                 a: (props) => (
                                     <a href={props.href}> {props.children}</a>
                                 ),
-                                ul: (props) => customizeUl(props),
-                                ol: (props) => customizeUl(props),
-                                li: (props) => (
-                                    <button
-                                        key={props.itemID}
-                                        onClick={() => {
-                                            convProps.onAnswerClick(
-                                                props.children?.valueOf() as string,
-                                            );
-                                        }}
-                                    >
-                                        {props.children}
-                                    </button>
-                                ),
+                                // ul: (props) => customizeUl(props),
+                                // ol: (props) => customizeUl(props),
+                                // li: (props) => (
+                                //     <button
+                                //         key={props.itemID}
+                                //         onClick={() => {
+                                //             convProps.onAnswerClick(
+                                //                 props.children?.valueOf() as string,
+                                //             );
+                                //         }}
+                                //     >
+                                //         {props.children}
+                                //     </button>
+                                // ),
                             }}
                         >
                             {convProps.content?.content}

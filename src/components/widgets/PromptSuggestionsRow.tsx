@@ -16,7 +16,7 @@ const PROMPTS = [
 
 export const PromptSuggestionRow: React.FC<IProps> = ({
     onPromptClick,
-    suggests,
+    suggests = PROMPTS,
 }) => {
     return (
         <Flex className="wrap justify-start items-center gap-10">

@@ -9,6 +9,9 @@ export * from "./Sidebar";
 export * from "./Navbar";
 export * from "./Footer";
 
+// common
+export * from "./BrainzAvatar";
+
 // home page
 export * from "./MoodScale";
 export * from "./Program";

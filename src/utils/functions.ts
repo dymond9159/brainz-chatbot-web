@@ -1,5 +1,7 @@
+import { ProgramDataType } from "@/types";
 import { clsx, type ClassValue } from "clsx";
 import { customAlphabet } from "nanoid";
+import { PROGRAMS } from "./constants";
 
 export function cn(...inputs: ClassValue[]) {
     return clsx(inputs);
@@ -18,3 +20,7 @@ export function formatDate(input: string | number | Date): string {
         year: "numeric",
     });
 }
+
+export const getProgram = (id: string): ProgramDataType => {
+    return PROGRAMS.filter((item) => item.strid === id)[0];
+};

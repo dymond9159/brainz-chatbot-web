@@ -29,7 +29,9 @@ const ExplorePage: React.FC = () => {
                                 </p>
                                 <Flex className="wrap justify-between gap-10 mt-10">
                                     <Program
-                                        program={_utils.constants.PROGRAMS[0]}
+                                        program={_utils.functions.getProgram(
+                                            "trauma",
+                                        )}
                                     />
                                 </Flex>
                             </Flex>

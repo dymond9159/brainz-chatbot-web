@@ -67,6 +67,11 @@ export type ProgramDataType = {
     strid: string;
     name: string;
     description: string;
+    description1: string;
     src: string;
     suggests: string[];
 };
+
+export interface IProgramProps extends IButtonProps {
+    program: ProgramDataType;
+}

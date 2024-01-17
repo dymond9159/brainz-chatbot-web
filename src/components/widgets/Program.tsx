@@ -2,16 +2,14 @@ import React from "react";
 import { Flex } from "../container";
 import { Button } from "../ui";
 import { cn } from "@/utils/functions";
-import { IButtonProps, ProgramDataType } from "@/types";
-import Avatar from "react-avatar";
+import { IProgramProps } from "@/types";
 import { useRouter } from "next/navigation";
-
-interface IProgramProps extends IButtonProps {
-    program: ProgramDataType;
-}
+import { BrainzAvatar } from ".";
+import _utils from "@/utils";
 
 export const Program: React.FC<IProgramProps> = (props) => {
     const router = useRouter();
+
     const handlerClick = (id: string) => {
         router.push(`/chat/${id}`);
         router.refresh();
@@ -24,13 +22,9 @@ export const Program: React.FC<IProgramProps> = (props) => {
         >
             <Flex className="row items-center justify-between full">
                 <Flex className="row items-center gap-15">
-                    <Avatar
-                        className="program-avatar"
+                    <BrainzAvatar
                         src={props.program.src}
-                        name={props.program.strid}
-                        size="80"
-                        color="gray"
-                        round={true}
+                        name={props.program.name}
                     />
                     <Flex className="col items-start justify-start">
                         <h3 className="program-text">{props.program.name}</h3>
