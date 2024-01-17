@@ -18,7 +18,7 @@ const ExplorePage: React.FC = () => {
             <Flex>
                 <Sidebar className="left-side" />
                 <Section className="main-section">
-                    <Navbar className="main-nav"></Navbar>
+                    <Navbar className="main-nav">Explore</Navbar>
                     <Content className="home-content">
                         <Wrapper>
                             <Flex className="col items-center justify-center full gap-15">

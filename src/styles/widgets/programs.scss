@@ -5,6 +5,18 @@
     @include sm {
         width: 100%;
     }
+
+    @include xs {
+        .flex {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            span {
+                text-align: center;
+            }
+        }
+    }
 }
 
 .program-avatar {

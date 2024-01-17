@@ -12,8 +12,20 @@ import {
 } from "@/components/container";
 import { Button } from "@/components/ui";
 import { MoodScale, Navbar, Sidebar } from "@/components/widgets";
+import { useRouter } from "next/navigation";
+import routes from "@/utils/routes";
 
 const HomePage: React.FC = () => {
+    const router = useRouter();
+
+    const handleTest = () => {
+        alert("Coming soon!");
+    };
+
+    const handleGoProgram = () => {
+        router.push(routes.PROGRAMS);
+    };
+
     return (
         <Container className="main-container">
             <Flex>
@@ -31,8 +43,12 @@ const HomePage: React.FC = () => {
                                     <MoodScale />
                                 </Box>
                                 <Flex className="row items-center justify-center gap-15 mt-10">
-                                    <Button>Psychometric Test</Button>
-                                    <Button>Programs</Button>
+                                    <Button onClick={handleTest}>
+                                        Psychometric Test
+                                    </Button>
+                                    <Button onClick={handleGoProgram}>
+                                        Programs
+                                    </Button>
                                 </Flex>
                             </Flex>
                         </Wrapper>
