@@ -1,6 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { HTMLInputTypeAttribute, useEffect, useState } from "react";
 
-import { IInputProps } from "@/types";
+export interface IInputProps extends React.ComponentProps<"input"> {
+    type: HTMLInputTypeAttribute;
+    placeholder?: string;
+    inputRef?: React.LegacyRef<HTMLInputElement>;
+    disabled?: boolean;
+    value?: string;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+}
 
 export const Input: React.FC<IInputProps> = (props) => {
     const [state, setState] = useState<{

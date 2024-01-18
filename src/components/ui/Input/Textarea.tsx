@@ -1,6 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { HTMLInputTypeAttribute, useEffect, useState } from "react";
 
-import { ITextareaProps } from "@/types";
+export interface ITextareaProps extends React.ComponentProps<"textarea"> {
+    type: HTMLInputTypeAttribute;
+    placeholder?: string;
+    textareaRef?: React.LegacyRef<HTMLTextAreaElement>;
+    disabled?: boolean;
+    rows?: number;
+    value?: string;
+    onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    onKeyUp?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+}
 
 export const Textarea: React.FC<ITextareaProps> = (props) => {
     const [state, setState] = useState<{

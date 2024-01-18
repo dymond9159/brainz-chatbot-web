@@ -1,0 +1,21 @@
+
+
+/*
+*   Recent Program CSS
+*/
+
+.recent-board {
+
+    button {
+        span .last-message {
+            margin-top: 5px;
+            display: inline-block;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;  
+        
+        }
+    } 
+        
+}

@@ -1,8 +1,8 @@
+import { Message } from "ai";
 import React from "react";
 
 export interface LayoutProps {
     children?: React.ReactNode;
-
     params?: any;
 }
 
@@ -20,40 +20,21 @@ export interface IIconProps {
     [x: string]: any;
 }
 
-// Input
-export interface IInputProps extends React.ComponentProps<"input"> {
-    type: HTMLInputTypeAttribute;
-    placeholder?: string;
-    inputRef?: React.LegacyRef<HTMLInputElement>;
-    disabled?: boolean;
-    value?: string;
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    onKeyUp?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-}
+// Conversations Types
 
-// Textarea
-export interface ITextareaProps extends React.ComponentProps<"textarea"> {
-    type: HTMLInputTypeAttribute;
-    placeholder?: string;
-    textareaRef?: React.LegacyRef<HTMLTextAreaElement>;
-    disabled?: boolean;
-    rows?: number;
-    value?: string;
-    onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
-    onKeyUp?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-}
-
-// Program
-export type ProgramDataType = {
-    numid: number;
-    strid: string;
-    name: string;
-    description: string;
-    description1: string;
-    src: string;
-    suggests: string[];
+export type MessageType = {
+    messageId: string;
+    createAt: string;
+    role: "user" | "assistant";
+    content: string;
 };
 
-export interface IProgramProps extends ButtonProps {
-    program: ProgramDataType;
+export interface IConversation extends MessageType {
+    conversationId: string;
+    progHistoryId: string;
 }
+
+export type RecentProgramType = {
+    progStrId: string;
+    lastMessage: string;
+};

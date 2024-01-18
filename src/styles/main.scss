@@ -80,10 +80,6 @@
                 border-radius: var(--border-radius-full);
             }
         }
-
-        span {
-            cursor: default;
-        }
     }
 
     .user-profile {
@@ -94,9 +90,6 @@
         position: relative;
     }
 
-    span {
-        cursor: default;
-    }
 }
 
 .sidebar[data-state=open] {

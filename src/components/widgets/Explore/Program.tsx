@@ -1,11 +1,24 @@
 import React from "react";
-import { Flex } from "../../container";
-import { Button } from "../../ui";
-import { cn } from "@/utils/functions";
-import { IProgramProps } from "@/types";
 import { useRouter } from "next/navigation";
+import { Flex } from "../../container";
+import { Button, type ButtonProps } from "@/components/ui";
+import { cn } from "@/utils/functions";
 import { BrainzAvatar } from "..";
 import _utils from "@/utils";
+
+export type ProgramDataType = {
+    numid: number;
+    strid: string;
+    name: string;
+    description: string;
+    description1: string;
+    src: string;
+    suggests: string[];
+};
+
+export interface IProgramProps extends ButtonProps {
+    program: ProgramDataType;
+}
 
 export const Program: React.FC<IProgramProps> = (props) => {
     const router = useRouter();

@@ -25,6 +25,9 @@ import { ChatRequest, FunctionCallHandler } from "ai";
 import _utils from "@/utils";
 import { useEnterSubmit } from "@/hooks";
 
+import { useAppDispatch } from "@/store";
+import { updateRecentProgram } from "@/store/reducers";
+
 const useRag = false;
 const llm = "gpt-4-1106-preview";
 const similarityMetric = "";
@@ -63,11 +66,8 @@ const handlerFunctionCall: FunctionCallHandler = async (
     }
 };
 
-const handlerFinish = (message: Message) => {
-    console.log(message);
-};
-
 const ChatPage: React.FC<ChatPageProps> = (props) => {
+    const dispatch = useAppDispatch();
     const {
         append,
         messages,
@@ -77,7 +77,16 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
         stop,
         isLoading,
         error,
-    } = useChat();
+    } = useChat({
+        onFinish: (message) => {
+            dispatch(
+                updateRecentProgram({
+                    progStrId: props.params.id,
+                    lastMessage: input,
+                }),
+            );
+        },
+    });
 
     const { formRef, onKeyDown } = useEnterSubmit();
 

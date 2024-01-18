@@ -20,13 +20,12 @@ button {
         background: var(--background-trans-25)
     }
     
-}
-
-.button {
     .button-text {
         font-weight: bold;
+        color: var(--foreground-color-secondary)
     }
 }
+
 
 /*
 *   Button Group Styles

@@ -19,7 +19,7 @@ export const Button: React.FC<ButtonProps> = (props) => {
         >
             <Icon name={`${props.icon}`} />
             {props.children && (
-                <span className="button-text">{props.children}</span>
+                <span className="button-text full">{props.children}</span>
             )}
         </button>
     );
