@@ -16,6 +16,7 @@ export * from "./list-iconts";
 export * from "./help-icons";
 export * from "./chat-icons";
 export * from "./contact-icons";
+export * from "./remove-icons";
 
 //
 export * from "./x-diamond-icons";

@@ -16,6 +16,23 @@
             white-space: nowrap;  
         
         }
+        
+        .remove {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            visibility: hidden;
+
+            &:hover {
+                color: var(--error-color, #a81d1d)
+            }
+        }
+
+        &:hover {
+            .remove {
+                visibility: visible;
+            }
+        }
     } 
         
 }

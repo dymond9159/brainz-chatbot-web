@@ -27,6 +27,8 @@
 
   --border-color-primary: #00000050;
 
+  --error-color: #e42a2a;
+
 }
 
 .dark {
@@ -47,7 +49,9 @@
     --background-message-primary: #424b69;
     --background-message-secondary: #30384f;
 
-    --border-color-primary: #FFFFFF50
+    --border-color-primary: #FFFFFF50;
+
+    --error-color: #a81d1d;
 }
 
 // @import '~bootstrap/scss/bootstrap';

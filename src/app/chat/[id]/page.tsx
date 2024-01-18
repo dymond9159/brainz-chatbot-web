@@ -25,8 +25,8 @@ import { ChatRequest, FunctionCallHandler } from "ai";
 import _utils from "@/utils";
 import { useEnterSubmit } from "@/hooks";
 
-import { useAppDispatch } from "@/store";
-import { updateRecentProgram } from "@/store/reducers";
+import { useAppDispatch, useTypedSelector } from "@/store";
+import { updateMessages, updateRecentProgram } from "@/store/reducers";
 
 const useRag = false;
 const llm = "gpt-4-1106-preview";
@@ -68,6 +68,9 @@ const handlerFunctionCall: FunctionCallHandler = async (
 
 const ChatPage: React.FC<ChatPageProps> = (props) => {
     const dispatch = useAppDispatch();
+
+    const { initMessages } = useTypedSelector((state) => state.chat);
+
     const {
         append,
         messages,
@@ -78,6 +81,8 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
         isLoading,
         error,
     } = useChat({
+        initialInput: "Hi, there",
+        initialMessages: initMessages,
         onFinish: (message) => {
             dispatch(
                 updateRecentProgram({
@@ -99,6 +104,10 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
             textareaRef.current.focus();
         }
     }, []);
+
+    React.useEffect(() => {
+        dispatch(updateMessages(messages));
+    }, [messages]);
 
     // textarea auto rows
     useEffect(() => {

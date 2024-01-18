@@ -1,13 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { RecentProgramType } from "@/types";
+import { MessageType, RecentProgramType } from "@/types";
 
 export type ChatStateProps = {
     recentPrograms: RecentProgramType[];
+    initMessages: MessageType[];
 };
 
 const initialState: ChatStateProps = {
     recentPrograms: [],
+    initMessages: [],
 };
 
 export const chatReducer = createSlice({
@@ -39,7 +41,10 @@ export const chatReducer = createSlice({
                 });
             }
         },
+        updateMessages: (state, action: PayloadAction<MessageType[]>) => {
+            state.initMessages = action.payload;
+        },
     },
 });
 
-export const { updateRecentProgram } = chatReducer.actions;
+export const { updateRecentProgram, updateMessages } = chatReducer.actions;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, ButtonGroup } from "../../ui";
+import { Button, ButtonGroup, Icon } from "../../ui";
 import _utils from "@/utils";
 import { useRouter } from "next/navigation";
 import { useTypedSelector } from "@/store";
@@ -15,19 +15,22 @@ export const RecentBoard: React.FC = (props) => {
 
     return (
         <ButtonGroup
-            groupname="Recently Programs"
+            groupname="Recent Programs"
             className="full col gap-10 justify-start items-start"
         >
             {recentPrograms &&
                 recentPrograms.map((item, index) => (
                     <Button
-                        className="full"
+                        className="full relative"
                         key={index}
                         onClick={() => handleChat(item.progStrId)}
                     >
                         {_utils.functions.getProgram(item.progStrId).name}
                         <br></br>
                         <span className="last-message">{item.lastMessage}</span>
+                        <span className="remove">
+                            <Icon name="trash"></Icon>
+                        </span>
                     </Button>
                 ))}
         </ButtonGroup>

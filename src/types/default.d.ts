@@ -22,12 +22,13 @@ export interface IIconProps {
 
 // Conversations Types
 
-export type MessageType = {
-    messageId: string;
-    createAt: string;
-    role: "user" | "assistant";
+export interface MessageType {
+    id: string;
+    createAt?: string;
+    role: "function" | "user" | "assistant" | "data" | "system" | "tool";
     content: string;
-};
+    name?: string;
+}
 
 export interface IConversation extends MessageType {
     conversationId: string;
