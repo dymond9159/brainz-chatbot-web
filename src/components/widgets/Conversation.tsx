@@ -5,6 +5,7 @@ import remarkGfm from "remark-gfm";
 
 import { Flex } from "../container";
 import { IConversationProps } from "@/types/chat";
+import { BrainzAvatar } from ".";
 
 export const Conversation: React.JSXElementConstructor<IConversationProps> =
     forwardRef(function bubble(convProps, ref) {
@@ -14,7 +15,15 @@ export const Conversation: React.JSXElementConstructor<IConversationProps> =
                 ref={ref as React.RefObject<HTMLDivElement>}
                 className={`conversation ${convProps.content.role}`}
             >
-                <Flex className="justify-end">
+                <Flex className="items-start justify-end gap-10">
+                    {/* {convProps.content.role === "assistant" && (
+                        <BrainzAvatar
+                            src=""
+                            name="DY"
+                            size="30"
+                            color=""
+                        />
+                    )} */}
                     <div className={`message ${convProps.content.role}`}>
                         <Markdown
                             remarkPlugins={[remarkGfm]}
@@ -44,6 +53,15 @@ export const Conversation: React.JSXElementConstructor<IConversationProps> =
                             {convProps.content?.content}
                         </Markdown>
                     </div>
+                    {/* {convProps.content.role === "user" && (
+                        <BrainzAvatar
+                            className="user-avatar"
+                            src=""
+                            name="DY"
+                            size="30"
+                            color=""
+                        />
+                    )} */}
                 </Flex>
             </div>
         );

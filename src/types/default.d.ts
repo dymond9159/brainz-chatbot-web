@@ -8,7 +8,7 @@ export interface LayoutProps {
 
 // Basic types
 
-export interface DivProps extends React.ComponentProps<"div"> {}
+export interface IDivProps extends React.ComponentProps<"div"> {}
 
 // UI-Component types
 
@@ -43,24 +43,6 @@ export interface ITextareaProps extends React.ComponentProps<"textarea"> {
     onKeyUp?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
 }
 
-// Button
-type ButtonType = "button" | "submit" | "reset" | undefined;
-type TFlexDirection = "row" | "col";
-
-export interface IButtonProps extends React.ComponentProps<"button"> {
-    type?: ButtonType;
-    icon?: string;
-    onClick?: (
-        event: React.MouseEventHandler<HTMLButtonElement, MouseEvent>,
-    ) => void;
-}
-
-export interface IButtonGroupProps extends DivProps {
-    direction?: TFlexDirection;
-    gap?: number;
-    groupname?: string;
-}
-
 // Program
 export type ProgramDataType = {
     numid: number;
@@ -72,6 +54,6 @@ export type ProgramDataType = {
     suggests: string[];
 };
 
-export interface IProgramProps extends IButtonProps {
+export interface IProgramProps extends ButtonProps {
     program: ProgramDataType;
 }

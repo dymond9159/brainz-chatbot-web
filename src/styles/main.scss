@@ -91,6 +91,7 @@
         // overflow: hidden;
         border-top: 1px solid #FFFFFF10;
         padding: 15px  0px;
+        position: relative;
     }
 
     span {
@@ -128,6 +129,7 @@
 }
 
 .sb-avatar {
+    margin-top: 1px;
     span {
         text-align: center;
     }

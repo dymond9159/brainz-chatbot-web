@@ -8,6 +8,9 @@ const routes = {
     //chat
     CHATHOME: "/",
     PROGRAMS: "/explore",
+    DASHBOARD: "/dashboard",
+    ACCOUNTSETTING: "/account",
+    BILLING: "/billing",
     CHAT: "/chat",
     //social
     LINKEDIN: `https://www.linkedin.com/company/brainz-health/`,

@@ -1,11 +1,11 @@
 import React from "react";
 import { Content, Flex, Wrapper } from "../container";
-import { DivProps } from "@/types";
+import { IDivProps } from "@/types";
 import { ThemeToggle } from ".";
 import { Button } from "../ui";
 import { useSidebar } from "@/hooks";
 
-export const Navbar: React.FC<DivProps> = (props) => {
+export const Navbar: React.FC<IDivProps> = (props) => {
     const { toggleSidebar } = useSidebar();
     return (
         <Content className={`header nav ${props.className}`}>

@@ -12,7 +12,7 @@
   --background-sidebar: #e9e9e9;
   --background-heavy: #b8b7b7;
   --background-medium: #d4d4d4;
-  --background-light: #e9e9e9;
+  --background-light: #c0c0c0;
 
   --background-trans-0: none;
   --background-trans-10: #00000010;
@@ -34,7 +34,7 @@
     --background-sidebar: #283046;
     --background-heavy: #283046;
     --background-medium: #4a5165;
-    --background-light: #5b688a;
+    --background-light: #636977;
 
     --background-trans-0: none;
     --background-trans-10: #FFFFFF10;
@@ -50,7 +50,7 @@
     --border-color-primary: #FFFFFF50
 }
 
-
+// @import '~bootstrap/scss/bootstrap';
 // breakpoints
 
 $xxs: 285px;
@@ -224,11 +224,11 @@ pre {
 }
 
 ol, ul {
-  margin: 15px 20px;
-
+  // margin: 15px 20px;
+  list-style: none;
   li {
     margin: 5px 0px;
-    line-height: 150%;
+    // line-height: 150%;
   }
 }
 

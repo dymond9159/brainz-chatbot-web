@@ -23,6 +23,7 @@ export const Program: React.FC<IProgramProps> = (props) => {
             <Flex className="row items-center justify-between full">
                 <Flex className="row items-center gap-15">
                     <BrainzAvatar
+                        className="program-avatar"
                         src={props.program.src}
                         name={props.program.name}
                     />

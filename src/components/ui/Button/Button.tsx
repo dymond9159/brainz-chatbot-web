@@ -1,13 +1,21 @@
 import React from "react";
-import { Icon } from ".";
-import { IButtonProps } from "@/types";
+import { Icon } from "..";
 
-export const Button: React.FC<IButtonProps> = (props) => {
+type ButtonType = "button" | "submit" | "reset" | undefined;
+
+export interface ButtonProps extends React.ComponentProps<"button"> {
+    type?: ButtonType;
+    icon?: string;
+}
+
+export const Button: React.FC<ButtonProps> = (props) => {
     return (
         <button
-            type={props.type ?? "button"}
             className={`button ${props.className}`}
+            type={props.type ?? "button"}
+            ref={props.ref}
             onClick={(e) => props.onClick && props.onClick(e)}
+            {...props}
         >
             <Icon name={`${props.icon}`} />
             {props.children && (

@@ -1,7 +1,7 @@
 import React from "react";
 
-import { DivProps } from "@/types";
+import { IDivProps } from "@/types";
 
-export const Content: React.FC<DivProps> = (props) => {
+export const Content: React.FC<IDivProps> = (props) => {
     return <div className={`content ${props.className}`}>{props.children}</div>;
 };

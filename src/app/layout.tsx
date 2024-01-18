@@ -9,9 +9,18 @@ import { Providers } from "@/components/provider/providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-    title: "Chat - Brainz Health",
-    description: "",
+export const metadata = {
+    metadataBase: new URL(`https://${process.env.VERCEL_URL}`),
+    title: {
+        default: "Brainz Health AI Therapy",
+        template: `Mental Health AI Chatbot`,
+    },
+    description: "Guiding through trauma with health care and empathetic",
+    icons: {
+        icon: "/favicon.ico",
+        shortcut: "/favicon.ico",
+        apple: "/favicon.ico",
+    },
 };
 
 export const viewport: Viewport = {

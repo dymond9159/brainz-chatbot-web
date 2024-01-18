@@ -125,6 +125,7 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
                     <Navbar className="main-nav">
                         <Flex className="row gap-10">
                             <BrainzAvatar
+                                className="program-avatar"
                                 src={
                                     _utils.functions.getProgram(props.params.id)
                                         .src
