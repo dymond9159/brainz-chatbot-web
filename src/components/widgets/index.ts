@@ -12,19 +12,7 @@ export * from "./Footer";
 // common
 export * from "./BrainzAvatar";
 
-// home page
-export * from "./MoodScale";
-export * from "./Program";
-
-// chat page - welcome message
-export * from "./WelcomeMessage";
-export * from "./Conversation";
-export * from "./PromptSuggestionsRow";
-export * from "./ChatScrollAnchor";
-
-// sidebar
-export * from "./ProgramBoard";
-export * from "./RecentBoard";
-export * from "./ShortcutBoard";
-export * from "./SocialBoard";
-export * from "./UserProfile";
+// pages
+export * from "./Home";
+export * from "./Explore";
+export * from "./Chat";

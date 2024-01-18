@@ -1,0 +1,55 @@
+/*
+*   Dashboard Styles
+*/
+
+// monitor area
+.monitor-box {
+    width: 100%;
+    
+    // border: solid 1px var(--border-color-primary);
+    margin-bottom: 30px;
+
+    h4 {
+        font-weight: 500;
+        color: var(--foreground-tetrary);
+    }
+
+    h3 {
+        font-weight: 500;;
+        color: var(--foreground-secondary);
+    }
+
+    .monitor-content {
+        padding: 10px 20px;
+        border-radius: var(--border-radius-small);
+        background: var(--background-message-secondary);
+        box-shadow: 2px 1px 2px #00000010;
+
+        @include xxs{
+            padding: 5px 10px;
+        }
+    }
+
+    .monitor-title {
+        margin-bottom: 20px;
+    }
+
+    .psychometric-box {
+        width: 48%;
+        margin-top: 10px;
+        margin-bottom: 25px;
+
+        @include md {
+            width: 100%;
+        }
+
+        .psycho-progress {
+            width: 100px;
+
+            @include xs {
+                width: 80px;
+            }
+        }
+    }
+}
+

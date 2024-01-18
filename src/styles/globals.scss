@@ -19,8 +19,8 @@
   --background-trans-25: #00000025;
 
   --foreground: #000000;
-  --foreground--secondary: #242424;
-  --foreground--tetrary: #474747;
+  --foreground-secondary: #333333;
+  --foreground-tetrary: #474747;
 
   --background-message-primary: #c2ecb4;
   --background-message-secondary: #f3f3f3;
@@ -41,8 +41,8 @@
     --background-trans-25: #FFFFFF25;
 
     --foreground: #fff;
-    --foreground--secondary: #84898d;
-    --foreground--tetrary: #bcbfc3;
+    --foreground-secondary: #e2e2e2;
+    --foreground-tetrary: #b1b1b1;
 
     --background-message-primary: #424b69;
     --background-message-secondary: #30384f;
@@ -204,12 +204,13 @@ p {
   font-size: medium;
   text-align: left;
   line-height: 150%;
-  color: var(--foreground--tetrary);
+  color: var(--foreground-secondary);
 }
 
 label, span {
   font-size: small;
   text-align: left;
+  color: var(--foreground-tetrary)
 }
 
 pre {
@@ -252,3 +253,4 @@ input, textarea {
 // page styles
 @import "./homepage.scss";
 @import "./chatpage.scss";
+@import "./dashboardpage.scss";

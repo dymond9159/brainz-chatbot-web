@@ -1,6 +1,6 @@
 import React from "react";
-import { Flex } from "../container";
-import { Button, ButtonGroup, Icon } from "../ui";
+import { Flex } from "../../container";
+import { Button, ButtonGroup, Icon } from "../../ui";
 import Link from "next/link";
 
 export const RecentBoard: React.FC = (props) => {

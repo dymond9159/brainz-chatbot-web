@@ -1,8 +1,8 @@
 import React from "react";
-import { Flex } from "../container";
-import { Dropdown } from "../ui";
+import { Flex } from "../../container";
+import { Dropdown } from "../../ui";
 import { IDivProps } from "@/types";
-import { BrainzAvatar } from ".";
+import { BrainzAvatar } from "..";
 import { useRouter } from "next/navigation";
 import routes from "@/utils/routes";
 

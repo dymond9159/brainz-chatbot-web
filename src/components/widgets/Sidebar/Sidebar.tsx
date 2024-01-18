@@ -2,7 +2,7 @@ import React from "react";
 
 import { cn } from "@/utils/functions";
 import { useSidebar } from "@/hooks/use-sidebar";
-import { Flex, Section, Wrapper } from "../container";
+import { Flex, Section, Wrapper } from "../../container";
 import {
     Logo,
     ProgramBoard,
@@ -10,7 +10,7 @@ import {
     ShortcutBoard,
     SocialBoard,
     UserProfile,
-} from ".";
+} from "..";
 
 export interface ISidebarProps extends React.ComponentProps<"div"> {}
 

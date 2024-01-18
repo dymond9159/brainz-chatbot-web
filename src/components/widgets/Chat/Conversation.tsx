@@ -3,9 +3,9 @@ import React, { forwardRef } from "react";
 import Markdown, { ExtraProps } from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-import { Flex } from "../container";
+import { Flex } from "../../container";
 import { IConversationProps } from "@/types/chat";
-import { BrainzAvatar } from ".";
+import { BrainzAvatar } from "..";
 
 export const Conversation: React.JSXElementConstructor<IConversationProps> =
     forwardRef(function bubble(convProps, ref) {

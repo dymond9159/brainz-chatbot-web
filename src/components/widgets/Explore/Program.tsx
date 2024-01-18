@@ -1,10 +1,10 @@
 import React from "react";
-import { Flex } from "../container";
-import { Button } from "../ui";
+import { Flex } from "../../container";
+import { Button } from "../../ui";
 import { cn } from "@/utils/functions";
 import { IProgramProps } from "@/types";
 import { useRouter } from "next/navigation";
-import { BrainzAvatar } from ".";
+import { BrainzAvatar } from "..";
 import _utils from "@/utils";
 
 export const Program: React.FC<IProgramProps> = (props) => {
@@ -17,7 +17,7 @@ export const Program: React.FC<IProgramProps> = (props) => {
 
     return (
         <Button
-            className={cn(props.className, "program")}
+            className={cn("program")}
             onClick={() => handlerClick(props.program.strid)}
         >
             <Flex className="row items-center justify-between full">

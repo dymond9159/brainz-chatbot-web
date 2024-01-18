@@ -1,5 +1,5 @@
 import React from "react";
-import { Content, Flex } from "../container";
+import { Content, Flex } from "../../container";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
