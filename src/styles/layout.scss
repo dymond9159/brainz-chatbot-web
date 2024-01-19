@@ -32,6 +32,10 @@
     justify-content: space-between;
 }
 
+.justify-around {
+    justify-content: space-around;
+}
+
 .items-start {
     align-items: flex-start;
 }
@@ -74,6 +78,10 @@
 
 .mt-10 {
     margin-top: 10px;
+}
+
+.ml-10 {
+    margin-left: 10px;
 }
 
 .block {

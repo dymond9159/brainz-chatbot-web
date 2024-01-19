@@ -9,7 +9,12 @@ import {
     Content,
     Wrapper,
 } from "@/components/container";
-import { Navbar, Program, Sidebar } from "@/components/widgets";
+import {
+    MobileNavigator,
+    Navbar,
+    Program,
+    Sidebar,
+} from "@/components/widgets";
 import _utils from "@/utils";
 
 const ExplorePage: React.FC = () => {
@@ -17,7 +22,7 @@ const ExplorePage: React.FC = () => {
         <Container className="main-container">
             <Flex>
                 <Sidebar className="left-side" />
-                <Section className="main-section">
+                <Flex className="main-section col">
                     <Navbar className="main-nav">Explore</Navbar>
                     <Content className="home-content">
                         <Wrapper>
@@ -37,7 +42,8 @@ const ExplorePage: React.FC = () => {
                             </Flex>
                         </Wrapper>
                     </Content>
-                </Section>
+                    <MobileNavigator />
+                </Flex>
             </Flex>
         </Container>
     );

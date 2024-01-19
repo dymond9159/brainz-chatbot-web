@@ -11,7 +11,12 @@ import {
     Box,
 } from "@/components/container";
 import { Button } from "@/components/ui";
-import { MoodScale, Navbar, Sidebar } from "@/components/widgets";
+import {
+    MobileNavigator,
+    MoodScale,
+    Navbar,
+    Sidebar,
+} from "@/components/widgets";
 import { useRouter } from "next/navigation";
 import routes from "@/utils/routes";
 
@@ -30,19 +35,15 @@ const HomePage: React.FC = () => {
         <Container className="main-container">
             <Flex>
                 <Sidebar className="left-side" />
-                <Section className="main-section">
+                <Flex className="main-section col">
                     <Navbar className="main-nav">Home</Navbar>
                     <Content className="home-content">
                         <Wrapper>
                             <Flex className="col items-center justify-center full gap-15">
-                                <h2>
-                                    Hey, you are finding strength in adversity
-                                    today!
-                                </h2>
-                                <Box className="">
-                                    <MoodScale />
-                                </Box>
-                                <Flex className="row items-center justify-center gap-15 mt-10">
+                                <MoodScale />
+                                <br></br>
+                                <h3>Anytime, Access our system!</h3>
+                                <Flex className="row items-center justify-center full gap-15 mt-10">
                                     <Button onClick={handleTest}>
                                         Psychometric Test
                                     </Button>
@@ -53,7 +54,8 @@ const HomePage: React.FC = () => {
                             </Flex>
                         </Wrapper>
                     </Content>
-                </Section>
+                    <MobileNavigator />
+                </Flex>
             </Flex>
         </Container>
     );

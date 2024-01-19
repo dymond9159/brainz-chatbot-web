@@ -39,3 +39,20 @@ export type RecentProgramType = {
     progStrId: string;
     lastMessage: string;
 };
+
+// Psychometric
+
+export type MetricCharactersType = {
+    value: number;
+    maxValue: number;
+    strValue?: string;
+    description?: string;
+};
+
+export type PsychometricScoreType = {
+    Mood?: MetricCharactersType;
+    PTSD?: MetricCharactersType;
+    Anxiety?: MetricCharactersType;
+    Depression?: MetricCharactersType;
+    Suicidal?: MetricCharactersType;
+};

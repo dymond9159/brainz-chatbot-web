@@ -1,15 +1,24 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { MessageType, RecentProgramType } from "@/types";
+import { MessageType, PsychometricScoreType, RecentProgramType } from "@/types";
 
 export type ChatStateProps = {
     recentPrograms: RecentProgramType[];
     initMessages: MessageType[];
+    scores?: PsychometricScoreType;
 };
 
 const initialState: ChatStateProps = {
     recentPrograms: [],
     initMessages: [],
+    scores: {
+        Mood: {
+            value: 0,
+            strValue: "Hey, Unlock Your Mood, Embrace Your Score!",
+            maxValue: 10,
+            description: "Not measured yet",
+        },
+    },
 };
 
 export const chatReducer = createSlice({
@@ -51,6 +60,9 @@ export const chatReducer = createSlice({
         updateMessages: (state, action: PayloadAction<MessageType[]>) => {
             state.initMessages = action.payload;
         },
+        /*
+         **  Psychometric Scoring
+         */
     },
 });
 

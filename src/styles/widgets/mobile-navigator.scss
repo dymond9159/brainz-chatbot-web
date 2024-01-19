@@ -1,0 +1,31 @@
+.mobile-navigator {
+    display: none;
+    padding: 0px 20px !important;
+    width: 100%;
+
+    background: var(--background-trans-10);
+
+    // position: absolute;
+    // bottom: 0;
+    // left: 0;
+
+    button {
+        width: 100%;
+        background: transparent;
+        border-radius: 0;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            background: var(--background-trans-10);
+        }
+        .button-text {
+            font-weight: 100;
+            font-size: smaller;
+        }
+    }
+
+    @include md {
+        display: block;
+    }
+}

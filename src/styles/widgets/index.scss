@@ -3,8 +3,14 @@
 // sidebar
 @import "./sidebar.scss";
 
+// mobile navigator
+@import "./mobile-navigator.scss";
+
 // chat page
 @import "./welcome-message.scss";
 @import "./userprofile.scss";
 @import "./programs.scss";
 @import "./dashboard.scss";
+
+// footer
+@import "./footer.scss";

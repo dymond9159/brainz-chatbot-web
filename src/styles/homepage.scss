@@ -20,12 +20,27 @@
                 width: 100%;
             }
 
-            .mood-scale {
-                width: 233px;
-                height: 217px;
-                flex-shrink: 0;
-                overflow: hidden;
+            .mood-box {
+                .mood-title {
+                
+                }
+                
             }
+            
+            .mood-scale {
+                margin-top: 40px;
+                width: 250px;
+                flex-shrink: 0;
+
+                @include xs {
+                    width: 200px;
+                }
+
+                @include xxs {
+                    width: 180px;
+                }
+            }
+
         }
     }
 }

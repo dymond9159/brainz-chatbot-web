@@ -9,16 +9,19 @@ import {
     Content,
     Wrapper,
 } from "@/components/container";
-import { Navbar, Sidebar } from "@/components/widgets";
+import { Footer, MobileNavigator, Navbar, Sidebar } from "@/components/widgets";
 import _utils from "@/utils";
 import { MonitorBox, Psychometric } from "@/components/widgets/Dashboard";
+import { useTypedSelector } from "@/store";
 
 const DashboardPage: React.FC = () => {
+    const psycometricScores = useTypedSelector((state) => state.chat.scores);
+
     return (
         <Container className="main-container">
             <Flex>
                 <Sidebar className="left-side" />
-                <Section className="main-section">
+                <Flex className="main-section col">
                     <Navbar className="main-nav">Dashboard</Navbar>
                     <Content className="dashboard-content">
                         <Wrapper>
@@ -28,26 +31,29 @@ const DashboardPage: React.FC = () => {
                                     <Flex className="wrap full gap-15">
                                         <Psychometric
                                             title="Anxiety"
-                                            value={3}
+                                            scores={psycometricScores?.Anxiety}
                                         />
                                         <Psychometric
                                             title="Depression"
-                                            value={1}
+                                            scores={
+                                                psycometricScores?.Depression
+                                            }
                                         />
                                         <Psychometric
                                             title="PTSD"
-                                            value={3}
+                                            scores={psycometricScores?.PTSD}
                                         />
                                         <Psychometric
                                             title="Suicidal"
-                                            value={1}
+                                            scores={psycometricScores?.Suicidal}
                                         />
                                     </Flex>
                                 </MonitorBox>
                             </Flex>
                         </Wrapper>
                     </Content>
-                </Section>
+                    <MobileNavigator />
+                </Flex>
             </Flex>
         </Container>
     );

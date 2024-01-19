@@ -1,27 +1,26 @@
 import React from "react";
 
 import { cn } from "@/utils/functions";
-import { IDivProps } from "@/types";
+import { IDivProps, MetricCharactersType } from "@/types";
 import { Box, Flex } from "@/components/container";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 
 interface IProps extends IDivProps {
     title?: string;
-    value?: number;
+    scores?: MetricCharactersType;
 }
 
 export const Psychometric: React.FC<IProps> = (props) => {
-    const maxValue = 27;
     return (
         <Box className={cn(props.className, "psychometric-box")}>
             <Flex className="col items-start justify-start gap-15">
-                <h4>{props.title ?? ""}</h4>
+                <h4>{props?.title ?? ""}</h4>
                 <Flex className="row">
                     <CircularProgressbar
                         className="psycho-progress"
-                        value={props.value ?? 0}
-                        maxValue={maxValue}
-                        text={`${props.value ?? 0}`}
+                        value={props?.scores?.value ?? 0}
+                        maxValue={props?.scores?.maxValue ?? 10}
+                        text={`${props?.scores?.value ?? 0}`}
                         strokeWidth={3}
                         circleRatio={1}
                         styles={buildStyles({
@@ -45,9 +44,14 @@ export const Psychometric: React.FC<IProps> = (props) => {
                             trailColor: "rgba(32, 32, 25, 0.1)",
                             backgroundColor: `rgba(62, 52, 199, 0.1)`,
                         })}
-                    ></CircularProgressbar>
-                    <Flex className="col gap-15">
-                        <p>(description)</p>
+                    />
+                    <Flex className="col gap-15 ml-10">
+                        <h4>
+                            {props?.scores?.strValue ?? "This can feel like:"}
+                        </h4>
+                        <p>
+                            {props?.scores?.description ?? "Not measured yet"}
+                        </p>
                     </Flex>
                 </Flex>
             </Flex>

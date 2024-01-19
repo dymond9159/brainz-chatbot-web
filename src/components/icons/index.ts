@@ -20,3 +20,5 @@ export * from "./remove-icons";
 
 //
 export * from "./x-diamond-icons";
+export * from "./grid-icons";
+export * from "./measure-icons";

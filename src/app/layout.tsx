@@ -6,6 +6,7 @@ import "@/styles/globals.scss";
 import { LayoutProps } from "@/types";
 import { cn } from "@/utils/functions";
 import { Providers } from "@/components/provider/providers";
+import { Footer } from "@/components/widgets";
 
 const inter = Inter({ subsets: ["latin"] });
 

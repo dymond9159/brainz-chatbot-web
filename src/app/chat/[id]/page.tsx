@@ -99,13 +99,13 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     // const formRef = useRef<HTMLFormElement>(null);
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (textareaRef.current) {
             textareaRef.current.focus();
         }
     }, []);
 
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(updateMessages(messages));
     }, [messages]);
 
@@ -157,24 +157,36 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
                         <Flex className="col items-center justify-center full">
                             <Content className="chat-area">
                                 <Wrapper>
-                                    {messages.length === 0 && (
+                                    {(!messages.length ||
+                                        !initMessages.length) && (
                                         <WelcomeMessage
                                             program={_utils.functions.getProgram(
                                                 props.params.id,
                                             )}
                                         />
                                     )}
-                                    <Box className="conversations">
-                                        {messages.length > 0 &&
-                                            messages.map((message, index) => (
-                                                <Conversation
-                                                    ref={messagesEndRef}
-                                                    key={index}
-                                                    content={message}
-                                                    onAnswerClick={handlePrompt}
-                                                />
-                                            ))}
-                                    </Box>
+                                    {messages.length > 0 &&
+                                        initMessages.length > 0 && (
+                                            <Box className="conversations">
+                                                {messages.length > 0 &&
+                                                    messages.map(
+                                                        (message, index) => (
+                                                            <Conversation
+                                                                ref={
+                                                                    messagesEndRef
+                                                                }
+                                                                key={index}
+                                                                content={
+                                                                    message
+                                                                }
+                                                                onAnswerClick={
+                                                                    handlePrompt
+                                                                }
+                                                            />
+                                                        ),
+                                                    )}
+                                            </Box>
+                                        )}
                                     <ChatScrollAnchor
                                         trackVisibility={isLoading}
                                     />
@@ -182,16 +194,16 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
                             </Content>
                             <Flex className="chat-prompts row items-end full">
                                 <Wrapper className="full">
-                                    {!messages ||
-                                        (messages.length === 0 && (
-                                            <PromptSuggestionRow
-                                                onPromptClick={handlePrompt}
-                                                suggests={
-                                                    _utils.constants.PROGRAMS[0]
-                                                        .suggests
-                                                }
-                                            />
-                                        ))}
+                                    {(!messages.length ||
+                                        !initMessages.length) && (
+                                        <PromptSuggestionRow
+                                            onPromptClick={handlePrompt}
+                                            suggests={
+                                                _utils.constants.PROGRAMS[0]
+                                                    .suggests
+                                            }
+                                        />
+                                    )}
                                     <form
                                         ref={formRef}
                                         onSubmit={handleSend}

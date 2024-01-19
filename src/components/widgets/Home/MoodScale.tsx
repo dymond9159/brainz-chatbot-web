@@ -1,20 +1,25 @@
 import React from "react";
-import { Content, Flex } from "../../container";
+import { Flex } from "@/components/container";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { useTypedSelector } from "@/store";
 
 const MAX_VALUE = 10;
 export const MoodScale = () => {
-    const value = 2;
-    const maxValue = MAX_VALUE;
     const pathColor =
         "conic-gradient(from -54deg at 284.27% 39.08%, #E3CED7 219.6000051498413deg, #D4B4D4 251.99999570846558deg, #AC87C9 360deg)";
+    const moodScore = useTypedSelector((state) => state.chat.scores?.Mood);
+
     return (
-        <Content className="mood-scale">
+        <Flex className="col mood-box">
+            <h2 className="mood-title">
+                {moodScore?.strValue ?? "Hey, there!"}
+            </h2>
             <CircularProgressbar
-                value={value}
-                maxValue={maxValue}
-                text={`${value}`}
+                className="mood-scale"
+                value={moodScore?.value ?? 0}
+                maxValue={moodScore?.maxValue ?? MAX_VALUE}
+                text={`${moodScore?.value ?? 0}`}
                 strokeWidth={12}
                 circleRatio={0.7}
                 styles={buildStyles({
@@ -40,6 +45,7 @@ export const MoodScale = () => {
                     backgroundColor: `rgba(62, 52, 199, 0.1)`,
                 })}
             ></CircularProgressbar>
-        </Content>
+            <p>{moodScore?.description ?? "Not measured yet"}</p>
+        </Flex>
     );
 };
