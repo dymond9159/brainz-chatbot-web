@@ -2,13 +2,7 @@
 
 import React from "react";
 
-import {
-    Flex,
-    Container,
-    Section,
-    Content,
-    Wrapper,
-} from "@/components/container";
+import { Flex, Container, Content, Wrapper } from "@/components/container";
 import {
     MobileNavigator,
     Navbar,
