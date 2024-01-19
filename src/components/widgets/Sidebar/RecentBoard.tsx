@@ -2,15 +2,21 @@ import React from "react";
 import { Button, ButtonGroup, Icon } from "../../ui";
 import _utils from "@/utils";
 import { useRouter } from "next/navigation";
-import { useTypedSelector } from "@/store";
+import { useAppDispatch, useTypedSelector } from "@/store";
+import { removeRecentProgram } from "@/store/reducers";
 
 export const RecentBoard: React.FC = (props) => {
     const router = useRouter();
+    const dispatch = useAppDispatch();
 
     const { recentPrograms } = useTypedSelector((state) => state.chat);
 
-    const handleChat = (id: string) => {
+    const handleToChat = (id: string) => {
         router.push(`/chat/${id}`);
+    };
+
+    const handleRemove = (id: string) => {
+        dispatch(removeRecentProgram(id));
     };
 
     return (
@@ -23,14 +29,17 @@ export const RecentBoard: React.FC = (props) => {
                     <Button
                         className="full relative"
                         key={index}
-                        onClick={() => handleChat(item.progStrId)}
+                        onClick={() => handleToChat(item.progStrId)}
                     >
                         {_utils.functions.getProgram(item.progStrId).name}
                         <br></br>
                         <span className="last-message">{item.lastMessage}</span>
-                        <span className="remove">
+                        <Button
+                            className="remove"
+                            onClick={() => handleRemove(item.progStrId)}
+                        >
                             <Icon name="trash"></Icon>
-                        </span>
+                        </Button>
                     </Button>
                 ))}
         </ButtonGroup>

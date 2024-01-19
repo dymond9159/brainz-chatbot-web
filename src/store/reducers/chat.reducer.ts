@@ -41,10 +41,18 @@ export const chatReducer = createSlice({
                 });
             }
         },
+        removeRecentProgram: (state, action: PayloadAction<string>) => {
+            const progStrId = action.payload;
+            state.recentPrograms = state.recentPrograms.filter(
+                (item) => item.progStrId !== progStrId,
+            );
+            state.initMessages = [];
+        },
         updateMessages: (state, action: PayloadAction<MessageType[]>) => {
             state.initMessages = action.payload;
         },
     },
 });
 
-export const { updateRecentProgram, updateMessages } = chatReducer.actions;
+export const { updateRecentProgram, updateMessages, removeRecentProgram } =
+    chatReducer.actions;
