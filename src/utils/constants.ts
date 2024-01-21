@@ -106,9 +106,9 @@ export const PSYCHOMETRICS: ProgramDataType[] = [
         type: "psychometric",
         src: "/avatars/0c1831d3-8b05-49af-a065-2ce390173f36.png",
         description_short:
-            "Expert guidance through PTSD assessment using DSM-5 criteria.",
+            "Expert guidance through PTSD Symptoms assessment using DSM-5 criteria.",
         description_long: `
-        Hello! Let's start your PTSD tracker journey together.`,
+        Hello! Let's start your PTSD Symptoms assessment journey together.`,
         suggests: [],
         questionnaires: "DSM-5(PCL-5)",
     },
@@ -116,9 +116,9 @@ export const PSYCHOMETRICS: ProgramDataType[] = [
     {
         numid: 2,
         strid: "anxiety",
-        name: "Anxiety Tracker",
+        name: "Anxiety Symptoms",
         type: "psychometric",
-        src: "/avatars/31c21e13-7b45-41b2-b413-9923e4641d83.webp",
+        src: "/avatars/0a33a50b-87de-412f-a84c-4c17d992a41c.png",
         description_short:
             "Assess, track, and manage anxiety symptoms with the Anxiety Measurement. Personalized insights, progress tracking, and valuable resources for better mental well-being.",
         description_long: `
@@ -131,9 +131,9 @@ export const PSYCHOMETRICS: ProgramDataType[] = [
     {
         numid: 3,
         strid: "depression",
-        name: "Depression Screen",
+        name: "Depression Symptoms",
         type: "psychometric",
-        src: "/avatars/31c21e13-7b45-41b2-b413-9923e4641d83.webp",
+        src: "/avatars/19d3f8df-7e4f-484d-a524-818d4eb2e705.png",
         description_short:
             "Assess, track, and manage depression symptoms with the Depression Measurement. Personalized insights, progress tracking, and valuable resources for improved mental well-being.",
         description_long: `
@@ -148,7 +148,7 @@ export const PSYCHOMETRICS: ProgramDataType[] = [
         strid: "suicid",
         name: "Suicidal Risk Assessment",
         type: "psychometric",
-        src: "/avatars/31c21e13-7b45-41b2-b413-9923e4641d83.webp",
+        src: "/avatars/dffd1f24-a00f-46d8-9403-c5baa7e2a528.png",
         description_short:
             "Assess, monitor, and manage suicidal risk factors with the Suicidal Risk Assessment. Personalized insights, progress tracking, and valuable resources for improved mental well-being.",
         description_long: `
