@@ -1,16 +1,17 @@
 import { clsx, type ClassValue } from "clsx";
 import { customAlphabet } from "nanoid";
-import { PROGRAMS } from "./constants";
+import { PROGRAMS, PSYCHOMETRICS } from "./constants";
 import { ProgramDataType } from "@/components/widgets";
 
 export function cn(...inputs: ClassValue[]) {
     return clsx(inputs);
 }
 
-export const nanoid = customAlphabet(
-    "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
-    12,
-); // 7-character random string
+export const nanoid = (size: number = 16) =>
+    customAlphabet(
+        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+        size,
+    ); // 16-character random string
 
 export function formatDate(input: string | number | Date): string {
     const date = new Date(input);
@@ -22,7 +23,10 @@ export function formatDate(input: string | number | Date): string {
 }
 
 export const getProgram = (id: string): ProgramDataType => {
-    return PROGRAMS.filter((item) => item.strid === id)[0];
+    return (
+        PROGRAMS.filter((item) => item.strid === id)[0] ||
+        PSYCHOMETRICS.filter((item) => item.strid === id)[0]
+    );
 };
 
 export const findLastIndex = <T>(arr: Array<T>, filter: T) => {

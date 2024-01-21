@@ -38,7 +38,7 @@ const HomePage: React.FC = () => {
                 <Flex className="main-section col">
                     <Navbar className="main-nav">Home</Navbar>
                     <Content className="home-content">
-                        <Wrapper>
+                        <Wrapper className="flex">
                             <Flex className="col items-center justify-center full gap-15">
                                 <MoodScale />
                                 <br></br>

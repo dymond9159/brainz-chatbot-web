@@ -20,26 +20,6 @@ export interface IIconProps {
     [x: string]: any;
 }
 
-// Conversations Types
-
-export interface MessageType {
-    id: string;
-    createAt?: string;
-    role: "function" | "user" | "assistant" | "data" | "system" | "tool";
-    content: string;
-    name?: string;
-}
-
-export interface IConversation extends MessageType {
-    conversationId: string;
-    progHistoryId: string;
-}
-
-export type RecentProgramType = {
-    progStrId: string;
-    lastMessage: string;
-};
-
 // Psychometric
 
 export type MetricCharactersType = {

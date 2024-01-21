@@ -7,16 +7,9 @@ interface IProps {
     suggests?: string[];
 }
 
-const PROMPTS = [
-    "I feel down-heart and blue",
-    "I feel that life was meaningless",
-    "I am troubled by attacks of nausea",
-    "My hands and feet are usually warm",
-];
-
 export const PromptSuggestionRow: React.FC<IProps> = ({
     onPromptClick,
-    suggests = PROMPTS,
+    suggests,
 }) => {
     return (
         <Flex className="wrap justify-start items-center gap-10">

@@ -30,7 +30,7 @@ export const chatReducer = createSlice({
             action: PayloadAction<RecentProgramType>,
         ) => {
             const recentProgram = action.payload;
-
+            console.log(recentProgram)
             const findOne = state.recentPrograms.findLastIndex(
                 (_) => _.progStrId === recentProgram.progStrId,
             );
@@ -42,12 +42,16 @@ export const chatReducer = createSlice({
                     if (_item.progStrId === recentProgram.progStrId) {
                         return {
                             ..._item,
-                            lastMessage: recentProgram.lastMessage,
+                            lastMessage:
+                                recentProgram.lastMessage ?? _item.lastMessage,
+                            lastAt: recentProgram.lastAt ?? _item.lastAt,
+                            messages: recentProgram.messages ?? _item.messages,
                         };
                     } else {
                         return _item;
                     }
                 });
+                // .sort((a, b) => a.lastAt.getTime() - b.lastAt.getTime());
             }
         },
         removeRecentProgram: (state, action: PayloadAction<string>) => {
@@ -57,7 +61,7 @@ export const chatReducer = createSlice({
             );
             state.initMessages = [];
         },
-        updateMessages: (state, action: PayloadAction<MessageType[]>) => {
+        updateInitMessages: (state, action: PayloadAction<MessageType[]>) => {
             state.initMessages = action.payload;
         },
         /*
@@ -66,5 +70,5 @@ export const chatReducer = createSlice({
     },
 });
 
-export const { updateRecentProgram, updateMessages, removeRecentProgram } =
+export const { updateRecentProgram, updateInitMessages, removeRecentProgram } =
     chatReducer.actions;

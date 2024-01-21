@@ -2,9 +2,6 @@
 //
 // Basic Layout Css
 .container {
-    .full {
-        width: 100%;
-    }
 
     header {
         height: var(--header-height);
@@ -21,12 +18,11 @@
     }
 
     .section {
-        
+        padding: 15px 0px;
     }
 
     .content {
-        padding-top: 15px;
-        padding-bottom: 15px;
+        padding: 15px 0px;
     }    
 
     .border {

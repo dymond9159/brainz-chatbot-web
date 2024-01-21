@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box, Flex } from "../../container";
+import { Box, Content, Flex } from "../../container";
 import { IDivProps } from "@/types";
 
 type TFlexDirection = "row" | "col";
@@ -13,19 +13,21 @@ export interface IButtonGroupProps extends IDivProps {
 
 export const ButtonGroup: React.FC<IButtonGroupProps> = (props) => {
     return (
-        <Box className="button-group">
+        <Content className="button-group">
             {props.groupname && (
                 <div className="group-name">
                     <label>{props.groupname}</label>
                 </div>
             )}
-            <Flex
-                className={`button-list ${props.direction ?? "row"} ${
-                    props.className
-                }`}
-            >
-                {props.children}
-            </Flex>
-        </Box>
+            <Box className="scroll-content">
+                <Flex
+                    className={`button-list ${props.direction ?? "row"} ${
+                        props.className
+                    }`}
+                >
+                    {props.children}
+                </Flex>
+            </Box>
+        </Content>
     );
 };

@@ -3,14 +3,14 @@
     .chat-content {
         height: calc(100vh - var(--header-height));
         max-height: calc(100vh - var(--header-height));
-        .flex {
-            height: 100%;
-        }
+
+        // .flex {
+        //     height: 100%;
+        // }
 
         .wrapper {
             width: 60%;
             margin: auto;
-            margin-top: 40px;
             @include lg {
                 width: 80%;
             }
@@ -49,6 +49,14 @@
                         text-align: left;                            
                         border-radius: 6px;
                         padding: 0.6rem 1rem;
+
+                        ol, li {
+                            padding: 0px 20px;
+                            margin-bottom: 20px;
+                            color: var(--foreground-secondary);
+                            // list-style: disc;
+                        }
+
                     }
                     
                     .user {
@@ -89,7 +97,7 @@
                 .prompt-buttons {
                     position: absolute;
                     right: 4px;
-                    top: -4px;
+                    top: 4px;
                 }
 
                 textarea {

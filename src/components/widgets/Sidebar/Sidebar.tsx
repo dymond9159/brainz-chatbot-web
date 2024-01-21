@@ -12,7 +12,9 @@ import {
     UserProfile,
 } from "..";
 
-export interface ISidebarProps extends React.ComponentProps<"div"> {}
+export interface ISidebarProps extends React.ComponentProps<"div"> {
+    progId: string;
+}
 
 export const Sidebar: React.FC<ISidebarProps> = (props) => {
     const { isSidebarOpen, isLoading } = useSidebar();
@@ -29,7 +31,7 @@ export const Sidebar: React.FC<ISidebarProps> = (props) => {
                         <ProgramBoard />
                     </Section>
                     <Section className="recent-board">
-                        <RecentBoard />
+                        <RecentBoard progId={props.progId} />
                     </Section>
                     <Section className="shortcut-board">
                         <ShortcutBoard />

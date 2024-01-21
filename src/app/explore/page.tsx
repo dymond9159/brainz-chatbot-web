@@ -7,9 +7,11 @@ import {
     MobileNavigator,
     Navbar,
     Program,
+    ProgramBox,
     Sidebar,
 } from "@/components/widgets";
 import _utils from "@/utils";
+import { PROGRAMS, PSYCHOMETRICS } from "@/utils/constants";
 
 const ExplorePage: React.FC = () => {
     return (
@@ -20,20 +22,18 @@ const ExplorePage: React.FC = () => {
                     <Navbar className="main-nav">Explore</Navbar>
                     <Content className="home-content">
                         <Wrapper>
-                            <Flex className="col items-center justify-center full gap-15">
-                                <h1>Programs</h1>
-                                <p>
-                                    Discover your own mental health tools to
-                                    care your health.
-                                </p>
-                                <Flex className="wrap justify-between gap-10 mt-10">
-                                    <Program
-                                        program={_utils.functions.getProgram(
-                                            "trauma",
-                                        )}
-                                    />
-                                </Flex>
-                            </Flex>
+                            <ProgramBox
+                                title="Programs"
+                                description="Discover your own mental health tools to care your health."
+                                programs={PROGRAMS}
+                            />
+                            <br></br>
+                            <br></br>
+                            <ProgramBox
+                                title="Psychometric Tools"
+                                description="Use a psychometric tools to track your mental health scale."
+                                programs={PSYCHOMETRICS}
+                            />
                         </Wrapper>
                     </Content>
                     <MobileNavigator />

@@ -4,16 +4,17 @@ import { Flex } from "../../container";
 import { Button, type ButtonProps } from "@/components/ui";
 import { cn } from "@/utils/functions";
 import { BrainzAvatar } from "..";
-import _utils from "@/utils";
 
 export type ProgramDataType = {
     numid: number;
     strid: string;
     name: string;
-    description: string;
-    description1: string;
+    type: string;
     src: string;
+    description_short: string;
+    description_long: string;
     suggests: string[];
+    instruction: string;
 };
 
 export interface IProgramProps extends ButtonProps {
@@ -43,7 +44,7 @@ export const Program: React.FC<IProgramProps> = (props) => {
                     <Flex className="col items-start justify-start">
                         <h3 className="program-text">{props.program.name}</h3>
                         <span className="program-desc">
-                            {props.program.description}
+                            {props.program.description_short}
                         </span>
                     </Flex>
                 </Flex>

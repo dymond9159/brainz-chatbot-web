@@ -4,8 +4,8 @@
   --border-radius-small: 5px;
   --border-radius-medium: 10px;
   --border-radius-full: 50px;
-  --font-mono: "Inter", 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
+  --font-mono: "Arial", "Inter", 'Roboto Mono', 'Segoe UI Mono','Cascadia Mono'
+    , 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
   --background: #FFFFFF;
@@ -147,8 +147,7 @@ $xxl: 1480px;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  transition: all 0.2s;
-  animation: ease-in-out 1s ease-in-out forwards;
+  // transition: all 0.3s;
 }
 
 // Custom scroll styles
@@ -191,6 +190,11 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-mono);
+}
+
+h1, h2, h3 {
+  text-align: center;
+  line-height: 150%;
 }
 
 a {

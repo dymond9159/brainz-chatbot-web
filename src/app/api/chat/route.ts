@@ -4,6 +4,7 @@ import { OpenAIStream, StreamingTextResponse } from "ai";
 // import { AstraDB } from "@datastax/astra-db-ts";
 
 import _libs from "@/libs";
+import _utils from "@/utils";
 
 // import { AstraDB } from "@datastax/astra-db-ts";
 const GPT_DEFAULT_MODEL = "gpt-3.5-turbo-1106";
@@ -94,6 +95,7 @@ export async function POST(req: NextRequest) {
             useRag,
             llm = GPT_DEFAULT_MODEL,
             similarityMetric,
+            progStrId,
         } = await req.json();
 
         const latestMessage = messages[messages?.length - 1]?.content;
@@ -102,10 +104,13 @@ export async function POST(req: NextRequest) {
             ? await getRAGContext(latestMessage)
             : "";
 
+        const systemPrompt =
+            _utils.functions.getProgram(progStrId)?.instruction ?? "";
+
         const ragPrompt = [
             {
                 role: "system",
-                content: _libs.prompts.SYSTEM_PROMPT + docContext,
+                content: systemPrompt + docContext,
             },
         ];
 
@@ -121,7 +126,9 @@ export async function POST(req: NextRequest) {
             .asResponse();
 
         const stream = OpenAIStream(streamResponse);
-        return new StreamingTextResponse(stream);
+        return new StreamingTextResponse(stream, {
+            headers: { "X-RATE-LIMIT": "lol" },
+        });
     } catch (err) {
         console.error(err);
     }

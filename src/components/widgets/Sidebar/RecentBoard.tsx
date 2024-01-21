@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, ButtonGroup, Icon } from "../../ui";
 import _utils from "@/utils";
 import { useRouter } from "next/navigation";
 import { useAppDispatch, useTypedSelector } from "@/store";
 import { removeRecentProgram } from "@/store/reducers";
+import { cn } from "@/utils/functions";
+import { IDivProps } from "@/types";
 
-export const RecentBoard: React.FC = (props) => {
+interface IProps extends IDivProps {
+    progId: string;
+}
+
+export const RecentBoard: React.FC<IProps> = (props) => {
     const router = useRouter();
     const dispatch = useAppDispatch();
 
@@ -22,24 +28,27 @@ export const RecentBoard: React.FC = (props) => {
     return (
         <ButtonGroup
             groupname="Recent Programs"
-            className="full col gap-10 justify-start items-start"
+            className="recent-programs-scroll full col gap-10 justify-start items-start"
         >
             {recentPrograms &&
                 recentPrograms.map((item, index) => (
                     <Button
-                        className="full relative"
+                        className={cn(
+                            item.progStrId === props.progId ? "current" : "",
+                            ["full", "relative"],
+                        )}
                         key={index}
                         onClick={() => handleToChat(item.progStrId)}
                     >
                         {_utils.functions.getProgram(item.progStrId).name}
                         <br></br>
                         <span className="last-message">{item.lastMessage}</span>
-                        <Button
-                            className="remove"
-                            onClick={() => handleRemove(item.progStrId)}
-                        >
-                            <Icon name="trash"></Icon>
-                        </Button>
+                        <div className="remove">
+                            <Icon
+                                name="trash"
+                                onClick={() => handleRemove(item.progStrId)}
+                            />
+                        </div>
                     </Button>
                 ))}
         </ButtonGroup>

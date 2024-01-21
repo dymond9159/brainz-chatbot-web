@@ -1,7 +1,6 @@
 import React from "react";
-import { BrainzAvatar } from "..";
+import { BrainzAvatar, IProgramProps } from "..";
 import { Flex } from "../../container";
-import { IProgramProps } from "@/types";
 
 export const WelcomeMessage: React.FC<IProgramProps> = (props) => {
     return (
@@ -10,7 +9,9 @@ export const WelcomeMessage: React.FC<IProgramProps> = (props) => {
                 className="program-avatar"
                 src={props.program.src}
             />
-            <p style={{ paddingTop: "15px" }}>{props.program.description1}</p>
+            <p style={{ paddingTop: "15px" }}>
+                {props.program.description_long}
+            </p>
         </Flex>
     );
 };

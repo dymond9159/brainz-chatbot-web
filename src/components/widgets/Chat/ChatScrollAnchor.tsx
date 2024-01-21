@@ -28,7 +28,7 @@ export const ChatScrollAnchor: React.FC<ChatScrollAnchorProps> = ({
     return (
         <div
             ref={ref}
-            style={{ width: "100%", height: "1px" }}
+            style={{ width: "100%", height: "1px", marginTop: "20px" }}
         />
     );
 };

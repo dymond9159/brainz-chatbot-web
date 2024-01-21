@@ -4,37 +4,56 @@
 *   Recent Program CSS
 */
 
+.sidebar {
+    .section {
+        padding: 0 !important;
+    }
+}
+
 .recent-board {
 
-    button {
-        span .last-message {
-            margin-top: 5px;
-            display: inline-block;
-            width: 100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;  
-        
-        }
-        
-        .remove {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            visibility: hidden;
-            background: transparent;
-            padding: 0;
+    .button-group {
+        height: 100%;
 
-            &:hover {
-                color: var(--error-color, #a81d1d)
+        .scroll-content{
+            height: 80%;
+            overflow-y: auto;
+            padding-right: 5px;
+            button {
+                position: relative;
+                span .last-message {
+                    margin-top: 5px;
+                    display: inline-block;
+                    width: 100%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;  
+                
+                }
+                
+                .remove {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    visibility: hidden;
+                    background: transparent;
+                    padding: 0;
+        
+                    &:hover {
+                        color: var(--error-color, #a81d1d)
+                    }
+                }
+        
+                &:hover, &.current {
+                    .remove {
+                        visibility: visible;
+                    }
+                }
+            }
+
+            .current {
+                background: var(--background-trans-25);
             }
         }
-
-        &:hover {
-            .remove {
-                visibility: visible;
-            }
-        }
-    } 
-        
+    }
 }

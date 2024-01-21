@@ -11,7 +11,7 @@ interface IProps extends IDivProps {
 export const MonitorBox: React.FC<IProps> = (props) => {
     return (
         <Box className={cn(props.className, "monitor-box")}>
-            {props.title && <h3 className="monitor-title">{props.title}</h3>}
+            {props.title && <h2 className="monitor-title">{props.title}</h2>}
             <div className="monitor-content">{props.children}</div>
         </Box>
     );
