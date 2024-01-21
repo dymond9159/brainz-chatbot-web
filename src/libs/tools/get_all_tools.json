@@ -1,0 +1,14 @@
+{
+    "name": "get_all_tools",
+    "description": "Get all of psychometric test tools",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "tool": {
+                "type": "string",
+                "name": "string"
+            }
+        },
+        "required": ["tool"]
+    }
+}

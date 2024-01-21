@@ -13,8 +13,9 @@ export type ProgramDataType = {
     src: string;
     description_short: string;
     description_long: string;
-    suggests: string[];
-    instruction: string;
+    suggests?: string[];
+    instruction?: string;
+    questionnaires?: string;
 };
 
 export interface IProgramProps extends ButtonProps {

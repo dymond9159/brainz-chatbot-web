@@ -1,0 +1,13 @@
+{
+    "name": "get_answers",
+    "description": "Get all of recommended answers to above question",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "answer": {
+                "type": "string"
+            }
+        },
+        "required": ["answer"]
+    }
+}

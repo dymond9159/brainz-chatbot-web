@@ -7,10 +7,10 @@ export const WelcomeMessage: React.FC<IProgramProps> = (props) => {
         <Flex className="welcome-body col justify-center">
             <BrainzAvatar
                 className="program-avatar"
-                src={props.program.src}
+                src={props.program?.src}
             />
             <p style={{ paddingTop: "15px" }}>
-                {props.program.description_long}
+                {props.program?.description_long}
             </p>
         </Flex>
     );

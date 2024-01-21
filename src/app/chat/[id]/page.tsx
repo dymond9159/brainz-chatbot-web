@@ -84,6 +84,7 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
         stop,
         isLoading,
         error,
+        data,
     } = useChat({
         initialInput: "",
         initialMessages: initMessages,
@@ -132,12 +133,16 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
     }, []);
 
     useEffect(() => {
+        console.log([data]);
+    }, [data]);
+
+    useEffect(() => {
         // switch message history
         switchProgram(progStrId);
 
-        if (!isLoading) {
-            handlePrompt("hey, there", false);
-        }
+        // if (!isLoading) {
+        //     handlePrompt("hey, there", false);
+        // }
     }, [progStrId]);
 
     // textarea auto rows
@@ -182,10 +187,12 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
                         <Flex className="row gap-10">
                             <BrainzAvatar
                                 className="program-avatar"
-                                src={_utils.functions.getProgram(progStrId).src}
+                                src={
+                                    _utils.functions.getProgram(progStrId)?.src
+                                }
                                 size={"40"}
                             />
-                            {_utils.functions.getProgram(progStrId).name}
+                            {_utils.functions.getProgram(progStrId)?.name}
                         </Flex>
                     </Navbar>
                     <Content className="chat-content full">
@@ -229,7 +236,7 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
                                             suggests={
                                                 _utils.functions.getProgram(
                                                     progStrId,
-                                                ).suggests
+                                                )?.suggests
                                             }
                                         />
                                     )}

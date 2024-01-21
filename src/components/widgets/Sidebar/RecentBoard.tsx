@@ -43,11 +43,11 @@ export const RecentBoard: React.FC<IProps> = (props) => {
                         {_utils.functions.getProgram(item.progStrId).name}
                         <br></br>
                         <span className="last-message">{item.lastMessage}</span>
-                        <div className="remove">
-                            <Icon
-                                name="trash"
-                                onClick={() => handleRemove(item.progStrId)}
-                            />
+                        <div
+                            className="remove"
+                            onClick={() => handleRemove(item.progStrId)}
+                        >
+                            <Icon name="trash" />
                         </div>
                     </Button>
                 ))}

@@ -41,35 +41,7 @@ export interface ChatPageProps {
     };
 }
 
-const handlerFunctionCall: FunctionCallHandler = async (
-    chatMessages,
-    functionCall,
-) => {
-    if (functionCall.name === "suggest_answers") {
-        let parsedFunctionCallArguments = {};
-        if (functionCall.arguments) {
-            parsedFunctionCallArguments = JSON.parse(functionCall.arguments);
-            // You now have access to the parsed arguments here (assuming the JSON was valid)
-            // If JSON is invalid, return an appropriate message to the model so that it may retry?
-            console.log(parsedFunctionCallArguments);
-        }
-
-        const functionResponse: ChatRequest = {
-            messages: [
-                ...chatMessages,
-                {
-                    id: crypto.randomUUID(),
-                    name: "MFQ_survey",
-                    role: "function" as const,
-                    content: JSON.stringify(parsedFunctionCallArguments),
-                },
-            ],
-        };
-        return functionResponse;
-    }
-};
-
-const ChatPage: React.FC<ChatPageProps> = (props) => {
+const TestPage: React.FC<ChatPageProps> = (props) => {
     const dispatch = useAppDispatch();
 
     const progStrId = props.params.id;
@@ -280,4 +252,4 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
     );
 };
 
-export default ChatPage;
+export default TestPage;

@@ -1,13 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
-import { OpenAIStream, StreamingTextResponse } from "ai";
+import {
+    OpenAIStream,
+    StreamingTextResponse,
+    experimental_StreamData,
+} from "ai";
+
+// functions
+import get_answers from "@/libs/tools/get_answers.json";
+import get_all_tools from "@/libs/tools/get_all_tools.json";
+
 // import { AstraDB } from "@datastax/astra-db-ts";
 
 import _libs from "@/libs";
 import _utils from "@/utils";
+import { get } from "http";
+import { PSYCHOMETRIC_INSTRUCTION } from "@/utils/constants";
 
 // import { AstraDB } from "@datastax/astra-db-ts";
-const GPT_DEFAULT_MODEL = "gpt-3.5-turbo-1106";
+const GPT_DEFAULT_MODEL = "gpt-3.5-turbo-1106"; //"gpt-3.5-turbo-0613"
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
@@ -20,48 +31,6 @@ const openai = new OpenAI({
 // );
 
 // export const runtime = "edge";
-
-// Suggest Answers Function definition:
-const functions = [
-    {
-        name: "suggest_answers",
-        description: "Get all of the suggest answers against above question",
-        parameters: {
-            type: "object",
-            properties: {
-                question: {
-                    type: "string",
-                    description:
-                        "This is a question that suggest you according above context.",
-                },
-                answers: {
-                    type: "array",
-                    description:
-                        "Here, list answer items(suggested answer regarding above question)",
-                    items: {
-                        type: "object",
-                        item: {
-                            answer: {
-                                type: "string",
-                                description: "this is one of that answers.",
-                            },
-                            score: {
-                                type: "number",
-                                description:
-                                    "score is number score of that answer",
-                            },
-                            color: {
-                                type: "string",
-                                description: "color represent in css color",
-                            },
-                        },
-                    },
-                },
-            },
-            required: ["question", "answers"],
-        },
-    },
-];
 
 const getRAGContext = async (latestMessage: string) => {
     // const { data } = await openai.embeddings.create({
@@ -86,6 +55,15 @@ const getRAGContext = async (latestMessage: string) => {
     return "";
 };
 
+const TOOLS = `
+The psychometric tester prepared are as follows.
+#Mood Tracker: Survey based on MFQ questionnaires,
+#PTSD Tracker: Survey based on DSM-5(PCL-5) questionnaires,
+#Anxiety Tracker: Survey based on GAD-7 questionnaires,
+#Depression Tracker: Survey base on PHQ-9 questionnaires,
+#Suide risk assessment: Survey based on C-SSRS questionnaires 
+`;
+
 export const runtime = "edge";
 
 export async function POST(req: NextRequest) {
@@ -104,8 +82,15 @@ export async function POST(req: NextRequest) {
             ? await getRAGContext(latestMessage)
             : "";
 
+        const program = _utils.functions.getProgram(progStrId);
         const systemPrompt =
-            _utils.functions.getProgram(progStrId)?.instruction ?? "";
+            program?.instruction ??
+            PSYCHOMETRIC_INSTRUCTION.replace("[testitem]", progStrId).replace(
+                "[questionnaires]",
+                program?.questionnaires ?? "the best popular",
+            );
+
+        console.log(systemPrompt);
 
         const ragPrompt = [
             {
@@ -114,21 +99,85 @@ export async function POST(req: NextRequest) {
             },
         ];
 
+        // Instantiate the StreamData. It works with all API providers.
+        const data = new experimental_StreamData();
+
         const params: OpenAI.Chat.ChatCompletionCreateParams = {
             model: llm,
             stream: true,
             messages: [...ragPrompt, ...messages],
-            // functions,
+            // functions: [get_answers, get_all_tools],
         };
 
-        const streamResponse = await openai.chat.completions
-            .create(params)
-            .asResponse();
+        const streamResponse = await openai.chat.completions.create(params);
 
-        const stream = OpenAIStream(streamResponse);
-        return new StreamingTextResponse(stream, {
-            headers: { "X-RATE-LIMIT": "lol" },
+        const stream = OpenAIStream(streamResponse, {
+            experimental_onFunctionCall: async (
+                { name, arguments: args },
+                createFunctionCallMessages,
+            ) => {
+                if (name === "get_answers") {
+                    // Call a weather API here
+                    const answerData = {
+                        answer: "?",
+                    };
+
+                    data.append({
+                        text: "Some custom data",
+                    });
+
+                    const newMessages = createFunctionCallMessages(answerData);
+                    console.log(newMessages);
+                    return openai.chat.completions.create({
+                        messages: [...messages, ...newMessages],
+                        stream: true,
+                        model: llm,
+                    });
+                }
+
+                if (name === "get_all_tools") {
+                    // Call a weather API here
+                    console.log(name, args);
+                    const toolData = {
+                        role: "function",
+                        content: "list all suggest answers to above question",
+                    };
+
+                    data.append({
+                        text: "Some custom data",
+                    });
+
+                    const newMessages = createFunctionCallMessages(toolData);
+                    console.log(newMessages);
+                    return openai.chat.completions.create({
+                        messages: [
+                            { role: "system", content: TOOLS },
+                            ...messages,
+                            ...newMessages,
+                        ],
+                        stream: true,
+                        model: llm,
+                    });
+                }
+            },
+            onCompletion(completion) {
+                console.log(completion);
+            },
+            onFinal(completion) {
+                // IMPORTANT! you must close StreamData manually or the response will never finish.
+                data.close();
+            },
+            // IMPORTANT! until this is stable, you must explicitly opt in to supporting streamData.
+            experimental_streamData: true,
         });
+
+        return new StreamingTextResponse(
+            stream,
+            {
+                headers: { "X-RATE-LIMIT": "lol" },
+            },
+            data,
+        );
     } catch (err) {
         console.error(err);
     }
