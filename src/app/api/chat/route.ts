@@ -117,7 +117,6 @@ export async function POST(req: NextRequest) {
                 createFunctionCallMessages,
             ) => {
                 if (name === "get_answers") {
-                    // Call a weather API here
                     const answerData = {
                         answer: "?",
                     };
@@ -127,7 +126,7 @@ export async function POST(req: NextRequest) {
                     });
 
                     const newMessages = createFunctionCallMessages(answerData);
-                    console.log(newMessages);
+                    console.log(name, args, newMessages);
                     return openai.chat.completions.create({
                         messages: [...messages, ...newMessages],
                         stream: true,
@@ -136,8 +135,6 @@ export async function POST(req: NextRequest) {
                 }
 
                 if (name === "get_all_tools") {
-                    // Call a weather API here
-                    console.log(name, args);
                     const toolData = {
                         role: "function",
                         content: "list all suggest answers to above question",
@@ -148,13 +145,10 @@ export async function POST(req: NextRequest) {
                     });
 
                     const newMessages = createFunctionCallMessages(toolData);
-                    console.log(newMessages);
+                    console.log(name, args, newMessages);
+
                     return openai.chat.completions.create({
-                        messages: [
-                            { role: "system", content: TOOLS },
-                            ...messages,
-                            ...newMessages,
-                        ],
+                        messages: [...messages, ...newMessages],
                         stream: true,
                         model: llm,
                     });
