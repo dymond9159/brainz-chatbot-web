@@ -13,7 +13,7 @@ import {
 } from "..";
 
 export interface ISidebarProps extends React.ComponentProps<"div"> {
-    progId: string;
+    progId?: string;
 }
 
 export const Sidebar: React.FC<ISidebarProps> = (props) => {

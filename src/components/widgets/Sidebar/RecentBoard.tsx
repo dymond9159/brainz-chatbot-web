@@ -8,7 +8,7 @@ import { cn } from "@/utils/functions";
 import { IDivProps } from "@/types";
 
 interface IProps extends IDivProps {
-    progId: string;
+    progId?: string;
 }
 
 export const RecentBoard: React.FC<IProps> = (props) => {

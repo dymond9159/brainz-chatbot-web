@@ -20,7 +20,10 @@ const DashboardPage: React.FC = () => {
     return (
         <Container className="main-container">
             <Flex>
-                <Sidebar className="left-side" />
+                <Sidebar
+                    progId=""
+                    className="left-side"
+                />
                 <Flex className="main-section col">
                     <Navbar className="main-nav">Dashboard</Navbar>
                     <Content className="dashboard-content">

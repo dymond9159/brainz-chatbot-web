@@ -22,10 +22,11 @@ export function formatDate(input: string | number | Date): string {
     });
 }
 
-export const getProgram = (id: string): ProgramDataType => {
+export const getProgram = (id: string | undefined): ProgramDataType => {
     return (
-        PROGRAMS.filter((item) => item.strid === id)[0] ||
-        PSYCHOMETRICS.filter((item) => item.strid === id)[0]
+        (PROGRAMS.filter((item) => item.strid === id)[0] ||
+            PSYCHOMETRICS.filter((item) => item.strid === id)[0]) ??
+        []
     );
 };
 
