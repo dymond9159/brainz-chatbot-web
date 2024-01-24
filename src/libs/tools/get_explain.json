@@ -1,0 +1,14 @@
+{
+    "name": "get_explain",
+    "description": "Get the explain based on the instruction with user.",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "explain": {
+                "type": "string",
+                "description": "Get the explain based on the instruction with user."
+            }
+        },
+        "required": ["explain"]
+    }
+}

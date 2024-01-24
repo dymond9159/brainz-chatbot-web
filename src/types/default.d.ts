@@ -1,10 +1,16 @@
-import { Message } from "ai";
+import { JSONValue, Message } from "ai";
+import { JSONSchema } from "openai/lib/jsonschema.mjs";
 import React from "react";
 
 export interface LayoutProps {
     children?: React.ReactNode;
     params?: any;
 }
+
+export type IDataProps = {
+    type: "answer" | "score";
+    result: JSONValue[] | JSONValue;
+};
 
 // Basic types
 
@@ -23,10 +29,13 @@ export interface IIconProps {
 // Psychometric
 
 export type MetricCharactersType = {
+    name?: string;
     value: number;
     maxValue: number;
+    title?: string;
     strValue?: string;
     description?: string;
+    updatedDate?: string;
 };
 
 export type PsychometricScoreType = {

@@ -8,11 +8,11 @@ type ButtonType = "button" | "submit" | "reset" | undefined;
 export interface ButtonProps extends React.ComponentProps<"button"> {
     type?: ButtonType;
     icon?: string;
-    vertical?: boolean;
+    vertical?: string;
 }
 
 export const Button: React.FC<ButtonProps> = (props) => {
-    const vertical = props.vertical ? "col" : "row";
+    const vertical = props.vertical === "true" ? "col" : "row";
     return (
         <button
             className={`button ${props.className}`}

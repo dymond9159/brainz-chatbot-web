@@ -1,11 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { MessageType, PsychometricScoreType, RecentProgramType } from "@/types";
+import {
+    MessageType,
+    MetricCharactersType,
+    PsychometricScoreType,
+    RecentProgramType,
+} from "@/types";
 
 export type ChatStateProps = {
     recentPrograms: RecentProgramType[];
     initMessages: MessageType[];
-    scores?: PsychometricScoreType;
+    scores: PsychometricScoreType;
 };
 
 const initialState: ChatStateProps = {
@@ -14,9 +19,43 @@ const initialState: ChatStateProps = {
     scores: {
         Mood: {
             value: 0,
-            strValue: "Hey, Unlock Your Mood, Embrace Your Score!",
+            title: "Hey, Unlock Your Mood, Embrace Your Score!",
             maxValue: 10,
-            description: "Not measured yet",
+            strValue: "Not measured yet",
+            description: "",
+            updatedDate: "",
+        },
+        Anxiety: {
+            value: 0,
+            title: "",
+            maxValue: 10,
+            strValue: "Not measured yet",
+            description: "",
+            updatedDate: "",
+        },
+        Depression: {
+            value: 0,
+            title: "",
+            maxValue: 10,
+            strValue: "Not measured yet",
+            description: "",
+            updatedDate: "",
+        },
+        PTSD: {
+            value: 0,
+            title: "",
+            maxValue: 10,
+            strValue: "Not measured yet",
+            description: "",
+            updatedDate: "",
+        },
+        Suicidal: {
+            value: 0,
+            title: "",
+            maxValue: 10,
+            strValue: "Not measured yet",
+            description: "",
+            updatedDate: "",
         },
     },
 };
@@ -30,7 +69,7 @@ export const chatReducer = createSlice({
             action: PayloadAction<RecentProgramType>,
         ) => {
             const recentProgram = action.payload;
-            console.log(recentProgram)
+            console.log(recentProgram);
             const findOne = state.recentPrograms.findLastIndex(
                 (_) => _.progStrId === recentProgram.progStrId,
             );
@@ -67,8 +106,39 @@ export const chatReducer = createSlice({
         /*
          **  Psychometric Scoring
          */
+        setPsychometricScore: (
+            state,
+            action: PayloadAction<MetricCharactersType>,
+        ) => {
+            const score = action.payload;
+            score.updatedDate = new Date(Date.now()).toISOString();
+            if (score?.name) {
+                switch (score?.name?.toLowerCase()) {
+                    case "mood":
+                        state.scores.Mood = score;
+                        break;
+                    case "anxiety":
+                        state.scores.Anxiety = score;
+                        break;
+                    case "depression":
+                        state.scores.Depression = score;
+                        break;
+                    case "ptsd":
+                        state.scores.PTSD = score;
+                        break;
+                    case "suicidal":
+                        state.scores.Suicidal = score;
+                        break;
+                    default:
+                }
+            }
+        },
     },
 });
 
-export const { updateRecentProgram, updateInitMessages, removeRecentProgram } =
-    chatReducer.actions;
+export const {
+    updateRecentProgram,
+    updateInitMessages,
+    removeRecentProgram,
+    setPsychometricScore,
+} = chatReducer.actions;

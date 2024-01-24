@@ -46,12 +46,9 @@ export const Psychometric: React.FC<IProps> = (props) => {
                         })}
                     />
                     <Flex className="col gap-15 ml-10">
-                        <h4>
-                            {props?.scores?.strValue ?? "This can feel like:"}
-                        </h4>
-                        <p>
-                            {props?.scores?.description ?? "Not measured yet"}
-                        </p>
+                        <h4>This can feel like:</h4>
+                        <p>{props?.scores?.strValue ?? "Not measured yet"}</p>
+                        <label>{props?.scores?.description ?? ""}</label>
                     </Flex>
                 </Flex>
             </Flex>

@@ -1,0 +1,26 @@
+{
+    "name": "get_score",
+    "description": "Get the psychometric results based on the instruction with user.",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "name": {
+                "type":"string",
+                "description": "the name of the psychometric tester"
+            },
+            "score": {
+                "type": "number",
+                "description": "the psychometric score in number"
+            },
+            "maxScore": {
+                "type": "number",
+                "description": "the psychometric max score in number"
+            },
+            "strValue": {
+                "type": "string",
+                "description": "the Severity in string"
+            }
+        },
+        "required": ["name", "score", "maxScore", "strValue"]
+    }
+}

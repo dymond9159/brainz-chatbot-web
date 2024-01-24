@@ -40,7 +40,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-, "src/components/ui/Button/Button.tsx"  ],
+, "src/components/ui/Button/Button.tsx", "src/app/api/hello"  ],
   "exclude": [
     "node_modules"
   ]

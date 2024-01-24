@@ -1,5 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { combineReducers } from "redux";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import {
     persistReducer,
     persistStore,
@@ -12,17 +11,25 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+
 import { chatReducer } from "./reducers";
+
+const persistConfig = {
+    key: "brainz_chat",
+    version: 1,
+    storage, //Initially set to null
+};
+
+// Dynamically load storage only in client-side
+// if (typeof window !== "undefined") {
+//     const createWebStorage = require("redux-persist/lib/storage").default;
+//     persistConfig.storage = createWebStorage("local");
+// }
 
 // Combine your reducers
 const rootReducers = combineReducers({
     chat: chatReducer.reducer,
 });
-const persistConfig = {
-    key: "brainz_chat",
-    version: 1,
-    storage,
-};
 const persistedReducer = persistReducer(persistConfig, rootReducers);
 
 // Create the Redux store
@@ -32,12 +39,12 @@ export const store = configureStore({
         getDefaultMiddleware({
             serializableCheck: {
                 ignoredActions: [
-                    // FLUSH,
-                    // REHYDRATE,
-                    // PAUSE,
-                    // PERSIST,
-                    // PURGE,
-                    // REGISTER,
+                    FLUSH,
+                    REHYDRATE,
+                    PAUSE,
+                    PERSIST,
+                    PURGE,
+                    REGISTER,
                 ],
             },
         }).concat(),
@@ -50,5 +57,5 @@ export const persistor = persistStore(store);
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof rootReducers>;
 
-export const useAppDispatch = (): any => useDispatch<AppDispatch>();
+export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;

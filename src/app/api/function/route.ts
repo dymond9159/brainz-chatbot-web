@@ -1,30 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 import {
-    JSONValue,
-    Message,
     OpenAIStream,
     StreamingTextResponse,
     experimental_StreamData,
 } from "ai";
 
-// psychometric test
+// functions
 import get_answers from "@/libs/tools/get_answers.json";
-import get_score from "@/libs/tools/get_score.json";
+import get_all_tools from "@/libs/tools/get_all_tools.json";
 
 // import { AstraDB } from "@datastax/astra-db-ts";
 
 import _libs from "@/libs";
 import _utils from "@/utils";
-import {
-    generateSuggestAnswersInstruction,
-    psychometricInstruction,
-} from "@/utils/constants";
-import { ProgramDataType } from "@/components/widgets";
+import { get } from "http";
+import { PSYCHOMETRIC_INSTRUCTION } from "@/utils/constants";
 
 // import { AstraDB } from "@datastax/astra-db-ts";
 const GPT_DEFAULT_MODEL = "gpt-3.5-turbo-1106"; //"gpt-3.5-turbo-0613"
-const TEMPERATURE = 0.1;
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
@@ -72,39 +66,6 @@ The psychometric tester prepared are as follows.
 
 export const runtime = "edge";
 
-const getAnswers = async (
-    llm: string,
-    system: string,
-    messages: any,
-    completion: string,
-    program: ProgramDataType,
-) => {
-    const systemPrompt = {
-        role: "system",
-        content: generateSuggestAnswersInstruction(program),
-    };
-    const params: OpenAI.Chat.ChatCompletionCreateParams = {
-        model: llm,
-        messages: [
-            systemPrompt,
-            ...messages,
-            {
-                role: "assistant",
-                content: completion,
-            },
-            {
-                role: "user",
-                content: "Generate the recommended answers to question above.",
-            },
-        ],
-        response_format: { type: "json_object" },
-        temperature: TEMPERATURE,
-    };
-
-    const response = await openai.chat.completions.create(params);
-    return response.choices[0].message.content;
-};
-
 export async function POST(req: NextRequest) {
     try {
         const {
@@ -123,7 +84,14 @@ export async function POST(req: NextRequest) {
 
         const program = _utils.functions.getProgram(progStrId);
         const systemPrompt =
-            program?.instruction ?? psychometricInstruction(program);
+            program?.instruction ??
+            PSYCHOMETRIC_INSTRUCTION.replaceAll(
+                "[testitem]",
+                progStrId,
+            ).replace(
+                "[questionnaires]",
+                program?.questionnaires ?? "the best popular",
+            );
 
         const ragPrompt = [
             {
@@ -139,8 +107,7 @@ export async function POST(req: NextRequest) {
             model: llm,
             stream: true,
             messages: [...ragPrompt, ...messages],
-            functions: [get_answers, get_score],
-            temperature: TEMPERATURE,
+            functions: [get_answers],
         };
 
         const streamResponse = await openai.chat.completions.create(params);
@@ -148,49 +115,49 @@ export async function POST(req: NextRequest) {
         const stream = OpenAIStream(streamResponse, {
             experimental_onFunctionCall: async (
                 { name, arguments: args },
-
                 createFunctionCallMessages,
             ) => {
-                if (name === "get_score") {
+                console.log([name, args]);
+                if (name === "get_answers") {
+                    const answerData = {
+                        answer: "?",
+                    };
+
                     data.append({
-                        type: "score",
-                        result: args as JSONValue,
+                        text: "Some custom data",
                     });
 
-                    const answerData = args as JSONValue;
                     const newMessages = createFunctionCallMessages(answerData);
+                    console.log(name, args, newMessages);
+                    return openai.chat.completions.create({
+                        messages: [...messages, ...newMessages],
+                        stream: true,
+                        model: llm,
+                    });
+                }
+
+                if (name === "get_all_tools") {
+                    const toolData = {
+                        role: "function",
+                        content: "list all suggest answers to above question",
+                    };
+
+                    data.append({
+                        text: "Some custom data",
+                    });
+
+                    const newMessages = createFunctionCallMessages(toolData);
+                    console.log(name, args, newMessages);
 
                     return openai.chat.completions.create({
                         messages: [...messages, ...newMessages],
                         stream: true,
                         model: llm,
-                        functions: [get_answers, get_score],
-                        temperature: TEMPERATURE,
                     });
                 }
             },
-            async onCompletion(completion) {
-                console.log();
+            onCompletion(completion) {
                 console.log(completion);
-                console.log();
-                if (!completion.includes(`"function_call":`)) {
-                    const answers = await getAnswers(
-                        llm,
-                        systemPrompt,
-                        messages,
-                        completion,
-                        program,
-                    );
-                    console.log("--------------------");
-                    console.log(answers);
-                    if (answers !== null) {
-                        const parseData = JSON.parse(answers);
-                        data.append({
-                            type: "answer",
-                            result: parseData.answers,
-                        });
-                    }
-                }
             },
             onFinal(completion) {
                 // IMPORTANT! you must close StreamData manually or the response will never finish.
@@ -203,7 +170,7 @@ export async function POST(req: NextRequest) {
         return new StreamingTextResponse(
             stream,
             {
-                headers: {},
+                headers: { "X-RATE-LIMIT": "lol" },
             },
             data,
         );

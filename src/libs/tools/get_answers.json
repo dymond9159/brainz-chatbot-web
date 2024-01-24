@@ -1,13 +1,17 @@
 {
     "name": "get_answers",
-    "description": "Get all of recommended answers to above question",
+    "description": "Get all of the recommended answers from questionnaires of that disorder",
     "parameters": {
-        "type": "object",
+        "type": "object",        
         "properties": {
-            "answer": {
-                "type": "string"
+            "answers": {
+                "title": "answer",
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
             }
         },
-        "required": ["answer"]
+        "required": ["answers"]
     }
 }

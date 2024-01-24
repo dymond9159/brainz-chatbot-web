@@ -37,7 +37,7 @@ export const MobileNavigator = () => {
                         <Button
                             key={index}
                             icon={_.icon}
-                            vertical={true}
+                            vertical={"true"}
                             onClick={() => {
                                 router.push(_.url);
                                 router.refresh();

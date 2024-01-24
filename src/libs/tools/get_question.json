@@ -1,0 +1,22 @@
+{
+    "name": "get_question",
+    "description": "Get one question and all of the recommended answers from that questionnaires.",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "question": {
+                "type": "string",
+                "description": "Get one question from that questionnaires."
+            },
+            "answers": {
+                "type": "array",
+                "description": "Get all of the recommended answers from that questionnaires.",
+                "items": {
+                    "type": "string",
+                    "description": "One of the recommended answer"
+                }
+            }
+        },
+        "required": ["answers", "question"]
+    }
+}

@@ -21,15 +21,17 @@ import {
     Sidebar,
     WelcomeMessage,
 } from "@/components/widgets";
-import { ChatRequest, FunctionCallHandler } from "ai";
+import { ChatRequest, FunctionCallHandler, JSONValue } from "ai";
 import _utils from "@/utils";
 import { useEnterSubmit } from "@/hooks";
 
 import { useAppDispatch, useTypedSelector } from "@/store";
-import { updateRecentProgram } from "@/store/reducers";
+import { setPsychometricScore, updateRecentProgram } from "@/store/reducers";
 import { switchProgram } from "@/store/actions";
 import { nanoid } from "nanoid";
 import { useRouter } from "next/navigation";
+import { fetchData } from "@/helpers/fetch";
+import { IDataProps, MessageType, MetricCharactersType } from "@/types";
 
 const useRag = false;
 const llm = "gpt-4-1106-preview";
@@ -41,71 +43,45 @@ export interface ChatPageProps {
     };
 }
 
-const handlerFunctionCall: FunctionCallHandler = async (
-    chatMessages,
-    functionCall,
-) => {
-    if (functionCall.name === "suggest_answers") {
-        let parsedFunctionCallArguments = {};
-        if (functionCall.arguments) {
-            parsedFunctionCallArguments = JSON.parse(functionCall.arguments);
-            // You now have access to the parsed arguments here (assuming the JSON was valid)
-            // If JSON is invalid, return an appropriate message to the model so that it may retry?
-            console.log(parsedFunctionCallArguments);
-        }
-
-        const functionResponse: ChatRequest = {
-            messages: [
-                ...chatMessages,
-                {
-                    id: crypto.randomUUID(),
-                    name: "MFQ_survey",
-                    role: "function" as const,
-                    content: JSON.stringify(parsedFunctionCallArguments),
-                },
-            ],
-        };
-        return functionResponse;
-    }
-};
-
 const ChatPage: React.FC<ChatPageProps> = (props) => {
     const dispatch = useAppDispatch();
 
     const progStrId = props.params.id;
-
+    const [suggestAnswers, setSuggestAnswers] = useState<JSONValue[]>();
     const { initMessages } = useTypedSelector((state) => state.chat);
     const {
         append,
+        setMessages,
         messages,
         input,
+        setInput,
         handleInputChange,
-        handleSubmit,
         stop,
         isLoading,
-        error,
         data,
+        error,
     } = useChat({
         initialInput: "",
         initialMessages: initMessages,
-        onResponse: (res) => {
-            console.log(res);
-        },
         onError: (err: Error) => {
             console.log(err);
         },
-        onFinish: (message) => {
+        onFinish: async (message) => {
+            // update message
+            if (!promptMessage) return;
+
+            // update new message
             dispatch(
                 updateRecentProgram({
                     progStrId: progStrId,
-                    lastMessage: promptText,
+                    lastMessage: promptMessage?.content,
                     lastAt: new Date(Date.now()).toISOString(),
                     messages: [
                         ...messages,
                         {
                             id: nanoid(),
                             role: "user",
-                            content: promptText,
+                            content: promptMessage.content,
                             createAt: new Date(Date.now()).toISOString(),
                         },
                         {
@@ -120,30 +96,45 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
         },
     });
 
-    const [promptText, setPromptText] = useState<string>("");
+    const [promptMessage, setPromptMessage] = useState<MessageType>();
     const { formRef, onKeyDown } = useEnterSubmit();
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     // const formRef = useRef<HTMLFormElement>(null);
 
     useEffect(() => {
+        console.log("[]");
         if (textareaRef.current) {
             textareaRef.current.focus();
         }
     }, []);
 
     useEffect(() => {
-        console.log([data]);
+        if (data && data.length > 0) {
+            const last = data?.at(data.length - 1) as IDataProps;
+            if (last && last !== null) {
+                switch (last.type) {
+                    case "answer":
+                        setSuggestAnswers(last.result as JSONValue[]);
+                        break;
+                    case "score":
+                        dispatch(
+                            setPsychometricScore(
+                                last.result as MetricCharactersType,
+                            ),
+                        );
+                        break;
+                    default:
+                }
+            }
+        }
+        console.log("[data]");
     }, [data]);
 
     useEffect(() => {
-        // switch message history
-        switchProgram(progStrId);
-
-        // if (!isLoading) {
-        //     handlePrompt("hey, there", false);
-        // }
-    }, [progStrId]);
+        setMessages(initMessages);
+        console.log("initMessage");
+    }, [initMessages]);
 
     // textarea auto rows
     useEffect(() => {
@@ -154,22 +145,20 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
                 textareaRef?.current?.scrollHeight > 120 ? "auto" : "hidden"
             }`;
         }
-        setPromptText(input);
+        console.log("input");
     }, [input]);
 
-    const handleSend = (e: React.FormEvent<HTMLFormElement>) => {
-        handleSubmit(e, {
-            options: { body: { useRag, llm, similarityMetric, progStrId } },
-        });
-    };
-
+    // Handle prompt selection
     const handlePrompt = (promptText: string, userResponse: boolean = true) => {
         const msg: Message = {
             id: nanoid(),
-            content: promptText,
             role: "user",
+            content: promptText,
+            createdAt: new Date(Date.now()),
+            // name: "", // TO DO
         };
-        setPromptText(userResponse ? promptText : "");
+        setPromptMessage(msg);
+        setSuggestAnswers(undefined);
         append(msg, {
             options: { body: { useRag, llm, similarityMetric, progStrId } },
         });
@@ -221,6 +210,25 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
                                                         />
                                                     ),
                                                 )}
+
+                                            {suggestAnswers && !isLoading && (
+                                                <ButtonGroup className="wrap justify-end gap-10 mt-10">
+                                                    {suggestAnswers.map(
+                                                        (item, idx) => (
+                                                            <Button
+                                                                key={idx}
+                                                                onClick={() =>
+                                                                    handlePrompt(
+                                                                        item as string,
+                                                                    )
+                                                                }
+                                                            >
+                                                                {item as string}
+                                                            </Button>
+                                                        ),
+                                                    )}
+                                                </ButtonGroup>
+                                            )}
                                         </Box>
                                     )}
                                     <ChatScrollAnchor
@@ -242,7 +250,14 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
                                     )}
                                     <form
                                         ref={formRef}
-                                        onSubmit={handleSend}
+                                        onSubmit={(e) => {
+                                            e.preventDefault();
+                                            if (!input?.trim()) {
+                                                return;
+                                            }
+                                            handlePrompt(input);
+                                            setInput("");
+                                        }}
                                     >
                                         <Textarea
                                             type="textarea"
@@ -250,6 +265,7 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
                                             className="full"
                                             rows={1}
                                             tabIndex={0}
+                                            disabled={isLoading}
                                             textareaRef={textareaRef}
                                             onChange={handleInputChange}
                                             onKeyDown={onKeyDown}

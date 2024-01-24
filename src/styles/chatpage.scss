@@ -50,7 +50,7 @@
                         border-radius: 6px;
                         padding: 0.6rem 1rem;
 
-                        ol, li {
+                        ol, ul {
                             padding: 0px 20px;
                             margin-bottom: 20px;
                             color: var(--foreground-secondary);
@@ -81,11 +81,11 @@
 
                 .user {
                     float: right;
-
                 }
 
                 .assistant {
                     float: left;
+                    width: 100%;
                 }
 
             }

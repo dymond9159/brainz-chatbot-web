@@ -12,9 +12,7 @@ export const MoodScale = () => {
 
     return (
         <Flex className="col mood-box">
-            <h2 className="mood-title">
-                {moodScore?.strValue ?? "Hey, there!"}
-            </h2>
+            <h2 className="mood-title">{moodScore?.title ?? "Hey, there!"}</h2>
             <CircularProgressbar
                 className="mood-scale"
                 value={moodScore?.value ?? 0}
@@ -45,7 +43,8 @@ export const MoodScale = () => {
                     backgroundColor: `rgba(62, 52, 199, 0.1)`,
                 })}
             ></CircularProgressbar>
-            <p>{moodScore?.description ?? "Not measured yet"}</p>
+            <p>{moodScore?.strValue ?? "Not measured yet."}</p>
+            <p>{moodScore?.description ?? ""}</p>
         </Flex>
     );
 };

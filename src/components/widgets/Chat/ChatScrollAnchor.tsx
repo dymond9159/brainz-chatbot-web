@@ -14,7 +14,7 @@ export const ChatScrollAnchor: React.FC<ChatScrollAnchorProps> = ({
     const { ref, entry, inView } = useInView({
         trackVisibility,
         delay: 100,
-        rootMargin: "0px 0px -30px 0px",
+        rootMargin: "0px 0px 40px 0px",
     });
 
     React.useEffect(() => {
@@ -28,7 +28,7 @@ export const ChatScrollAnchor: React.FC<ChatScrollAnchorProps> = ({
     return (
         <div
             ref={ref}
-            style={{ width: "100%", height: "1px", marginTop: "20px" }}
+            style={{ width: "100%", height: "1px", marginTop: "40px" }}
         />
     );
 };

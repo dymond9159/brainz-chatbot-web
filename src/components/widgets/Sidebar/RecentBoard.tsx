@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { Button, ButtonGroup, Icon } from "../../ui";
 import _utils from "@/utils";
 import { useRouter } from "next/navigation";
@@ -30,27 +30,33 @@ export const RecentBoard: React.FC<IProps> = (props) => {
             groupname="Recent Programs"
             className="recent-programs-scroll full col gap-10 justify-start items-start"
         >
-            {recentPrograms &&
-                recentPrograms.map((item, index) => (
-                    <Button
-                        className={cn(
-                            item.progStrId === props.progId ? "current" : "",
-                            ["full", "relative"],
-                        )}
-                        key={index}
-                        onClick={() => handleToChat(item.progStrId)}
-                    >
-                        {_utils.functions.getProgram(item.progStrId).name}
-                        <br></br>
-                        <span className="last-message">{item.lastMessage}</span>
-                        <div
-                            className="remove"
-                            onClick={() => handleRemove(item.progStrId)}
+            <Suspense fallback={<div>Loading...</div>}>
+                {recentPrograms &&
+                    recentPrograms.map((item, index) => (
+                        <Button
+                            className={cn(
+                                item.progStrId === props.progId
+                                    ? "current"
+                                    : "",
+                                ["full", "relative"],
+                            )}
+                            key={index}
+                            onClick={() => handleToChat(item.progStrId)}
                         >
-                            <Icon name="trash" />
-                        </div>
-                    </Button>
-                ))}
+                            {_utils.functions.getProgram(item.progStrId).name}
+                            <br></br>
+                            <span className="last-message">
+                                {item.lastMessage}
+                            </span>
+                            <div
+                                className="remove"
+                                onClick={() => handleRemove(item.progStrId)}
+                            >
+                                <Icon name="trash" />
+                            </div>
+                        </Button>
+                    ))}
+            </Suspense>
         </ButtonGroup>
     );
 };
