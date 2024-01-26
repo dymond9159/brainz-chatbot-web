@@ -34,21 +34,21 @@ const DashboardPage: React.FC = () => {
                                     <Flex className="wrap full gap-15">
                                         <Psychometric
                                             title="Anxiety"
-                                            scores={psycometricScores?.Anxiety}
+                                            scores={psycometricScores?.anxiety}
                                         />
                                         <Psychometric
                                             title="Depression"
                                             scores={
-                                                psycometricScores?.Depression
+                                                psycometricScores?.depression
                                             }
                                         />
                                         <Psychometric
                                             title="PTSD"
-                                            scores={psycometricScores?.PTSD}
+                                            scores={psycometricScores?.ptsd}
                                         />
                                         <Psychometric
                                             title="Suicidal"
-                                            scores={psycometricScores?.Suicidal}
+                                            scores={psycometricScores?.suicide}
                                         />
                                     </Flex>
                                 </MonitorBox>
