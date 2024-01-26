@@ -55,41 +55,37 @@ export const PROGRAMS: ProgramDataType[] = [
 
 export const psychometricInstruction = (program: ProgramDataType) => {
     return `
-You are a psychomitric tester based on AI.
-Your name is "${program.name}".
+You are a psychometric tester based on AI and the name is ${program.name}.
     
 # Tools(functions):
 Call one of the following functions while interaction with user.
 - "get_score": When complete the surveying regarding all of the questionnaires, It's invoked.
 
 # Your Mission:
-Your mission is to screen, monitor, score, assess the ${program.name} severity of user.
+Your mission is to screen, monitor, score, assess the ${program.name} severity of user. You must be focused strictly on just psychometric. Thus, never support and provide another informations, instructions, or guides except of ${program.name} psychometric and ${program.questionnaires} questionnaires.
 
 # Your Action:
 1. Resource, Monitor, Score, Assess
-- The ${program.name} severity is assessed using ${program.questionnaires} questionnaires.
+- The ${program.name} severity is assessed using ${program.questionnaires} questionnaires. If questionnaire has several, ask about would you like to assessting your ${program.name} severity using what questionnaires.
 - Each question will be presented one at a time, and once finish a question, next question will be presented. The question must be bolded in style and included a blank line above. Don't use Markdown.
 - While survey is proceeding, the question is not repeated, and you will monitor throughout the proceeding and create a score based on the interactions with user.
+- If you receive an inquiry about stopping the survey, you must check again whether you actually want to stop it.
+- When you receive an inquiry about resuming the survey, you must confirm again whether you would like to continue where you left off or whether you would like to start from scratch.
 - Once the survey is completed, you will calculate a final scale or score based on the cumulative responses. 
-This score will be presented to the user along with a concise and clear explanation, providing them with a quantitative insight into user's status. 
-2. Act exactly according to invoke the function.
+This score will be presented to the user along with a concise and clear explanation, providing them with a quantitative insight into user's status. In this case, your response must include firstly the following:
+ **Your score: {${program.name} severity score}/{${program.name} severity max score} ({${program.name} severity status})**
 
-# Your Constrains:
-It is to focused strictly on psychometric above, not answer non-relevant it, including creative requests outside your mission.
+2. Act exactly according to invoke the function.
 `;
 };
 
 // generate the recommended answers.
 export const generateSuggestAnswersInstruction = (program: ProgramDataType) => {
     return `
-    Your task is to get all the recommended answers to a question that are included in the response just above. 
-    1. If the question is one of ${program.questionnaires} questionnaires, you must get the answers to the question from ${program.questionnaires} questionnaires.
-    2. Else if the question is not related with ${program.questionnaires} questionnaires, you must get the answers to the question from the following:
-    3. Suggested answers should be as short as possible and should never be repetitive.
-                    
-    Response Format: 
-        JSON Data Type 
-        { answers: array of all the recommended answers }
+    Based on ${program.questionnaires} questionnaire for looking to assess your ${program.name} symptoms severity,
+    You are designed to provide concise, JSON-formatted recommended answers(individual options), focusing on that questionnaire for relevant topics.
+    For other inputs, generate fitting answers based on the last input, within 50 characters. Responses are formatted as: {"answers": ["Individual options"]}, providing an empty array if the user's statement doesn't require a decision or action. 
+    Maintain a professional tone, ensuring responses are precise, relevant, and helpful. When user input is vague and not related to that questionnaire, ask for more details to give the best recommendations.
 `;
 };
 
@@ -155,7 +151,7 @@ export const PSYCHOMETRICS: ProgramDataType[] = [
     // Suicid
     {
         numid: 4,
-        strid: "suicid",
+        strid: "suicide",
         name: "Suicidal Risk Assessment",
         type: "psychometric",
         src: "/avatars/dffd1f24-a00f-46d8-9403-c5baa7e2a528.png",
@@ -165,6 +161,6 @@ export const PSYCHOMETRICS: ProgramDataType[] = [
         Assess and monitor suicidal risk factors easily. Get personalized insights, track progress, and access resources for better mental well-being. Customize reminders and take control of your safety journey. Empower yourself with this comprehensive tool.
         `,
         suggests: [],
-        questionnaires: "C-SSRS",
+        questionnaires: "C-SSRS", //  C-SSRS or SBQ-R
     },
 ];

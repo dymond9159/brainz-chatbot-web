@@ -17,6 +17,7 @@ import {
     ChatScrollAnchor,
     Conversation,
     Navbar,
+    ProgramDataType,
     PromptSuggestionRow,
     Sidebar,
     WelcomeMessage,
@@ -31,7 +32,12 @@ import { switchProgram } from "@/store/actions";
 import { nanoid } from "nanoid";
 import { useRouter } from "next/navigation";
 import { fetchData } from "@/helpers/fetch";
-import { IDataProps, MessageType, MetricCharactersType } from "@/types";
+import {
+    IDataProps,
+    MessageType,
+    MetricCharactersType,
+    ProgramType,
+} from "@/types";
 
 const useRag = false;
 const llm = "gpt-4-1106-preview";
@@ -47,8 +53,9 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
     const dispatch = useAppDispatch();
 
     const progStrId = props.params.id;
-    const [suggestAnswers, setSuggestAnswers] = useState<JSONValue[]>();
-    const { initMessages } = useTypedSelector((state) => state.chat);
+    const [suggestAnswers, setSuggestAnswers] = useState<string[]>();
+    const { currentProgram } = useTypedSelector((state) => state.chat);
+
     const {
         append,
         setMessages,
@@ -61,53 +68,70 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
         data,
         error,
     } = useChat({
+        // api: "api/chat",
+        id: progStrId,
         initialInput: "",
-        initialMessages: initMessages,
+        initialMessages: (currentProgram?.initMessages as Message[]) ?? [],
         onError: (err: Error) => {
             console.log(err);
         },
         onFinish: async (message) => {
             // update message
-            if (!promptMessage) return;
-
-            // update new message
-            dispatch(
-                updateRecentProgram({
-                    progStrId: progStrId,
-                    lastMessage: promptMessage?.content,
-                    lastAt: new Date(Date.now()).toISOString(),
-                    messages: [
-                        ...messages,
-                        {
-                            id: nanoid(),
-                            role: "user",
-                            content: promptMessage.content,
-                            createAt: new Date(Date.now()).toISOString(),
-                        },
-                        {
-                            id: message.id,
-                            role: message.role,
-                            content: message.content,
-                            createAt: message.createdAt?.toISOString(),
-                        },
-                    ],
-                }),
-            );
+            if (promptMessage) {
+                // update new message
+                dispatch(
+                    updateRecentProgram({
+                        progStrId: progStrId as ProgramType,
+                        lastMessage: promptMessage.content,
+                        lastAt: new Date(Date.now()).toISOString(),
+                        messages: [
+                            promptMessage as MessageType,
+                            {
+                                id: message.id,
+                                role: message.role,
+                                content: message.content,
+                                createdAt: message.createdAt?.toISOString(),
+                            },
+                        ],
+                    }),
+                );
+            }
         },
     });
 
-    const [promptMessage, setPromptMessage] = useState<MessageType>();
+    const [program, setProgram] = useState<ProgramDataType>();
+    const [promptMessage, setPromptMessage] = useState<Message>();
     const { formRef, onKeyDown } = useEnterSubmit();
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
-    // const formRef = useRef<HTMLFormElement>(null);
 
     useEffect(() => {
-        console.log("[]");
         if (textareaRef.current) {
             textareaRef.current.focus();
         }
     }, []);
+
+    useEffect(() => {
+        switchProgram(progStrId);
+        const _currentProgram = _utils.functions.getProgram(progStrId);
+        setProgram(_currentProgram);
+    }, [progStrId]);
+
+    useEffect(() => {
+        setMessages((currentProgram?.initMessages as Message[]) ?? []);
+        setSuggestAnswers(currentProgram?.data?.lastAnswers);
+    }, [currentProgram]);
+
+    useEffect(() => {
+        if (suggestAnswers) {
+            dispatch(
+                updateRecentProgram({
+                    progStrId: progStrId as ProgramType,
+                    lastAnswers: suggestAnswers,
+                }),
+            );
+        }
+    }, [suggestAnswers]);
 
     useEffect(() => {
         if (data && data.length > 0) {
@@ -115,7 +139,7 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
             if (last && last !== null) {
                 switch (last.type) {
                     case "answer":
-                        setSuggestAnswers(last.result as JSONValue[]);
+                        setSuggestAnswers(last.result as string[]);
                         break;
                     case "score":
                         dispatch(
@@ -128,13 +152,7 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
                 }
             }
         }
-        console.log("[data]");
     }, [data]);
-
-    useEffect(() => {
-        setMessages(initMessages);
-        console.log("initMessage");
-    }, [initMessages]);
 
     // textarea auto rows
     useEffect(() => {
@@ -145,11 +163,21 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
                 textareaRef?.current?.scrollHeight > 120 ? "auto" : "hidden"
             }`;
         }
-        console.log("input");
     }, [input]);
 
+    useEffect(() => {
+        if (promptMessage && progStrId && append) {
+            append(promptMessage, {
+                options: { body: { useRag, llm, similarityMetric, progStrId } },
+            });
+        }
+    }, [promptMessage]);
+
     // Handle prompt selection
-    const handlePrompt = (promptText: string, userResponse: boolean = true) => {
+    const handlePrompt = async (
+        promptText: string,
+        userResponse: boolean = true,
+    ) => {
         const msg: Message = {
             id: nanoid(),
             role: "user",
@@ -157,11 +185,9 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
             createdAt: new Date(Date.now()),
             // name: "", // TO DO
         };
+
         setPromptMessage(msg);
         setSuggestAnswers(undefined);
-        append(msg, {
-            options: { body: { useRag, llm, similarityMetric, progStrId } },
-        });
     };
 
     return (
@@ -176,12 +202,10 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
                         <Flex className="row gap-10">
                             <BrainzAvatar
                                 className="program-avatar"
-                                src={
-                                    _utils.functions.getProgram(progStrId)?.src
-                                }
+                                src={program?.src ?? ""}
                                 size={"40"}
                             />
-                            {_utils.functions.getProgram(progStrId)?.name}
+                            {program?.name}
                         </Flex>
                     </Navbar>
                     <Content className="chat-content full">

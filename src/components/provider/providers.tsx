@@ -13,17 +13,17 @@ import { persistor, store } from "@/store";
 
 export function Providers({ children, ...props }: ThemeProviderProps) {
     return (
-        <Provider store={store}>
-            <PersistGate
-                persistor={persistor}
-                loading={null}
-            >
-                <NextThemesProvider {...props}>
+        <NextThemesProvider {...props}>
+            <Provider store={store}>
+                <PersistGate
+                    persistor={persistor}
+                    loading={null}
+                >
                     <SidebarProvider>
                         <TooltipProvider>{children}</TooltipProvider>
                     </SidebarProvider>
-                </NextThemesProvider>
-            </PersistGate>
-        </Provider>
+                </PersistGate>
+            </Provider>
+        </NextThemesProvider>
     );
 }

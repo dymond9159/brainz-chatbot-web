@@ -1,6 +1,13 @@
 import { Message } from "ai/react";
 
 type RoleType = "function" | "user" | "assistant" | "data" | "system" | "tool";
+type ProgramType =
+    | "trauma"
+    | "mood"
+    | "ptsd"
+    | "anxiety"
+    | "depression"
+    | "suicide";
 
 export interface IConversationProps extends IDivProps {
     content: Message;
@@ -10,7 +17,7 @@ export interface IConversationProps extends IDivProps {
 
 export interface MessageType {
     id: string;
-    createAt?: string;
+    createdAt?: string;
     role: RoleType;
     content: string;
     name?: string;
@@ -22,8 +29,14 @@ export interface IConversation extends MessageType {
 }
 
 export type RecentProgramType = {
-    progStrId: string;
+    progStrId?: ProgramType;
     messages?: MessageType[]; // drafts
     lastMessage?: string;
+    lastAnswers?: string[];
     lastAt?: string;
+};
+
+export type CurrentProgramType = {
+    data?: RecentProgramType;
+    initMessages: MessageType[];
 };

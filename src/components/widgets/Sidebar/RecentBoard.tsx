@@ -41,7 +41,7 @@ export const RecentBoard: React.FC<IProps> = (props) => {
                                 ["full", "relative"],
                             )}
                             key={index}
-                            onClick={() => handleToChat(item.progStrId)}
+                            onClick={() => handleToChat(item?.progStrId ?? "")}
                         >
                             {_utils.functions.getProgram(item.progStrId).name}
                             <br></br>
@@ -50,7 +50,9 @@ export const RecentBoard: React.FC<IProps> = (props) => {
                             </span>
                             <div
                                 className="remove"
-                                onClick={() => handleRemove(item.progStrId)}
+                                onClick={() =>
+                                    handleRemove(item?.progStrId ?? "")
+                                }
                             >
                                 <Icon name="trash" />
                             </div>

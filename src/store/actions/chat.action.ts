@@ -1,6 +1,6 @@
 import { store } from "..";
 import { MessageType, RecentProgramType } from "@/types";
-import { updateInitMessages } from "../reducers";
+import { setCurrentProgram } from "../reducers";
 
 /**
  *  Switch program - message history
@@ -18,6 +18,10 @@ export const switchProgram = (progStrId: string) => {
         initMessages = recentPrograms[findOne]?.messages ?? [];
     }
 
-    // set initMessages
-    store.dispatch(updateInitMessages(initMessages));
+    store.dispatch(
+        setCurrentProgram({
+            data: recentPrograms.at(findOne),
+            initMessages: initMessages,
+        }),
+    );
 };

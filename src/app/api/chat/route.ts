@@ -75,7 +75,7 @@ export const runtime = "edge";
 const getAnswers = async (
     llm: string,
     system: string,
-    messages: any,
+    messages: any[],
     completion: string,
     program: ProgramDataType,
 ) => {
@@ -83,20 +83,21 @@ const getAnswers = async (
         role: "system",
         content: generateSuggestAnswersInstruction(program),
     };
+
+    // remove the last user input message.
+    messages.pop();
+
+    const inputMessages = [
+        systemPrompt,
+        ...messages,
+        {
+            role: "user",
+            content: completion,
+        },
+    ];
     const params: OpenAI.Chat.ChatCompletionCreateParams = {
         model: llm,
-        messages: [
-            systemPrompt,
-            ...messages,
-            {
-                role: "assistant",
-                content: completion,
-            },
-            {
-                role: "user",
-                content: "Generate the recommended answers to question above.",
-            },
-        ],
+        messages: inputMessages,
         response_format: { type: "json_object" },
         temperature: TEMPERATURE,
     };
@@ -139,7 +140,7 @@ export async function POST(req: NextRequest) {
             model: llm,
             stream: true,
             messages: [...ragPrompt, ...messages],
-            functions: [get_answers, get_score],
+            functions: [get_score],
             temperature: TEMPERATURE,
         };
 
@@ -170,9 +171,6 @@ export async function POST(req: NextRequest) {
                 }
             },
             async onCompletion(completion) {
-                console.log();
-                console.log(completion);
-                console.log();
                 if (!completion.includes(`"function_call":`)) {
                     const answers = await getAnswers(
                         llm,
@@ -181,10 +179,9 @@ export async function POST(req: NextRequest) {
                         completion,
                         program,
                     );
-                    console.log("--------------------");
-                    console.log(answers);
                     if (answers !== null) {
                         const parseData = JSON.parse(answers);
+                        console.log(parseData);
                         data.append({
                             type: "answer",
                             result: parseData.answers,

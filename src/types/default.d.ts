@@ -1,6 +1,7 @@
 import { JSONValue, Message } from "ai";
 import { JSONSchema } from "openai/lib/jsonschema.mjs";
 import React from "react";
+import { RecentProgramType } from ".";
 
 export interface LayoutProps {
     children?: React.ReactNode;
@@ -39,9 +40,9 @@ export type MetricCharactersType = {
 };
 
 export type PsychometricScoreType = {
-    Mood?: MetricCharactersType;
-    PTSD?: MetricCharactersType;
-    Anxiety?: MetricCharactersType;
-    Depression?: MetricCharactersType;
-    Suicidal?: MetricCharactersType;
+    mood?: MetricCharactersType;
+    ptsd?: MetricCharactersType;
+    anxiety?: MetricCharactersType;
+    depression?: MetricCharactersType;
+    suicide?: MetricCharactersType;
 };
