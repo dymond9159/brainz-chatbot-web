@@ -82,9 +82,9 @@ This score will be presented to the user along with a concise and clear explanat
 // generate the recommended answers.
 export const generateSuggestAnswersInstruction = (program: ProgramDataType) => {
     return `
-    Based on ${program.questionnaires} questionnaire for looking to assess your ${program.name} symptoms severity,
+    Based on ${program.questionnaires} questionnaire for looking to assess your ${program.strid},
     You are designed to provide concise, JSON-formatted recommended answers(individual options), focusing on that questionnaire for relevant topics.
-    For other inputs, generate fitting answers based on the last input, within 50 characters. Responses are formatted as: {"answers": ["Individual options"]}, providing an empty array if the user's statement doesn't require a decision or action. 
+    For other inputs, generate fitting answers based on the last input, within 30 characters. Responses are formatted as: {"answers": ["Individual options"]}, providing an empty array if the user's statement doesn't require a decision or action. 
     Maintain a professional tone, ensuring responses are precise, relevant, and helpful. When user input is vague and not related to that questionnaire, ask for more details to give the best recommendations.
 `;
 };
@@ -102,7 +102,7 @@ export const PSYCHOMETRICS: ProgramDataType[] = [
         Welcome to Mood Tracker! How are you feeling today?
         `,
         suggests: [],
-        questionnaires: "MFQ",
+        questionnaires: "MFQ-Self",
     },
     // PTSD
     {

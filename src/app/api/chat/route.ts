@@ -95,11 +95,12 @@ const getAnswers = async (
             content: completion,
         },
     ];
+    console.log({ inputMessages });
     const params: OpenAI.Chat.ChatCompletionCreateParams = {
         model: llm,
         messages: inputMessages,
         response_format: { type: "json_object" },
-        temperature: TEMPERATURE,
+        temperature: 0,
     };
 
     const response = await openai.chat.completions.create(params);
