@@ -95,7 +95,6 @@ const getAnswers = async (
             content: completion,
         },
     ];
-    console.log({ inputMessages });
     const params: OpenAI.Chat.ChatCompletionCreateParams = {
         model: llm,
         messages: inputMessages,
