@@ -1,6 +1,6 @@
 import React from "react";
 
-import { cn } from "@/utils/functions";
+import { cn, formatDate } from "@/utils/functions";
 import { IDivProps, MetricCharactersType } from "@/types";
 import { Box, Flex } from "@/components/container";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
@@ -18,9 +18,9 @@ export const Psychometric: React.FC<IProps> = (props) => {
                 <Flex className="row">
                     <CircularProgressbar
                         className="psycho-progress"
-                        value={props?.scores?.value ?? 0}
-                        maxValue={props?.scores?.maxValue ?? 10}
-                        text={`${props?.scores?.value ?? 0}`}
+                        value={props?.scores?.score ?? 0}
+                        maxValue={props?.scores?.maxScore ?? 10}
+                        text={`${props?.scores?.score ?? 0}`}
                         strokeWidth={3}
                         circleRatio={1}
                         styles={buildStyles({
@@ -45,10 +45,14 @@ export const Psychometric: React.FC<IProps> = (props) => {
                             backgroundColor: `rgba(62, 52, 199, 0.1)`,
                         })}
                     />
-                    <Flex className="col gap-15 ml-10">
+                    <Flex className="col ml-10">
                         <h4>This can feel like:</h4>
                         <p>{props?.scores?.strValue ?? "Not measured yet"}</p>
-                        <label>{props?.scores?.description ?? ""}</label>
+                        <em>
+                            <label>
+                                {formatDate(props?.scores?.updatedDate ?? "")}
+                            </label>
+                        </em>
                     </Flex>
                 </Flex>
             </Flex>

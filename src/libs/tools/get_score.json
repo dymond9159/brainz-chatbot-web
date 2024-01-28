@@ -4,6 +4,10 @@
     "parameters": {
         "type": "object",
         "properties": {
+            "name": {
+                "type": "string",
+                "description": "get the psychometric tool name exactly just in 'mood', 'ptsd', 'anxiety', 'depression' or 'suicide'."
+            },
             "score": {
                 "type": "number",
                 "description": "get the psychometric score in number"

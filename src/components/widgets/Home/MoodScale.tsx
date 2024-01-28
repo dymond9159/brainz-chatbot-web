@@ -15,9 +15,9 @@ export const MoodScale = () => {
             <h2 className="mood-title">{moodScore?.title ?? "Hey, there!"}</h2>
             <CircularProgressbar
                 className="mood-scale"
-                value={moodScore?.value ?? 0}
-                maxValue={moodScore?.maxValue ?? MAX_VALUE}
-                text={`${moodScore?.value ?? 0}`}
+                value={moodScore?.score ?? 0}
+                maxValue={moodScore?.maxScore ?? MAX_VALUE}
+                text={`${moodScore?.score ?? 0}`}
                 strokeWidth={12}
                 circleRatio={0.7}
                 styles={buildStyles({

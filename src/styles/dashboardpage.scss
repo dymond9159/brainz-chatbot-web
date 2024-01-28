@@ -24,5 +24,20 @@
                 width: 100%;
             }
         }
+
+        .monitor-box {
+            .monitor-title {
+                text-align: left;
+            }
+            .psychometric-box {
+                h4, p, em, label {
+                    width: 100%;
+                }
+
+                h4 {
+                    margin-bottom: 10px;
+                }
+            }
+        }
     }
 }

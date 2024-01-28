@@ -14,6 +14,7 @@ export const nanoid = (size: number = 16) =>
     ); // 16-character random string
 
 export function formatDate(input: string | number | Date): string {
+    if (!input || input === "") return "";
     const date = new Date(input);
     return date.toLocaleDateString("en-US", {
         month: "long",

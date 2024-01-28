@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import {
     CurrentProgramType,
-    MessageType,
     MetricCharactersType,
     PsychometricScoreType,
     RecentProgramType,
@@ -19,41 +18,41 @@ const initialState: ChatStateProps = {
     currentProgram: undefined,
     scores: {
         mood: {
-            value: 0,
+            score: 0,
             title: "Hey, Unlock Your Mood, Embrace Your Score!",
-            maxValue: 10,
+            maxScore: 10,
             strValue: "Not measured yet",
             description: "",
             updatedDate: "",
         },
         anxiety: {
-            value: 0,
+            score: 0,
             title: "",
-            maxValue: 10,
+            maxScore: 10,
             strValue: "Not measured yet",
             description: "",
             updatedDate: "",
         },
         depression: {
-            value: 0,
+            score: 0,
             title: "",
-            maxValue: 10,
+            maxScore: 10,
             strValue: "Not measured yet",
             description: "",
             updatedDate: "",
         },
         ptsd: {
-            value: 0,
+            score: 0,
             title: "",
-            maxValue: 10,
+            maxScore: 10,
             strValue: "Not measured yet",
             description: "",
             updatedDate: "",
         },
         suicide: {
-            value: 0,
+            score: 0,
             title: "",
-            maxValue: 10,
+            maxScore: 10,
             strValue: "Not measured yet",
             description: "",
             updatedDate: "",
@@ -126,23 +125,27 @@ export const chatReducer = createSlice({
             action: PayloadAction<MetricCharactersType>,
         ) => {
             const score = action.payload;
-            score.updatedDate = new Date(Date.now()).toISOString();
-            if (state.currentProgram?.data?.progStrId) {
-                switch (score?.name?.toLowerCase()) {
+            const updatedScore = {
+                ...score,
+                updatedDate: new Date().toISOString(),
+            };
+
+            if (updatedScore.name) {
+                switch (updatedScore.name) {
                     case "mood":
-                        state.scores.mood = score;
+                        state.scores.mood = updatedScore;
                         break;
                     case "anxiety":
-                        state.scores.anxiety = score;
+                        state.scores.anxiety = updatedScore;
                         break;
                     case "depression":
-                        state.scores.depression = score;
+                        state.scores.depression = updatedScore;
                         break;
                     case "ptsd":
-                        state.scores.ptsd = score;
+                        state.scores.ptsd = updatedScore;
                         break;
                     case "suicide":
-                        state.scores.suicide = score;
+                        state.scores.suicide = updatedScore;
                         break;
                     default:
                 }
