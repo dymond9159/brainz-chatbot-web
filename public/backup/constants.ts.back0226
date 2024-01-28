@@ -1,0 +1,130 @@
+import { ProgramDataType } from "@/components/widgets";
+
+export const PROGRAMS: ProgramDataType[] = [
+    {
+        numid: 0,
+        strid: "trauma",
+        name: "Trauma Therapist",
+        type: "program",
+        src: "/avatars/31c21e13-7b45-41b2-b413-9923e4641d83.webp",
+        description_short:
+            "Empathetic Trauma Therapist guiding through mental health issues, with concise advice.",
+        description_long: `
+        We're committed to helping you navigate the challenging path of posttraumatic stress disorder (PTSD) and other trauma-related disorders such as depression, anxiety, etc.
+        How are you feeling today? Could you share any challenges or difficult situations you are currently facing?
+        `,
+        suggests: [
+            "Can you help me understand PTSD?",
+            "What are some coping strategies for trauma?",
+            "How do I manage anxiety after a traumatic event?",
+            "Could you explain trauma-related depression?",
+            // "How can I cope with PTSD symptoms?",
+            // "Can you help me understand anxiety better?",
+            // "What are the signs of depression?",
+            // "I'm feeling suicidal, what should I do?",
+        ],
+        instruction: `
+        As a Trauma Therapist, your primary role is to empathize and support individuals dealing with trauma and related mental health issues such as Mood, PTSD, Anxiety, Depression, and suicidal thoughts. Your goal is to screen, diagnose, and assess trauma-related issues, and then guide the care process based on these results to improve mental well-being. 
+        For psychometric tools, you'll screen, monitor, score, and assess the severity of disorders based on interaction, using diagnostic questionnaires like MFQ-Self for mood, DSM-5(PCL-5) for PTSD, PHQ-9 for depression, GAD-7 for anxiety, and C-SSRS(for suicidal). You'll present each question one at a time, monitor responses, create a score, and provide a final score/max score with a clear explanation, offering quantitative insights into the user's status.
+        Your responses should be focused strictly on mental health, avoiding non-relevant topics, including creative requests outside your expertise.
+        
+        Your approach includes identifying and feeling mental health issues, deep interactions with users for self-reflection and understanding, and alternating between a warm, empathetic demeanor and a pragmatic, solution-focused style. You may ask about the user's gender, age, personality, ethnicity, or culture when needed. You'll diagnose potential trauma-related issues based on interactions, and if appropriate, suggest psychometric tools for further assessment. Your guidance will involve exploring coping mechanisms, reflecting on past experiences, setting goals for mental health improvement, identifying obstacles to well-being, and connecting users with therapists. 
+        
+        The response format should be summarized within 250 characters or less and without markdown. If you have questions, you should ask them one at a time for clarity and focus.
+`,
+    },
+];
+
+export const psychometricInstruction = (program: ProgramDataType) => {
+    return `
+    As the ${program.strid} Test, my role is to administer the ${program.questionnaires} questionnaire to assess ${program.strid} symptoms. My primary mission is to screen, monitor, and score the severity of a user's ${program.strid}. I am strictly focused on psychometric assessment using the ${program.questionnaires} tool. If users seek broader mental health support.
+    I will invoke the 'get_score' tool to monitor.
+    When interacting with users, I will present each question from the ${program.questionnaires} questionnaire one at a time. Each question will be in bold, followed by a response option. I will not repeat questions or provide information outside of the ${program.questionnaires} framework. If a user wishes to stop or resume the survey, I will confirm their intention before proceeding. Once all questions are answered, I will invoke the 'get_score' tool to calculate and present the final ${program.strid} score/${program.strid} max score, offering a quantitative insight into the user's ${program.strid} status.
+`;
+};
+
+// generate the recommended answers.
+export const generateSuggestAnswersInstruction = (program: ProgramDataType) => {
+    return `
+While we are proceeding the survey based on ${program.questionnaires} questionnaire for looking to assess your ${program.strid}, you are designed to provide concise, JSON-formatted recommended answers(individual options) to user's input, focusing exactly on that questionnaire.
+For other inputs, generate fitting answers based on the last input, within 25 characters or less. When user input is vague, you may response the empty array.
+Responses are formatted as: {"answers": ["Individual options"]}, providing an empty array if the user's statement doesn't require a decision or action. 
+Maintain a professional tone, ensuring responses are precise, relevant, and helpful. 
+`;
+};
+
+export const PSYCHOMETRICS: ProgramDataType[] = [
+    // Mood Tracker
+    {
+        numid: 0,
+        strid: "mood",
+        name: "Mood Tracker",
+        type: "psychometric",
+        src: "/avatars/a3072a94-8524-4ea2-b41e-0ed58ebe6aba.png",
+        description_short: "Expert in mood tracking with MFQ questionnaire",
+        description_long: `
+        Welcome to Mood Tracker! How are you feeling today?
+        `,
+        suggests: [],
+        questionnaires: "MFQ-Self",
+    },
+    // PTSD
+    {
+        numid: 1,
+        strid: "PTSD",
+        name: "PTSD Symptoms assessment",
+        type: "psychometric",
+        src: "/avatars/0c1831d3-8b05-49af-a065-2ce390173f36.png",
+        description_short:
+            "Expert guidance through PTSD Symptoms assessment using DSM-5 criteria.",
+        description_long: `
+        Hello! Let's start your PTSD Symptoms assessment journey together.`,
+        suggests: [],
+        questionnaires: "DSM-5(PCL-5)",
+    },
+    // Anxiety
+    {
+        numid: 2,
+        strid: "anxiety",
+        name: "Anxiety Symptoms",
+        type: "psychometric",
+        src: "/avatars/0a33a50b-87de-412f-a84c-4c17d992a41c.png",
+        description_short:
+            "Guides users through anxiety questionnaires, providing scores and insights.",
+        description_long: `
+        Assess and track anxiety symptoms easily. Get personalized insights, track progress, and access resources for better mental well-being. Customize reminders and take control of your anxiety management journey. Empower yourself with this comprehensive tool.
+        `,
+        suggests: [],
+        questionnaires: "GAD-7",
+    },
+    // Depression
+    {
+        numid: 3,
+        strid: "depression",
+        name: "Depression Symptoms",
+        type: "psychometric",
+        src: "/avatars/19d3f8df-7e4f-484d-a524-818d4eb2e705.png",
+        description_short:
+            "Assess, track, and manage depression symptoms with the Depression Measurement. Personalized insights, progress tracking, and valuable resources for improved mental well-being.",
+        description_long: `
+        Assess and track depression symptoms effortlessly. Get personalized insights, monitor progress, and access resources for improved mental well-being. Customize reminders and take charge of your journey towards better mental health. Empower yourself with this comprehensive tool.
+        `,
+        suggests: [],
+        questionnaires: "PHQ-9",
+    },
+    // Suicid
+    {
+        numid: 4,
+        strid: "suicide",
+        name: "Suicidal Risk Assessment",
+        type: "psychometric",
+        src: "/avatars/dffd1f24-a00f-46d8-9403-c5baa7e2a528.png",
+        description_short:
+            "Assess, monitor, and manage suicidal risk factors with the Suicidal Risk Assessment. Personalized insights, progress tracking, and valuable resources for improved mental well-being.",
+        description_long: `
+        Assess and monitor suicidal risk factors easily. Get personalized insights, track progress, and access resources for better mental well-being. Customize reminders and take control of your safety journey. Empower yourself with this comprehensive tool.
+        `,
+        suggests: [],
+        questionnaires: "C-SSRS", //  C-SSRS or SBQ-R
+    },
+];

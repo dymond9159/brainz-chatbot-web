@@ -31,8 +31,8 @@ export interface IIconProps {
 
 export type MetricCharactersType = {
     name?: string;
-    value: number;
-    maxValue: number;
+    score: number;
+    maxScore: number;
     title?: string;
     strValue?: string;
     description?: string;

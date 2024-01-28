@@ -142,6 +142,7 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
                         setSuggestAnswers(last.result as string[]);
                         break;
                     case "score":
+                        console.log(last);
                         dispatch(
                             setPsychometricScore(
                                 last.result as MetricCharactersType,

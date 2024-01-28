@@ -142,10 +142,15 @@ export async function POST(req: NextRequest) {
                 createFunctionCallMessages,
             ) => {
                 console.log({ name, args });
+
                 if (name === "get_score") {
+                    const parseData = JSON.parse(
+                        ((args as JSONValue) ?? "{}").toString(),
+                    );
+                    console.log(parseData);
                     data.append({
                         type: "score",
-                        result: args as JSONValue,
+                        result: parseData,
                     });
 
                     const answerData = args as JSONValue;
@@ -173,7 +178,7 @@ export async function POST(req: NextRequest) {
                     );
                     if (answers !== null) {
                         const parseData = JSON.parse(answers);
-                        console.log(parseData);
+                        // console.log(parseData);
                         data.append({
                             type: "answer",
                             result: parseData.answers,
