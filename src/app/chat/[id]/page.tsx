@@ -236,7 +236,7 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
                                                 )}
 
                                             {suggestAnswers && !isLoading && (
-                                                <ButtonGroup className="wrap justify-end gap-10 mt-10">
+                                                <ButtonGroup className="wrap justify-start gap-10 mt-10 pl-20">
                                                     {suggestAnswers.map(
                                                         (item, idx) => (
                                                             <Button

@@ -2,14 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 import {
     JSONValue,
-    Message,
     OpenAIStream,
     StreamingTextResponse,
     experimental_StreamData,
 } from "ai";
 
 // psychometric test
-import get_answers from "@/libs/tools/get_answers.json";
 import get_score from "@/libs/tools/get_score.json";
 
 // import { AstraDB } from "@datastax/astra-db-ts";
@@ -24,7 +22,7 @@ import { ProgramDataType } from "@/components/widgets";
 
 // import { AstraDB } from "@datastax/astra-db-ts";
 const GPT_DEFAULT_MODEL = "gpt-3.5-turbo-1106"; //"gpt-3.5-turbo-0613"
-const TEMPERATURE = 0.1;
+const TEMPERATURE = 0.7;
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
@@ -60,15 +58,6 @@ const getRAGContext = async (latestMessage: string) => {
     //     `;
     return "";
 };
-
-const TOOLS = `
-The psychometric tester prepared are as follows.
-#Mood Tracker: Survey based on MFQ questionnaires,
-#PTSD Tracker: Survey based on DSM-5(PCL-5) questionnaires,
-#Anxiety Tracker: Survey based on GAD-7 questionnaires,
-#Depression Tracker: Survey base on PHQ-9 questionnaires,
-#Suide risk assessment: Survey based on C-SSRS questionnaires 
-`;
 
 export const runtime = "edge";
 
@@ -152,6 +141,7 @@ export async function POST(req: NextRequest) {
 
                 createFunctionCallMessages,
             ) => {
+                console.log({ name, args });
                 if (name === "get_score") {
                     data.append({
                         type: "score",
@@ -165,13 +155,15 @@ export async function POST(req: NextRequest) {
                         messages: [...messages, ...newMessages],
                         stream: true,
                         model: llm,
-                        functions: [get_answers, get_score],
                         temperature: TEMPERATURE,
                     });
                 }
             },
             async onCompletion(completion) {
-                if (!completion.includes(`"function_call":`)) {
+                if (
+                    !completion.includes(`"function_call":`) &&
+                    completion.includes("?")
+                ) {
                     const answers = await getAnswers(
                         llm,
                         systemPrompt,
