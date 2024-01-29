@@ -37,6 +37,15 @@
                 h4 {
                     margin-bottom: 10px;
                 }
+
+                .progress-box{
+                    position: relative;
+                    label {
+                        position: absolute;
+                        top: 65%;
+                        left: 42%;
+                    }
+                }
             }
         }
     }

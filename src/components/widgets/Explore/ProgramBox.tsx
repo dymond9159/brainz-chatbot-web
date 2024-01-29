@@ -14,7 +14,7 @@ export const ProgramBox: React.FC<IProps> = (props) => {
     return (
         <Section>
             <Flex className="col items-center justify-center full gap-15">
-                <h2>{props.title}</h2>
+                <h2 id={props.id}>{props.title}</h2>
                 <p>{props.description}</p>
                 <Flex className="wrap justify-between gap-10 mt-10">
                     {props.programs.length &&

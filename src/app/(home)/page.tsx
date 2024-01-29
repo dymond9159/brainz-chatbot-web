@@ -24,11 +24,11 @@ const HomePage: React.FC = () => {
     const router = useRouter();
 
     const handleTest = () => {
-        alert("Coming soon!");
+        router.push(`${routes.PROGRAMS}#psychometric`);
     };
 
     const handleGoProgram = () => {
-        router.push(routes.PROGRAMS);
+        router.push(`${routes.PROGRAMS}#programs`);
     };
 
     return (
@@ -44,11 +44,11 @@ const HomePage: React.FC = () => {
                                 <br></br>
                                 <h3>Anytime, Access our system!</h3>
                                 <Flex className="row items-center justify-center full gap-15 mt-10">
-                                    <Button onClick={handleTest}>
-                                        Psychometric Test
-                                    </Button>
                                     <Button onClick={handleGoProgram}>
                                         Programs
+                                    </Button>
+                                    <Button onClick={handleTest}>
+                                        Psychometric Test
                                     </Button>
                                 </Flex>
                             </Flex>

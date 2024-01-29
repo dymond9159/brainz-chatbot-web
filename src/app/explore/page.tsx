@@ -23,6 +23,7 @@ const ExplorePage: React.FC = () => {
                     <Content className="home-content">
                         <Wrapper>
                             <ProgramBox
+                                id="programs"
                                 title="Programs"
                                 description="Discover your own mental health tools to care your health."
                                 programs={PROGRAMS}
@@ -30,6 +31,7 @@ const ExplorePage: React.FC = () => {
                             <br></br>
                             <br></br>
                             <ProgramBox
+                                id="psychometric"
                                 title="Psychometric Tools"
                                 description="Use a psychometric tools to track your mental health scale."
                                 programs={PSYCHOMETRICS}
