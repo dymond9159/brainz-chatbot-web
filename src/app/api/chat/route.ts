@@ -130,7 +130,7 @@ export async function POST(req: NextRequest) {
             stream: true,
             messages: [...ragPrompt, ...messages],
             functions: [get_score],
-            temperature: TEMPERATURE,
+            temperature: 0,
         };
 
         const streamResponse = await openai.chat.completions.create(params);
@@ -156,32 +156,11 @@ export async function POST(req: NextRequest) {
                         messages: [...messages, ...newMessages],
                         stream: true,
                         model: llm,
-                        temperature: TEMPERATURE,
+                        temperature: 0,
                     });
                 }
             },
-            async onCompletion(completion) {
-                if (
-                    !completion.includes(`"function_call":`) &&
-                    completion.includes("?")
-                ) {
-                    const answers = await getAnswers(
-                        llm,
-                        systemPrompt,
-                        messages,
-                        completion,
-                        program,
-                    );
-                    if (answers !== null) {
-                        const parseData = JSON.parse(answers);
-                        console.log(parseData);
-                        data.append({
-                            type: "answer",
-                            result: parseData.answers,
-                        });
-                    }
-                }
-            },
+            async onCompletion(completion) {},
             onFinal(completion) {
                 // IMPORTANT! you must close StreamData manually or the response will never finish.
                 data.close();

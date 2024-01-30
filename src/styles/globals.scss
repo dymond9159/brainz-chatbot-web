@@ -222,12 +222,11 @@ label, span {
 }
 
 pre {
-  background: var(--background-heavy);
-  margin: 10px 0px;
-  padding: 10px 20px;
-  border-radius: var(--border-radius-small);
+  // background: var(--background-heavy);
+  // margin: 10px 0px;
+  // padding: 10px 10px;
+  // border-radius: var(--border-radius-small);
   code {
-    background: inherit;
     text-wrap: wrap;  
   }
 }

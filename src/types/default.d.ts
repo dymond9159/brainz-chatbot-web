@@ -26,23 +26,3 @@ export interface IIconProps {
     //For rest props
     [x: string]: any;
 }
-
-// Psychometric
-
-export type MetricCharactersType = {
-    name?: string;
-    score: number;
-    maxScore: number;
-    title?: string;
-    strValue?: string;
-    description?: string;
-    updatedDate?: string;
-};
-
-export type PsychometricScoreType = {
-    mood?: MetricCharactersType;
-    ptsd?: MetricCharactersType;
-    anxiety?: MetricCharactersType;
-    depression?: MetricCharactersType;
-    suicide?: MetricCharactersType;
-};

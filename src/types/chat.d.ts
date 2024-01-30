@@ -10,6 +10,7 @@ type ProgramType =
     | "suicide";
 
 export interface IConversationProps extends IDivProps {
+    last: boolean;
     content: Message;
     ref: React.RefObject<HTMLDivElement>;
     onAnswerClick: (answer: string) => void;
@@ -39,4 +40,28 @@ export type RecentProgramType = {
 export type CurrentProgramType = {
     data?: RecentProgramType;
     initMessages: MessageType[];
+};
+
+// Psychometric
+
+export type MetricCharactersType = {
+    name?: string;
+    score: number;
+    maxScore: number;
+    title?: string;
+    strValue?: string;
+    description?: string;
+    updatedDate?: string;
+};
+
+export type PsychometricScoreType = {
+    mood?: MetricCharactersType;
+    ptsd?: MetricCharactersType;
+    anxiety?: MetricCharactersType;
+    depression?: MetricCharactersType;
+    suicide?: MetricCharactersType;
+};
+
+export type RecommendedOptionType = {
+    options?: string[];
 };

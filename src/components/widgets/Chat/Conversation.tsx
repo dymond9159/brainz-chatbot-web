@@ -1,10 +1,11 @@
 import React, { forwardRef } from "react";
 
-import Markdown, { ExtraProps } from "react-markdown";
+import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 import { Flex } from "../../container";
-import { IConversationProps } from "@/types/chat";
+import { IConversationProps, RecommendedOptionType } from "@/types/chat";
+import { Button, ButtonGroup } from "@/components/ui";
 
 export const Conversation: React.JSXElementConstructor<IConversationProps> =
     forwardRef(function bubble(convProps, ref) {
@@ -28,25 +29,56 @@ export const Conversation: React.JSXElementConstructor<IConversationProps> =
                             remarkPlugins={[remarkGfm]}
                             components={{
                                 code({ node, children, ...props }) {
-                                    return <code {...props}>{children}</code>;
+                                    let jsonData: RecommendedOptionType = {};
+                                    let resultUI: React.ReactNode = <></>;
+
+                                    if (
+                                        props.className?.includes("json") &&
+                                        convProps.last
+                                    ) {
+                                        try {
+                                            jsonData = JSON.parse(
+                                                children as string,
+                                            );
+
+                                            resultUI = (
+                                                <code {...props}>
+                                                    <ButtonGroup className="wrap gap-10">
+                                                        {jsonData.options &&
+                                                            jsonData.options.map(
+                                                                (
+                                                                    item,
+                                                                    index,
+                                                                ) => (
+                                                                    <Button
+                                                                        key={
+                                                                            index
+                                                                        }
+                                                                        disabled={
+                                                                            !convProps.last
+                                                                        }
+                                                                        onClick={() =>
+                                                                            convProps.onAnswerClick(
+                                                                                item as string,
+                                                                            )
+                                                                        }
+                                                                    >
+                                                                        {
+                                                                            item as string
+                                                                        }
+                                                                    </Button>
+                                                                ),
+                                                            )}
+                                                    </ButtonGroup>
+                                                </code>
+                                            );
+                                        } catch (ex) {}
+                                    }
+                                    return resultUI;
                                 },
                                 a: (props) => (
                                     <a href={props.href}> {props.children}</a>
                                 ),
-                                // ul: (props) => customizeUl(props),
-                                // ol: (props) => customizeUl(props),
-                                // li: (props) => (
-                                //     <button
-                                //         key={props.itemID}
-                                //         onClick={() => {
-                                //             convProps.onAnswerClick(
-                                //                 props.children?.valueOf() as string,
-                                //             );
-                                //         }}
-                                //     >
-                                //         {props.children}
-                                //     </button>
-                                // ),
                             }}
                         >
                             {convProps.content?.content}
@@ -66,10 +98,10 @@ export const Conversation: React.JSXElementConstructor<IConversationProps> =
         );
     });
 
-const customizeUl = (
-    props: React.ClassAttributes<HTMLUListElement> &
-        React.HTMLAttributes<HTMLUListElement> &
-        ExtraProps,
-) => {
-    return <Flex className="wrap full gap-5">{props.children}</Flex>;
-};
+// const customeCodeUI = (
+//     node,
+//     children,
+//     props
+// ) => {
+//     return <code {...props}>{props.children}</code>;
+// };

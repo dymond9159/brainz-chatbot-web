@@ -53,7 +53,6 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
     const dispatch = useAppDispatch();
 
     const progStrId = props.params.id;
-    const [suggestAnswers, setSuggestAnswers] = useState<string[]>();
     const { currentProgram } = useTypedSelector((state) => state.chat);
 
     const {
@@ -119,28 +118,13 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
 
     useEffect(() => {
         setMessages((currentProgram?.initMessages as Message[]) ?? []);
-        setSuggestAnswers(currentProgram?.data?.lastAnswers);
     }, [currentProgram]);
-
-    useEffect(() => {
-        if (suggestAnswers) {
-            dispatch(
-                updateRecentProgram({
-                    progStrId: progStrId as ProgramType,
-                    lastAnswers: suggestAnswers,
-                }),
-            );
-        }
-    }, [suggestAnswers]);
 
     useEffect(() => {
         if (data && data.length > 0) {
             const last = data?.at(data.length - 1) as IDataProps;
             if (last && last !== null) {
                 switch (last.type) {
-                    case "answer":
-                        setSuggestAnswers(last.result as string[]);
-                        break;
                     case "score":
                         console.log(last);
                         dispatch(
@@ -188,7 +172,6 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
         };
 
         setPromptMessage(msg);
-        setSuggestAnswers(undefined);
     };
 
     return (
@@ -228,6 +211,11 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
                                                         <Conversation
                                                             ref={messagesEndRef}
                                                             key={index}
+                                                            last={
+                                                                index ===
+                                                                messages.length -
+                                                                    1
+                                                            }
                                                             content={message}
                                                             onAnswerClick={
                                                                 handlePrompt
@@ -235,25 +223,6 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
                                                         />
                                                     ),
                                                 )}
-
-                                            {suggestAnswers && !isLoading && (
-                                                <ButtonGroup className="wrap justify-start gap-10 mt-10 pl-20">
-                                                    {suggestAnswers.map(
-                                                        (item, idx) => (
-                                                            <Button
-                                                                key={idx}
-                                                                onClick={() =>
-                                                                    handlePrompt(
-                                                                        item as string,
-                                                                    )
-                                                                }
-                                                            >
-                                                                {item as string}
-                                                            </Button>
-                                                        ),
-                                                    )}
-                                                </ButtonGroup>
-                                            )}
                                         </Box>
                                     )}
                                     <ChatScrollAnchor
