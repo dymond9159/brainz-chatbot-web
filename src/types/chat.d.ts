@@ -47,7 +47,7 @@ export type CurrentProgramType = {
 export type MetricCharactersType = {
     name?: string;
     score: number;
-    maxScore: number;
+    maxScore?: number;
     title?: string;
     strValue?: string;
     description?: string;

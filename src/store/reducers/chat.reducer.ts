@@ -20,7 +20,6 @@ const initialState: ChatStateProps = {
         mood: {
             score: 0,
             title: "Hey, Unlock Your Mood, Embrace Your Score!",
-            maxScore: 10,
             strValue: "Not measured yet",
             description: "",
             updatedDate: "",
@@ -28,7 +27,6 @@ const initialState: ChatStateProps = {
         anxiety: {
             score: 0,
             title: "",
-            maxScore: 10,
             strValue: "Not measured yet",
             description: "",
             updatedDate: "",
@@ -36,7 +34,6 @@ const initialState: ChatStateProps = {
         depression: {
             score: 0,
             title: "",
-            maxScore: 10,
             strValue: "Not measured yet",
             description: "",
             updatedDate: "",
@@ -44,7 +41,6 @@ const initialState: ChatStateProps = {
         ptsd: {
             score: 0,
             title: "",
-            maxScore: 10,
             strValue: "Not measured yet",
             description: "",
             updatedDate: "",
@@ -52,7 +48,6 @@ const initialState: ChatStateProps = {
         suicide: {
             score: 0,
             title: "",
-            maxScore: 10,
             strValue: "Not measured yet",
             description: "",
             updatedDate: "",

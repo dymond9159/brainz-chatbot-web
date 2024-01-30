@@ -46,7 +46,9 @@ export const Psychometric: React.FC<IProps> = (props) => {
                                 backgroundColor: `rgba(62, 52, 199, 0.1)`,
                             })}
                         />
-                        <label>/{props?.scores?.maxScore ?? 10}</label>
+                        {props.scores?.maxScore && (
+                            <label>/{props?.scores?.maxScore ?? 10}</label>
+                        )}
                     </Box>
                     <Flex className="col ml-10">
                         <h4>This can feel like:</h4>
