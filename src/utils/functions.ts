@@ -17,10 +17,21 @@ export function formatDate(input: string | number | Date): string {
     if (!input || input === "") return "";
     const date = new Date(input);
     return date.toLocaleDateString("en-US", {
-        month: "long",
+        weekday: "short",
+        month: "short",
         day: "numeric",
         year: "numeric",
     });
+}
+
+export function compareDate(date1: Date, date2: Date): number {
+    if (date1 > date2) {
+        return -1; // Date1 is greater thant Date2
+    } else if (date1 < date2) {
+        return 1; // Date1 is less thant Date2
+    } else {
+        return 0; // Date1 is same with Date2
+    }
 }
 
 export const getProgram = (id: string | undefined): ProgramDataType => {

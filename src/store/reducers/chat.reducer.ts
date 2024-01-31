@@ -3,9 +3,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
     CurrentProgramType,
     MetricCharactersType,
+    ProgramType,
     PsychometricScoreType,
     RecentProgramType,
 } from "@/types";
+import { compareDate } from "@/utils/functions";
 
 export type ChatStateProps = {
     recentPrograms: RecentProgramType[];
@@ -125,25 +127,16 @@ export const chatReducer = createSlice({
                 updatedDate: new Date().toISOString(),
             };
 
-            if (updatedScore.name) {
-                switch (updatedScore.name) {
-                    case "mood":
-                        state.scores.mood = updatedScore;
-                        break;
-                    case "anxiety":
-                        state.scores.anxiety = updatedScore;
-                        break;
-                    case "depression":
-                        state.scores.depression = updatedScore;
-                        break;
-                    case "ptsd":
-                        state.scores.ptsd = updatedScore;
-                        break;
-                    case "suicide":
-                        state.scores.suicide = updatedScore;
-                        break;
-                    default:
-                }
+            const psychoName = score.name as ProgramType;
+            if (psychoName) {
+                // const date1 = new Date(
+                //     state.scores[psychoName]?.updatedDate ?? "",
+                // );
+                // const date2 = new Date(updatedScore.updatedDate);
+
+                // const compResult = compareDate(date1, date2);
+
+                state.scores[psychoName] = updatedScore;
             }
         },
     },

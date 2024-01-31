@@ -25,7 +25,17 @@
                 .mood-title {
                 
                 }
+
+                .mood-progress {
+                    position: relative;
+                }
                 
+            }
+
+            .mood-max {
+                position: absolute;
+                left: 45%;
+                top: 70%;
             }
             
             .mood-scale {

@@ -8,6 +8,10 @@
                 "type": "string",
                 "description": "get the psychometric tool name exactly just in 'mood', 'ptsd', 'anxiety', 'depression' or 'suicide'."
             },
+            "title": {
+                "type": "string",
+                "description": "get the best fit slogan to the severity. e.g. Regarding your mood score is 3, best fit slogan is 'Hey, you are weathering the storm with grace today!'"
+            },
             "score": {
                 "type": "number",
                 "description": "get the psychometric score in number"
@@ -19,8 +23,12 @@
             "strValue": {
                 "type": "string",
                 "description": "get the Severity in string"
+            },
+            "description": {
+                "type": "string",
+                "description": "get the clear explanation for treatment guiding based on score"
             }
         },
-        "required": ["score", "maxScore", "strValue"]
+        "required": ["name", "title", "score", "maxScore", "strValue", "description"]
     }
 }

@@ -55,6 +55,7 @@ export type MetricCharactersType = {
 };
 
 export type PsychometricScoreType = {
+    trauma?: MetricCharactersType;
     mood?: MetricCharactersType;
     ptsd?: MetricCharactersType;
     anxiety?: MetricCharactersType;
