@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 import {
     JSONValue,
+    Message,
     OpenAIStream,
     StreamingTextResponse,
     experimental_StreamData,
@@ -151,12 +152,21 @@ export async function POST(req: NextRequest) {
 
                     const answerData = args as JSONValue;
                     const newMessages = createFunctionCallMessages(answerData);
+                    const sysPrompt = [
+                        {
+                            role: "system",
+                            content: `                                
+                                Present the final score as follow: '**Your final score is (score)/(max score).**'
 
+                                This score will be presented to the user along with a concise and clear explanation, providing them with a quantitative insight into user's status.
+                                `,
+                        },
+                    ];
                     return openai.chat.completions.create({
-                        messages: [...messages, ...newMessages],
+                        messages: [...sysPrompt, ...newMessages],
                         stream: true,
                         model: llm,
-                        temperature: 0,
+                        temperature: 0.7,
                     });
                 }
             },

@@ -22,7 +22,6 @@ import {
     Sidebar,
     WelcomeMessage,
 } from "@/components/widgets";
-import { ChatRequest, FunctionCallHandler, JSONValue } from "ai";
 import _utils from "@/utils";
 import { useEnterSubmit } from "@/hooks";
 
@@ -31,13 +30,13 @@ import { setPsychometricScore, updateRecentProgram } from "@/store/reducers";
 import { switchProgram } from "@/store/actions";
 import { nanoid } from "nanoid";
 import { useRouter } from "next/navigation";
-import { fetchData } from "@/helpers/fetch";
 import {
     IDataProps,
     MessageType,
     MetricCharactersType,
     ProgramType,
 } from "@/types";
+import { NONE } from "@/utils/constants";
 
 const useRag = false;
 const llm = "gpt-4-1106-preview";
@@ -51,7 +50,7 @@ export interface ChatPageProps {
 
 const ChatPage: React.FC<ChatPageProps> = (props) => {
     const dispatch = useAppDispatch();
-
+    const router = useRouter();
     const progStrId = props.params.id;
     const { currentProgram } = useTypedSelector((state) => state.chat);
 
@@ -70,7 +69,8 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
         // api: "api/chat",
         id: progStrId,
         initialInput: "",
-        initialMessages: (currentProgram?.initMessages as Message[]) ?? [],
+        initialMessages:
+            (currentProgram?.recentData?.messages as Message[]) ?? [],
         onError: (err: Error) => {
             console.log(err);
         },
@@ -98,27 +98,32 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
         },
     });
 
-    const [program, setProgram] = useState<ProgramDataType>();
     const [promptMessage, setPromptMessage] = useState<Message>();
     const { formRef, onKeyDown } = useEnterSubmit();
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     useEffect(() => {
+        switchProgram(progStrId);
         if (textareaRef.current) {
             textareaRef.current.focus();
         }
-    }, []);
-
-    useEffect(() => {
-        switchProgram(progStrId);
-        const _currentProgram = _utils.functions.getProgram(progStrId);
-        setProgram(_currentProgram);
     }, [progStrId]);
 
     useEffect(() => {
-        setMessages((currentProgram?.initMessages as Message[]) ?? []);
-    }, [currentProgram]);
+        const curId = currentProgram?.data?.strid;
+
+        // when actually switched.
+        const isEmptyMessage =
+            currentProgram?.recentData?.messages?.length === 0 ||
+            messages.length === 0;
+        if (progStrId === curId && isEmptyMessage) {
+            setMessages(
+                (currentProgram?.recentData?.messages as Message[]) ?? [],
+            );
+            handlePrompt("Hi, there", false);
+        }
+    }, [currentProgram?.data?.strid]);
 
     useEffect(() => {
         if (data && data.length > 0) {
@@ -164,7 +169,7 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
         userResponse: boolean = true,
     ) => {
         const msg: Message = {
-            id: nanoid(),
+            id: userResponse ? "" : NONE + nanoid(),
             role: "user",
             content: promptText,
             createdAt: new Date(Date.now()),
@@ -186,10 +191,10 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
                         <Flex className="row gap-10">
                             <BrainzAvatar
                                 className="program-avatar"
-                                src={program?.src ?? ""}
+                                src={currentProgram?.data?.src ?? ""}
                                 size={"40"}
                             />
-                            {program?.name}
+                            {currentProgram?.data?.name}
                         </Flex>
                     </Navbar>
                     <Content className="chat-content full">

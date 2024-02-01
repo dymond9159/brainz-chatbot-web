@@ -1,6 +1,7 @@
 import { store } from "..";
 import { MessageType, RecentProgramType } from "@/types";
 import { setCurrentProgram } from "../reducers";
+import _utils from "@/utils";
 
 /**
  *  Switch program - message history
@@ -13,15 +14,11 @@ export const switchProgram = (progStrId: string) => {
     const findOne = recentPrograms.findLastIndex(
         (item) => item.progStrId === progStrId,
     );
-    let initMessages: MessageType[] = [];
-    if (findOne !== -1) {
-        initMessages = recentPrograms[findOne]?.messages ?? [];
-    }
 
     store.dispatch(
         setCurrentProgram({
-            data: recentPrograms.at(findOne),
-            initMessages: initMessages,
+            data: _utils.functions.getProgram(progStrId),
+            recentData: recentPrograms[findOne],
         }),
     );
 };

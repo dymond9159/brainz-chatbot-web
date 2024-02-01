@@ -6,9 +6,13 @@ import remarkGfm from "remark-gfm";
 import { Flex } from "../../container";
 import { IConversationProps, RecommendedOptionType } from "@/types/chat";
 import { Button, ButtonGroup } from "@/components/ui";
+import { NONE } from "@/utils/constants";
 
 export const Conversation: React.JSXElementConstructor<IConversationProps> =
     forwardRef(function bubble(convProps, ref) {
+        if (convProps.content.id.includes(NONE)) {
+            return null;
+        }
         return (
             <div
                 id={`${convProps.content?.id}`}

@@ -1,3 +1,4 @@
+import { ProgramDataType } from "@/components/widgets";
 import { Message } from "ai/react";
 
 type RoleType = "function" | "user" | "assistant" | "data" | "system" | "tool";
@@ -38,8 +39,8 @@ export type RecentProgramType = {
 };
 
 export type CurrentProgramType = {
-    data?: RecentProgramType;
-    initMessages: MessageType[];
+    data?: ProgramDataType;
+    recentData?: RecentProgramType;
 };
 
 // Psychometric
