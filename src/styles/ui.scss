@@ -58,6 +58,15 @@ button {
 *   Input, Textarea
 */
 // Default tag's css
+
+input, textarea {
+    font-size: 16px;
+    font-family: inherit;
+    color: inherit;
+    line-height: 110%;
+    letter-spacing: inherit;
+}
+
 input, textarea {
     display: block;
     position: relative;
@@ -79,6 +88,24 @@ input, textarea {
         border: 1px solid var(--background-light);
     }
   }
+
+/*
+*   Radio
+*/
+input[type="radio"] {
+    cursor: pointer;  
+    min-width: 17px;
+    background: transparent;
+    min-height: 1rem;
+    height: 1.3rem;
+  }
+
+.radio {
+    label {
+        font-size: medium;
+        color: var(--foreground);
+    }
+}
 
 /*
 *     Dropdown Menu
@@ -135,4 +162,6 @@ input, textarea {
     height: 1px;
     background: var(--background-light);
 }
+
+
 

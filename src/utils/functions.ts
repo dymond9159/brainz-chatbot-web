@@ -42,6 +42,17 @@ export const getProgram = (id: string | undefined): ProgramDataType => {
     );
 };
 
+export const getMetric = (id: string | undefined): ProgramDataType => {
+    return PSYCHOMETRICS.filter((item) => item.strid === id)[0] ?? [];
+};
+
 export const findLastIndex = <T>(arr: Array<T>, filter: T) => {
     return arr.findLast((_) => _ === filter);
 };
+
+// Using an async function to await the import if you're dealing with dynamic imports
+export async function loadMarkdown(filename: string) {
+    const anxietyIntro = await require("!raw-loader!@/libs/questionnaires" +
+        "/anxiety/intro.md");
+    return anxietyIntro.default as string; // Accessing the default export
+}

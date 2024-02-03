@@ -22,35 +22,35 @@ const initialState: ChatStateProps = {
         mood: {
             score: 0,
             title: "Hey, Unlock Your Mood, Embrace Your Score!",
-            strValue: "Not measured yet",
+            severity: "Not measured yet",
             description: "",
             updatedDate: "",
         },
         anxiety: {
             score: 0,
             title: "",
-            strValue: "Not measured yet",
+            severity: "Not measured yet",
             description: "",
             updatedDate: "",
         },
         depression: {
             score: 0,
             title: "",
-            strValue: "Not measured yet",
+            severity: "Not measured yet",
             description: "",
             updatedDate: "",
         },
         ptsd: {
             score: 0,
             title: "",
-            strValue: "Not measured yet",
+            severity: "Not measured yet",
             description: "",
             updatedDate: "",
         },
         suicide: {
             score: 0,
             title: "",
-            strValue: "Not measured yet",
+            severity: "Not measured yet",
             description: "",
             updatedDate: "",
         },
@@ -142,9 +142,5 @@ export const chatReducer = createSlice({
     },
 });
 
-export const {
-    setCurrentProgram,
-    updateRecentProgram,
-    removeRecentProgram,
-    setPsychometricScore,
-} = chatReducer.actions;
+export const { setCurrentProgram, updateRecentProgram, removeRecentProgram } =
+    chatReducer.actions;

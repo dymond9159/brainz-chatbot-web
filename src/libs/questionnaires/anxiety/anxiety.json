@@ -1,0 +1,82 @@
+{
+    "name": "GAD-7",
+    "introduce": "**Hello there! 😊**   \n\n \n\n**What's the GAD-7 questionnaire?**    \n\nThe GAD-7 is a self-reported questionnaire used to screen for, monitor, and assess the severity of generalized anxiety disorder (GAD). It consists of 7 questions that relate to the symptoms of anxiety. The answers to these questions help to quantify the severity of an individual's anxiety. [more info](https://www.co.com)  \n\n  **Introductions** \n\nRate the frequency of occurrence of each item using a 4-point Likert scale. Select the option that best fits your experience over the last 2 weeks. \n\n (Not at all = 0, Several days = 1, More than half the days = 2, and Nearly every day = 3)  \n\n **Times:** 2 min  \n  **Number of questions:** 7 \n\n**Are you ready to begin the GAD-7 anxiety questionnaire?**",
+    "buttonOptions": ["Yes, I am ready", "No, not right now"],
+    "maxScore": 21,
+    "times": 2,    
+    "questionCounts": 7,
+    "report": {
+        "title": "GAD-7 Score Report",
+        "description": "All responses are summed to calculate the total GAD-7 score. Scores range from 0–21 with increasing scores indicating greater severity of symptoms of anxiety.",
+        "severities": [{
+            "scoreRange": [0, 4],
+            "severity": "None to minimal",
+            "color": "minimal",
+            "description": "No follow-up is warranted at this time."
+        },{
+            "scoreRange": [5, 7],
+            "severity": "Mild",
+            "color": "mild",
+            "description": "It is recommended to monitor symptoms and follow-up as indicated."
+        },{
+            "scoreRange": [8, 9],
+            "severity": "Mild",
+            "color": "mild",
+            "description": "You are likely to be diagnosed with an anxiety or related disorder. Repeat administration of the GAD-7 every 4 weeks to monitor symptoms. Follow up to determine if current symptoms warrant a referral to a mental health professional."
+        },{
+            "scoreRange": [10, 14],
+            "severity": "Moderate",
+            "color": "moderate",
+            "description": "You are  likely to be diagnosed with an anxiety or related disorder. Please make the treatment plan, considering counseling, follow-up and/or pharmacotherapy, then active treatment with pharmacotherapy and/or psychotherapy. Your symptoms are clinically significant and warrant further assessment (including diagnostic interview and mental status examination) and/or referral to a mental health professional is recommended."
+        },{
+            "scoreRange": [15, 21],
+            "severity": "Severe",
+            "color": "severe",
+            "description": "You are likely to be diagnosed with an anxiety or related disorder. Further assessment (including diagnostic interview and mental status examination), immediate initiation of pharmacotherapy and, if severe impairment or poor response to therapy, expedited referral to a mental health specialist for psychotherapy and/or collaborative management."
+        }]
+    },
+    "questions": [
+        {
+            "question":"Question 1: Over the last 2 weeks, how often have you been bothered by feeling nervous, anxious, or on edge?",
+            "description":"This question aims to assess the frequency of your feelings of nervousness or anxiety.",
+            "instruction":"Please select the option that best fits your experience over the last 2 weeks.",
+            "answerType":"type3"
+        },
+        {
+            "question":"Question 2: Over the last 2 weeks, how often have you been bothered by not being able to stop or control worrying?",
+            "description":"This question is designed to evaluate your experience with uncontrollable worrying.",
+            "instruction":"Please select the option that best describes how often you've felt this way in the last 2 weeks.",
+            "answerType":"type3"
+        },
+        {
+            "question":"Question 3: Over the last 2 weeks, how often have you been bothered by worrying too much about different things?",
+            "description":"This question aims to understand the extent of your worry about various aspects of life.",
+            "instruction":"Please select the option that best reflects your experience with this issue over the last 2 weeks.",
+            "answerType":"type3"
+        },
+        {
+            "question":"Question 4: Over the last 2 weeks, how often have you been bothered by trouble relaxing?",
+            "description":"This question seeks to assess the frequency with which you've had difficulty relaxing.",
+            "instruction":"Please choose the option that best describes your experience during the past 2 weeks.",
+            "answerType":"type3"
+        },
+        {
+            "question":"Question 5: Over the last 2 weeks, how often have you been bothered by being so restless that it is hard to sit still?",
+            "description":"This question is intended to gauge how often you've felt unusually restless.",
+            "instruction":"Please select the option that best matches your experience in the last 2 weeks.",
+            "answerType":"type3"
+        },
+        {
+            "question":"Question 6: Over the last 2 weeks, how often have you been bothered by becoming easily annoyed or irritable?",
+            "description":"This question aims to determine the frequency of irritability or annoyance you may have experienced.",
+            "instruction":"Please select the option that best describes how often you've felt this way in the last 2 weeks.",
+            "answerType":"type3"
+        },
+        {
+            "question":"Question 7: Over the last 2 weeks, how often have you been bothered by feeling afraid as if something awful might happen?",
+            "description":"This question is designed to understand how often you've been troubled by fear or a sense of impending doom.",
+            "instruction":"Please select the option that best reflects your experience with this feeling over the last 2 weeks.",
+            "answerType":"type3"
+        }
+    ]
+}

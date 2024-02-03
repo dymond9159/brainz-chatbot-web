@@ -15,6 +15,7 @@ import { Button, ButtonGroup, Textarea } from "@/components/ui";
 import {
     BrainzAvatar,
     ChatScrollAnchor,
+    ChatTools,
     Conversation,
     Navbar,
     ProgramDataType,
@@ -237,16 +238,7 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
                             </Content>
                             <Flex className="chat-prompts row items-end full">
                                 <Wrapper className="full">
-                                    {!messages.length && (
-                                        <PromptSuggestionRow
-                                            onPromptClick={handlePrompt}
-                                            suggests={
-                                                _utils.functions.getProgram(
-                                                    progStrId,
-                                                )?.suggests
-                                            }
-                                        />
-                                    )}
+                                    <ChatTools />
                                     <form
                                         ref={formRef}
                                         onSubmit={(e) => {

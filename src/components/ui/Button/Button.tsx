@@ -9,6 +9,7 @@ export interface ButtonProps extends React.ComponentProps<"button"> {
     type?: ButtonType;
     icon?: string;
     vertical?: string;
+    supicon?: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = (props) => {
@@ -21,10 +22,21 @@ export const Button: React.FC<ButtonProps> = (props) => {
             onClick={(e) => props.onClick && props.onClick(e)}
             {...props}
         >
-            <Flex className={cn("gap-10 full", vertical)}>
-                <Icon name={`${props.icon}`} />
+            <Flex className={cn("gap-5 full", vertical)}>
+                {!props.supicon && (
+                    <Icon
+                        size="16"
+                        name={`${props.icon}`}
+                    />
+                )}
                 {props.children && (
                     <span className="button-text full">{props.children}</span>
+                )}
+                {props.supicon && (
+                    <Icon
+                        size="16"
+                        name={`${props.icon}`}
+                    />
                 )}
             </Flex>
         </button>

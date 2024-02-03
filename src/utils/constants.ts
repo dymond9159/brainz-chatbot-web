@@ -1,6 +1,25 @@
 import { ProgramDataType } from "@/components/widgets";
 
 export const NONE = "NONE_";
+export const BLANK_LINE = "  \n\n";
+
+import ptsdQuestionnaire from "@/libs/questionnaires/ptsd/ptsd.json";
+import anxietyQuestionnaire from "@/libs/questionnaires/anxiety/anxiety.json";
+import depressionQuestionnaire from "@/libs/questionnaires/depression/depression.json";
+import suicidalQuestionnaire from "@/libs/questionnaires/suicidal/suicidal.json";
+import { MetricColor } from "@/types";
+
+export const M_COLOR: MetricColor = {
+    default: "",
+    minimal: "#3dad2a",
+    mild: "#cb9905",
+    moderate: "#ab0450",
+    moderate_severe: "#991313",
+    severe: "#991313",
+    low: "",
+    medium: "",
+    risk: "",
+};
 
 export const PROGRAMS: ProgramDataType[] = [
     {
@@ -9,6 +28,7 @@ export const PROGRAMS: ProgramDataType[] = [
         name: "Trauma Therapist",
         type: "program",
         src: "/avatars/31c21e13-7b45-41b2-b413-9923e4641d83.webp",
+        url: "/chat/trauma",
         description_short:
             "Empathetic Trauma Therapist guiding through mental health issues, with concise advice.",
         description_long: `
@@ -96,26 +116,32 @@ export const PSYCHOMETRICS: ProgramDataType[] = [
         name: "Mood Tracker",
         type: "psychometric",
         src: "/avatars/a3072a94-8524-4ea2-b41e-0ed58ebe6aba.png",
+        url: "/test/mood",
         description_short: "Expert in mood tracking with MFQ questionnaire",
         description_long: `
         Welcome to Mood Tracker! How are you feeling today?
         `,
         suggests: [],
-        questionnaires: "MFQ-Self",
+        questionnaires: {
+            ...anxietyQuestionnaire,
+        },
     },
     // PTSD
     {
         numid: 1,
-        strid: "PTSD",
+        strid: "ptsd",
         name: "PTSD Symptoms assessment",
         type: "psychometric",
         src: "/avatars/0c1831d3-8b05-49af-a065-2ce390173f36.png",
+        url: "/test/ptsd",
         description_short:
             "Expert guidance through PTSD Symptoms assessment using DSM-5 criteria.",
         description_long: `
         Hello! Let's start your PTSD Symptoms assessment journey together.`,
         suggests: [],
-        questionnaires: "DSM-5(PCL-5)",
+        questionnaires: {
+            ...ptsdQuestionnaire,
+        },
     },
     // Anxiety
     {
@@ -124,13 +150,16 @@ export const PSYCHOMETRICS: ProgramDataType[] = [
         name: "Anxiety Symptoms",
         type: "psychometric",
         src: "/avatars/0a33a50b-87de-412f-a84c-4c17d992a41c.png",
+        url: "/test/anxiety",
         description_short:
             "Guides users through anxiety questionnaires, providing scores and insights.",
         description_long: `
         Assess and track anxiety symptoms easily. Get personalized insights, track progress, and access resources for better mental well-being. Customize reminders and take control of your anxiety management journey. Empower yourself with this comprehensive tool.
         `,
         suggests: [],
-        questionnaires: "GAD-7",
+        questionnaires: {
+            ...anxietyQuestionnaire,
+        },
     },
     // Depression
     {
@@ -139,13 +168,16 @@ export const PSYCHOMETRICS: ProgramDataType[] = [
         name: "Depression Symptoms",
         type: "psychometric",
         src: "/avatars/19d3f8df-7e4f-484d-a524-818d4eb2e705.png",
+        url: "/test/depression",
         description_short:
             "Assess, track, and manage depression symptoms with the Depression Measurement. Personalized insights, progress tracking, and valuable resources for improved mental well-being.",
         description_long: `
         Assess and track depression symptoms effortlessly. Get personalized insights, monitor progress, and access resources for improved mental well-being. Customize reminders and take charge of your journey towards better mental health. Empower yourself with this comprehensive tool.
         `,
         suggests: [],
-        questionnaires: "PHQ-9",
+        questionnaires: {
+            ...depressionQuestionnaire,
+        },
     },
     // Suicid
     {
@@ -154,12 +186,15 @@ export const PSYCHOMETRICS: ProgramDataType[] = [
         name: "Suicidal Risk Assessment",
         type: "psychometric",
         src: "/avatars/dffd1f24-a00f-46d8-9403-c5baa7e2a528.png",
+        url: "/test/suicide",
         description_short:
             "Assess, monitor, and manage suicidal risk factors with the Suicidal Risk Assessment. Personalized insights, progress tracking, and valuable resources for improved mental well-being.",
         description_long: `
         Assess and monitor suicidal risk factors easily. Get personalized insights, track progress, and access resources for better mental well-being. Customize reminders and take control of your safety journey. Empower yourself with this comprehensive tool.
         `,
         suggests: [],
-        questionnaires: "C-SSRS", //  C-SSRS or SBQ-R
+        questionnaires: {
+            ...suicidalQuestionnaire,
+        },
     },
 ];

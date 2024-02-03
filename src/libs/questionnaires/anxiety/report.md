@@ -1,0 +1,1 @@
+All responses are summed to calculate the total GAD-7 score. Scores range from 0–21 with increasing scores indicating greater severity of symptoms of anxiety.

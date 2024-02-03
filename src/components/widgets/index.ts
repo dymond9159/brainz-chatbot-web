@@ -17,3 +17,4 @@ export * from "./BrainzAvatar";
 export * from "./Home";
 export * from "./Explore";
 export * from "./Chat";
+export * from "./Metric";

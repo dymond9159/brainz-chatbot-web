@@ -1,0 +1,166 @@
+{
+    "name": "PCL-5",
+    "introduce": "**Hello there! 😊**   \n\n**What's the DSM-5(PCL-5) questionnaire?**    \n\nThe PTSD Checklist for DSM-5 (PCL-5) is a 20-item self-report measure that assesses the presence and severity of PTSD symptoms. Items on the PCL-5 correspond with DSM-5 criteria for PTSD. The PCL-5 can be used to quantify and monitor symptoms over time, to screen individuals for PTSD, and to assist in making a provisional or temporary diagnosis of PTSD. \n\n  **Introductions** \n\nRead each question carefully, keeping the worst case in mind, and then choose the one option that best represents how much that problem has bothered by that problem in the past month. \n\n (Not at all = 0, A little bit = 1, Moderately = 2, Quite a bit = 3,  \n and Extremely = 4)  \n\n **Times:** 7 min  \n  **Number of questions:** 20 \n\n**Before we begin the PTSD screening using the DSM-5 (PCL-5) questionnaire, are you ready to start the survey?**",
+    "buttonOptions": ["Yes, I am ready", "No, not right now"],
+    "maxScore": 80,
+    "times": 7,    
+    "questionCounts": 20,
+    "report": {
+        "title": "DSM-5(PCL-5) Score Report",
+        "description": "All responses are summed to calculate the total DSM-5(PCL-5) score. Scores range from 0–80 with increasing scores indicating greater severity of symptoms of PTSD.",
+        "severities": [
+            {
+                "scoreRange": [0, 19],
+                "severity": "None to minimal",
+                "color": "minimal",
+                "description": "This indicates minimal or no symptoms of PTSD."
+            },
+            {
+                "scoreRange": [20, 37],
+                "severity": "Mild",
+                "color": "mild",
+                "description": "This suggests mild symptoms of PTSD, which may or may not significantly impact daily functioning."
+            },
+            {
+                "scoreRange": [38, 52],
+                "severity": "Moderate",
+                "color": "moderate",
+                "description": "This is indicative of moderate symptoms of PTSD, which may have a moderate impact on daily functioning."
+            },
+            {
+                "scoreRange": [53, 69],
+                "severity": "Moderately Severe",
+                "color": "moderate_severe",
+                "description": "This suggests moderately severe symptoms of PTSD, which are likely to have a significant impact on daily life and functioning."
+            },
+            {
+                "scoreRange": [70, 80],
+                "severity": "Severe",
+                "color": "severe",
+                "description": "This indicates severe symptoms of PTSD, which are likely to have a severe impact on daily functioning and quality of life."
+            }
+        ]
+    },
+    "questions": [
+        {
+            "question":"Question 1: In the past month, how much were you bothered by repeated, disturbing, and unwanted memories of the stressful experience?",
+            "description":"This question assesses the presence of intrusive memories, which is a common symptom of PTSD.",
+            "instruction":"Please select the option that best fits your experience in the past month.",
+            "answerType":"type2"
+        },
+        {
+            "question":"Question 2: In the past month, how much were you bothered by repeated, disturbing dreams of the stressful experience?",
+            "description":"This question is designed to evaluate the occurrence of distressing dreams related to the traumatic event, which is another symptom of PTSD.",
+            "instruction":"Please select the option that best describes your experience over the past month.",
+            "answerType":"type2"
+        },
+        {
+            "question":"Question 3: In the past month, how much were you bothered by suddenly feeling or acting as if the stressful experience were actually happening again (as if you were actually back there reliving it)?",
+            "description":"This question aims to assess the experience of flashbacks, where it feels as though the traumatic event is occurring again.",
+            "instruction":"Please choose the option that most accurately reflects your experience in the past month.",
+            "answerType":"type2"
+        },
+        {
+            "question":"Question 4: In the past month, how much were you bothered by feeling very upset when something reminded you of the stressful experience?",
+            "description":"This question evaluates the intensity of emotional distress triggered by reminders of the traumatic event, which is a symptom of PTSD.",
+            "instruction":"Please select the option that best describes your level of distress in response to such reminders over the past month.",
+            "answerType":"type2"
+        },
+        {
+            "question":"Question 5: In the past month, how much were you bothered by having strong physical reactions (e.g., heart pounding, trouble breathing, sweating) when something reminded you of the stressful experience?",
+            "description":"This question is intended to measure physiological reactions to reminders of the trauma, which are physical symptoms of PTSD.",
+            "instruction":"Please choose the option that best represents your physical reactions in the past month when reminded of the stressful experience.",
+            "answerType":"type2"
+        },
+        {
+            "question":"Question 6: In the past month, how much were you bothered by avoiding memories, thoughts, or feelings related to the stressful experience?",
+            "description":"This question assesses the avoidance of internal reminders of the traumatic event, which is a common coping mechanism in PTSD.",
+            "instruction":"Please select the option that best describes your experience with avoidance in the past month.",
+            "answerType":"type2"
+        },
+        {
+            "question":"Question 7: In the past month, how much were you bothered by avoiding external reminders (people, places, conversations, activities, objects, situations) of the stressful experience?",
+            "description":"This question is designed to evaluate the extent to which you have been avoiding things that remind you of the traumatic event, which is another avoidance symptom of PTSD.",
+            "instruction":"Please select the option that best fits your experience with avoidance of external reminders over the past month.",
+            "answerType":"type2"
+        },
+        {
+            "question":"Question 8: In the past month, how much were you bothered by trouble remembering important parts of the stressful experience?",
+            "description":"This question assesses potential difficulties with memory, specifically regarding the traumatic event, which can be a symptom of PTSD.",
+            "instruction":"Please choose the option that most accurately reflects any memory issues you've experienced in the past month related to the stressful experience.",
+            "answerType":"type2"
+        },
+        {
+            "question":"Question 9: In the past month, how much were you bothered by having strong negative beliefs about yourself, others, or the world (e.g., having thoughts such as: I am bad, there is something seriously wrong with me, no one can be trusted, the world is completely dangerous)?",
+            "description":"This question aims to identify negative changes in beliefs and feelings that may arise after experiencing a traumatic event, which are symptoms associated with PTSD.",
+            "instruction":"Please select the option that best describes your experience with such negative beliefs in the past month.",
+            "answerType":"type2"
+        },
+        {
+            "question":"Question 10: In the past month, how much were you bothered by blaming yourself or someone else for the stressful experience or what happened after it?",
+            "description":"This question explores feelings of guilt or blame that may be associated with the traumatic event, which can be part of the emotional response in PTSD.",
+            "instruction":"Please choose the option that best represents your experience with self-blame or blaming others in relation to the stressful experience over the past month.",
+            "answerType":"type2"
+        },
+        {
+            "question":"Question 11: In the past month, how much were you bothered by negative feelings like fear, horror, anger, guilt, or shame?",
+            "description":"This question is intended to measure the range of negative emotions that can be triggered by the traumatic event, which are common emotional symptoms of PTSD.",
+            "instruction":"Please select the option that best describes the intensity of these negative feelings you've experienced in the past month.",
+            "answerType":"type2"
+        },
+        {
+            "question":"Question 12: In the past month, how much were you bothered by loss of interest in activities that you used to enjoy?",
+            "description":"This question assesses changes in your interest or participation in activities since the traumatic event, which can be an indication of the numbing or withdrawal symptoms associated with PTSD.",
+            "instruction":"Please choose the option that most accurately reflects any changes in your interest in activities over the past month.",
+            "answerType":"type2"
+        },
+        {
+            "question":"Question 13: In the past month, how much were you bothered by feeling distant or cut off from other people?",
+            "description":"This question is designed to evaluate feelings of detachment or estrangement from others, which can be a symptom of PTSD.",
+            "instruction":"Please select the option that best describes your experience with feeling disconnected from others in the past month.",
+            "answerType":"type2"
+        },
+        {
+            "question":"Question 14: In the past month, how much were you bothered by trouble experiencing positive feelings (for example, being unable to feel happiness or have loving feelings for people close to you)?",
+            "description":"This question aims to identify difficulties in experiencing positive emotions, which can be an aspect of the emotional numbing seen in PTSD.",
+            "instruction":"Please choose the option that best represents your experience with having trouble feeling positive emotions in the past month.",
+            "answerType":"type2"
+        },
+        {
+            "question":"Question 15: In the past month, how much were you bothered by feeling irritable or having angry outbursts (with little or no provocation)?",
+            "description":"This question assesses symptoms of irritability and anger, which are common in individuals with PTSD.",
+            "instruction":"Please select the option that best describes your experience with irritability or anger in the past month.",
+            "answerType":"type2"
+        },
+        {
+            "question":"Question 16: In the past month, how much were you bothered by taking too many risks or doing things that could cause you harm?",
+            "description":"This question is intended to measure reckless or self-destructive behavior, which can be a symptom of PTSD.",
+            "instruction":"Please choose the option that most accurately reflects any risky or harmful behaviors you've engaged in over the past month.",
+            "answerType":"type2"
+        },
+        {
+            "question":"Question 17: In the past month, how much were you bothered by being \"super alert\" or watchful or on guard?",
+            "description":"This question evaluates symptoms of hypervigilance, which involve being excessively alert or on edge, often seen in individuals with PTSD.",
+            "instruction":"Please select the option that best describes your experience with feeling overly alert or watchful in the past month.",
+            "answerType":"type2"
+        },
+        {
+            "question":"Question 18: In the past month, how much were you bothered by feeling jumpy or easily startled (for example, when someone walks up behind you)?",
+            "description":"This question assesses the symptom of an exaggerated startle response, which is a common reaction in individuals with PTSD.",
+            "instruction":"Please choose the option that best represents how often you've felt jumpy or easily startled in the past month.",
+            "answerType":"type2"
+        },
+        {
+            "question":"Question 19: In the past month, how much were you bothered by having difficulty concentrating?",
+            "description":"This question is designed to measure concentration difficulties, which can be a symptom of PTSD.",
+            "instruction":"Please select the option that best describes your experience with concentration problems in the past month.",
+            "answerType":"type2"
+        },
+        {
+            "question":"Question 20: In the past month, how much were you bothered by trouble falling or staying asleep?",
+            "description":"This final question assesses sleep disturbances, which are common in individuals with PTSD.",
+            "instruction":"Please choose the option that most accurately reflects any difficulties you've had with sleep over the past month.  \n\nAfter you answer this question, we will calculate and present your final score.",
+            "answerType":"type2"
+        }
+    ]
+}

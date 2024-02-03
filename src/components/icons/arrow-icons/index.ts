@@ -4,3 +4,5 @@ export * from "./box-arrow-right";
 export * from "./caret-left";
 export * from "./caret-right";
 export * from "./caret-open-left";
+export * from "./caret-open-right";
+export * from "./arrow-clockwise";
