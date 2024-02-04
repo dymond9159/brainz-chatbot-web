@@ -19,6 +19,7 @@ import { Psychometric } from "../Dashboard";
 import _utils from "@/utils";
 import moment from "moment";
 import { motion } from "framer-motion";
+import { AnimateBox, AnimateMarkdown } from "..";
 
 interface IProps extends IDivProps {
     report?: MetricReportType;
@@ -121,34 +122,15 @@ export const ReportWizard: React.FC<IProps> = (props) => {
 
     return (
         <Flex className={`col border markdonw-box`}>
-            <motion.div
-                className="relative h-8"
-                variants={{
-                    initial: {
-                        height: 0,
-                        opacity: 0,
-                    },
-                    animate: {
-                        height: "auto",
-                        opacity: 1,
-                    },
-                }}
-                initial={"initial" }
-                animate={"animate"}
-                transition={{
-                    duration: 0.8,
-                    ease: "easeIn",
-                }}
-            >
-                <h2>{props.report?.title ?? "Score Report"}</h2>
-                <br />
-                <Box className="scroll-box">
-                    <Markdown
-                        remarkPlugins={[remarkGfm]}
-                        components={{}}
-                    >
-                        {props.report?.description}
-                    </Markdown>
+            <h2>{props.report?.title ?? "Score Report"}</h2>
+            <br />
+            <Box className="scroll-box">
+                <AnimateBox
+                    duration={1}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                >
+                    <Markdown>{props.report?.description}</Markdown>
                     <Psychometric
                         title="Your Score"
                         scores={
@@ -160,30 +142,30 @@ export const ReportWizard: React.FC<IProps> = (props) => {
                         h_align="items-center"
                         collapse={true}
                     />
-                </Box>
-                <hr />
-                <ButtonGroup className="wrap gap-15">
-                    <Button
-                        icon="caret-open-left"
-                        onClick={() => previousStep()}
-                    >
-                        Back
-                    </Button>
-                    <Button
-                        icon="arrow-clockwise"
-                        onClick={() => goToStep(0)}
-                    >
-                        Restart
-                    </Button>
-                    <Button
-                        icon="speedometer"
-                        onClick={() => router.push(routes.DASHBOARD)}
-                    >
-                        Dashboard
-                    </Button>
-                    {/* <Button>Return</Button> */}
-                </ButtonGroup>
-            </motion.div>
+                    <hr />
+                    <ButtonGroup className="wrap gap-15">
+                        <Button
+                            icon="caret-open-left"
+                            onClick={() => previousStep()}
+                        >
+                            Back
+                        </Button>
+                        <Button
+                            icon="arrow-clockwise"
+                            onClick={() => goToStep(0)}
+                        >
+                            Restart
+                        </Button>
+                        <Button
+                            icon="speedometer"
+                            onClick={() => router.push(routes.DASHBOARD)}
+                        >
+                            Dashboard
+                        </Button>
+                        {/* <Button>Return</Button> */}
+                    </ButtonGroup>
+                </AnimateBox>
+            </Box>
         </Flex>
     );
 };

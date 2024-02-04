@@ -13,6 +13,10 @@ export * from "./Footer";
 // common
 export * from "./BrainzAvatar";
 
+// animate
+export * from "./AnimateMarkdown";
+export * from "./AnimateBox";
+
 // pages
 export * from "./Home";
 export * from "./Explore";

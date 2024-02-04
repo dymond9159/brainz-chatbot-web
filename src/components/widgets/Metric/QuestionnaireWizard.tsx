@@ -11,6 +11,7 @@ import { AnswerOptionType, IDivProps, QuestionType } from "@/types";
 import { useAppDispatch, useTypedSelector } from "@/store";
 import { setActiveScore, setActiveStep } from "@/store/reducers";
 import { motion } from "framer-motion";
+import { AnimateBox } from "..";
 
 interface IProps extends IDivProps {
     q?: QuestionType;
@@ -73,9 +74,9 @@ export const QuestionnaireWizard: React.FC<IProps> = (props) => {
 
     return (
         <React.Fragment>
-            <Flex className={`col border markdonw-box`}>
+            <Flex className={`col markdonw-box`}>
                 {props.questionCounts && (
-                    <label>
+                    <label className="counter">
                         <strong>{activeStep}</strong>/{props.questionCounts}
                     </label>
                 )}
@@ -87,26 +88,12 @@ export const QuestionnaireWizard: React.FC<IProps> = (props) => {
                 />
                 <br />
                 <br />
-                <Box className="scroll-box">
-                    <motion.div
-                        className="relative h-8"
-                        variants={{
-                            initial: {
-                                height: 0,
-                                opacity: 0,
-                            },
-                            animate: {
-                                height: "auto",
-                                opacity: 1,
-                            },
-                        }}
-                        initial={shouldAnimate ? "initial" : undefined}
-                        animate={shouldAnimate ? "animate" : undefined}
-                        transition={{
-                            duration: 0.3,
-                            ease: "easeIn",
-                        }}
-                    >
+                <AnimateBox
+                    duration={0.7}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                >
+                    <Box className="scroll-box">
                         <Markdown
                             remarkPlugins={[remarkGfm]}
                             components={{}}
@@ -130,31 +117,31 @@ export const QuestionnaireWizard: React.FC<IProps> = (props) => {
                                     />
                                 ))}
                         </ButtonGroup>
-                    </motion.div>
-                </Box>
-                <hr />
-                <ButtonGroup className="wrap gap-15">
-                    <Button
-                        icon="caret-open-left"
-                        onClick={() => previousStep()}
-                    >
-                        Back
-                    </Button>
-                    <Button
-                        supicon
-                        icon="caret-open-right"
-                        onClick={handleNext}
-                    >
-                        {!lastPage ? "Next" : "Finish"}
-                    </Button>
-                    <Button
-                        icon="arrow-clockwise"
-                        onClick={() => goToStep(0)}
-                    >
-                        Restart
-                    </Button>
-                    {/* <Button icon="stop-fill">Stop</Button> */}
-                </ButtonGroup>
+                    </Box>
+                    <hr />
+                    <ButtonGroup className="wrap gap-15">
+                        <Button
+                            icon="caret-open-left"
+                            onClick={() => previousStep()}
+                        >
+                            Back
+                        </Button>
+                        <Button
+                            supicon
+                            icon="caret-open-right"
+                            onClick={handleNext}
+                        >
+                            {!lastPage ? "Next" : "Finish"}
+                        </Button>
+                        <Button
+                            icon="arrow-clockwise"
+                            onClick={() => goToStep(0)}
+                        >
+                            Restart
+                        </Button>
+                        {/* <Button icon="stop-fill">Stop</Button> */}
+                    </ButtonGroup>
+                </AnimateBox>
             </Flex>
         </React.Fragment>
     );
