@@ -18,6 +18,7 @@ import {
 import routes from "@/utils/routes";
 import _utils from "@/utils";
 import moment from "moment";
+import { AnimateBox } from "..";
 
 interface IProps extends IDivProps {
     buttons?: string[];
@@ -53,28 +54,8 @@ export const WelcomeWizard: React.FC<IProps> = (props) => {
     };
 
     return (
-        <Box className={`border markdonw-box`}>
-            <motion.div
-                variants={{
-                    initial: {
-                        opacity: 0,
-                        y: 100,
-                    },
-                    animate: {
-                        opacity: 1,
-                        y: 0,
-                    },
-                }}
-                initial={"initial"}
-                animate={"animate"}
-                transition={{
-                    duration: 0.25,
-                    ease: "easeIn",
-                    delay: 0.8,
-                    staggerChildren: 0.05,
-                }}
-                onAnimationComplete={() => {}}
-            >
+        <Box className={`markdonw-box`}>
+            <AnimateBox duration={0.6} initial={{opacity: 0}} animate={{opacity: 1}}>
                 <Markdown
                     remarkPlugins={[remarkGfm]}
                     components={{}}
@@ -85,7 +66,7 @@ export const WelcomeWizard: React.FC<IProps> = (props) => {
                     <Button onClick={handleStart}>Yes, I am ready</Button>
                     <Button onClick={handleStop}>No, not right now</Button>
                 </ButtonGroup>
-            </motion.div>
+            </AnimateBox>
         </Box>
     );
 };

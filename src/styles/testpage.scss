@@ -20,14 +20,15 @@
                 width: 100%;
             }
 
-            .test-area {
-                overflow-y: auto;
-                overflow-x: hidden;
+            .test-area {                
                 width: 100%;
-                // padding: 10px 20px;
                 flex: 1 1 0%;
     
                 .markdonw-box {
+
+                    label.counter {
+                        float:inline-end
+                    }
     
                     @include xs {
                         padding: 10px 10px;
@@ -35,8 +36,7 @@
 
                     .scroll-box {
                         flex: 1 1;
-                        overflow-x: hidden;
-                        overflow-y: auto;
+                        overflow: hidden;
                     }
     
                     p {

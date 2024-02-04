@@ -25,6 +25,9 @@
     .content {
         width: 100%;
         padding: 15px 5px;
+        @include xs {
+            padding: 10px 0px;
+        }
     }    
 
     .border {
@@ -39,7 +42,7 @@
         box-shadow: 1px 1px 3px 1px #00000015;
         overflow: visible;
 
-        @include xxs{
+        @include xs{
             padding: 0;
             background: none;
             box-shadow: none;
