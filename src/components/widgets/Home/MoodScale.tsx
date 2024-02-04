@@ -9,7 +9,7 @@ const MAX_VALUE = 10;
 export const MoodScale = () => {
     const pathColor =
         "conic-gradient(from -54deg at 284.27% 39.08%, #E3CED7 219.6000051498413deg, #D4B4D4 251.99999570846558deg, #AC87C9 360deg)";
-    const moodScore = useTypedSelector((state) => state.chat.scores?.mood);
+    const moodScore = useTypedSelector((state) => state.metric.scores?.mood);
 
     return (
         <Flex className="col mood-box">
@@ -51,7 +51,7 @@ export const MoodScale = () => {
                     </label>
                 )}
             </Box>
-            <p>{moodScore?.strValue ?? "Not measured yet."}</p>
+            <p>{moodScore?.severity ?? "Not measured yet."}</p>
             <label>{formatDate(moodScore?.updatedDate ?? "")}</label>
             {/* <p>{moodScore?.description ?? ""}</p> */}
         </Flex>

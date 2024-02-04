@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
+import moment from "moment";
 import { customAlphabet } from "nanoid";
 import { PROGRAMS, PSYCHOMETRICS } from "./constants";
 import { ProgramDataType } from "@/components/widgets";
@@ -24,7 +25,10 @@ export function formatDate(input: string | number | Date): string {
     });
 }
 
-export function compareDate(date1: Date, date2: Date): number {
+export function compareDate(oldDate?: string, newDate?: string): number {
+    const date1 = new Date(oldDate ?? "");
+    const date2 = new Date(newDate ?? "");
+
     if (date1 > date2) {
         return -1; // Date1 is greater thant Date2
     } else if (date1 < date2) {
@@ -42,6 +46,17 @@ export const getProgram = (id: string | undefined): ProgramDataType => {
     );
 };
 
+export const getMetric = (id: string | undefined): ProgramDataType => {
+    return PSYCHOMETRICS.filter((item) => item.strid === id)[0] ?? [];
+};
+
 export const findLastIndex = <T>(arr: Array<T>, filter: T) => {
     return arr.findLast((_) => _ === filter);
 };
+
+// Using an async function to await the import if you're dealing with dynamic imports
+export async function loadMarkdown(filename: string) {
+    const anxietyIntro = await require("!raw-loader!@/libs/questionnaires" +
+        "/anxiety/intro.md");
+    return anxietyIntro.default as string; // Accessing the default export
+}

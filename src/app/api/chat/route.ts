@@ -113,8 +113,7 @@ export async function POST(req: NextRequest) {
             : "";
 
         const program = _utils.functions.getProgram(progStrId);
-        const systemPrompt =
-            program?.instruction ?? psychometricInstruction(program);
+        const systemPrompt = program?.instruction;
 
         const ragPrompt = [
             {
@@ -130,7 +129,7 @@ export async function POST(req: NextRequest) {
             model: llm,
             stream: true,
             messages: [...ragPrompt, ...messages],
-            functions: [get_score],
+            // functions: [get_score],
             temperature: 0,
         };
 
@@ -156,18 +155,16 @@ export async function POST(req: NextRequest) {
                         {
                             role: "system",
                             content: `                                
-                                Present the final score as follow: '**Your final score is (score)/(max score).**'
-
                                 This score will be presented to the user along with a concise and clear explanation, providing them with a quantitative insight into user's status.
                                 `,
                         },
                     ];
-                    return openai.chat.completions.create({
-                        messages: [...sysPrompt, ...newMessages],
-                        stream: true,
-                        model: llm,
-                        temperature: 0.7,
-                    });
+                    // return openai.chat.completions.create({
+                    //     messages: [...sysPrompt, ...newMessages],
+                    //     stream: true,
+                    //     model: llm,
+                    //     temperature: 0.7,
+                    // });
                 }
             },
             async onCompletion(completion) {},

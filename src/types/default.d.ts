@@ -26,3 +26,28 @@ export interface IIconProps {
     //For rest props
     [x: string]: any;
 }
+
+// UI - color
+export interface FlowbiteStateColors {
+    info: string;
+    failure: string;
+    success: string;
+    warning: string;
+}
+
+export interface FlowbiteColors extends FlowbiteStateColors {
+    [key: string]: string;
+    blue: string;
+    cyan: string;
+    dark: string;
+    gray: string;
+    green: string;
+    indigo: string;
+    light: string;
+    lime: string;
+    pink: string;
+    purple: string;
+    red: string;
+    teal: string;
+    yellow: string;
+}

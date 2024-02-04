@@ -12,7 +12,7 @@ import {
 import storage from "redux-persist/lib/storage";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
-import { chatReducer } from "./reducers";
+import { chatReducer, commonReducer, metricReducer } from "./reducers";
 
 const persistConfig = {
     key: "brainz_chat",
@@ -29,6 +29,8 @@ const persistConfig = {
 // Combine your reducers
 const rootReducers = combineReducers({
     chat: chatReducer.reducer,
+    common: commonReducer.reducer,
+    metric: metricReducer.reducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducers);
 

@@ -4,6 +4,7 @@ import { Flex } from "../../container";
 import { Button, type ButtonProps } from "@/components/ui";
 import { cn } from "@/utils/functions";
 import { BrainzAvatar } from "..";
+import { QuestionnaireType } from "@/types";
 
 export type ProgramDataType = {
     numid: number;
@@ -11,11 +12,12 @@ export type ProgramDataType = {
     name: string;
     type: string;
     src: string;
+    url: string;
     description_short: string;
     description_long: string;
     suggests?: string[];
     instruction?: string;
-    questionnaires?: string;
+    questionnaires?: QuestionnaireType;
 };
 
 export interface IProgramProps extends ButtonProps {
@@ -25,15 +27,16 @@ export interface IProgramProps extends ButtonProps {
 export const Program: React.FC<IProgramProps> = (props) => {
     const router = useRouter();
 
-    const handlerClick = (id: string) => {
-        router.push(`/chat/${id}`);
+    const handlerClick = (url: string) => {
+        const callbackUrl = url.includes("test") ? "?callback=explore" : "";
+        router.push(`${url}${callbackUrl}`);
         router.refresh();
     };
 
     return (
         <Button
             className={cn("program")}
-            onClick={() => handlerClick(props.program.strid)}
+            onClick={() => handlerClick(props.program.url)}
         >
             <Flex className="row items-center justify-between full">
                 <Flex className="row items-center gap-15">

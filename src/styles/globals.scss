@@ -26,8 +26,11 @@
   --background-message-secondary: #f3f3f3;
 
   --border-color-primary: #00000050;
+  --border-color-secondary: #FFFFFF10;
 
   --error-color: #e42a2a;
+
+  --focused-color: #AAD3D3;
 
 }
 
@@ -50,7 +53,10 @@
     --background-message-secondary: #30384f;
 
     --border-color-primary: #FFFFFF50;
+    --border-color-secondary: #00000010;
 
+    --focused-color: #AAD3D3;
+    
     --error-color: #a81d1d;
 }
 
@@ -195,6 +201,7 @@ body {
 h1, h2, h3 {
   text-align: center;
   line-height: 150%;
+  text-shadow: 1px 3px 3px rgba(0, 0, 0, 0.12745098);
 }
 
 a {
@@ -240,12 +247,11 @@ ol, ul {
   }
 }
 
-input, textarea {
-  font-size: 16px;
-  font-family: inherit;
-  color: inherit;
-  line-height: 110%;
-  letter-spacing: inherit;
+hr {
+  height: 0;
+  border: 0;
+  border-bottom: 1px solid var(--border-color-secondary);
+  margin: 20px 0px;
 }
 
 @import "./ui.scss";
@@ -261,3 +267,4 @@ input, textarea {
 @import "./homepage.scss";
 @import "./chatpage.scss";
 @import "./dashboardpage.scss";
+@import "./testpage.scss"

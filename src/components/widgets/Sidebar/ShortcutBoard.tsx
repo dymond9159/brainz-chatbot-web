@@ -7,9 +7,13 @@ import _utils from "@/utils";
 export const ShortcutBoard: React.FC = (props) => {
     return (
         <ButtonGroup
-            groupname="Website"
+            groupname=""
             className="shortcut-button full col gap-10 justify-start"
         >
+            <Flex className="shortcut row gap-15 full">
+                <Icon name="speedometer" />
+                <Link href={_utils.routes.DASHBOARD}>Dashboard</Link>
+            </Flex>
             <Flex className="shortcut row gap-15 full">
                 <Icon name="house" />
                 <Link
@@ -34,11 +38,21 @@ export const ShortcutBoard: React.FC = (props) => {
             </Flex>
             <Flex className="shortcut row gap-15 full">
                 <Icon name="chat-right-dot" />
-                <Link href="#">Feedback</Link>
+                <Link
+                    href="#"
+                    target="_blank"
+                >
+                    Feedback
+                </Link>
             </Flex>
             <Flex className="shortcut row gap-15 full">
                 <Icon name="send" />
-                <Link href={_utils.routes.CONTACT}>Contact Us</Link>
+                <Link
+                    href={_utils.routes.CONTACT}
+                    target="_blank"
+                >
+                    Contact Us
+                </Link>
             </Flex>
         </ButtonGroup>
     );

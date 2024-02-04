@@ -23,30 +23,14 @@
             @include md {
                 width: 100%;
             }
-        }
+        }   
+        
+        .psychometric-box {
+            width: 48%;
 
-        .monitor-box {
-            .monitor-title {
-                text-align: left;
+            @include xs {
+                width: 100%;
             }
-            .psychometric-box {
-                h4, p, em, label {
-                    width: 100%;
-                }
-
-                h4 {
-                    margin-bottom: 10px;
-                }
-
-                .progress-box{
-                    position: relative;
-                    label {
-                        position: absolute;
-                        top: 65%;
-                        left: 42%;
-                    }
-                }
-            }
-        }
+        }            
     }
 }

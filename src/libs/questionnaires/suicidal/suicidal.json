@@ -1,0 +1,68 @@
+{
+    "name": "C-SSRS",
+    "introduce": "**Hello there! 😊**   \n\n \n\n**What's the C-SSRS questionnaire?**    \n\nThe C-SSRS (Columbia-Suicide Severity Rating Scale) is a questionnaire used for screening, monitoring, scoring, and assessing the severity of suicide risk. It is designed to identify individuals who have suicidal ideation and behavior, and to determine the intensity and immediacy of that risk. The C-SSRS is widely used in clinical and research settings to help evaluate suicide risk and to make decisions about the level of support or intervention that may be needed.   \n\n  **Introductions** \n\nSelect the option that best fits your experience.  \n\n (Yes or No)  \n\n **Times:** 1 min  \n  **Number of questions:** 6 \n\n**Are you ready to begin the C-SSRS questionnaire?**",
+    "buttonOptions": ["Yes, I am ready", "No, not right now"],
+    "maxScore": 4,
+    "times": 1,    
+    "questionCounts": 6,
+    "report": {
+        "title": "Suicidal Risk Report",
+        "description": "The C-SSRS is identify varying levels of suicide risk, from low to high, based on the responses provided.",
+        "severities": [{
+            "scoreRange": [1, 1],
+            "severity": "Low Risk",
+            "color": "low_risk",
+            "description": "Thoughts of death or mild thoughts of wanting to harm oneself without any plan or intent."
+        },
+        {
+            "scoreRange": [2, 2],
+            "severity": "Moderate Risk",
+            "color": "moderate_risk",
+            "description": "Suicidal thoughts with a method in mind but no intent or plan."
+        },
+        {
+            "scoreRange": [3, 3],
+            "severity": "High Risk",
+            "color": "high_risk",
+            "description": "Specific plan and intent to carry out the plan, with or without preparatory actions."
+        }]
+    },
+    "questions": [
+        {
+            "question":"Question 1: Have you wished you were dead or wished you could go to sleep and not wake up?",
+            "description":"This question is designed to assess whether you have had any thoughts about wishing to be dead or not waking up.",
+            "instruction":"Please select the option that best describes your experience.",
+            "answerType":"type4"
+        },
+        {
+            "question":"Question 2: Have you actually had any thoughts of killing yourself?",
+            "description":"This question aims to determine if you have experienced any thoughts of taking your own life.",
+            "instruction":"Please select the option that best fits your experience.",
+            "answerType":"type4"
+        },
+        {
+            "question":"Question 3: Have you been thinking about how you might do this?",
+            "description":"This question is to understand if you have had thoughts about the method you might use to kill yourself.",
+            "instruction":"Please select the option that best describes your experience.",
+            "answerType":"type5"
+        },
+        {
+            "question":"Question 4: Have you had these thoughts and had some intention of acting on them?",
+            "description":"This question assesses whether there is any intention behind the thoughts of killing yourself, if such thoughts were present.",
+            "instruction":"Please select the option that best fits your experience.",
+            "answerType":"type6"
+        },
+        {
+            "question":"Question 5: Have you started to work out or worked out the details of how to kill yourself? Do you intend to carry out this plan?",
+            "description":"This question is to determine if you have developed a plan with an intention to follow through with it.",
+            "instruction":"Please select the option that best describes your experience.",
+            "answerType":"type6"
+        },
+        {
+            "question":"Question 6: Have you done anything, started to do anything, or prepared to do anything to end your life?",
+            "description":"This question seeks to understand if you have taken any steps towards ending your life.",
+            "instruction":"Please select the option that best fits your experience.",
+            "answerType":"type7"
+        }
+    ]
+}

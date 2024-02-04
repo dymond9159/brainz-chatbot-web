@@ -1,0 +1,120 @@
+{
+    "name": "MFQ",
+    "introduce": "**Hello there! 😊**   \n\n \n\n**What's the MFQ questionnaire?**    \n\nThe Mood and Feelings Questionnaire (MFQ), It's consists of a series of descriptive phrases regarding how the subject has been feeling or acting recently. It consists of statements related to mood and feelings, and respondents rate how well each statement describes their experiences over a specific time period. The questionnaire is widely used in clinical and research settings to screen for depression, track changes in symptoms, and assess the effectiveness of interventions.  \n\n  **Introductions**  \n\nFor each question, please select one option how you have been feeling or actingin the past two weeks. \n\n (Not true = 0, Sometimes = 1, and True = 2)  \n\n **Times:** 3 min  \n  **Number of questions:** 13 \n\n**Are you ready to begin the MFQ questionnaire?**",
+    "buttonOptions": ["Yes, I am ready", "No, not right now"],
+    "maxScore": 26,
+    "times": 3,    
+    "questionCounts": 13,
+    "report": {
+        "title": "MFQ Score Report",
+        "description": "All responses are summed to calculate the total MFQ score. Scores range from 0–26 with increasing scores indicating greater the severity of mood and feeling.",
+        "severities": [{
+            "scoreRange": [0, 5],
+            "severity": "None to minimal",
+            "color": "minimal",
+            "description": ""
+        },
+        {
+            "scoreRange": [6, 10],
+            "severity": "Mild",
+            "color": "mild",
+            "description": ""
+        },
+        {
+            "scoreRange": [11, 15],
+            "severity": "Moderate",
+            "color": "moderate",
+            "description": ""
+        },{
+            "scoreRange": [16, 20],
+            "severity": "Moderately Severe",
+            "color": "moderate_severe",
+            "description": ""
+        },{
+            "scoreRange": [21, 26],
+            "severity": "Severe",
+            "color": "severe",
+            "description": ""
+        }]
+    },
+    "questions": [
+        {
+            "question":"Question 1: Over the last 2 weeks, I felt miserable or unhappy.",
+            "description":"This question is asking about your general mood and feelings of happiness or sadness.",
+            "instruction":"Please select the option that best fits your experience how you have been feeling or acting in the past two weeks.",
+            "answerType":"type1"
+        },
+        {
+            "question":"Question 2: Over the last 2 weeks, I didn't enjoy anything at all.",
+            "description":"This question is about your ability to enjoy activities and experiences that you normally find pleasurable.",
+            "instruction":"Please select the option that best fits your experience over the past two weeks.",
+            "answerType":"type1"
+        },
+        {
+            "question":"Question 3: Over the last 2 weeks, I felt so tired I just sat around and did nothing.",
+            "description":"This question assesses feelings of fatigue and potential lack of motivation or energy.",
+            "instruction":"Please select the option that best describes how you have felt in the past two weeks.",
+            "answerType":"type1"
+        },
+        {
+            "question":"Question 4: Over the last 2 weeks, I was very restless.",
+            "description":"This question is inquiring about feelings of restlessness or difficulty being still.",
+            "instruction":"Please select the option that best describes your experience in the past two weeks.",
+            "answerType":"type1"
+        },
+        {
+            "question":"Question 5: Over the last 2 weeks, I felt I was no good anymore.",
+            "description":"This question is about your self-esteem and whether you've felt a sense of worthlessness or a loss of confidence in yourself.",
+            "instruction":"Please select the option that best fits your experience over the past two weeks.",
+            "answerType":"type1"
+        },
+        {
+            "question":"Question 6: Over the last 2 weeks, I cried a lot",
+            "description":"This question is asking about the frequency of crying, which can be an indicator of sadness or emotional distress.",
+            "instruction":"Please select the option that best describes how you have felt in the past two weeks.",
+            "answerType":"type1"
+        },
+        {
+            "question":"Question 7: Over the last 2 weeks, I found it hard to think properly or concentrate.",
+            "description":"This question is about cognitive functions such as thinking clearly and concentrating, which can be affected by mood.",
+            "instruction":"Please select the option that best describes your experience in the past two weeks.",
+            "answerType":"type1"
+        },
+        {
+            "question":"Question 8: Over the last 2 weeks, I hated myself.",
+            "description":"This question addresses feelings of self-hatred, which can be a sign of negative self-perception or self-esteem issues.",
+            "instruction":"Please select the option that best describes how you have felt in the past two weeks.",
+            "answerType":"type1"
+        },
+        {
+            "question":"Question 9: Over the last 2 weeks, I was a bad person.",
+            "description":"This question is asking about your feelings regarding your own behavior or character, potentially indicating guilt or self-blame.",
+            "instruction":"Please select the option that best fits your experience over the past two weeks.",
+            "answerType":"type1"
+        },
+        {
+            "question":"Question 10: Over the last 2 weeks, I felt lonely.",
+            "description":"This question is about feelings of loneliness or isolation.",
+            "instruction":"Please select the option that best describes how you have felt in the past two weeks.",
+            "answerType":"type1"
+        },
+        {
+            "question":"Question 11: Over the last 2 weeks, I thought nobody really loved me.",
+            "description":"This question explores the feeling of being unloved or the perception that others do not care for you.",
+            "instruction":"Please select the option that best describes your experience in the past two weeks.",
+            "answerType":"type1"
+        },
+        {
+            "question":"Question 12: Over the last 2 weeks, I thought I could never be as good as other people.",
+            "description":"This question is about comparing yourself to others and feelings of inadequacy or inferiority.",
+            "instruction":"Please select the option that best fits your experience over the past two weeks.",
+            "answerType":"type1"
+        },
+        {
+            "question":"Question 13: Over the last 2 weeks, I did everything wrong.",
+            "description":"This question is asking about feelings of guilt or a sense of failure in things you do.",
+            "instruction":"Please select the option that best describes how you have felt in the past two weeks.",
+            "answerType":"type1"
+        }
+    ]
+}
