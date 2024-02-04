@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
+import moment from "moment";
 import { customAlphabet } from "nanoid";
 import { PROGRAMS, PSYCHOMETRICS } from "./constants";
 import { ProgramDataType } from "@/components/widgets";
@@ -24,7 +25,10 @@ export function formatDate(input: string | number | Date): string {
     });
 }
 
-export function compareDate(date1: Date, date2: Date): number {
+export function compareDate(oldDate?: string, newDate?: string): number {
+    const date1 = new Date(oldDate ?? "");
+    const date2 = new Date(newDate ?? "");
+
     if (date1 > date2) {
         return -1; // Date1 is greater thant Date2
     } else if (date1 < date2) {

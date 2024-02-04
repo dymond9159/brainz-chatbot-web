@@ -16,6 +16,9 @@ import {
 } from "@/store/reducers";
 import routes from "@/utils/routes";
 import { Psychometric } from "../Dashboard";
+import _utils from "@/utils";
+import moment from "moment";
+import { motion } from "framer-motion";
 
 interface IProps extends IDivProps {
     report?: MetricReportType;
@@ -41,16 +44,24 @@ export const ReportWizard: React.FC<IProps> = (props) => {
     const activeScore = useTypedSelector((state) => state.metric.activeScore);
 
     useEffect(() => {
-        const _arrScore = activeScore?.filter((value) => value !== -1);
-
+        const _arrScore = activeScore?.filter((value) => value !== -1) ?? [];
         // when filled all questions.
         if (_arrScore?.length === props.qCount) {
-            const _score = _arrScore?.reduce((sum, v) => sum + v, 0) ?? -1;
+            let _score = -1;
+            if (props.metricName !== "suicide") {
+                // not suicidal
+                _score = _arrScore?.reduce((sum, v) => sum + v, 0) ?? -1;
+            } else {
+                // when suicidal
+                _score = Math.max(..._arrScore);
+            }
+
             const severity = props.report?.severities?.filter(
                 (item) =>
                     _score >= item.scoreRange[0] &&
                     _score <= item.scoreRange[1],
             );
+
             if (severity?.length) {
                 const _metric: MetricCharactersType = {
                     score: _score,
@@ -59,8 +70,27 @@ export const ReportWizard: React.FC<IProps> = (props) => {
                     color: severity[0].color,
                     description: severity[0].description,
                 };
-                dispatch(setPsychometricScore(_metric));
+
+                if (scores && props.metricName) {
+                    const dateOld =
+                        scores[props.metricName].updatedDate ?? "00:00:00";
+
+                    const oldDay = moment(new Date()).format("YYYY-MM-DD");
+                    const toDay = moment(new Date()).format("YYYY-MM-DD");
+
+                    // console.log(dateOld, oldDay, toDay, oldDay == toDay);
+
+                    if (oldDay <= toDay) {
+                        dispatch(setPsychometricScore(_metric));
+                        // if (oldDay === toDay && !confirm("Updated?")) {
+                        // } else {
+                        //     console.log("updated.");
+                        // }
+                    }
+                }
             }
+        } else {
+            alert("Oop! Looks like you didn't complete all the questions.");
         }
     }, [activeScore]);
 
@@ -90,8 +120,26 @@ export const ReportWizard: React.FC<IProps> = (props) => {
     };
 
     return (
-        <React.Fragment>
-            <Flex className={`col border markdonw-box`}>
+        <Flex className={`col border markdonw-box`}>
+            <motion.div
+                className="relative h-8"
+                variants={{
+                    initial: {
+                        height: 0,
+                        opacity: 0,
+                    },
+                    animate: {
+                        height: "auto",
+                        opacity: 1,
+                    },
+                }}
+                initial={"initial" }
+                animate={"animate"}
+                transition={{
+                    duration: 0.8,
+                    ease: "easeIn",
+                }}
+            >
                 <h2>{props.report?.title ?? "Score Report"}</h2>
                 <br />
                 <Box className="scroll-box">
@@ -103,9 +151,14 @@ export const ReportWizard: React.FC<IProps> = (props) => {
                     </Markdown>
                     <Psychometric
                         title="Your Score"
-                        scores={scores?.anxiety}
+                        scores={
+                            props.metricName && scores
+                                ? scores[props.metricName]
+                                : undefined
+                        }
                         size={"100px"}
                         h_align="items-center"
+                        collapse={true}
                     />
                 </Box>
                 <hr />
@@ -114,17 +167,23 @@ export const ReportWizard: React.FC<IProps> = (props) => {
                         icon="caret-open-left"
                         onClick={() => previousStep()}
                     >
-                        Record
+                        Back
                     </Button>
                     <Button
                         icon="arrow-clockwise"
                         onClick={() => goToStep(0)}
                     >
-                        Reset
+                        Restart
                     </Button>
-                    <Button icon="stop-fill">Done</Button>
+                    <Button
+                        icon="speedometer"
+                        onClick={() => router.push(routes.DASHBOARD)}
+                    >
+                        Dashboard
+                    </Button>
+                    {/* <Button>Return</Button> */}
                 </ButtonGroup>
-            </Flex>
-        </React.Fragment>
+            </motion.div>
+        </Flex>
     );
 };

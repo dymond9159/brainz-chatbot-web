@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { cn, formatDate } from "@/utils/functions";
 import { IDivProps, MetricCharactersType } from "@/types";
@@ -13,10 +13,16 @@ interface IProps extends IDivProps {
     scores?: MetricCharactersType;
     size?: string;
     h_align?: string;
+    collapse?: boolean;
 }
 
 export const Psychometric: React.FC<IProps> = (props) => {
     const pathColor = M_COLOR[props.scores?.color ?? "default"];
+    const [isExpand, setExpand] = useState<boolean>(false);
+
+    useEffect(() => {
+        setExpand(props.collapse ?? false);
+    }, [props.collapse]);
     return (
         <Box className={cn(props.className, "psychometric-box")}>
             <Flex
@@ -78,12 +84,14 @@ export const Psychometric: React.FC<IProps> = (props) => {
                     </Flex>
                 </Flex>
                 <br />
-                <Markdown
-                    remarkPlugins={[remarkGfm]}
-                    components={{}}
-                >
-                    {props.scores?.description}
-                </Markdown>
+                {isExpand && (
+                    <Markdown
+                        remarkPlugins={[remarkGfm]}
+                        components={{}}
+                    >
+                        {props.scores?.description}
+                    </Markdown>
+                )}
             </Flex>
         </Box>
     );

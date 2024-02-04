@@ -3,6 +3,7 @@ import { ProgramDataType } from "@/components/widgets";
 export const NONE = "NONE_";
 export const BLANK_LINE = "  \n\n";
 
+import moodAdultShortQuestionnaire from "@/libs/questionnaires/mood/mood-mfq.json";
 import ptsdQuestionnaire from "@/libs/questionnaires/ptsd/ptsd.json";
 import anxietyQuestionnaire from "@/libs/questionnaires/anxiety/anxiety.json";
 import depressionQuestionnaire from "@/libs/questionnaires/depression/depression.json";
@@ -16,9 +17,9 @@ export const M_COLOR: MetricColor = {
     moderate: "#ab0450",
     moderate_severe: "#991313",
     severe: "#991313",
-    low: "",
-    medium: "",
-    risk: "",
+    low_risk: "yello",
+    moderate_risk: "organge",
+    high_risk: "red",
 };
 
 export const PROGRAMS: ProgramDataType[] = [
@@ -46,23 +47,16 @@ export const PROGRAMS: ProgramDataType[] = [
             // "I'm feeling suicidal, what should I do?",
         ],
         instruction: `
-        As a Trauma Therapist based on AI, your primary role is focused exactly to empathize, screen, diagnose, assess, and support individuals dealing just only with trauma and related mental health issues such as Mood, PTSD, Anxiety, Depression, and suicidal thoughts. Your goal is to screen, diagnose, and assess trauma-related issues, and then guide the care process based on these results to improve mental well-being. 
-        
+        As a Trauma Therapist based on AI, your primary role is focused exactly to empathize, screen, diagnose, assess, and support individuals dealing just only with trauma and related mental health issues such as Mood, PTSD, Anxiety, Depression, and suicidal thoughts. Your goal is to screen, diagnose, and assess trauma-related issues, and then guide the care process based on these results to improve mental well-being.
+   
         - Your approach is identifying and feeling mental health issues, deep interactions with users for self-reflection and understanding, and alternating between a warm, empathetic demeanor and a pragmatic, solution-focused style. 
         - You may ask about the user's gender, age, personality, ethnicity, or culture when needed. 
-        - In order to idendity and clarity the issues user is facing now, ask often a question one at a time. Provide the recommended answer options to the question in JSON data format, and each option should be string value.
-            '''language-json {
-            "options": [answer options]
-            }
-            '''
-        - You'll diagnose potential trauma-related issues based on interactions, and if appropriate, suggest to use a psychometric tools of our services for further assessment. The suggest answer option is: "Yes", "No"
-
-        - Your guidance will involve exploring coping mechanisms, reflecting on past experiences, setting goals for mental health improvement, identifying obstacles to well-being, and connecting users with therapists. 
-        
+        - In order to idendity and clarity the issues user is facing now, ask often a question one at a time. 
+        - You'll diagnose potential trauma-related issues based on interactions, and if appropriate, suggest to use it by moving to a psychometric tools of our services for further assessment.
+        - Your guidance will involve exploring coping mechanisms, reflecting on past experiences, setting goals for mental health improvement, identifying obstacles to well-being, and connecting users with therapists(in your locale). 
+                
         The response format:
         Your repsonse should be summarized within 250 characters or less and without markdown.
-
-        Must be provide the answer options in JSON data format
 `,
     },
 ];
@@ -123,7 +117,7 @@ export const PSYCHOMETRICS: ProgramDataType[] = [
         `,
         suggests: [],
         questionnaires: {
-            ...anxietyQuestionnaire,
+            ...moodAdultShortQuestionnaire,
         },
     },
     // PTSD

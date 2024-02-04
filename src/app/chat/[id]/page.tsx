@@ -180,6 +180,11 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
         setPromptMessage(msg);
     };
 
+    const handleReset = () => {
+        setMessages([]);
+        handlePrompt("Hi, there", false);
+    };
+
     return (
         <Container className="main-container">
             <Flex>
@@ -238,7 +243,16 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
                             </Content>
                             <Flex className="chat-prompts row items-end full">
                                 <Wrapper className="full">
-                                    <ChatTools />
+                                    <Flex className="row justify-center items-center gap-10">
+                                        {/* <Button>Psychometric Test</Button> */}
+                                        {/* <Button icon="radio-grid">Explore</Button> */}
+                                        <Button
+                                            icon="arrow-clockwise"
+                                            onClick={handleReset}
+                                        >
+                                            Reset
+                                        </Button>
+                                    </Flex>
                                     <form
                                         ref={formRef}
                                         onSubmit={(e) => {

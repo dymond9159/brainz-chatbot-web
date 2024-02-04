@@ -17,6 +17,7 @@ import _utils from "@/utils";
 import { ANSWER_COLLECT } from "@/libs/questionnaires/answers/answer";
 import { useAppDispatch, useTypedSelector } from "@/store";
 import { clearMetricInfo, setActiveMetric } from "@/store/reducers";
+import { useRouter } from "next/navigation";
 
 export interface MetricPageProps {
     params: {
@@ -26,9 +27,12 @@ export interface MetricPageProps {
 
 const MetricPage: React.FC<MetricPageProps> = (props) => {
     const dispatch = useAppDispatch();
+    const router = useRouter();
     const [tool, setTool] = useState<ProgramDataType>();
 
     const startIndex = useTypedSelector((state) => state.metric.activeStep);
+
+    useEffect(() => {}, []);
 
     useEffect(() => {
         const _tool = _utils.functions.getMetric(props.params.id);
@@ -57,7 +61,7 @@ const MetricPage: React.FC<MetricPageProps> = (props) => {
                         <Wrapper>
                             <Content className="test-area">
                                 <Wizard
-                                    startIndex={startIndex}
+                                    startIndex={0}
                                     // wrapper={<AnimateWrapper />}
                                 >
                                     <WelcomeWizard
@@ -93,6 +97,7 @@ const MetricPage: React.FC<MetricPageProps> = (props) => {
                                         maxScore={
                                             tool?.questionnaires?.maxScore
                                         }
+                                        metricName={props.params.id}
                                     />
                                 </Wizard>
                             </Content>

@@ -18,9 +18,9 @@ export type MetricColor = {
     moderate: string;
     moderate_severe: string;
     severe: string;
-    low: string;
-    medium: string;
-    risk: string;
+    low_risk: string;
+    moderate_risk: string;
+    high_risk: string;
 };
 
 export interface IConversationProps extends IDivProps {

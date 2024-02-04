@@ -10,6 +10,7 @@ import { BLANK_LINE } from "@/utils/constants";
 import { AnswerOptionType, IDivProps, QuestionType } from "@/types";
 import { useAppDispatch, useTypedSelector } from "@/store";
 import { setActiveScore, setActiveStep } from "@/store/reducers";
+import { motion } from "framer-motion";
 
 interface IProps extends IDivProps {
     q?: QuestionType;
@@ -32,12 +33,19 @@ export const QuestionnaireWizard: React.FC<IProps> = (props) => {
 
     const activeScore = useTypedSelector((state) => state.metric.activeScore);
 
+    const lastPage = activeStep === (props.questionCounts ?? 0);
+
     useEffect(() => {
-        if (activeStep && activeScore) {
+        if (activeScore) {
             setValue(activeScore[activeStep]);
+        }
+    }, [activeScore]);
+
+    useEffect(() => {
+        if (activeStep) {
             dispatch(setActiveStep(activeStep));
         }
-    }, [activeStep, activeScore]);
+    }, [activeStep]);
 
     useEffect(() => {
         const _percent = (activeStep / (props.questionCounts ?? 1)) * 100;
@@ -61,6 +69,8 @@ export const QuestionnaireWizard: React.FC<IProps> = (props) => {
         nextStep();
     };
 
+    const shouldAnimate = true;
+
     return (
         <React.Fragment>
             <Flex className={`col border markdonw-box`}>
@@ -78,29 +88,49 @@ export const QuestionnaireWizard: React.FC<IProps> = (props) => {
                 <br />
                 <br />
                 <Box className="scroll-box">
-                    <Markdown
-                        remarkPlugins={[remarkGfm]}
-                        components={{}}
+                    <motion.div
+                        className="relative h-8"
+                        variants={{
+                            initial: {
+                                height: 0,
+                                opacity: 0,
+                            },
+                            animate: {
+                                height: "auto",
+                                opacity: 1,
+                            },
+                        }}
+                        initial={shouldAnimate ? "initial" : undefined}
+                        animate={shouldAnimate ? "animate" : undefined}
+                        transition={{
+                            duration: 0.3,
+                            ease: "easeIn",
+                        }}
                     >
-                        {`**${props.q?.question}**` +
-                            BLANK_LINE +
-                            props.q?.description +
-                            BLANK_LINE +
-                            props.q?.instruction}
-                    </Markdown>
-                    <ButtonGroup className="col justify-start items-start pl-20">
-                        {props.answerOptions &&
-                            props.answerOptions.map((item, i) => (
-                                <Radio
-                                    key={i}
-                                    checked={value === item.value}
-                                    name="option"
-                                    title={item.strValue}
-                                    value={item.value}
-                                    onChange={handleChange}
-                                />
-                            ))}
-                    </ButtonGroup>
+                        <Markdown
+                            remarkPlugins={[remarkGfm]}
+                            components={{}}
+                        >
+                            {`**${props.q?.question}**` +
+                                BLANK_LINE +
+                                props.q?.description +
+                                BLANK_LINE +
+                                props.q?.instruction}
+                        </Markdown>
+                        <ButtonGroup className="col justify-start items-start pl-20">
+                            {props.answerOptions &&
+                                props.answerOptions.map((item, i) => (
+                                    <Radio
+                                        key={i}
+                                        checked={value === item.value}
+                                        name="option"
+                                        title={item.strValue}
+                                        value={item.value}
+                                        onChange={handleChange}
+                                    />
+                                ))}
+                        </ButtonGroup>
+                    </motion.div>
                 </Box>
                 <hr />
                 <ButtonGroup className="wrap gap-15">
@@ -115,15 +145,15 @@ export const QuestionnaireWizard: React.FC<IProps> = (props) => {
                         icon="caret-open-right"
                         onClick={handleNext}
                     >
-                        Next
+                        {!lastPage ? "Next" : "Finish"}
                     </Button>
                     <Button
                         icon="arrow-clockwise"
                         onClick={() => goToStep(0)}
                     >
-                        Reset
+                        Restart
                     </Button>
-                    <Button icon="stop-fill">Stop</Button>
+                    {/* <Button icon="stop-fill">Stop</Button> */}
                 </ButtonGroup>
             </Flex>
         </React.Fragment>

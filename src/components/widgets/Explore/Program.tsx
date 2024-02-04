@@ -28,7 +28,8 @@ export const Program: React.FC<IProgramProps> = (props) => {
     const router = useRouter();
 
     const handlerClick = (url: string) => {
-        router.push(`${url}`);
+        const callbackUrl = url.includes("test") ? "?callback=explore" : "";
+        router.push(`${url}${callbackUrl}`);
         router.refresh();
     };
 

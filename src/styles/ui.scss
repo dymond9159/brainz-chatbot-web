@@ -15,6 +15,7 @@ button {
     border-radius: var(--border-radius-small);
     border: 0;
     background: var(--background-trans-10);
+    // box-shadow: 1px 2px 3px 1px #00000015;
 
     &:hover {
         background: var(--background-trans-25)
@@ -22,12 +23,12 @@ button {
     
     .button-text {
         font-weight: bold;
-        color: var(--foreground-color-secondary)
+        color: var(--foreground-secondary)
     }
 
     &:disabled {
         cursor: default;
-        color:var(--foreground-color-secondary);
+        color:var(--foreground-secondary);
         &:hover {
             background: var(--background-trans-10);
         }

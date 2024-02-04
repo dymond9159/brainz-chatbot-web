@@ -1,96 +1,68 @@
 {
     "name": "C-SSRS",
-    "introduce": "**Hello there! 😊**   \n\n \n\n**What's the C-SSRS questionnaire?**    \n\nThe PHQ-9 is the Patient Health Questionnaire-9, which is a self-administered tool used to screen for the presence and severity of depression. It consists of 9 questions that relate to the symptoms of depression as outlined in the Diagnostic and Statistical Manual of Mental Disorders (DSM-IV). Each question asks about the frequency of a symptom over the past two weeks.  \n\n  **Introductions** \n\nRate the frequency of occurrence of each item using a 4-point Likert scale. Select the option that best fits your experience over the last 2 weeks. \n\n (Not at all = 0, Several days = 1, More than half the days = 2, and Nearly every day = 3)  \n\n **Times:** 2 min  \n  **Number of questions:** 9 \n\n**Are you ready to begin the PHQ-9 depression questionnaire?**",
+    "introduce": "**Hello there! 😊**   \n\n \n\n**What's the C-SSRS questionnaire?**    \n\nThe C-SSRS (Columbia-Suicide Severity Rating Scale) is a questionnaire used for screening, monitoring, scoring, and assessing the severity of suicide risk. It is designed to identify individuals who have suicidal ideation and behavior, and to determine the intensity and immediacy of that risk. The C-SSRS is widely used in clinical and research settings to help evaluate suicide risk and to make decisions about the level of support or intervention that may be needed.   \n\n  **Introductions** \n\nSelect the option that best fits your experience.  \n\n (Yes or No)  \n\n **Times:** 1 min  \n  **Number of questions:** 6 \n\n**Are you ready to begin the C-SSRS questionnaire?**",
     "buttonOptions": ["Yes, I am ready", "No, not right now"],
-    "maxScore": 27,
-    "times": 2,    
-    "questionCounts": 9,
+    "maxScore": 4,
+    "times": 1,    
+    "questionCounts": 6,
     "report": {
-        "title": "PHQ-9 Score Report",
-        "description": "All responses are summed to calculate the total PHQ-9 score. Scores range from 0–27 with increasing scores indicating greater severity of symptoms of depression.",
+        "title": "Suicidal Risk Report",
+        "description": "The C-SSRS is identify varying levels of suicide risk, from low to high, based on the responses provided.",
         "severities": [{
-            "scoreRange": [0, 4],
-            "severity": "None to minimal",
-            "color": "minimal",
-            "description": "No follow-up is warranted at this time."
+            "scoreRange": [1, 1],
+            "severity": "Low Risk",
+            "color": "low_risk",
+            "description": "Thoughts of death or mild thoughts of wanting to harm oneself without any plan or intent."
         },
         {
-            "scoreRange": [5, 9],
-            "severity": "Mild",
-            "color": "mild",
-            "description": "It is recommended to monitor symptoms and follow-up as indicated."
+            "scoreRange": [2, 2],
+            "severity": "Moderate Risk",
+            "color": "moderate_risk",
+            "description": "Suicidal thoughts with a method in mind but no intent or plan."
         },
         {
-            "scoreRange": [10, 14],
-            "severity": "Moderate",
-            "color": "moderate",
-            "description": "Treatment plan, considering counseling, follow-up and/or pharmacotherapy. Your symptoms are clinically significant and warrant further assessment (including diagnostic interview and mental status examination) and/or referral to a mental health professional is recommended."
-        },{
-            "scoreRange": [15, 19],
-            "severity": "Moderately Severe",
-            "color": "moderate_severe",
-            "description": "You are feeling moderately the severe to be diagnosed with an depression or related disorder. Active treatment with pharmacotherapy and/or psychotherapy, expedited referral to a mental health specialist for psychotherapy and/or collaborative management."
-        },{
-            "scoreRange": [20, 27],
-            "severity": "Severe",
-            "color": "severe",
-            "description": "You are severe to be diagnosed with an depression or related disorder. Immediate initiation of pharmacotherapy and, if severe impairment or poor response to therapy, expedited referral to a mental health specialist for psychotherapy and/or collaborative management."
+            "scoreRange": [3, 3],
+            "severity": "High Risk",
+            "color": "high_risk",
+            "description": "Specific plan and intent to carry out the plan, with or without preparatory actions."
         }]
     },
     "questions": [
         {
-            "question":"Question 1: Over the last 2 weeks, little interest or pleasure in doing things?",
-            "description":"This question assesses your level of interest or pleasure in daily activities, which is a common symptom of depression.",
-            "instruction":"Please select one of the following options:",
-            "answerType":"type3"
+            "question":"Question 1: Have you wished you were dead or wished you could go to sleep and not wake up?",
+            "description":"This question is designed to assess whether you have had any thoughts about wishing to be dead or not waking up.",
+            "instruction":"Please select the option that best describes your experience.",
+            "answerType":"type4"
         },
         {
-            "question":"Question 2: Over the last 2 weeks, feeling down, depressed, or hopeless?",
-            "description":"This question is designed to evaluate the frequency of feelings of sadness or hopelessness, which are core symptoms of depression.",
-            "instruction":"Please select one of the following options:",
-            "answerType":"type3"
+            "question":"Question 2: Have you actually had any thoughts of killing yourself?",
+            "description":"This question aims to determine if you have experienced any thoughts of taking your own life.",
+            "instruction":"Please select the option that best fits your experience.",
+            "answerType":"type4"
         },
         {
-            "question":"Question 3: Over the last 2 weeks, trouble falling or staying asleep, or sleeping too much?",
-            "description":"This question aims to assess sleep disturbances, which can be an indicator of depression.",
-            "instruction":"Please select one of the following options:",
-            "answerType":"type3"
+            "question":"Question 3: Have you been thinking about how you might do this?",
+            "description":"This question is to understand if you have had thoughts about the method you might use to kill yourself.",
+            "instruction":"Please select the option that best describes your experience.",
+            "answerType":"type5"
         },
         {
-            "question":"Question 4: Over the last 2 weeks, feeling tired or having little energy?",
-            "description":"This question evaluates the presence of fatigue or low energy, which are common symptoms associated with depression.",
-            "instruction":"Please select one of the following options:",
-            "answerType":"type3"
+            "question":"Question 4: Have you had these thoughts and had some intention of acting on them?",
+            "description":"This question assesses whether there is any intention behind the thoughts of killing yourself, if such thoughts were present.",
+            "instruction":"Please select the option that best fits your experience.",
+            "answerType":"type6"
         },
         {
-            "question":"Question 5: Over the last 2 weeks, poor appetite or overeating?",
-            "description":"This question is intended to identify changes in eating habits, which can be a symptom of depression.",
-            "instruction":"Please select one of the following options:",
-            "answerType":"type3"
+            "question":"Question 5: Have you started to work out or worked out the details of how to kill yourself? Do you intend to carry out this plan?",
+            "description":"This question is to determine if you have developed a plan with an intention to follow through with it.",
+            "instruction":"Please select the option that best describes your experience.",
+            "answerType":"type6"
         },
         {
-            "question":"Question 6: Over the last 2 weeks, feeling bad about yourself - or that you are a failure or have let yourself or your family down?",
-            "description":"This question addresses feelings of low self-esteem or guilt, which are often experienced by individuals with depression.",
-            "instruction":"Please select one of the following options:",
-            "answerType":"type3"
-        },
-        {
-            "question":"Question 7: Over the last 2 weeks, trouble concentrating on things, such as reading the newspaper or watching television?",
-            "description":"This question assesses cognitive aspects of depression, such as difficulty with concentration and focus.",
-            "instruction":"Please select one of the following options:",
-            "answerType":"type3"
-        },
-        {
-            "question":"Question 8: Over the last 2 weeks, moving or speaking so slowly that other people could have noticed? Or the opposite - being so fidgety or restless that you have been moving around a lot more than usual?",
-            "description":"This question is designed to evaluate changes in motor activity and restlessness, which can be symptoms of depression.",
-            "instruction":"Please select one of the following options:",
-            "answerType":"type3"
-        },
-        {
-            "question":"Question 9: Over the last 2 weeks, thoughts that you would be better off dead, or of hurting yourself in some way?",
-            "description":"This final question of the PHQ-9 addresses the critical issue of suicidal ideation and self-harm, which are urgent symptoms of severe depression.",
-            "instruction":"Please select one of the following options:",
-            "answerType":"type3"
+            "question":"Question 6: Have you done anything, started to do anything, or prepared to do anything to end your life?",
+            "description":"This question seeks to understand if you have taken any steps towards ending your life.",
+            "instruction":"Please select the option that best fits your experience.",
+            "answerType":"type7"
         }
     ]
 }

@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { useWizard } from "react-use-wizard";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { motion } from "framer-motion";
 
 import { Box } from "@/components/container";
 import { Button, ButtonGroup } from "@/components/ui";
@@ -15,6 +16,8 @@ import {
     setActiveStep,
 } from "@/store/reducers";
 import routes from "@/utils/routes";
+import _utils from "@/utils";
+import moment from "moment";
 
 interface IProps extends IDivProps {
     buttons?: string[];
@@ -50,8 +53,28 @@ export const WelcomeWizard: React.FC<IProps> = (props) => {
     };
 
     return (
-        <React.Fragment>
-            <Box className={`border markdonw-box`}>
+        <Box className={`border markdonw-box`}>
+            <motion.div
+                variants={{
+                    initial: {
+                        opacity: 0,
+                        y: 100,
+                    },
+                    animate: {
+                        opacity: 1,
+                        y: 0,
+                    },
+                }}
+                initial={"initial"}
+                animate={"animate"}
+                transition={{
+                    duration: 0.25,
+                    ease: "easeIn",
+                    delay: 0.8,
+                    staggerChildren: 0.05,
+                }}
+                onAnimationComplete={() => {}}
+            >
                 <Markdown
                     remarkPlugins={[remarkGfm]}
                     components={{}}
@@ -62,7 +85,7 @@ export const WelcomeWizard: React.FC<IProps> = (props) => {
                     <Button onClick={handleStart}>Yes, I am ready</Button>
                     <Button onClick={handleStop}>No, not right now</Button>
                 </ButtonGroup>
-            </Box>
-        </React.Fragment>
+            </motion.div>
+        </Box>
     );
 };
