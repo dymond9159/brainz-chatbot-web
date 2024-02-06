@@ -200,8 +200,7 @@ body {
 
 h1, h2, h3 {
   text-align: center;
-  line-height: 150%;
-  text-shadow: 1px 3px 3px rgba(0, 0, 0, 0.12745098);
+  line-height: 150%;  
 }
 
 a {
@@ -222,10 +221,16 @@ p {
   color: var(--foreground-secondary);
 }
 
-label, span {
-  font-size: small;
-  text-align: left;
-  color: var(--foreground-tetrary)
+.main-container{
+  label, span {
+    font-size: small;
+    text-align: left;
+    color: var(--foreground-tetrary)
+  }
+
+  em {
+    color: var(--foreground-tetrary);
+  }
 }
 
 pre {

@@ -5,6 +5,9 @@ import { Button, type ButtonProps } from "@/components/ui";
 import { cn } from "@/utils/functions";
 import { BrainzAvatar } from "..";
 import { QuestionnaireType } from "@/types";
+import { CALLBACKURL } from "@/utils/constants";
+import { useAppDispatch } from "@/store";
+import { setMetricCallBackUrl } from "@/store/reducers";
 
 export type ProgramDataType = {
     numid: number;
@@ -26,11 +29,16 @@ export interface IProgramProps extends ButtonProps {
 
 export const Program: React.FC<IProgramProps> = (props) => {
     const router = useRouter();
+    const dispatch = useAppDispatch();
 
     const handlerClick = (url: string) => {
-        const callbackUrl = url.includes("test") ? "?callback=explore" : "";
-        router.push(`${url}${callbackUrl}`);
-        router.refresh();
+        const callbackUrl = url.includes("test")
+            ? `../explore#psychometric`
+            : null;
+
+        dispatch(setMetricCallBackUrl(callbackUrl));
+
+        router.push(`${url}`);
     };
 
     return (

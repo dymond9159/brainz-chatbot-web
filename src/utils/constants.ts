@@ -2,6 +2,7 @@ import { ProgramDataType } from "@/components/widgets";
 
 export const NONE = "NONE_";
 export const BLANK_LINE = "  \n\n";
+export const CALLBACKURL = "callbackUrl";
 
 import moodAdultShortQuestionnaire from "@/libs/questionnaires/mood/mood-mfq.json";
 import ptsdQuestionnaire from "@/libs/questionnaires/ptsd/ptsd.json";

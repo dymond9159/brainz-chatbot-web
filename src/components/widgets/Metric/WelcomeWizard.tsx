@@ -3,10 +3,11 @@ import { useRouter } from "next/navigation";
 import { useWizard } from "react-use-wizard";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { motion } from "framer-motion";
+import swal from "sweetalert";
 
 import { Box } from "@/components/container";
 import { Button, ButtonGroup } from "@/components/ui";
+import { AnimateBox } from "@/components/widgets";
 import { IDivProps } from "@/types";
 import { useAppDispatch } from "@/store";
 import {
@@ -18,13 +19,13 @@ import {
 import routes from "@/utils/routes";
 import _utils from "@/utils";
 import moment from "moment";
-import { AnimateBox } from "..";
 
 interface IProps extends IDivProps {
     buttons?: string[];
     intro?: string;
     metricName?: string;
-    callBackUrl?: string;
+    onStop?: () => void;
+    callBackUrl: string | null;
 }
 export const WelcomeWizard: React.FC<IProps> = (props) => {
     const dispatch = useAppDispatch();
@@ -43,19 +44,26 @@ export const WelcomeWizard: React.FC<IProps> = (props) => {
     };
 
     const handleStop = () => {
-        if (confirm("Are you sure?")) {
-            dispatch(setActiveMetric(undefined));
-            dispatch(clearMetricInfo());
-            // go to callBack url
-            if (!props.callBackUrl) {
-                router.push(routes.CHATHOME);
+        swal({
+            title: "Are you sure?",
+            // text: "Once deleted, you will not be able to recover this imaginary file!",
+            buttons: ["Not Sure", true],
+            dangerMode: true,
+        }).then((ok) => {
+            if (ok) {
+                if (props.onStop) props.onStop();
+            } else {
             }
-        }
+        });
     };
 
     return (
         <Box className={`markdonw-box`}>
-            <AnimateBox duration={0.6} initial={{opacity: 0}} animate={{opacity: 1}}>
+            <AnimateBox
+                duration={0.6}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+            >
                 <Markdown
                     remarkPlugins={[remarkGfm]}
                     components={{}}

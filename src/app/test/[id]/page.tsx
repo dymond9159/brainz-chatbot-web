@@ -18,6 +18,7 @@ import { ANSWER_COLLECT } from "@/libs/questionnaires/answers/answer";
 import { useAppDispatch, useTypedSelector } from "@/store";
 import { clearMetricInfo, setActiveMetric } from "@/store/reducers";
 import { useRouter } from "next/navigation";
+import routes from "@/utils/routes";
 
 export interface MetricPageProps {
     params: {
@@ -28,11 +29,13 @@ export interface MetricPageProps {
 const MetricPage: React.FC<MetricPageProps> = (props) => {
     const dispatch = useAppDispatch();
     const router = useRouter();
+
     const [tool, setTool] = useState<ProgramDataType>();
 
     const startIndex = useTypedSelector((state) => state.metric.activeStep);
-
-    useEffect(() => {}, []);
+    const callBackUrl = useTypedSelector(
+        (state) => state.common.metricCallBackURL,
+    );
 
     useEffect(() => {
         const _tool = _utils.functions.getMetric(props.params.id);
@@ -40,16 +43,13 @@ const MetricPage: React.FC<MetricPageProps> = (props) => {
         dispatch(clearMetricInfo());
     }, [props.params.id]);
 
-    // Example: Wrap steps in an `<AnimatePresence` from framer-motion
-    const AnimateWrapper = () => (
-        <AnimatePresence initial={false}>
-            <motion.div
-                initial={{ opacity: 0.5 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-            />
-        </AnimatePresence>
-    );
+    const handleStop = () => {
+        if (callBackUrl) {
+            router.push(callBackUrl);
+        } else {
+            router.push(routes.CHATHOME);
+        }
+    };
 
     return (
         <Container className="main-container">
@@ -70,6 +70,8 @@ const MetricPage: React.FC<MetricPageProps> = (props) => {
                                         buttons={
                                             tool?.questionnaires?.buttonOptions
                                         }
+                                        onStop={handleStop}
+                                        callBackUrl={callBackUrl}
                                     />
                                     {tool?.questionnaires?.questions.length &&
                                         tool.questionnaires.questions.map(
@@ -86,6 +88,7 @@ const MetricPage: React.FC<MetricPageProps> = (props) => {
                                                             q.answerType
                                                         ]
                                                     }
+                                                    onStop={handleStop}
                                                 />
                                             ),
                                         )}
@@ -98,6 +101,7 @@ const MetricPage: React.FC<MetricPageProps> = (props) => {
                                             tool?.questionnaires?.maxScore
                                         }
                                         metricName={props.params.id}
+                                        onStop={handleStop}
                                     />
                                 </Wizard>
                             </Content>

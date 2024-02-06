@@ -36,7 +36,7 @@ export default function RootLayout(props: LayoutProps) {
             <body className={inter.className}>
                 <Providers
                     attribute="class"
-                    defaultTheme="system"
+                    defaultTheme="light"
                     enableSystem
                     disableTransitionOnChange
                 >

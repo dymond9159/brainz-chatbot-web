@@ -10,6 +10,7 @@ import { IDivProps, MetricCharactersType, MetricReportType } from "@/types";
 import { useAppDispatch, useTypedSelector } from "@/store";
 import {
     clearActiveScore,
+    clearMetricInfo,
     setActiveMetric,
     setActiveStep,
     setPsychometricScore,
@@ -26,7 +27,7 @@ interface IProps extends IDivProps {
     qCount?: number;
     maxScore?: number;
     metricName?: string;
-    callBackUrl?: string;
+    onStop?: () => void;
 }
 export const ReportWizard: React.FC<IProps> = (props) => {
     const dispatch = useAppDispatch();
@@ -101,25 +102,6 @@ export const ReportWizard: React.FC<IProps> = (props) => {
         }
     }, [activeStep]);
 
-    // when start, clear the score, set metricName
-    const handleStart = () => {
-        dispatch(setActiveMetric(props.metricName));
-        dispatch(clearActiveScore());
-        nextStep();
-    };
-
-    const handleStop = () => {
-        if (confirm("Are you sure?")) {
-            dispatch(setActiveMetric(undefined));
-            dispatch(clearActiveScore());
-
-            // go to callBack url
-            if (!props.callBackUrl) {
-                router.push(routes.CHATHOME);
-            }
-        }
-    };
-
     return (
         <Flex className={`col border markdonw-box`}>
             <h2>{props.report?.title ?? "Score Report"}</h2>
@@ -162,7 +144,9 @@ export const ReportWizard: React.FC<IProps> = (props) => {
                         >
                             Dashboard
                         </Button>
-                        {/* <Button>Return</Button> */}
+                        <Button onClick={() => props.onStop && props.onStop()}>
+                            Return
+                        </Button>
                     </ButtonGroup>
                 </AnimateBox>
             </Box>
