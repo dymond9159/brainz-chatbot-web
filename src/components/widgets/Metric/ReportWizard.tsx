@@ -78,8 +78,6 @@ export const ReportWizard: React.FC<IProps> = (props) => {
             const oldDay = moment(new Date(dateOld)).format("YYYY-MM-DD");
             const toDay = moment(new Date()).format("YYYY-MM-DD");
 
-            console.log(dateOld, oldDay, oldDay === toDay);
-
             if (oldDay < toDay) {
                 dispatch(setPsychometricScore(score));
             }
