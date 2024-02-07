@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import React from "react";
 import { useWizard } from "react-use-wizard";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -9,38 +8,31 @@ import { Box } from "@/components/container";
 import { Button, ButtonGroup } from "@/components/ui";
 import { AnimateBox } from "@/components/widgets";
 import { IDivProps } from "@/types";
-import { useAppDispatch } from "@/store";
-import {
-    clearActiveScore,
-    clearMetricInfo,
-    setActiveMetric,
-    setActiveStep,
-} from "@/store/reducers";
-import routes from "@/utils/routes";
-import _utils from "@/utils";
-import moment from "moment";
+import { useAppDispatch, useTypedSelector } from "@/store";
+import { clearMetricInfo, setActiveMetric } from "@/store/reducers";
 
 interface IProps extends IDivProps {
-    buttons?: string[];
     intro?: string;
     metricName?: string;
     onStop?: () => void;
-    callBackUrl: string | null;
 }
 export const WelcomeWizard: React.FC<IProps> = (props) => {
     const dispatch = useAppDispatch();
-    const router = useRouter();
-    const { activeStep, handleStep, previousStep, nextStep } = useWizard();
+    const { goToStep, nextStep } = useWizard();
 
-    useEffect(() => {
-        dispatch(setActiveStep(activeStep));
-    }, [activeStep]);
+    //
+    const score = useTypedSelector(
+        (state) => state.metric.scores[props.metricName ?? ""],
+    );
 
     // when start, clear the score, set metricName
     const handleStart = () => {
-        dispatch(setActiveMetric(props.metricName));
         dispatch(clearMetricInfo());
         nextStep();
+    };
+
+    const handleGoStep = () => {
+        goToStep(score?.activeStep);
     };
 
     const handleStop = () => {
@@ -50,9 +42,8 @@ export const WelcomeWizard: React.FC<IProps> = (props) => {
             buttons: ["Not Sure", true],
             dangerMode: true,
         }).then((ok) => {
-            if (ok) {
-                if (props.onStop) props.onStop();
-            } else {
+            if (ok && props.onStop) {
+                props.onStop();
             }
         });
     };
@@ -73,6 +64,9 @@ export const WelcomeWizard: React.FC<IProps> = (props) => {
                 <ButtonGroup className="wrap gap-15">
                     <Button onClick={handleStart}>Yes, I am ready</Button>
                     <Button onClick={handleStop}>No, not right now</Button>
+                    {score?.activeStep ? (
+                        <Button onClick={handleGoStep}>Continue</Button>
+                    ) : null}
                 </ButtonGroup>
             </AnimateBox>
         </Box>

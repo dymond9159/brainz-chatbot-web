@@ -1,106 +1,113 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useWizard } from "react-use-wizard";
 import Markdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 
 import { Box, Flex } from "@/components/container";
 import { Button, ButtonGroup } from "@/components/ui";
 import { IDivProps, MetricCharactersType, MetricReportType } from "@/types";
 import { useAppDispatch, useTypedSelector } from "@/store";
-import {
-    clearActiveScore,
-    clearMetricInfo,
-    setActiveMetric,
-    setActiveStep,
-    setPsychometricScore,
-} from "@/store/reducers";
+import { setPsychometricScore } from "@/store/reducers";
 import routes from "@/utils/routes";
 import { Psychometric } from "../Dashboard";
 import _utils from "@/utils";
 import moment from "moment";
-import { motion } from "framer-motion";
-import { AnimateBox, AnimateMarkdown } from "..";
+import { AnimateBox } from "..";
 
 interface IProps extends IDivProps {
     report?: MetricReportType;
     qCount?: number;
     maxScore?: number;
-    metricName?: string;
     onStop?: () => void;
 }
 export const ReportWizard: React.FC<IProps> = (props) => {
     const dispatch = useAppDispatch();
     const router = useRouter();
 
-    const {
-        isLoading,
-        activeStep,
-        goToStep,
-        handleStep,
-        previousStep,
-        nextStep,
-    } = useWizard();
+    // get the monitor results
+    const activeMetric = useTypedSelector((state) => state.metric.activeMetric);
+    const activeScore = useTypedSelector(
+        (state) => state.metric.scores[activeMetric ?? ""].itemsScore,
+    );
+    const lastedUpdated = useTypedSelector(
+        (state) => state.metric.scores[activeMetric ?? ""].updatedDate,
+    );
 
-    const scores = useTypedSelector((state) => state.metric.scores);
-    const activeScore = useTypedSelector((state) => state.metric.activeScore);
+    // final score
+    const [score, setFinalScore] = useState<MetricCharactersType>();
+
+    // flag values
+    const [isMeasured, setIsMeasured] = useState<boolean>(false);
+    const [isNewRecord, setIsNewRecord] = useState<boolean>(false);
+    const [isOverwrite, setIsOverwrite] = useState<boolean>(false);
+
+    console.log({ activeMetric, activeScore });
 
     useEffect(() => {
-        const _arrScore = activeScore?.filter((value) => value !== -1) ?? [];
-        // when filled all questions.
-        if (_arrScore?.length === props.qCount) {
-            let _score = -1;
-            if (props.metricName !== "suicide") {
-                // not suicidal
-                _score = _arrScore?.reduce((sum, v) => sum + v, 0) ?? -1;
-            } else {
-                // when suicidal
-                _score = Math.max(..._arrScore);
-            }
+        // get final score from activeScore array
+        if (activeMetric && activeScore && props.maxScore && props.report) {
+            const finalScore = _utils.functions.calculateFinalScore(
+                activeMetric,
+                activeScore,
+            );
 
             const severity = props.report?.severities?.filter(
                 (item) =>
-                    _score >= item.scoreRange[0] &&
-                    _score <= item.scoreRange[1],
+                    finalScore >= item.scoreRange[0] &&
+                    finalScore <= item.scoreRange[1],
             );
 
             if (severity?.length) {
-                const _metric: MetricCharactersType = {
-                    score: _score,
+                setFinalScore({
+                    score: finalScore,
                     maxScore: props.maxScore,
                     severity: severity[0].severity,
                     color: severity[0].color,
                     description: severity[0].description,
-                };
-
-                if (scores && props.metricName) {
-                    const dateOld =
-                        scores[props.metricName].updatedDate ?? "00:00:00";
-
-                    const oldDay = moment(new Date()).format("YYYY-MM-DD");
-                    const toDay = moment(new Date()).format("YYYY-MM-DD");
-
-                    // console.log(dateOld, oldDay, toDay, oldDay == toDay);
-
-                    if (oldDay <= toDay) {
-                        dispatch(setPsychometricScore(_metric));
-                        // if (oldDay === toDay && !confirm("Updated?")) {
-                        // } else {
-                        //     console.log("updated.");
-                        // }
-                    }
-                }
+                    updatedDate: new Date().toISOString(),
+                    activeStep: 0,
+                    itemsScore: activeScore,
+                });
             }
-        } else {
-            alert("Oop! Looks like you didn't complete all the questions.");
         }
-    }, [activeScore]);
+    }, [activeScore, activeMetric, props.maxScore, props.report]);
 
     useEffect(() => {
-        if (activeStep) {
-            dispatch(setActiveStep(activeStep));
+        if (score && dispatch) {
+            const dateOld = lastedUpdated ?? "1999-01-01";
+
+            const oldDay = moment(new Date(dateOld)).format("YYYY-MM-DD");
+            const toDay = moment(new Date()).format("YYYY-MM-DD");
+
+            console.log(dateOld, oldDay, oldDay === toDay);
+
+            if (oldDay < toDay) {
+                dispatch(setPsychometricScore(score));
+            }
+
+            if (oldDay === toDay) {
+                setIsMeasured(true);
+            }
         }
-    }, [activeStep]);
+    }, [score, dispatch]);
+
+    useEffect(() => {
+        if (score) {
+            if (isNewRecord) {
+            }
+            if (isOverwrite) {
+            }
+            dispatch(setPsychometricScore(score));
+        }
+    }, [score, isOverwrite, isNewRecord]);
+
+    // already measured today
+    const handleNewRecord = () => {
+        setIsNewRecord(true);
+    };
+
+    const handleOverwrite = () => {
+        setIsOverwrite(true);
+    };
 
     return (
         <Flex className={`col border markdonw-box`}>
@@ -115,37 +122,38 @@ export const ReportWizard: React.FC<IProps> = (props) => {
                     <Markdown>{props.report?.description}</Markdown>
                     <Psychometric
                         title="Your Score"
-                        scores={
-                            props.metricName && scores
-                                ? scores[props.metricName]
-                                : undefined
-                        }
+                        scores={score}
                         size={"100px"}
                         h_align="items-center"
                         collapse={true}
                     />
+                    {isMeasured && (
+                        <Markdown>
+                            {
+                                "**You already have a record for today. Would you like update?**"
+                            }
+                        </Markdown>
+                    )}
+                    {isMeasured && !isOverwrite && !isNewRecord && (
+                        <ButtonGroup className="wrap gap-15">
+                            <Button onClick={handleNewRecord}>
+                                New Record
+                            </Button>
+                            <Button onClick={handleOverwrite}>Overwrite</Button>
+                        </ButtonGroup>
+                    )}
+                    {isOverwrite && <Markdown>Overwrited.</Markdown>}
+                    {isNewRecord && <Markdown>New recroded.</Markdown>}
                     <hr />
                     <ButtonGroup className="wrap gap-15">
-                        <Button
-                            icon="caret-open-left"
-                            onClick={() => previousStep()}
-                        >
-                            Back
-                        </Button>
-                        <Button
-                            icon="arrow-clockwise"
-                            onClick={() => goToStep(0)}
-                        >
-                            Restart
+                        <Button onClick={() => props.onStop && props.onStop()}>
+                            Return
                         </Button>
                         <Button
                             icon="speedometer"
                             onClick={() => router.push(routes.DASHBOARD)}
                         >
                             Dashboard
-                        </Button>
-                        <Button onClick={() => props.onStop && props.onStop()}>
-                            Return
                         </Button>
                     </ButtonGroup>
                 </AnimateBox>

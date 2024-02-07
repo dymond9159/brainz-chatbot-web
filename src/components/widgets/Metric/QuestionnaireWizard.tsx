@@ -10,16 +10,9 @@ import { Button, ButtonGroup, Radio } from "@/components/ui";
 import { BLANK_LINE } from "@/utils/constants";
 import { AnswerOptionType, IDivProps, QuestionType } from "@/types";
 import { useAppDispatch, useTypedSelector } from "@/store";
-import {
-    clearMetricInfo,
-    setActiveMetric,
-    setActiveScore,
-    setActiveStep,
-} from "@/store/reducers";
-import { motion } from "framer-motion";
+import { clearMetricInfo, setActiveScore } from "@/store/reducers";
 import { AnimateBox } from "..";
 import { useRouter } from "next/navigation";
-import routes from "@/utils/routes";
 
 interface IProps extends IDivProps {
     q?: QuestionType;
@@ -30,48 +23,68 @@ interface IProps extends IDivProps {
 export const QuestionnaireWizard: React.FC<IProps> = (props) => {
     const router = useRouter();
     const dispatch = useAppDispatch();
-    const { isLoading, activeStep, goToStep, previousStep, nextStep } =
-        useWizard();
+    const { activeStep, goToStep, previousStep, nextStep } = useWizard();
 
-    const [value, setValue] = useState<number>(-1);
-    const [percent, setPercent] = useState<number>(0);
+    const [value, setValue] = useState<number>(-1); // your state in number
+    const [percent, setPercent] = useState<number>(0); // proceed percent
 
-    const activeScore = useTypedSelector((state) => state.metric.activeScore);
+    // able to continue the test based on the activeStep in store
+    const activeMetric = useTypedSelector((state) => state.metric.activeMetric);
+    const activeScore = useTypedSelector(
+        (state) => state.metric.scores[activeMetric ?? ""]?.itemsScore,
+    );
 
+    // when lasted tab, use "Finish >" button instead "Next >"
     const lastPage = activeStep === (props.questionCounts ?? 0);
 
     useEffect(() => {
-        if (activeScore) {
+        if (activeScore && activeStep) {
             setValue(activeScore[activeStep]);
         }
-    }, [activeScore]);
-
-    useEffect(() => {
-        if (activeStep) {
-            dispatch(setActiveStep(activeStep));
-        }
-    }, [activeStep]);
+    }, [activeScore, activeStep]);
 
     useEffect(() => {
         const _percent = (activeStep / (props.questionCounts ?? 1)) * 100;
         setPercent(_percent);
-    }, [activeStep]);
+    }, [activeStep, props.questionCounts]);
 
+    // when change the your experience value.
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const _value = Number.parseInt(e.target.value);
-        if (activeStep && _value !== -1) {
-            dispatch(setActiveScore({ scoreIndex: activeStep, score: _value }));
-        }
-        setValue(_value);
+        if (_value >= 0) setValue(_value);
     };
 
+    // Move to Next Question
     const handleNext = async (e: React.MouseEvent<HTMLButtonElement>) => {
         if (value === -1) {
             swal({ title: "Please select a option at least.", icon: "info" });
             return;
         }
-
+        if (activeStep && value !== -1) {
+            dispatch(
+                setActiveScore({
+                    scoreIndex: activeStep,
+                    score: value,
+                    activeStep: !lastPage ? activeStep + 1 : 0,
+                }),
+            );
+        }
         nextStep();
+    };
+
+    // Restart the test
+    const handleRestart = () => {
+        swal({
+            title: "Are you sure?",
+            text: "Once restart, you will reset metric data from start.",
+            buttons: ["Not Sure", true],
+            dangerMode: true,
+        }).then((ok) => {
+            if (ok) {
+                dispatch(clearMetricInfo());
+                goToStep(0);
+            }
+        });
     };
 
     const handleStop = () => {
@@ -82,10 +95,11 @@ export const QuestionnaireWizard: React.FC<IProps> = (props) => {
             dangerMode: true,
         }).then((ok) => {
             if (ok) {
-                if (props.onStop) props.onStop();
+                dispatch(clearMetricInfo());
             } else {
                 // continue
             }
+            if (props.onStop) props.onStop();
         });
     };
 
@@ -96,14 +110,12 @@ export const QuestionnaireWizard: React.FC<IProps> = (props) => {
                     <strong>{activeStep}</strong>/{props.questionCounts}
                 </label>
             )}
-            <br />
             <Line
+                className="progress-bar"
                 percent={percent}
                 strokeWidth={3}
                 strokeColor="#AAD3D3"
             />
-            <br />
-            <br />
             <AnimateBox
                 duration={0.7}
                 initial={{ opacity: 0 }}
@@ -136,12 +148,14 @@ export const QuestionnaireWizard: React.FC<IProps> = (props) => {
                 </Box>
                 <hr />
                 <ButtonGroup className="wrap gap-15">
-                    <Button
-                        icon="caret-open-left"
-                        onClick={() => previousStep()}
-                    >
-                        Back
-                    </Button>
+                    {activeStep !== 1 && (
+                        <Button
+                            icon="caret-open-left"
+                            onClick={() => previousStep()}
+                        >
+                            Back
+                        </Button>
+                    )}
                     <Button
                         supicon
                         icon="caret-open-right"
@@ -151,7 +165,7 @@ export const QuestionnaireWizard: React.FC<IProps> = (props) => {
                     </Button>
                     <Button
                         icon="arrow-clockwise"
-                        onClick={() => goToStep(0)}
+                        onClick={handleRestart}
                     >
                         Restart
                     </Button>

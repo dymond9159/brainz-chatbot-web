@@ -27,7 +27,12 @@
                 .markdonw-box {
 
                     label.counter {
-                        float:inline-end
+                        float: inline-end;
+                        margin-bottom: 15px;
+                    }
+
+                    .progress-bar {
+                        margin-bottom: 20px;
                     }
     
                     @include xs {

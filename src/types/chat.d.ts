@@ -59,7 +59,6 @@ export type CurrentProgramType = {
 // Psychometric
 
 export type MetricCharactersType = {
-    name?: string;
     score: number;
     maxScore?: number;
     title?: string;
@@ -67,6 +66,8 @@ export type MetricCharactersType = {
     color?: string;
     description?: string;
     updatedDate?: string;
+    activeStep: number;
+    itemsScore?: number[];
 };
 
 export type PsychometricScoreType = {

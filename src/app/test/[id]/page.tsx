@@ -32,7 +32,6 @@ const MetricPage: React.FC<MetricPageProps> = (props) => {
 
     const [tool, setTool] = useState<ProgramDataType>();
 
-    const startIndex = useTypedSelector((state) => state.metric.activeStep);
     const callBackUrl = useTypedSelector(
         (state) => state.common.metricCallBackURL,
     );
@@ -40,7 +39,7 @@ const MetricPage: React.FC<MetricPageProps> = (props) => {
     useEffect(() => {
         const _tool = _utils.functions.getMetric(props.params.id);
         setTool(_tool);
-        dispatch(clearMetricInfo());
+        dispatch(setActiveMetric(props.params.id));
     }, [props.params.id]);
 
     const handleStop = () => {
@@ -67,11 +66,7 @@ const MetricPage: React.FC<MetricPageProps> = (props) => {
                                     <WelcomeWizard
                                         intro={tool?.questionnaires?.introduce}
                                         metricName={tool?.strid}
-                                        buttons={
-                                            tool?.questionnaires?.buttonOptions
-                                        }
                                         onStop={handleStop}
-                                        callBackUrl={callBackUrl}
                                     />
                                     {tool?.questionnaires?.questions.length &&
                                         tool.questionnaires.questions.map(
@@ -100,7 +95,6 @@ const MetricPage: React.FC<MetricPageProps> = (props) => {
                                         maxScore={
                                             tool?.questionnaires?.maxScore
                                         }
-                                        metricName={props.params.id}
                                         onStop={handleStop}
                                     />
                                 </Wizard>

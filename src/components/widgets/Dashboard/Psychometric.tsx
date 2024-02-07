@@ -77,7 +77,7 @@ export const Psychometric: React.FC<IProps> = (props) => {
                         </span>
                         <em>
                             <label>
-                                Last updated:{" "}
+                                Last measured:{" "}
                                 {formatDate(props?.scores?.updatedDate ?? "")}
                             </label>
                         </em>

@@ -3,6 +3,7 @@ import moment from "moment";
 import { customAlphabet } from "nanoid";
 import { PROGRAMS, PSYCHOMETRICS } from "./constants";
 import { ProgramDataType } from "@/components/widgets";
+import { MetricCharactersType } from "@/types";
 
 export function cn(...inputs: ClassValue[]) {
     return clsx(inputs);
@@ -14,10 +15,14 @@ export const nanoid = (size: number = 16) =>
         size,
     ); // 16-character random string
 
-export function formatDate(input: string | number | Date): string {
+export function formatDate(
+    input: string | number | Date,
+    locale?: string,
+): string {
     if (!input || input === "") return "";
     const date = new Date(input);
-    return date.toLocaleDateString("en-US", {
+
+    return date.toLocaleDateString(locale, {
         weekday: "short",
         month: "short",
         day: "numeric",
@@ -52,6 +57,26 @@ export const getMetric = (id: string | undefined): ProgramDataType => {
 
 export const findLastIndex = <T>(arr: Array<T>, filter: T) => {
     return arr.findLast((_) => _ === filter);
+};
+
+export const actualArray = (arr: number[]) => {
+    return arr.filter((value) => value !== -1) ?? [];
+};
+
+export const calculateFinalScore = (
+    metric: string,
+    scoreArray: number[],
+): number => {
+    // get acutal array, thus value is not -1
+    const _arr = actualArray(scoreArray);
+
+    // calculate score
+    const _score =
+        metric !== "suicide"
+            ? _arr?.reduce((sum, v) => sum + v, 0)
+            : Math.max(..._arr);
+
+    return _score;
 };
 
 // Using an async function to await the import if you're dealing with dynamic imports
