@@ -10,6 +10,8 @@ type ProgramType =
     | "depression"
     | "suicide";
 
+type InstructionType = "trauma" | "metric_tools";
+
 export type MetricColor = {
     [key: string]: string;
     default: string;
@@ -68,6 +70,7 @@ export type MetricCharactersType = {
     updatedDate?: string;
     activeStep: number;
     itemsScore?: number[];
+    prevStep: number[];
 };
 
 export type PsychometricScoreType = {
@@ -94,6 +97,12 @@ export type QuestionType = {
     description: string;
     instruction: string;
     answerType: string;
+    follow_question?: {
+        question: string;
+        description: string;
+        instruction: string;
+        answerType: string;
+    };
 };
 
 export type SeverityType = {

@@ -154,6 +154,7 @@ $xxl: 1480px;
   padding: 0;
   margin: 0;
   // transition: all 0.3s;
+  color: var(--foreground-secondary);
 }
 
 // Custom scroll styles
@@ -193,7 +194,7 @@ body {
 }
 
 body {
-  color: var(--foreground);
+  color: var(--foreground-secondary);
   background: var(--background);
   font-family: var(--font-mono);
 }
@@ -211,6 +212,13 @@ a {
   &:hover {
     color: var(--foreground);
     text-decoration:underline;
+  }
+}
+
+p {
+  a {
+    font-weight: 600;
+    color: #4040e1;
   }
 }
 
@@ -250,6 +258,10 @@ ol, ul {
     margin: 5px 0px;
     line-height: 150%;
   }
+}
+
+span {
+  color: white;
 }
 
 hr {

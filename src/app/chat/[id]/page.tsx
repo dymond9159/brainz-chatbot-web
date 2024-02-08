@@ -15,11 +15,8 @@ import { Button, ButtonGroup, Textarea } from "@/components/ui";
 import {
     BrainzAvatar,
     ChatScrollAnchor,
-    ChatTools,
     Conversation,
     Navbar,
-    ProgramDataType,
-    PromptSuggestionRow,
     Sidebar,
     WelcomeMessage,
 } from "@/components/widgets";
@@ -182,7 +179,7 @@ const ChatPage: React.FC<ChatPageProps> = (props) => {
 
     const handleReset = () => {
         setMessages([]);
-        handlePrompt("Hi, there", false);
+        handlePrompt("Hi, there!", false);
     };
 
     return (

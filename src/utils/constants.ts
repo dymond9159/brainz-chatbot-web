@@ -9,7 +9,7 @@ import ptsdQuestionnaire from "@/libs/questionnaires/ptsd/ptsd.json";
 import anxietyQuestionnaire from "@/libs/questionnaires/anxiety/anxiety.json";
 import depressionQuestionnaire from "@/libs/questionnaires/depression/depression.json";
 import suicidalQuestionnaire from "@/libs/questionnaires/suicidal/suicidal.json";
-import { MetricColor } from "@/types";
+import { InstructionType, MetricColor, ProgramType } from "@/types";
 
 export const M_COLOR: MetricColor = {
     default: "",
@@ -18,9 +18,40 @@ export const M_COLOR: MetricColor = {
     moderate: "#ab0450",
     moderate_severe: "#991313",
     severe: "#991313",
-    low_risk: "yello",
-    moderate_risk: "organge",
+    low_risk: "yellow",
+    moderate_risk: "orange",
     high_risk: "red",
+};
+
+export const INSTRUCTIONS: Record<InstructionType, string> = {
+    trauma: `
+    As a Trauma Therapist based on AI, your primary role is focused exactly to empathize, screen, diagnose, assess, and support individuals dealing just only with trauma and related mental health issues such as Mood, PTSD, Anxiety, Depression, and suicidal thoughts. Your goal is to screen, diagnose, and assess trauma-related issues, and then guide the care process based on these results to improve mental well-being.
+
+user profile:
+name: [username],
+age: [age] years old,
+locale: "HongKong",
+
+Here is psychometric tools based on verified questionnaire usable at our official website.
+"PTSD Assessment Tool(PCL-5)": {key: "ptsd", link: "../test/ptsd"}, 
+"Anxiety Assessment Tool(GAD-7)": {key: "anxiety", link: "../test/anxiety"},  
+"Depression Assessment Tool(PHQ-9)": {key: "depression", link: "../test/depression"},  
+"Suicidal Risk Assessment Tool(C-SSRS)": {key: "suicide", link: "../test/suicide"},
+   
+- Your approach is identifying and feeling mental health issues, deep interactions with users for self-reflection and understanding, and alternating between a warm, empathetic demeanor and a pragmatic, solution-focused style. 
+- You may ask about the user's gender, age, personality, ethnicity, or culture when needed. 
+- In order to idendity and clarity the issues user is facing now, ask often a question one at a time. 
+- Diagnose a potential symptom based on interactions.
+- To screen more details your symptom, Ask to use the best fit psychometric tool from our website.
+ Once user aggree, invoke "search_psychometric_tools" function.
+- Your guidance will involve exploring coping mechanisms, reflecting on past experiences, setting goals for mental health improvement, identifying obstacles to well-being, and connecting users with therapists(in your locale). 
+
+today is [today].
+                
+The response format:
+Your repsonse should be summarized within 250 characters or less and without markdown.
+    `,
+    metric_tools: ``,
 };
 
 export const PROGRAMS: ProgramDataType[] = [
@@ -47,18 +78,6 @@ export const PROGRAMS: ProgramDataType[] = [
             // "What are the signs of depression?",
             // "I'm feeling suicidal, what should I do?",
         ],
-        instruction: `
-        As a Trauma Therapist based on AI, your primary role is focused exactly to empathize, screen, diagnose, assess, and support individuals dealing just only with trauma and related mental health issues such as Mood, PTSD, Anxiety, Depression, and suicidal thoughts. Your goal is to screen, diagnose, and assess trauma-related issues, and then guide the care process based on these results to improve mental well-being.
-   
-        - Your approach is identifying and feeling mental health issues, deep interactions with users for self-reflection and understanding, and alternating between a warm, empathetic demeanor and a pragmatic, solution-focused style. 
-        - You may ask about the user's gender, age, personality, ethnicity, or culture when needed. 
-        - In order to idendity and clarity the issues user is facing now, ask often a question one at a time. 
-        - You'll diagnose potential trauma-related issues based on interactions, and if appropriate, suggest to use it by moving to a psychometric tools of our services for further assessment.
-        - Your guidance will involve exploring coping mechanisms, reflecting on past experiences, setting goals for mental health improvement, identifying obstacles to well-being, and connecting users with therapists(in your locale). 
-                
-        The response format:
-        Your repsonse should be summarized within 250 characters or less and without markdown.
-`,
     },
 ];
 
@@ -125,7 +144,7 @@ export const PSYCHOMETRICS: ProgramDataType[] = [
     {
         numid: 1,
         strid: "ptsd",
-        name: "PTSD Symptoms assessment",
+        name: "PTSD Assessment Tool",
         type: "psychometric",
         src: "/avatars/0c1831d3-8b05-49af-a065-2ce390173f36.png",
         url: "/test/ptsd",
@@ -142,7 +161,7 @@ export const PSYCHOMETRICS: ProgramDataType[] = [
     {
         numid: 2,
         strid: "anxiety",
-        name: "Anxiety Symptoms",
+        name: "Anxiety Assessment Tool",
         type: "psychometric",
         src: "/avatars/0a33a50b-87de-412f-a84c-4c17d992a41c.png",
         url: "/test/anxiety",
@@ -160,7 +179,7 @@ export const PSYCHOMETRICS: ProgramDataType[] = [
     {
         numid: 3,
         strid: "depression",
-        name: "Depression Symptoms",
+        name: "Depression Assessment Tool",
         type: "psychometric",
         src: "/avatars/19d3f8df-7e4f-484d-a524-818d4eb2e705.png",
         url: "/test/depression",

@@ -1,9 +1,10 @@
 import { clsx, type ClassValue } from "clsx";
 import moment from "moment";
 import { customAlphabet } from "nanoid";
-import { PROGRAMS, PSYCHOMETRICS } from "./constants";
+import { INSTRUCTIONS, PROGRAMS, PSYCHOMETRICS } from "./constants";
 import { ProgramDataType } from "@/components/widgets";
-import { MetricCharactersType } from "@/types";
+import { InstructionType, MetricCharactersType } from "@/types";
+import _utils from ".";
 
 export function cn(...inputs: ClassValue[]) {
     return clsx(inputs);
@@ -85,3 +86,28 @@ export async function loadMarkdown(filename: string) {
         "/anxiety/intro.md");
     return anxietyIntro.default as string; // Accessing the default export
 }
+
+// Chat
+
+export const getSystemInstruction = (
+    name: InstructionType,
+    profile: any = undefined,
+) => {
+    let instruction = INSTRUCTIONS[name];
+
+    if (name === "trauma" && profile) {
+        Object.keys(profile).map((_key) => {
+            if (profile[_key]) {
+                instruction = instruction?.replaceAll(
+                    `[${_key}]`,
+                    profile[_key],
+                );
+            }
+        });
+        instruction = instruction?.replaceAll(
+            `[today]`,
+            formatDate(new Date()),
+        );
+    }
+    return instruction;
+};

@@ -1,60 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import {
-    CurrentProgramType,
-    MetricCharactersType,
-    ProgramType,
-    PsychometricScoreType,
-    RecentProgramType,
-} from "@/types";
-import { compareDate } from "@/utils/functions";
+import { CurrentProgramType, RecentProgramType } from "@/types";
 
 export type ChatStateProps = {
     recentPrograms: RecentProgramType[];
-    scores: PsychometricScoreType;
     currentProgram?: CurrentProgramType;
 };
 
 const initialState: ChatStateProps = {
     recentPrograms: [],
     currentProgram: undefined,
-    scores: {
-        mood: {
-            score: 0,
-            title: "Hey, Unlock Your Mood, Embrace Your Score!",
-            severity: "Not measured yet",
-            description: "",
-            updatedDate: "",
-        },
-        anxiety: {
-            score: 0,
-            title: "",
-            severity: "Not measured yet",
-            description: "",
-            updatedDate: "",
-        },
-        depression: {
-            score: 0,
-            title: "",
-            severity: "Not measured yet",
-            description: "",
-            updatedDate: "",
-        },
-        ptsd: {
-            score: 0,
-            title: "",
-            severity: "Not measured yet",
-            description: "",
-            updatedDate: "",
-        },
-        suicide: {
-            score: 0,
-            title: "",
-            severity: "Not measured yet",
-            description: "",
-            updatedDate: "",
-        },
-    },
 };
 
 export const chatReducer = createSlice({
@@ -112,31 +67,6 @@ export const chatReducer = createSlice({
             const current = action.payload;
             if (current) {
                 state.currentProgram = current;
-            }
-        },
-        /*
-         **  Psychometric Scoring
-         */
-        setPsychometricScore: (
-            state,
-            action: PayloadAction<MetricCharactersType>,
-        ) => {
-            const score = action.payload;
-            const updatedScore = {
-                ...score,
-                updatedDate: new Date().toISOString(),
-            };
-
-            const psychoName = score.name as ProgramType;
-            if (psychoName) {
-                // const date1 = new Date(
-                //     state.scores[psychoName]?.updatedDate ?? "",
-                // );
-                // const date2 = new Date(updatedScore.updatedDate);
-
-                // const compResult = compareDate(date1, date2);
-
-                state.scores[psychoName] = updatedScore;
             }
         },
     },

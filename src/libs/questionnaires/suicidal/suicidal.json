@@ -1,8 +1,8 @@
 {
     "name": "C-SSRS",
-    "introduce": "**Hello there! 😊**   \n\n \n\n**What's the C-SSRS questionnaire?**    \n\nThe C-SSRS (Columbia-Suicide Severity Rating Scale) is a questionnaire used for screening, monitoring, scoring, and assessing the severity of suicide risk. It is designed to identify individuals who have suicidal ideation and behavior, and to determine the intensity and immediacy of that risk. The C-SSRS is widely used in clinical and research settings to help evaluate suicide risk and to make decisions about the level of support or intervention that may be needed.   \n\n  **Introductions** \n\nSelect the option that best fits your experience.  \n\n (Yes or No)  \n\n **Times:** 1 min  \n  **Number of questions:** 6 \n\n**Are you ready to begin the C-SSRS questionnaire?**",
+    "introduce": "**Hello there! 😊**   \n\n \n\n**What's the C-SSRS questionnaire?**    \n\nThe C-SSRS (Columbia-Suicide Severity Rating Scale) is a questionnaire used for screening, monitoring, scoring, and assessing the severity of suicide risk. It is designed to identify individuals who have suicidal ideation and behavior, and to determine the intensity and immediacy of that risk. The C-SSRS is widely used in clinical and research settings to help evaluate suicide risk and to make decisions about the level of support or intervention that may be needed.   \n\n  **Intruction:** Select the option that best fits your experience.  \n\n (Yes or No)  \n\n **Times:** 1 min  \n  **Number of questions:** 6 \n\n**Are you ready to begin the C-SSRS questionnaire?**",
     "buttonOptions": ["Yes, I am ready", "No, not right now"],
-    "maxScore": 4,
+    "maxScore": 3,
     "times": 1,    
     "questionCounts": 6,
     "report": {
@@ -62,7 +62,11 @@
             "question":"Question 6: Have you done anything, started to do anything, or prepared to do anything to end your life?",
             "description":"This question seeks to understand if you have taken any steps towards ending your life.",
             "instruction":"Please select the option that best fits your experience.",
-            "answerType":"type7"
+            "answerType":"type4",
+            "follow_question": {
+                "question": "Was this within the past three months?",
+                "answerType": "type7"
+            }
         }
     ]
 }

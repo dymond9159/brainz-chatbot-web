@@ -13,6 +13,7 @@ import { useAppDispatch, useTypedSelector } from "@/store";
 import { clearMetricInfo, setActiveScore } from "@/store/reducers";
 import { AnimateBox } from "..";
 import { useRouter } from "next/navigation";
+import { ANSWER_COLLECT } from "@/libs/questionnaires/answers/answer";
 
 interface IProps extends IDivProps {
     q?: QuestionType;
@@ -26,16 +27,23 @@ export const QuestionnaireWizard: React.FC<IProps> = (props) => {
     const { activeStep, goToStep, previousStep, nextStep } = useWizard();
 
     const [value, setValue] = useState<number>(-1); // your state in number
+    const [finalValue, setFinalValue] = useState<number>(-1); // your state in number
     const [percent, setPercent] = useState<number>(0); // proceed percent
+    const [isFollow, setIsFollow] = useState<boolean>(false);
 
     // able to continue the test based on the activeStep in store
     const activeMetric = useTypedSelector((state) => state.metric.activeMetric);
     const activeScore = useTypedSelector(
         (state) => state.metric.scores[activeMetric ?? ""]?.itemsScore,
     );
+    const prevStep = useTypedSelector(
+        (state) => state.metric.scores[activeMetric ?? ""].prevStep,
+    );
 
     // when lasted tab, use "Finish >" button instead "Next >"
     const lastPage = activeStep === (props.questionCounts ?? 0);
+    const followAnswers =
+        ANSWER_COLLECT[props.q?.follow_question?.answerType ?? ""] ?? [];
 
     useEffect(() => {
         if (activeScore && activeStep) {
@@ -51,25 +59,52 @@ export const QuestionnaireWizard: React.FC<IProps> = (props) => {
     // when change the your experience value.
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const _value = Number.parseInt(e.target.value);
+        if (activeMetric === "suicide") {
+            if (activeStep === 6 && _value === 1) {
+                setIsFollow(true);
+            } else {
+                setIsFollow(false);
+            }
+        }
         if (_value >= 0) setValue(_value);
+    };
+
+    const handleChangeFinal = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const _value = Number.parseInt(e.target.value);
+        setFinalValue(_value);
     };
 
     // Move to Next Question
     const handleNext = async (e: React.MouseEvent<HTMLButtonElement>) => {
-        if (value === -1) {
+        const _value = finalValue !== -1 ? finalValue : value;
+
+        if (_value === -1) {
             swal({ title: "Please select a option at least.", icon: "info" });
             return;
         }
-        if (activeStep && value !== -1) {
+        if (activeStep && _value !== -1) {
+            let _nextStep = !lastPage ? activeStep + 1 : 0; // default
+
+            if (activeMetric === "suicide") {
+                if (activeStep === 2 && _value === 0) {
+                    _nextStep = 6;
+                    goToStep(6);
+                } else {
+                    nextStep();
+                }
+            } else {
+                nextStep();
+            }
+
             dispatch(
                 setActiveScore({
                     scoreIndex: activeStep,
-                    score: value,
-                    activeStep: !lastPage ? activeStep + 1 : 0,
+                    score: _value,
+                    activeStep: _nextStep,
+                    prevStep: activeStep,
                 }),
             );
         }
-        nextStep();
     };
 
     // Restart the test
@@ -85,6 +120,11 @@ export const QuestionnaireWizard: React.FC<IProps> = (props) => {
                 goToStep(0);
             }
         });
+    };
+
+    const handleBack = () => {
+        console.log(prevStep, activeStep);
+        goToStep(prevStep[activeStep]);
     };
 
     const handleStop = () => {
@@ -145,19 +185,44 @@ export const QuestionnaireWizard: React.FC<IProps> = (props) => {
                                 />
                             ))}
                     </ButtonGroup>
+                    {isFollow && (
+                        <React.Fragment>
+                            <Markdown
+                                remarkPlugins={[remarkGfm]}
+                                components={{}}
+                            >
+                                {`**${
+                                    props.q?.follow_question?.question ?? ""
+                                }**`}
+                            </Markdown>
+                            <ButtonGroup className="col justify-start items-start pl-20">
+                                {followAnswers &&
+                                    followAnswers.map((item, i) => (
+                                        <Radio
+                                            key={i}
+                                            checked={finalValue === item.value}
+                                            name="follow-option"
+                                            title={item.strValue}
+                                            value={item.value}
+                                            onChange={handleChangeFinal}
+                                        />
+                                    ))}
+                            </ButtonGroup>
+                        </React.Fragment>
+                    )}
                 </Box>
                 <hr />
                 <ButtonGroup className="wrap gap-15">
                     {activeStep !== 1 && (
                         <Button
                             icon="caret-open-left"
-                            onClick={() => previousStep()}
+                            onClick={handleBack}
                         >
                             Back
                         </Button>
                     )}
                     <Button
-                        supicon
+                        supicon={true}
                         icon="caret-open-right"
                         onClick={handleNext}
                     >

@@ -9,6 +9,7 @@ export type ActiveScoreType = {
     scoreIndex: number;
     score: number;
     activeStep: number;
+    prevStep: number;
 };
 
 export type MetricStateProps = {
@@ -26,6 +27,7 @@ const initialState: MetricStateProps = {
             description: "",
             updatedDate: "",
             activeStep: 0,
+            prevStep: new Array(MAX_COUNT).fill(0),
             itemsScore: new Array(MAX_COUNT).fill(NOT_METRIC_VALUE),
         },
         anxiety: {
@@ -35,6 +37,7 @@ const initialState: MetricStateProps = {
             description: "",
             updatedDate: "",
             activeStep: 0,
+            prevStep: new Array(MAX_COUNT).fill(0),
             itemsScore: new Array(MAX_COUNT).fill(NOT_METRIC_VALUE),
         },
         depression: {
@@ -44,6 +47,7 @@ const initialState: MetricStateProps = {
             description: "",
             updatedDate: "",
             activeStep: 0,
+            prevStep: new Array(MAX_COUNT).fill(0),
             itemsScore: new Array(MAX_COUNT).fill(NOT_METRIC_VALUE),
         },
         ptsd: {
@@ -53,6 +57,7 @@ const initialState: MetricStateProps = {
             description: "",
             updatedDate: "",
             activeStep: 0,
+            prevStep: new Array(MAX_COUNT).fill(0),
             itemsScore: new Array(MAX_COUNT).fill(NOT_METRIC_VALUE),
         },
         suicide: {
@@ -62,6 +67,7 @@ const initialState: MetricStateProps = {
             description: "",
             updatedDate: "",
             activeStep: 0,
+            prevStep: new Array(MAX_COUNT).fill(0),
             itemsScore: new Array(MAX_COUNT).fill(NOT_METRIC_VALUE),
         },
     },
@@ -86,13 +92,21 @@ export const metricReducer = createSlice({
                 state.scores[state.activeMetric].itemsScore = _updatedScore;
                 state.scores[state.activeMetric].activeStep =
                     action.payload.activeStep;
+                state.scores[state.activeMetric].prevStep[
+                    action.payload.activeStep
+                ] = action.payload.prevStep;
             }
         },
         clearMetricInfo: (state) => {
             if (!state.activeMetric || !state.scores) return;
 
-            state.scores[state.activeMetric].itemsScore = undefined;
+            state.scores[state.activeMetric].itemsScore = new Array(
+                MAX_COUNT,
+            ).fill(NOT_METRIC_VALUE);
             state.scores[state.activeMetric].activeStep = 0;
+            state.scores[state.activeMetric].prevStep = new Array(
+                MAX_COUNT,
+            ).fill(NOT_METRIC_VALUE);
         },
         setPsychometricScore: (
             state,
