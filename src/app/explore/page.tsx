@@ -2,7 +2,13 @@
 
 import React from "react";
 
-import { Flex, Container, Content, Wrapper } from "@/components/container";
+import {
+    Flex,
+    Container,
+    Content,
+    Wrapper,
+    Section,
+} from "@/components/container";
 import {
     MobileNavigator,
     Navbar,
@@ -19,23 +25,25 @@ const ExplorePage: React.FC = () => {
             <Flex>
                 <Sidebar className="left-side" />
                 <Flex className="main-section col">
-                    <Navbar className="main-nav">Explore</Navbar>
+                    <Navbar className="main-nav"></Navbar>
                     <Content className="home-content">
                         <Wrapper>
-                            <ProgramBox
-                                id="programs"
-                                title="Programs"
-                                description="Discover your own mental health tools to care your health."
-                                programs={PROGRAMS}
-                            />
-                            <br></br>
-                            <br></br>
-                            <ProgramBox
-                                id="psychometric"
-                                title="Psychometric Tools"
-                                description="Use a psychometric tools to track your mental health scale."
-                                programs={PSYCHOMETRICS}
-                            />
+                            <Section className="">
+                                <h2 className="page-title">Mind Tests</h2>
+                                <p className="page-description">
+                                    Learn in depth about your psychological
+                                    state, see results of the evidence-based
+                                    tests
+                                </p>
+                            </Section>
+                            <Section>
+                                <ProgramBox
+                                    id="psychometric"
+                                    title=""
+                                    description=""
+                                    programs={PSYCHOMETRICS}
+                                />
+                            </Section>
                         </Wrapper>
                     </Content>
                     <MobileNavigator />

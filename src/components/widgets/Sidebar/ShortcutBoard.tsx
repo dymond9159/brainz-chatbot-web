@@ -11,48 +11,16 @@ export const ShortcutBoard: React.FC = (props) => {
             className="shortcut-button full col gap-10 justify-start"
         >
             <Flex className="shortcut row gap-15 full">
+                <Icon name="chat" />
+                <Link href={_utils.routes.CHAT}>Mind Chat</Link>
+            </Flex>
+            <Flex className="shortcut row gap-15 full">
                 <Icon name="speedometer" />
-                <Link href={_utils.routes.DASHBOARD}>Dashboard</Link>
+                <Link href={_utils.routes.DASHBOARD}>Mind Insights</Link>
             </Flex>
             <Flex className="shortcut row gap-15 full">
-                <Icon name="house" />
-                <Link
-                    href={_utils.routes.HOME}
-                    target="_blank"
-                >
-                    Home
-                </Link>
-            </Flex>
-            <Flex className="shortcut row gap-15 full">
-                <Icon name="currency-dollar" />
-                <Link
-                    href={_utils.routes.PRICING}
-                    target="_blank"
-                >
-                    Pricing
-                </Link>
-            </Flex>
-            <Flex className="shortcut row gap-15 full">
-                <Icon name="question-circle" />
-                <Link href={_utils.routes.FAQ}>FAQ</Link>
-            </Flex>
-            <Flex className="shortcut row gap-15 full">
-                <Icon name="chat-right-dot" />
-                <Link
-                    href="#"
-                    target="_blank"
-                >
-                    Feedback
-                </Link>
-            </Flex>
-            <Flex className="shortcut row gap-15 full">
-                <Icon name="send" />
-                <Link
-                    href={_utils.routes.CONTACT}
-                    target="_blank"
-                >
-                    Contact Us
-                </Link>
+                <Icon name="radio-grid" />
+                <Link href={_utils.routes.EXPLORE}>Mind Tests</Link>
             </Flex>
         </ButtonGroup>
     );

@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex } from "../../container";
-import { Dropdown } from "../../ui";
+import { Button, Dropdown } from "../../ui";
 import { IDivProps } from "@/types";
 import { BrainzAvatar } from "..";
 import { useRouter } from "next/navigation";
@@ -21,9 +21,10 @@ export const UserProfile: React.FC<IDivProps> = (props) => {
                 <h5>Dong</h5>
                 <span>panda.dev1115@gmail.com</span>
             </Flex>
-            <Dropdown label="...">
+            <Button icon="box-arrow-right"></Button>
+            {/* <Dropdown label="...">
                 <Dropdown.Item onClick={() => router.push(routes.DASHBOARD)}>
-                    Dashboard
+                    Mind Insights
                 </Dropdown.Item>
                 <Dropdown.Item
                     disabled
@@ -41,7 +42,7 @@ export const UserProfile: React.FC<IDivProps> = (props) => {
                 <Dropdown.Item onClick={() => alert("Ooop! Coming Soon!")}>
                     Sign out
                 </Dropdown.Item>
-            </Dropdown>
+            </Dropdown> */}
         </Flex>
     );
 };

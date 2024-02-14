@@ -115,7 +115,7 @@ export const PSYCHOMETRICS: ProgramDataType[] = [
     // Suicid
     {
         numid: 4,
-        strid: "suicide",
+        strid: "suicidal",
         name: "Suicidal Risk Assessment",
         type: "psychometric",
         src: "/avatars/dffd1f24-a00f-46d8-9403-c5baa7e2a528.png",

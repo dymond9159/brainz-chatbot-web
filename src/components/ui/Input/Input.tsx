@@ -1,3 +1,5 @@
+"use client";
+
 import React, { HTMLInputTypeAttribute, useEffect, useState } from "react";
 
 export interface IInputProps extends React.ComponentProps<"input"> {

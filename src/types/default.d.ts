@@ -17,6 +17,18 @@ export type IDataProps = {
 
 export interface IDivProps extends React.ComponentProps<"div"> {}
 
+export interface ProfileForMetric {
+    [key: string]: MetricBasicItemType | string | number | undefined;
+    username?: string;
+    age?: number;
+    locale?: string;
+    mood?: MetricBasicItemType;
+    ptsd?: MetricBasicItemType;
+    anxiety?: MetricBasicItemType;
+    depression?: MetricBasicItemType;
+    suicidal?: MetricBasicItemType;
+}
+
 // UI-Component types
 
 export interface IIconProps {

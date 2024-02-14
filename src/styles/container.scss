@@ -19,7 +19,7 @@
 
     .section {
         width: 100%;
-        padding: 15px 0px;
+        padding: 25px 0px;
     }
 
     .content {
@@ -39,7 +39,7 @@
         padding: 30px 30px;
         border-radius: var(--border-radius-small);
         background: var(--background-message-secondary);
-        box-shadow: 1px 1px 3px 1px #00000015;
+        // box-shadow: 1px 1px 3px 1px #00000015;
         overflow: visible;
 
         @include xs{

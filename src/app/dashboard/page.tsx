@@ -20,18 +20,27 @@ const DashboardPage: React.FC = () => {
     return (
         <Container className="main-container">
             <Flex>
-                <Sidebar
-                    progId=""
-                    className="left-side"
-                />
+                <Sidebar className="left-side" />
                 <Flex className="main-section col">
-                    <Navbar className="main-nav">Dashboard</Navbar>
+                    <Navbar className="main-nav"></Navbar>
                     <Content className="dashboard-content">
                         <Wrapper>
-                            <Flex className="wrap items-center justify-center full gap-15">
-                                <MonitorBox title="Calendar"></MonitorBox>
-                                <MonitorBox title="Psychometrics">
+                            <Section>
+                                <h2 className="page-title">Mind Insights</h2>
+                                <p className="page-description">
+                                    Learn in depth about your psychological
+                                    state, see results of the evidence-based
+                                    tests
+                                </p>
+                            </Section>
+                            {/* <MonitorBox title="Calendar"></MonitorBox> */}
+                            <Section>
+                                <MonitorBox title="">
                                     <Flex className="wrap full gap-15 items-start">
+                                        <Psychometric
+                                            title="Trauma"
+                                            scores={psycometricScores?.trauma}
+                                        />
                                         <Psychometric
                                             title="Anxiety"
                                             scores={psycometricScores?.anxiety}
@@ -43,16 +52,12 @@ const DashboardPage: React.FC = () => {
                                             }
                                         />
                                         <Psychometric
-                                            title="PTSD"
-                                            scores={psycometricScores?.ptsd}
-                                        />
-                                        <Psychometric
-                                            title="Suicidal"
-                                            scores={psycometricScores?.suicide}
+                                            title="Mood"
+                                            scores={psycometricScores?.mood}
                                         />
                                     </Flex>
                                 </MonitorBox>
-                            </Flex>
+                            </Section>
                         </Wrapper>
                     </Content>
                     <MobileNavigator />

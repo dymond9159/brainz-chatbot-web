@@ -1,24 +1,45 @@
+"use client";
+
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+
+// import { type Chat } from '@/lib/types'
+
 import { store } from "..";
-import { MessageType, RecentProgramType } from "@/types";
-import { setCurrentProgram } from "../reducers";
+import { ChatType, MessageType } from "@/types";
+import { setChats } from "../reducers";
 import _utils from "@/utils";
+import { nanoId } from "@/utils/functions";
 
-/**
- *  Switch program - message history
- */
-export const switchProgram = (progStrId: string) => {
-    // get messages with progStrId from recent programs.
-    const recentPrograms = store.getState().chat
-        .recentPrograms as RecentProgramType[];
+export const setChat = async (chatid: string, messages: MessageType[]) => {
+    const userId = "";
+    const lastMessage = messages[messages.length - 2].content.substring(0, 100);
+    const id = chatid ?? nanoId();
+    const lastedAt = new Date(Date.now()).toISOString();
+    const path = `/chat/${id}`;
+    const strMessages = JSON.stringify(messages);
+    const payload: ChatType = {
+        id,
+        userId,
+        lastMessage,
+        lastedAt,
+        path,
+        messages: strMessages,
+    };
+    store.dispatch(setChats(payload));
+};
 
-    const findOne = recentPrograms.findLastIndex(
-        (item) => item.progStrId === progStrId,
-    );
+export const getChats = (userId?: string) => {
+    try {
+        return store.getState().chat.chats ?? [];
+    } catch (error) {
+        return [];
+    }
+};
 
-    store.dispatch(
-        setCurrentProgram({
-            data: _utils.functions.getProgram(progStrId),
-            recentData: recentPrograms[findOne],
-        }),
-    );
+export const getChat = async (id: string) => {
+    const chats = getChats();
+    if (chats) {
+        return chats.filter((item) => item.id === id)[0];
+    }
 };

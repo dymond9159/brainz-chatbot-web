@@ -23,7 +23,8 @@ button {
     
     .button-text {
         font-weight: bold;
-        color: var(--foreground-secondary)
+        color: var(--foreground-secondary);
+        text-align: center;
     }
 
     &:disabled {
@@ -162,6 +163,26 @@ input[type="radio"] {
     margin: 1px 0px;
     height: 1px;
     background: var(--background-light);
+}
+
+
+/*
+*   Sweet Alert Modal
+*/
+
+.swal-modal {
+    background-color: var(--background);
+    box-shadow: 1px 1px 3px 1px #00000025;
+
+    .swal-title {
+        color: var(--foreground);
+        font-size: large;
+    }
+
+    .swal-text {
+        color: var(--foreground-secondary);
+    }
+    
 }
 
 

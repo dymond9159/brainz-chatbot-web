@@ -11,9 +11,9 @@ const NAVIGATOR_MENU = [
         url: routes.CHATHOME,
     },
     {
-        label: "Explore",
+        label: "Tests",
         icon: "radio-grid",
-        url: routes.PROGRAMS,
+        url: routes.EXPLORE,
     },
     {
         label: "Chat",
@@ -21,7 +21,7 @@ const NAVIGATOR_MENU = [
         url: routes.CHAT,
     },
     {
-        label: "Dashboard",
+        label: "Insights",
         icon: "speedometer",
         url: routes.DASHBOARD,
     },

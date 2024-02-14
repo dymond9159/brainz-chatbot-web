@@ -1,7 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = {
+export interface CommonProps {
+    sidebarStatus: string;
+    metricCallBackURL: string | null;
+}
+
+const initialState: CommonProps = {
     sidebarStatus: "open",
+    metricCallBackURL: null,
 };
 
 export const commonReducer = createSlice({
@@ -11,7 +17,10 @@ export const commonReducer = createSlice({
         setSidebarStatus: (state, action: PayloadAction<string>) => {
             state.sidebarStatus = action.payload;
         },
+        setMetricCallBackUrl: (state, action: PayloadAction<string | null>) => {
+            state.metricCallBackURL = action.payload;
+        },
     },
 });
 
-export const { setSidebarStatus } = commonReducer.actions;
+export const { setSidebarStatus, setMetricCallBackUrl } = commonReducer.actions;

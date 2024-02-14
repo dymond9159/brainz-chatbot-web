@@ -1,11 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import {
-    MetricCharactersType,
-    ProgramType,
-    PsychometricScoreType,
-} from "@/types";
-import { compareDate } from "@/utils/functions";
+import { MetricCharactersType, PsychometricScoreType } from "@/types";
 
 const MAX_COUNT = 30;
 const NOT_METRIC_VALUE = -1;
@@ -13,54 +8,61 @@ const NOT_METRIC_VALUE = -1;
 export type ActiveScoreType = {
     scoreIndex: number;
     score: number;
+    activeStep: number;
+    prevStep: number;
 };
 
 export type MetricStateProps = {
-    scores?: PsychometricScoreType;
-    activeScore?: number[];
+    scores: PsychometricScoreType;
     activeMetric?: string;
-    activeStep?: number;
 };
 
 const initialState: MetricStateProps = {
     activeMetric: undefined,
-    activeScore: new Array(MAX_COUNT).fill(NOT_METRIC_VALUE),
-    activeStep: 0,
     scores: {
         mood: {
-            score: 0,
+            score: undefined,
+            maxScore: 10,
             title: "Hey, Unlock Your Mood, Embrace Your Score!",
             severity: "Not measured yet",
             description: "",
             updatedDate: "",
+            activeStep: 0,
+            prevStep: new Array(MAX_COUNT).fill(0),
+            itemsScore: new Array(MAX_COUNT).fill(NOT_METRIC_VALUE),
         },
         anxiety: {
-            score: 0,
+            score: undefined,
+            maxScore: 21,
             title: "",
             severity: "Not measured yet",
             description: "",
             updatedDate: "",
+            activeStep: 0,
+            prevStep: new Array(MAX_COUNT).fill(0),
+            itemsScore: new Array(MAX_COUNT).fill(NOT_METRIC_VALUE),
         },
         depression: {
-            score: 0,
+            score: undefined,
+            maxScore: 27,
             title: "",
             severity: "Not measured yet",
             description: "",
             updatedDate: "",
+            activeStep: 0,
+            prevStep: new Array(MAX_COUNT).fill(0),
+            itemsScore: new Array(MAX_COUNT).fill(NOT_METRIC_VALUE),
         },
-        ptsd: {
-            score: 0,
+        trauma: {
+            score: undefined,
+            maxScore: 80,
             title: "",
             severity: "Not measured yet",
             description: "",
             updatedDate: "",
-        },
-        suicide: {
-            score: 0,
-            title: "",
-            severity: "Not measured yet",
-            description: "",
-            updatedDate: "",
+            activeStep: 0,
+            prevStep: new Array(MAX_COUNT).fill(0),
+            itemsScore: new Array(MAX_COUNT).fill(NOT_METRIC_VALUE),
         },
     },
 };
@@ -73,40 +75,51 @@ export const metricReducer = createSlice({
             state.activeMetric = action.payload;
         },
         setActiveScore: (state, action: PayloadAction<ActiveScoreType>) => {
+            if (!state.activeMetric || !state.scores) return;
+
             const _updatedScore =
-                state.activeScore ??
+                state.scores[state.activeMetric]?.itemsScore ??
                 new Array(MAX_COUNT).fill(NOT_METRIC_VALUE);
 
-            if (_updatedScore) {
+            if (_updatedScore && state.scores[state.activeMetric]) {
                 _updatedScore[action.payload.scoreIndex] = action.payload.score;
-                state.activeScore = _updatedScore;
+                state.scores[state.activeMetric].itemsScore = _updatedScore;
+                state.scores[state.activeMetric].activeStep =
+                    action.payload.activeStep;
+
+                state.scores[state.activeMetric].prevStep[
+                    action.payload.activeStep
+                ] = action.payload.prevStep;
             }
         },
-        setActiveStep: (state, action: PayloadAction<number>) => {
-            state.activeStep = action.payload;
-        },
-        clearActiveScore: (state) => {
-            state.activeScore = undefined;
-        },
         clearMetricInfo: (state) => {
-            state.activeScore = undefined;
-            state.activeStep = 0;
+            if (!state.activeMetric || !state.scores) return;
+
+            if (!state.scores[state.activeMetric]) {
+                state.scores[state.activeMetric] =
+                    initialState.scores[state.activeMetric];
+            }
+
+            state.scores[state.activeMetric].itemsScore = new Array(
+                MAX_COUNT,
+            ).fill(NOT_METRIC_VALUE);
+            state.scores[state.activeMetric].activeStep = 0;
+            state.scores[state.activeMetric].prevStep = new Array(
+                MAX_COUNT,
+            ).fill(NOT_METRIC_VALUE);
         },
-        /*
-         **  Psychometric Scoring
-         */
         setPsychometricScore: (
             state,
             action: PayloadAction<MetricCharactersType>,
         ) => {
+            if (!state.activeMetric || !state.scores) return;
+
             const score = action.payload;
             const updatedScore = {
                 ...score,
                 updatedDate: new Date().toISOString(),
             };
-            const metricName = state.activeMetric;
-            if (metricName && state.scores)
-                state.scores[metricName] = updatedScore;
+            state.scores[state.activeMetric] = updatedScore;
         },
     },
 });
@@ -114,8 +127,6 @@ export const metricReducer = createSlice({
 export const {
     setActiveMetric,
     setActiveScore,
-    setActiveStep,
-    clearActiveScore,
     clearMetricInfo,
     setPsychometricScore,
 } = metricReducer.actions;

@@ -1,188 +1,94 @@
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 import {
-    JSONValue,
-    Message,
     OpenAIStream,
     StreamingTextResponse,
     experimental_StreamData,
 } from "ai";
 
-// psychometric test
-import get_score from "@/libs/tools/get_score.json";
-
-// import { AstraDB } from "@datastax/astra-db-ts";
-
 import _libs from "@/libs";
 import _utils from "@/utils";
-import {
-    generateSuggestAnswersInstruction,
-    psychometricInstruction,
-} from "@/utils/constants";
-import { ProgramDataType } from "@/components/widgets";
+import { functions, runFunction } from "./function";
+import { getSystemInstruction, nanoId } from "@/utils/functions";
 
-// import { AstraDB } from "@datastax/astra-db-ts";
 const GPT_DEFAULT_MODEL = "gpt-3.5-turbo-1106"; //"gpt-3.5-turbo-0613"
 const TEMPERATURE = 0.7;
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
 
-// const astraDb = new AstraDB(
-//     process.env.ASTRA_DB_APPLICATION_TOKEN,
-//     process.env.ASTRA_DB_ID,
-//     process.env.ASTRA_DB_REGION,
-//     process.env.ASTRA_DB_NAMESPACE,
-// );
-
-// export const runtime = "edge";
-
-const getRAGContext = async (latestMessage: string) => {
-    // const { data } = await openai.embeddings.create({
-    //               input: latestMessage,
-    //               model: "text-embedding-ada-002",
-    //           });
-    //           const collection = await astraDb.collection(
-    //               `chat_${similarityMetric}`,
-    //           );
-    //           const cursor = collection.find(null, {
-    //               sort: {
-    //                   $vector: data[0]?.embedding,
-    //               },
-    //               limit: 5,
-    //           });
-    //           const documents = await cursor.toArray();
-    //           docContext = `
-    //       START CONTEXT
-    //       ${documents?.map((doc) => doc.content).join("\n")}
-    //       END CONTEXT
-    //     `;
-    return "";
-};
-
 export const runtime = "edge";
-
-const getAnswers = async (
-    llm: string,
-    system: string,
-    messages: any[],
-    completion: string,
-    program: ProgramDataType,
-) => {
-    const systemPrompt = {
-        role: "system",
-        content: generateSuggestAnswersInstruction(program),
-    };
-
-    // remove the last user input message.
-    messages.pop();
-
-    const inputMessages = [
-        systemPrompt,
-        ...messages,
-        {
-            role: "user",
-            content: completion,
-        },
-    ];
-    const params: OpenAI.Chat.ChatCompletionCreateParams = {
-        model: llm,
-        messages: inputMessages,
-        response_format: { type: "json_object" },
-        temperature: 0,
-    };
-
-    const response = await openai.chat.completions.create(params);
-    return response.choices[0].message.content;
-};
 
 export async function POST(req: NextRequest) {
     try {
+        const requestData = await req.json();
         const {
             messages,
             useRag,
             llm = GPT_DEFAULT_MODEL,
             similarityMetric,
-            progStrId,
-        } = await req.json();
+            instructionId,
+            profile,
+        } = requestData;
 
-        const latestMessage = messages[messages?.length - 1]?.content;
+        const systemInstruction = getSystemInstruction(instructionId, profile);
 
-        const docContext: string = useRag
-            ? await getRAGContext(latestMessage)
-            : "";
-
-        const program = _utils.functions.getProgram(progStrId);
-        const systemPrompt = program?.instruction;
-
-        const ragPrompt = [
+        const systemPrompt = [
             {
                 role: "system",
-                content: systemPrompt + docContext,
+                content: systemInstruction,
             },
         ];
 
-        // Instantiate the StreamData. It works with all API providers.
-        const data = new experimental_StreamData();
-
-        const params: OpenAI.Chat.ChatCompletionCreateParams = {
+        // check if the conversation requires a function call to be made
+        const openAIChatParams: OpenAI.Chat.ChatCompletionCreateParams = {
             model: llm,
+            messages: [...systemPrompt, ...messages],
             stream: true,
-            messages: [...ragPrompt, ...messages],
-            // functions: [get_score],
-            temperature: 0,
+            temperature: TEMPERATURE,
+            top_p: 1,
+            frequency_penalty: 1,
+            presence_penalty: 1,
+            functions,
+            function_call: "auto",
         };
 
-        const streamResponse = await openai.chat.completions.create(params);
+        const initialResponse = await openai.chat.completions.create(
+            openAIChatParams,
+        );
 
-        const stream = OpenAIStream(streamResponse, {
+        const data = new experimental_StreamData();
+
+        // function handler
+        const stream = OpenAIStream(initialResponse, {
             experimental_onFunctionCall: async (
                 { name, arguments: args },
-
                 createFunctionCallMessages,
             ) => {
-                console.log({ name, args });
-                if (name === "get_score") {
-                    const jsonValue = (args as JSONValue) ?? {};
-                    data.append({
-                        type: "score",
-                        result: jsonValue,
-                    });
+                const result = await runFunction(name, args, profile);
+                console.log(name, args, result);
+                const newMessages = result
+                    ? createFunctionCallMessages(result)
+                    : [];
 
-                    const answerData = args as JSONValue;
-                    const newMessages = createFunctionCallMessages(answerData);
-                    const sysPrompt = [
-                        {
-                            role: "system",
-                            content: `                                
-                                This score will be presented to the user along with a concise and clear explanation, providing them with a quantitative insight into user's status.
-                                `,
-                        },
-                    ];
-                    // return openai.chat.completions.create({
-                    //     messages: [...sysPrompt, ...newMessages],
-                    //     stream: true,
-                    //     model: llm,
-                    //     temperature: 0.7,
-                    // });
-                }
+                return openai.chat.completions.create({
+                    model: llm,
+                    stream: true,
+                    temperature: 0.7,
+                    messages: [...systemPrompt, ...messages, ...newMessages],
+                });
             },
-            async onCompletion(completion) {},
+
+            async onCompletion(completion) {   
+            },
             onFinal(completion) {
-                // IMPORTANT! you must close StreamData manually or the response will never finish.
                 data.close();
             },
-            // IMPORTANT! until this is stable, you must explicitly opt in to supporting streamData.
             experimental_streamData: true,
         });
 
-        return new StreamingTextResponse(
-            stream,
-            {
-                headers: {},
-            },
-            data,
-        );
+        // Respond with the stream
+        return new StreamingTextResponse(stream, {}, data);
     } catch (err) {
         console.error(err);
     }

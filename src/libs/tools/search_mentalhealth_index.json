@@ -1,0 +1,27 @@
+{
+    "name": "search_mentalhealth_index",
+    "description": "search the mental health index",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "item": {
+                "type": "string",
+                "description":
+                    "get the mental health indicator in 'mood', 'ptsd', 'anxiety', 'depression', 'suicidal'."
+            },
+            "index": {
+                "type": "number",
+                "description": "final index"
+            },
+            "severity": {
+                "type": "string",
+                "description": "severity"
+            },
+            "follow-up": {
+                "type": "string",
+                "description": "follow-up according to severity"
+            }
+        },
+        "required": ["item", "score", "severity", "follow-up"]
+    }
+}

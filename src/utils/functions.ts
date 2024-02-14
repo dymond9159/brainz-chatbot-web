@@ -1,23 +1,33 @@
 import { clsx, type ClassValue } from "clsx";
+import { nanoid } from "ai";
 import moment from "moment";
 import { customAlphabet } from "nanoid";
-import { PROGRAMS, PSYCHOMETRICS } from "./constants";
+import { INSTRUCTIONS, PROGRAMS, PSYCHOMETRICS } from "./constants";
 import { ProgramDataType } from "@/components/widgets";
+import { InstructionType, MetricCharactersType } from "@/types";
+import _utils from ".";
 
 export function cn(...inputs: ClassValue[]) {
     return clsx(inputs);
 }
 
-export const nanoid = (size: number = 16) =>
-    customAlphabet(
-        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
-        size,
-    ); // 16-character random string
+export const nanoId = (size: number = 16) => {
+    // const _id =  customAlphabet(
+    //     "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+    //     size,
+    // ); // 16-character random string
 
-export function formatDate(input: string | number | Date): string {
+    return nanoid(16);
+};
+
+export function formatDate(
+    input: string | number | Date | null | undefined,
+    locale?: string,
+): string {
     if (!input || input === "") return "";
     const date = new Date(input);
-    return date.toLocaleDateString("en-US", {
+
+    return date.toLocaleDateString(locale, {
         weekday: "short",
         month: "short",
         day: "numeric",
@@ -54,9 +64,54 @@ export const findLastIndex = <T>(arr: Array<T>, filter: T) => {
     return arr.findLast((_) => _ === filter);
 };
 
+export const actualArray = (arr: number[]) => {
+    return arr?.filter((value) => value !== -1) ?? [];
+};
+
+export const calculateFinalScore = (
+    metric: string,
+    scoreArray: number[],
+): number => {
+    // get acutal array, thus value is not -1
+    const _arr = actualArray(scoreArray);
+
+    // calculate score
+    const _score =
+        metric !== "suicidal"
+            ? _arr?.reduce((sum, v) => sum + v, 0)
+            : Math.max(..._arr);
+
+    return _score;
+};
+
 // Using an async function to await the import if you're dealing with dynamic imports
 export async function loadMarkdown(filename: string) {
     const anxietyIntro = await require("!raw-loader!@/libs/questionnaires" +
         "/anxiety/intro.md");
     return anxietyIntro.default as string; // Accessing the default export
 }
+
+// Chat
+
+export const getSystemInstruction = (
+    name: InstructionType,
+    profile: any = undefined,
+) => {
+    let instruction = INSTRUCTIONS[name];
+
+    if (name === "trauma" && profile) {
+        Object.keys(profile).map((_key) => {
+            if (profile[_key]) {
+                instruction = instruction?.replaceAll(
+                    `[${_key}]`,
+                    profile[_key],
+                );
+            }
+        });
+        instruction = instruction?.replaceAll(
+            `[today]`,
+            formatDate(new Date()),
+        );
+    }
+    return instruction;
+};

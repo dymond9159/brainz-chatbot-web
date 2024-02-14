@@ -1,0 +1,20 @@
+{
+    "name": "search_psychometric_tools",
+    "description": "search the psychometric tools.",
+    "parameters": {
+        "type": "object",
+        "title": "tools",
+        "properties": {
+            "tool_name": {
+                "type": "string",
+                "description":
+                    "get a tool name the best fit to your symptom from our psychometric tools."
+            },
+            "link": {
+                "type": "string",
+                "description": "get a tool link the best fit"
+            }
+        },
+        "required": ["tool_name", "link"]
+    }
+}

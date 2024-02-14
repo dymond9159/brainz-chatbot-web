@@ -7,7 +7,7 @@ const routes = {
     CONTACT: `${WEB_URL}/contact`,
     //chat
     CHATHOME: "/",
-    PROGRAMS: "/explore",
+    EXPLORE: "/explore",
     DASHBOARD: "/dashboard",
     ACCOUNTSETTING: "/account",
     BILLING: "/billing",

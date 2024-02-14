@@ -1,0 +1,16 @@
+{
+    "name": "get_mood",
+    "description": "traking the individual mood",
+    "parameters": {
+        "type": "object",
+        "title": "mood tracking",
+        "properties": {
+            "mood_scale": {
+                "type": "string",
+                "description":
+                    "get mood scale"
+            }
+        },
+        "required": ["mood_scale"]
+    }
+}

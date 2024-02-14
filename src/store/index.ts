@@ -1,4 +1,7 @@
+"use client";
+
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 import {
     persistReducer,
     persistStore,
@@ -14,24 +17,22 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 import { chatReducer, commonReducer, metricReducer } from "./reducers";
 
-const persistConfig = {
-    key: "brainz_chat",
-    version: 1,
-    storage, //Initially set to null
-};
-
-// Dynamically load storage only in client-side
-// if (typeof window !== "undefined") {
-//     const createWebStorage = require("redux-persist/lib/storage").default;
-//     persistConfig.storage = createWebStorage("local");
-// }
-
 // Combine your reducers
 const rootReducers = combineReducers({
     chat: chatReducer.reducer,
     common: commonReducer.reducer,
     metric: metricReducer.reducer,
 });
+
+const isClient = typeof window !== "undefined";
+
+// Dynamically load storage only in client-side
+const persistConfig = {
+    key: "brainz_chat",
+    version: 1,
+    storage: storage ?? createWebStorage("local"),
+};
+
 const persistedReducer = persistReducer(persistConfig, rootReducers);
 
 // Create the Redux store
