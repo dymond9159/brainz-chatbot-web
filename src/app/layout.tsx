@@ -12,8 +12,8 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
     metadataBase: new URL(`https://${process.env.VERCEL_URL}`),
     title: {
-        default: "Brainz Health AI Therapy",
-        template: `Mental Health AI Chatbot`,
+        default: "Brainz: AI Mind Support",
+        template: `NextJs 14.0 framework`,
     },
     description: "Guiding through trauma with health care and empathetic",
     icons: {
