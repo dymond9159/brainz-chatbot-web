@@ -16,6 +16,20 @@ export interface ChatType {
     sharePath?: string;
 }
 
+export type ProgramDataType = {
+    numid: number;
+    strid: string;
+    name: string;
+    type: string;
+    src: string;
+    url: string;
+    description_short: string;
+    description_long: string;
+    suggests?: string[];
+    instruction?: string;
+    questionnaires?: QuestionnaireType;
+};
+
 export type MetricColor = {
     [key: string]: string;
     default: string;

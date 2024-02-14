@@ -1,10 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { nanoid } from "ai";
-import moment from "moment";
-import { customAlphabet } from "nanoid";
 import { INSTRUCTIONS, PROGRAMS, PSYCHOMETRICS } from "./constants";
-import { ProgramDataType } from "@/components/widgets";
-import { InstructionType, MetricCharactersType } from "@/types";
+import { InstructionType, ProgramDataType } from "@/types";
 import _utils from ".";
 
 export function cn(...inputs: ClassValue[]) {

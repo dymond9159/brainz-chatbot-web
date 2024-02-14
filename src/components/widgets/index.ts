@@ -1,3 +1,5 @@
+"use client";
+
 // logo
 export * from "./Logo";
 

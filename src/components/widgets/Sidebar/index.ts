@@ -1,3 +1,5 @@
+"use client";
+
 export * from "./ProgramBoard";
 export * from "./RecentBoard";
 export * from "./ShortcutBoard";

@@ -1,3 +1,5 @@
+"use client";
+
 export * from "./use-at-bottom";
 export * from "./use-copy-to-clipboard";
 export * from "./use-enter-submit";

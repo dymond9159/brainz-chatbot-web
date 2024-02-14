@@ -1,4 +1,6 @@
 // theme icon
+"use client";
+
 export * from "./theme-icons";
 
 export * from "./brainz-logo-icons";

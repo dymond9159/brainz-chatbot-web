@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import OpenAI from "openai";
 import {
     OpenAIStream,
@@ -79,8 +79,7 @@ export async function POST(req: NextRequest) {
                 });
             },
 
-            async onCompletion(completion) {   
-            },
+            async onCompletion(completion) {},
             onFinal(completion) {
                 data.close();
             },

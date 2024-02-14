@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import { useWizard } from "react-use-wizard";
 import Markdown from "react-markdown";

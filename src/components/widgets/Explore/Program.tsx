@@ -1,28 +1,13 @@
 import React from "react";
 import { useRouter } from "next/navigation";
-import { Flex } from "../../container";
-import { Button, type ButtonProps } from "@/components/ui";
-import { cn } from "@/utils/functions";
-import { BrainzAvatar } from "..";
-import { QuestionnaireType } from "@/types";
-import { CALLBACKURL } from "@/utils/constants";
-import { useAppDispatch } from "@/store";
-import { setMetricCallBackUrl } from "@/store/reducers";
 import Markdown from "react-markdown";
 
-export type ProgramDataType = {
-    numid: number;
-    strid: string;
-    name: string;
-    type: string;
-    src: string;
-    url: string;
-    description_short: string;
-    description_long: string;
-    suggests?: string[];
-    instruction?: string;
-    questionnaires?: QuestionnaireType;
-};
+import { Flex } from "../../container";
+import { Button } from "@/components/ui";
+import { cn } from "@/utils/functions";
+import { useAppDispatch } from "@/store";
+import { setMetricCallBackUrl } from "@/store/reducers";
+import { ProgramDataType } from "@/types";
 
 export interface IProgramProps {
     program: ProgramDataType;

@@ -1,5 +1,3 @@
-"use client";
-
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -17,7 +15,7 @@ export const setChat = async (chatid: string, messages: MessageType[]) => {
     const id = chatid ?? nanoId();
     const lastedAt = new Date(Date.now()).toISOString();
     const path = `/chat/${id}`;
-    const strMessages = JSON.stringify(messages);
+    const strMessages = JSON.stringify({ messages });
     const payload: ChatType = {
         id,
         userId,

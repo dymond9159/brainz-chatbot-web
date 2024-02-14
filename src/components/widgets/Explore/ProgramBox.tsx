@@ -1,8 +1,8 @@
 import React from "react";
 import { Flex, Section } from "../../container";
-import { Program, ProgramDataType } from "..";
+import { Program } from "..";
 import _utils from "@/utils";
-import { IDivProps } from "@/types";
+import { IDivProps, ProgramDataType } from "@/types";
 
 interface IProps extends IDivProps {
     title: string;

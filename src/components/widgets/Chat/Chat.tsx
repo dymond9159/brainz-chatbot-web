@@ -3,21 +3,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useChat, Message } from "ai/react";
 
-import {
-    Flex,
-    Container,
-    Section,
-    Content,
-    Wrapper,
-    Box,
-} from "@/components/container";
+import { Flex, Container, Content, Wrapper, Box } from "@/components/container";
 import { Button, ButtonGroup, Textarea } from "@/components/ui";
 import {
     ChatScrollAnchor,
     Conversation,
     Navbar,
     Sidebar,
-    WelcomeMessage,
 } from "@/components/widgets";
 import _utils from "@/utils";
 import { useEnterSubmit } from "@/hooks";
@@ -110,31 +102,6 @@ export const Chat: React.FC<ChatPageProps> = (props) => {
             router.push(routes.CHAT);
         }
     }, [messages]);
-
-    useEffect(() => {
-        const loadChats = async () => {
-            if (props.id) {
-                const chats = await getChat(props.id);
-                if (chats) {
-                    const _msg = JSON.parse(chats.messages) ?? [];
-                    setMessages(_msg);
-                }
-            } else {
-                setMessages([
-                    {
-                        id: nanoId(),
-                        role: "assistant",
-                        content: "How can Brainz help you today?",
-                    },
-                ]);
-            }
-        };
-
-        // if (messages.length === 0) {
-        //     handlePrompt("Hi, there", false);
-        // }
-        loadChats();
-    }, []);
 
     // textarea auto rows
     useEffect(() => {
