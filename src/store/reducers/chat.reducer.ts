@@ -18,7 +18,7 @@ export const chatReducer = createSlice({
     reducers: {
         setChats: (state, action: PayloadAction<ChatType>) => {
             const payload = action.payload;
-            const _chats = state.chats;
+            const _chats = state.chats ?? [];
 
             if (_chats) {
                 // find a element
