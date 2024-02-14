@@ -13,11 +13,10 @@
         }
 
         .wrapper {
-            width: 100%;
-            margin: auto;
-            margin-top: 40px;
+            width: 60%;
+            margin: auto;            
             @include lg {
-                width: 100%;
+                width: 80%;
             }
 
             @include md {

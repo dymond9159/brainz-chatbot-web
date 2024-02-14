@@ -9,10 +9,10 @@ import {
 import _libs from "@/libs";
 import _utils from "@/utils";
 import { functions, runFunction } from "./function";
-import { getSystemInstruction } from "@/utils/functions";
+import { getSystemInstruction, nanoId } from "@/utils/functions";
 
 const GPT_DEFAULT_MODEL = "gpt-3.5-turbo-1106"; //"gpt-3.5-turbo-0613"
-const TEMPERATURE = 0;
+const TEMPERATURE = 0.7;
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
@@ -21,20 +21,17 @@ export const runtime = "edge";
 
 export async function POST(req: NextRequest) {
     try {
+        const requestData = await req.json();
         const {
             messages,
             useRag,
             llm = GPT_DEFAULT_MODEL,
             similarityMetric,
-            progStrId,
-        } = await req.json();
+            instructionId,
+            profile,
+        } = requestData;
 
-        const profile: any = {
-            username: "Dong",
-            age: 35,
-            locale: "Hong Kong",
-        };
-        const systemInstruction = getSystemInstruction(progStrId, profile);
+        const systemInstruction = getSystemInstruction(instructionId, profile);
 
         const systemPrompt = [
             {
@@ -68,28 +65,22 @@ export async function POST(req: NextRequest) {
                 { name, arguments: args },
                 createFunctionCallMessages,
             ) => {
-                const result = await runFunction(name, args);
-                console.log("tool_result:=", result);
+                const result = await runFunction(name, args, profile);
+                console.log(name, args, result);
                 const newMessages = result
                     ? createFunctionCallMessages(result)
                     : [];
+
                 return openai.chat.completions.create({
                     model: llm,
                     stream: true,
-                    temperature: 0,
-                    messages: [
-                        {
-                            role: "system",
-                            content:
-                                "Provide brief explain for the tool and a link preasented with the tool name to connect to the psychometric tool.",
-                        },
-                        ...messages,
-                        ...newMessages,
-                    ],
+                    temperature: 0.7,
+                    messages: [...messages, ...newMessages],
                 });
             },
 
-            onCompletion(completion) {},
+            async onCompletion(completion) {   
+            },
             onFinal(completion) {
                 data.close();
             },

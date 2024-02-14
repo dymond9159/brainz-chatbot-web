@@ -15,23 +15,24 @@ interface IProps extends IDivProps {
     h_align?: string;
     collapse?: boolean;
 }
-
 export const Psychometric: React.FC<IProps> = (props) => {
     const pathColor = M_COLOR[props.scores?.color ?? "default"];
+    const backColor = `radial-gradient(circle, #ffffff10 45%, ${
+        M_COLOR[props.scores?.color ?? "default"]
+    })`;
     const [isExpand, setExpand] = useState<boolean>(false);
 
     useEffect(() => {
         setExpand(props.collapse ?? false);
     }, [props.collapse]);
     return (
-        <Box className={cn(props.className, "psychometric-box")}>
+        <Box className={cn(props.className, "psychometric-box border")}>
             <Flex
                 className={cn(
-                    "col justify-start gap-15",
-                    props.h_align ?? "items-start",
+                    "col justify-center gap-15",
+                    props.h_align ?? "items-center",
                 )}
             >
-                <h3>{props?.title ?? ""}</h3>
                 <Flex className="row">
                     <Box
                         className="progress-box"
@@ -41,14 +42,14 @@ export const Psychometric: React.FC<IProps> = (props) => {
                             className="psycho-progress"
                             value={props?.scores?.score ?? 0}
                             maxValue={props?.scores?.maxScore ?? 10}
-                            text={`${props?.scores?.score ?? 0}`}
-                            strokeWidth={3}
-                            circleRatio={1}
+                            text={`${props?.scores?.score ?? "?"}`}
+                            strokeWidth={12}
+                            circleRatio={0.75}
                             styles={buildStyles({
                                 // Rotation of path and trail, in number of turns (0-1)
-                                rotation: 0.5,
+                                rotation: 1 / 2 + 1 / 7.8,
                                 // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
-                                strokeLinecap: "butt",
+                                strokeLinecap: "round",
 
                                 // Text size
                                 textSize: "22px",
@@ -63,35 +64,46 @@ export const Psychometric: React.FC<IProps> = (props) => {
                                 pathColor: `${pathColor}`,
                                 textColor: "currentColor",
                                 trailColor: "rgba(32, 32, 25, 0.1)",
-                                backgroundColor: `rgba(62, 52, 199, 0.1)`,
                             })}
                         />
+                        <div
+                            className="circle"
+                            style={{ background: backColor }}
+                        ></div>
                         {props.scores?.maxScore && (
-                            <label>/ {props?.scores?.maxScore ?? 10}</label>
+                            <label>/ {props?.scores?.maxScore ?? "0"}</label>
                         )}
                     </Box>
-                    <Flex className="col ml-10">
-                        <h4>This can feel like:</h4>
-                        <span style={{ color: pathColor }}>
-                            {props?.scores?.severity ?? "Not measured yet"}
-                        </span>
-                        <em>
-                            <label>
-                                Last measured:{" "}
-                                {formatDate(props?.scores?.updatedDate ?? "")}
-                            </label>
-                        </em>
-                    </Flex>
+
+                    {isExpand && (
+                        <Flex className="col ml-10">
+                            <h4>This can feel like:</h4>
+                            <span style={{ color: pathColor }}>
+                                {props?.scores?.severity ?? "Not measured yet"}
+                            </span>
+                            <em>
+                                <label>
+                                    Last measured:{" "}
+                                    {formatDate(
+                                        props?.scores?.updatedDate ?? "",
+                                    )}
+                                </label>
+                            </em>
+                        </Flex>
+                    )}
                 </Flex>
-                <br />
                 {isExpand && (
-                    <Markdown
-                        remarkPlugins={[remarkGfm]}
-                        components={{}}
-                    >
-                        {props.scores?.description}
-                    </Markdown>
+                    <React.Fragment>
+                        <br />
+                        <Markdown
+                            remarkPlugins={[remarkGfm]}
+                            components={{}}
+                        >
+                            {props.scores?.description}
+                        </Markdown>
+                    </React.Fragment>
                 )}
+                <h4>{props?.title ?? ""}</h4>
             </Flex>
         </Box>
     );

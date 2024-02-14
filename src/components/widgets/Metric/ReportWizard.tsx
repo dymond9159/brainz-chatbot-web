@@ -151,7 +151,7 @@ export const ReportWizard: React.FC<IProps> = (props) => {
                             icon="speedometer"
                             onClick={() => router.push(routes.DASHBOARD)}
                         >
-                            Dashboard
+                            Mind insights
                         </Button>
                     </ButtonGroup>
                 </AnimateBox>

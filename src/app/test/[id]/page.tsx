@@ -55,7 +55,7 @@ const MetricPage: React.FC<MetricPageProps> = (props) => {
             <Flex>
                 <Sidebar className="left-side" />
                 <Flex className="main-section col">
-                    <Navbar className="main-nav">{tool?.name}</Navbar>
+                    <Navbar className="main-nav"></Navbar>
                     <Content className="test-content">
                         <Wrapper>
                             <Content className="test-area">

@@ -8,6 +8,7 @@ import { QuestionnaireType } from "@/types";
 import { CALLBACKURL } from "@/utils/constants";
 import { useAppDispatch } from "@/store";
 import { setMetricCallBackUrl } from "@/store/reducers";
+import Markdown from "react-markdown";
 
 export type ProgramDataType = {
     numid: number;
@@ -23,7 +24,7 @@ export type ProgramDataType = {
     questionnaires?: QuestionnaireType;
 };
 
-export interface IProgramProps extends ButtonProps {
+export interface IProgramProps {
     program: ProgramDataType;
 }
 
@@ -46,18 +47,26 @@ export const Program: React.FC<IProgramProps> = (props) => {
             className={cn("program")}
             onClick={() => handlerClick(props.program.url)}
         >
-            <Flex className="row items-center justify-between full">
-                <Flex className="row items-center gap-15">
-                    <BrainzAvatar
-                        className="program-avatar"
-                        src={props.program.src}
-                        name={props.program.name}
-                    />
+            <Flex className="row items-center justify-between">
+                <Flex className="col items-center gap-15">
                     <Flex className="col items-start justify-start">
                         <h3 className="program-text">{props.program.name}</h3>
-                        <span className="program-desc">
+                        <Flex className="row gap-5">
+                            <h4 className="timespan">
+                                Time: ~{props.program.questionnaires?.times}{" "}
+                                mins
+                            </h4>
+                            <h4 className="questionspan">
+                                Questions:{" "}
+                                {props.program.questionnaires?.questionCounts}
+                            </h4>
+                        </Flex>
+                        <Markdown className="program-desc">
                             {props.program.description_short}
-                        </span>
+                        </Markdown>
+                        {/* <span className="program-desc">
+                            {props.program.description_short}
+                        </span> */}
                     </Flex>
                 </Flex>
             </Flex>

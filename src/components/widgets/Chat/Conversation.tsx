@@ -1,15 +1,18 @@
 import React, { forwardRef } from "react";
 
-import Markdown from "react-markdown";
+import Markdown, { ExtraProps } from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 import { Flex } from "../../container";
 import { IConversationProps, RecommendedOptionType } from "@/types/chat";
 import { Button, ButtonGroup } from "@/components/ui";
 import { NONE } from "@/utils/constants";
+import { useAppDispatch, useTypedSelector } from "@/store";
+import { setMetricCallBackUrl } from "@/store/reducers";
 
 export const Conversation: React.JSXElementConstructor<IConversationProps> =
-    forwardRef(function bubble(convProps, ref) {
+    forwardRef(function Bubble(convProps, ref) {
+        const dispatch = useAppDispatch();
         if (convProps.content.id.includes(NONE)) {
             return null;
         }
@@ -20,15 +23,10 @@ export const Conversation: React.JSXElementConstructor<IConversationProps> =
                 className={`conversation ${convProps.content?.role}`}
             >
                 <Flex className="items-start justify-end gap-10">
-                    {/* {convProps.content.role === "assistant" && (
-                        <BrainzAvatar
-                            src=""
-                            name="DY"
-                            size="30"
-                            color=""
-                        />
-                    )} */}
                     <div className={`message ${convProps.content?.role}`}>
+                        {convProps.content.role === "assistant" && (
+                            <div className="brinze-chat"></div>
+                        )}
                         <Markdown
                             remarkPlugins={[remarkGfm]}
                             components={{
@@ -80,9 +78,7 @@ export const Conversation: React.JSXElementConstructor<IConversationProps> =
                                     }
                                     return resultUI;
                                 },
-                                a: (props) => (
-                                    <a href={props.href}> {props.children}</a>
-                                ),
+                                a: (props) => CustomAnchorTag(props),
                             }}
                         >
                             {convProps.content?.content}
@@ -109,3 +105,18 @@ export const Conversation: React.JSXElementConstructor<IConversationProps> =
 // ) => {
 //     return <code {...props}>{props.children}</code>;
 // };
+
+const CustomAnchorTag = (
+    props: React.ClassAttributes<HTMLAnchorElement> &
+        React.AnchorHTMLAttributes<HTMLAnchorElement> &
+        ExtraProps,
+) => {
+    return (
+        <a
+            href={props.href}
+            style={{ fontWeight: "600", color: "#4040e1" }}
+        >
+            {props.children}
+        </a>
+    );
+};

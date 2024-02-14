@@ -17,41 +17,28 @@
                 width: 80%;
             }
 
+            .home-header {
+                margin-bottom: 20px;
+                .page-title {
+                    text-align: center;
+                }
+            }
+
             @include md {
                 width: 100%;
             }
 
-            .mood-box {
-                .mood-title {
-                
+            .home-shortcut {
+                width: 30%;
+
+                h4 {
+                    margin-bottom: 10px;
                 }
 
-                .mood-progress {
-                    position: relative;
-                }
-                
-            }
-
-            .mood-max {
-                position: absolute;
-                left: 45%;
-                top: 70%;
-            }
-            
-            .mood-scale {
-                margin-top: 40px;
-                width: 250px;
-                flex-shrink: 0;
-
-                @include xs {
-                    width: 200px;
-                }
-
-                @include xxs {
-                    width: 180px;
+                h4, p  {
+                    text-align: center;
                 }
             }
-
         }
     }
 }

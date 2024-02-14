@@ -8,9 +8,19 @@ type ProgramType =
     | "ptsd"
     | "anxiety"
     | "depression"
-    | "suicide";
+    | "suicidal";
 
 type InstructionType = "trauma" | "metric_tools";
+
+export interface ChatType {
+    id: string;
+    userId: string;
+    lastMessage: string;
+    lastedAt: string;
+    messages: string;
+    path: string;
+    sharePath?: string;
+}
 
 export type MetricColor = {
     [key: string]: string;
@@ -23,6 +33,9 @@ export type MetricColor = {
     low_risk: string;
     moderate_risk: string;
     high_risk: string;
+    very_unpleasant: string;
+    unpleasant: string;
+    pleasant: string;
 };
 
 export interface IConversationProps extends IDivProps {
@@ -45,42 +58,31 @@ export interface IConversation extends MessageType {
     progHistoryId: string;
 }
 
-export type RecentProgramType = {
-    progStrId?: ProgramType;
-    messages?: MessageType[]; // drafts
-    lastMessage?: string;
-    lastAnswers?: string[];
-    lastAt?: string;
-};
-
-export type CurrentProgramType = {
-    data?: ProgramDataType;
-    recentData?: RecentProgramType;
-};
-
 // Psychometric
 
-export type MetricCharactersType = {
-    score: number;
+export type MetricBasicItemType = {
+    score?: number;
     maxScore?: number;
-    title?: string;
     severity?: string;
-    color?: string;
     description?: string;
     updatedDate?: string;
+};
+
+export interface MetricCharactersType extends MetricBasicItemType {
+    title?: string;
+    color?: string;
     activeStep: number;
     itemsScore?: number[];
-    prevStep: number[];
-};
+    prevStep?: number[];
+}
 
 export type PsychometricScoreType = {
     [key: string]: MetricCharactersType;
-    trauma?: MetricCharactersType;
     mood?: MetricCharactersType;
     ptsd?: MetricCharactersType;
     anxiety?: MetricCharactersType;
     depression?: MetricCharactersType;
-    suicide?: MetricCharactersType;
+    suicidal?: MetricCharactersType;
 };
 
 export type RecommendedOptionType = {

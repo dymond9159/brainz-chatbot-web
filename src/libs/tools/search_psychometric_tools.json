@@ -8,7 +8,7 @@
             "tool_name": {
                 "type": "string",
                 "description":
-                    "get a tool name the best fit to your symptom."
+                    "get a tool name the best fit to your symptom from our psychometric tools."
             },
             "link": {
                 "type": "string",

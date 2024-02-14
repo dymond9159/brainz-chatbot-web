@@ -12,6 +12,7 @@ import {
 } from "@/components/container";
 import { Button } from "@/components/ui";
 import {
+    HomeShortcutItem,
     MobileNavigator,
     MoodScale,
     Navbar,
@@ -24,11 +25,11 @@ const HomePage: React.FC = () => {
     const router = useRouter();
 
     const handleTest = () => {
-        router.push(`${routes.PROGRAMS}#psychometric`);
+        router.push(`${routes.EXPLORE}#psychometric`);
     };
 
     const handleGoProgram = () => {
-        router.push(`${routes.PROGRAMS}#programs`);
+        router.push(`${routes.EXPLORE}#programs`);
     };
 
     return (
@@ -36,22 +37,43 @@ const HomePage: React.FC = () => {
             <Flex>
                 <Sidebar className="left-side" />
                 <Flex className="main-section col">
-                    <Navbar className="main-nav">Home</Navbar>
+                    <Navbar className="main-nav"></Navbar>
                     <Content className="home-content">
-                        <Wrapper className="flex">
-                            <Flex className="col items-center justify-center full gap-15">
-                                <MoodScale />
-                                <br></br>
-                                <h3>Anytime, Access our system!</h3>
-                                <Flex className="row items-center justify-center full gap-15 mt-10">
-                                    <Button onClick={handleGoProgram}>
-                                        Programs
-                                    </Button>
-                                    <Button onClick={handleTest}>
-                                        Psychometric Test
-                                    </Button>
+                        <Wrapper className="flex col items-center justify-center">
+                            <Section className="home-header">
+                                <h2 className="page-title">
+                                    Welcome to Brainz Health, <br />
+                                    Mental Health Simplified
+                                </h2>
+                            </Section>
+                            <Section>
+                                <h3 className="sub-title">
+                                    How can we help you?
+                                </h3>
+                                <Flex className="wrap full gap-15 items-start">
+                                    <HomeShortcutItem
+                                        title={"Mind Test"}
+                                        url={""}
+                                        description={
+                                            "I would like to take psychological tests"
+                                        }
+                                    />
+                                    <HomeShortcutItem
+                                        title={"Mind Support"}
+                                        url={""}
+                                        description={
+                                            "I would like to Speak to Brainz AI"
+                                        }
+                                    />
+                                    <HomeShortcutItem
+                                        title={"Mind Check"}
+                                        url={""}
+                                        description={
+                                            "I would like to see my profile insights"
+                                        }
+                                    />
                                 </Flex>
-                            </Flex>
+                            </Section>
                         </Wrapper>
                     </Content>
                     <MobileNavigator />

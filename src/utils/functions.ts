@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
+import { nanoid } from "ai";
 import moment from "moment";
 import { customAlphabet } from "nanoid";
 import { INSTRUCTIONS, PROGRAMS, PSYCHOMETRICS } from "./constants";
@@ -10,14 +11,17 @@ export function cn(...inputs: ClassValue[]) {
     return clsx(inputs);
 }
 
-export const nanoid = (size: number = 16) =>
-    customAlphabet(
-        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
-        size,
-    ); // 16-character random string
+export const nanoId = (size: number = 16) => {
+    // const _id =  customAlphabet(
+    //     "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+    //     size,
+    // ); // 16-character random string
+
+    return nanoid(16);
+};
 
 export function formatDate(
-    input: string | number | Date,
+    input: string | number | Date | null | undefined,
     locale?: string,
 ): string {
     if (!input || input === "") return "";
@@ -73,7 +77,7 @@ export const calculateFinalScore = (
 
     // calculate score
     const _score =
-        metric !== "suicide"
+        metric !== "suicidal"
             ? _arr?.reduce((sum, v) => sum + v, 0)
             : Math.max(..._arr);
 

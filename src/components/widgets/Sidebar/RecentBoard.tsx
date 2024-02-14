@@ -1,58 +1,59 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, cache, useEffect, useState } from "react";
 import { Button, ButtonGroup, Icon } from "../../ui";
 import _utils from "@/utils";
 import { useRouter } from "next/navigation";
 import { useAppDispatch, useTypedSelector } from "@/store";
-import { removeRecentProgram } from "@/store/reducers";
 import { cn } from "@/utils/functions";
-import { IDivProps } from "@/types";
+import { ChatType, IDivProps } from "@/types";
+import { getChats } from "@/store/actions";
+import { deleteChat } from "@/store/reducers";
 
 interface IProps extends IDivProps {
-    progId?: string;
+    chatId?: string;
 }
 
 export const RecentBoard: React.FC<IProps> = (props) => {
     const router = useRouter();
     const dispatch = useAppDispatch();
 
-    const { recentPrograms } = useTypedSelector((state) => state.chat);
+    // const [chats, setChats] = useState<ChatType[]>();
+    const chats = useTypedSelector((state) => state.chat.chats);
+
+    useEffect(() => {
+        // const loadChats = cache(async (userId?: string) => {
+        //     setChats(await getChats(userId));
+        // });
+        // loadChats();
+    }, []);
 
     const handleToChat = (id: string) => {
         router.push(`/chat/${id}`);
     };
 
     const handleRemove = (id: string) => {
-        dispatch(removeRecentProgram(id));
+        dispatch(deleteChat(id));
     };
 
     return (
         <ButtonGroup
-            groupname="Recent Programs"
-            className="recent-programs-scroll full col gap-10 justify-start items-start"
+            groupname="Recent Mindchats"
+            className="recent-programs-scroll full col justify-start items-start"
         >
             <Suspense fallback={<div>Loading...</div>}>
-                {recentPrograms &&
-                    recentPrograms.map((item, index) => (
+                {chats &&
+                    chats.map((item, index) => (
                         <Button
                             className={cn(
-                                item.progStrId === props.progId
-                                    ? "current"
-                                    : "",
-                                ["full", "relative"],
+                                item.id === props.chatId ? "current" : "",
+                                ["full", "relative", "last-message"],
                             )}
                             key={index}
-                            onClick={() => handleToChat(item?.progStrId ?? "")}
+                            onClick={() => handleToChat(item?.id ?? "")}
                         >
-                            {_utils.functions.getProgram(item.progStrId).name}
-                            <br></br>
-                            <span className="last-message">
-                                {item.lastMessage}
-                            </span>
+                            {item.lastMessage}
                             <div
                                 className="remove"
-                                onClick={() =>
-                                    handleRemove(item?.progStrId ?? "")
-                                }
+                                onClick={() => handleRemove(item?.id ?? "")}
                             >
                                 <Icon name="trash" />
                             </div>

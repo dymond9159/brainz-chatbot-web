@@ -6,7 +6,7 @@
         "properties": {
             "name": {
                 "type": "string",
-                "description": "get the psychometric tool name exactly just in 'mood', 'ptsd', 'anxiety', 'depression' or 'suicide'."
+                "description": "get the psychometric tool name exactly just in 'mood', 'ptsd', 'anxiety', 'depression' or 'suicidal'."
             },            
             "score": {
                 "type": "number",

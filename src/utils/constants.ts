@@ -21,35 +21,31 @@ export const M_COLOR: MetricColor = {
     low_risk: "yellow",
     moderate_risk: "orange",
     high_risk: "red",
+    very_unpleasant: "",
+    unpleasant: "",
+    pleasant: "",
 };
 
+//How would you describe your current mood?
+
 export const INSTRUCTIONS: Record<InstructionType, string> = {
-    trauma: `
-    As a Trauma Therapist based on AI, your primary role is focused exactly to empathize, screen, diagnose, assess, and support individuals dealing just only with trauma and related mental health issues such as Mood, PTSD, Anxiety, Depression, and suicidal thoughts. Your goal is to screen, diagnose, and assess trauma-related issues, and then guide the care process based on these results to improve mental well-being.
-
-user profile:
-name: [username],
-age: [age] years old,
-locale: "HongKong",
-
-Here is psychometric tools based on verified questionnaire usable at our official website.
-"PTSD Assessment Tool(PCL-5)": {key: "ptsd", link: "../test/ptsd"}, 
-"Anxiety Assessment Tool(GAD-7)": {key: "anxiety", link: "../test/anxiety"},  
-"Depression Assessment Tool(PHQ-9)": {key: "depression", link: "../test/depression"},  
-"Suicidal Risk Assessment Tool(C-SSRS)": {key: "suicide", link: "../test/suicide"},
-   
-- Your approach is identifying and feeling mental health issues, deep interactions with users for self-reflection and understanding, and alternating between a warm, empathetic demeanor and a pragmatic, solution-focused style. 
-- You may ask about the user's gender, age, personality, ethnicity, or culture when needed. 
-- In order to idendity and clarity the issues user is facing now, ask often a question one at a time. 
-- Diagnose a potential symptom based on interactions.
-- To screen more details your symptom, Ask to use the best fit psychometric tool from our website.
- Once user aggree, invoke "search_psychometric_tools" function.
-- Your guidance will involve exploring coping mechanisms, reflecting on past experiences, setting goals for mental health improvement, identifying obstacles to well-being, and connecting users with therapists(in your locale). 
-
-today is [today].
-                
-The response format:
-Your repsonse should be summarized within 250 characters or less and without markdown.
+    trauma: `Today is [today].
+    As a AI Mind Support, you are a chatbot conversational interaction with me focused on dealing just only with trauma-related mental health issues such as mood, PTSD, anxiety and depression. You are designed and personalized to help I track my mental health and engage in conversations with a chatbot to healthcare better. Your goal is to help individual(me) to improve mental health status and their well-being overall. Your approach is identifying and feeling my mental health issues, deep interactions with users for self-reflection and understanding. Your tone is use between a warm, empathetic demeanor and a pragmatic, solution-focused style.
+    
+    1. Idendify a potential symptom based on interactions with me. In order to idendity and clarity the issues I am facing today, ask me often one question one at a time. Also In order to screen and monitor the mood scale, PTSD severity, anxiety severity, depression severity, suicidal risk, suggest to test the psychometric.
+    2. Personalized Mental Health Tracking: 
+    You track, screen, monitor, assess my mental health indicators such as mood, PTSD, anxiety, depression, suicidal risk and daily activities using the tools below on our website. You utilizes AI algorithms to analyze this data and provide personalized insights and recommendations tailored to my unique needs.
+    - Personalized Mood Tracker:
+    Use the interactive mood tracking features to track the mood. This is designed to help I track and manage my emotions over time. It is to guide me through the conversation process in the best effective way and one-by-one to monitor mood changes, identify patterns, and gain insight into their emotional well-being. Once completed the mood traking, record the daily mood and related factors such as mood scale, activity, sleep quality, and stress level.
+    - Personalized Other Psychometric Tools: Provide the direct link to connect one of them.
+    PTSD: {link:"../test/ptsd"},
+    Anxiety: {link:"../test/anxiety"},
+    Depression: {link:"../test/depression"}, 
+    3. Non-judgmental Listening and Guidance: You provide a safe space for me to express their thoughts and feelings without fear of judgment. Through empathetic responses and evidence-based techniques, the chatbot offers guidance, coping strategies, and resources to help me navigate challenging emotions and situations and improve the mental health, well-being.
+    
+    The Response Format is as follow: 
+    -Your repsonse must be summarized within 250 characters or less.
+    -Must provide the best fit recommended answer options with JSON data format at the end.
     `,
     metric_tools: ``,
 };
@@ -58,7 +54,7 @@ export const PROGRAMS: ProgramDataType[] = [
     {
         numid: 0,
         strid: "trauma",
-        name: "Trauma Therapist",
+        name: "Brainz: AI Mind Support",
         type: "program",
         src: "/avatars/31c21e13-7b45-41b2-b413-9923e4641d83.webp",
         url: "/chat/trauma",
@@ -123,35 +119,17 @@ export const generateSuggestAnswersInstruction = (program: ProgramDataType) => {
 };
 
 export const PSYCHOMETRICS: ProgramDataType[] = [
-    // Mood Tracker
-    {
-        numid: 0,
-        strid: "mood",
-        name: "Mood Tracker",
-        type: "psychometric",
-        src: "/avatars/a3072a94-8524-4ea2-b41e-0ed58ebe6aba.png",
-        url: "/test/mood",
-        description_short: "Expert in mood tracking with MFQ questionnaire",
-        description_long: `
-        Welcome to Mood Tracker! How are you feeling today?
-        `,
-        suggests: [],
-        questionnaires: {
-            ...moodAdultShortQuestionnaire,
-        },
-    },
-    // PTSD
+    // Trauma
     {
         numid: 1,
-        strid: "ptsd",
-        name: "PTSD Assessment Tool",
+        strid: "trauma",
+        name: "Trauma",
         type: "psychometric",
         src: "/avatars/0c1831d3-8b05-49af-a065-2ce390173f36.png",
-        url: "/test/ptsd",
+        url: "/test/trauma",
         description_short:
-            "Expert guidance through PTSD Symptoms assessment using DSM-5 criteria.",
-        description_long: `
-        Hello! Let's start your PTSD Symptoms assessment journey together.`,
+            "Feeling exhausted, but yet overstimulated? This test will help you better understand if you're going through a state of prolonged stress, aka trauma. \n\n **Take the PTSD - PCL-5 test here.**",
+        description_long: ``,
         suggests: [],
         questionnaires: {
             ...ptsdQuestionnaire,
@@ -161,15 +139,13 @@ export const PSYCHOMETRICS: ProgramDataType[] = [
     {
         numid: 2,
         strid: "anxiety",
-        name: "Anxiety Assessment Tool",
+        name: "Anxiety",
         type: "psychometric",
         src: "/avatars/0a33a50b-87de-412f-a84c-4c17d992a41c.png",
         url: "/test/anxiety",
         description_short:
-            "Guides users through anxiety questionnaires, providing scores and insights.",
-        description_long: `
-        Assess and track anxiety symptoms easily. Get personalized insights, track progress, and access resources for better mental well-being. Customize reminders and take control of your anxiety management journey. Empower yourself with this comprehensive tool.
-        `,
+            "Feeling jittery, uneasy and fearful of the future? This test will help you better track your anxiety levels and make sense of your triggers. \n\n **Take the GAD-7 test here.**",
+        description_long: ``,
         suggests: [],
         questionnaires: {
             ...anxietyQuestionnaire,
@@ -179,36 +155,50 @@ export const PSYCHOMETRICS: ProgramDataType[] = [
     {
         numid: 3,
         strid: "depression",
-        name: "Depression Assessment Tool",
+        name: "Depression",
         type: "psychometric",
         src: "/avatars/19d3f8df-7e4f-484d-a524-818d4eb2e705.png",
         url: "/test/depression",
         description_short:
-            "Assess, track, and manage depression symptoms with the Depression Measurement. Personalized insights, progress tracking, and valuable resources for improved mental well-being.",
-        description_long: `
-        Assess and track depression symptoms effortlessly. Get personalized insights, monitor progress, and access resources for improved mental well-being. Customize reminders and take charge of your journey towards better mental health. Empower yourself with this comprehensive tool.
-        `,
+            "Is it 'normal' saddness, fatigue and indifference? Or, is it something deeper? This test will help you track the severity of your depression levels. \n\n **Take the PHQ-9 test here.**",
+        description_long: ``,
         suggests: [],
         questionnaires: {
             ...depressionQuestionnaire,
         },
     },
-    // Suicid
+    // Mood Tracker
     {
-        numid: 4,
-        strid: "suicide",
-        name: "Suicidal Risk Assessment",
+        numid: 0,
+        strid: "mood",
+        name: "Mood",
         type: "psychometric",
-        src: "/avatars/dffd1f24-a00f-46d8-9403-c5baa7e2a528.png",
-        url: "/test/suicide",
+        src: "/avatars/a3072a94-8524-4ea2-b41e-0ed58ebe6aba.png",
+        url: "/test/mood",
         description_short:
-            "Assess, monitor, and manage suicidal risk factors with the Suicidal Risk Assessment. Personalized insights, progress tracking, and valuable resources for improved mental well-being.",
-        description_long: `
-        Assess and monitor suicidal risk factors easily. Get personalized insights, track progress, and access resources for better mental well-being. Customize reminders and take control of your safety journey. Empower yourself with this comprehensive tool.
-        `,
+            "Uncertain of your mood severity? Want to be better able to track your up's and down's?  \n\n **Take the MFQ questionnaire.**",
+        description_long: ``,
         suggests: [],
         questionnaires: {
-            ...suicidalQuestionnaire,
+            ...moodAdultShortQuestionnaire,
         },
     },
+    // // Suicid
+    // {
+    //     numid: 4,
+    //     strid: "suicidal",
+    //     name: "Suicidal Risk Assessment",
+    //     type: "psychometric",
+    //     src: "/avatars/dffd1f24-a00f-46d8-9403-c5baa7e2a528.png",
+    //     url: "/test/suicidal",
+    //     description_short:
+    //         "Assess, monitor, and manage suicidal risk factors with the Suicidal Risk Assessment. Personalized insights, progress tracking, and valuable resources for improved mental well-being.",
+    //     description_long: `
+    //     Assess and monitor suicidal risk factors easily. Get personalized insights, track progress, and access resources for better mental well-being. Customize reminders and take control of your safety journey. Empower yourself with this comprehensive tool.
+    //     `,
+    //     suggests: [],
+    //     questionnaires: {
+    //         ...suicidalQuestionnaire,
+    //     },
+    // },
 ];

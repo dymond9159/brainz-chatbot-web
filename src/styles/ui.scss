@@ -23,7 +23,8 @@ button {
     
     .button-text {
         font-weight: bold;
-        color: var(--foreground-secondary)
+        color: var(--foreground-secondary);
+        text-align: center;
     }
 
     &:disabled {

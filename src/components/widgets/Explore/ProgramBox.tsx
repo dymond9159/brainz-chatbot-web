@@ -12,20 +12,18 @@ interface IProps extends IDivProps {
 
 export const ProgramBox: React.FC<IProps> = (props) => {
     return (
-        <Section>
-            <Flex className="col items-center justify-center full gap-15">
-                <h2 id={props.id}>{props.title}</h2>
-                <p>{props.description}</p>
-                <Flex className="wrap justify-between gap-10 mt-10">
-                    {props.programs.length &&
-                        props.programs.map((item, idx) => (
-                            <Program
-                                key={idx}
-                                program={item}
-                            />
-                        ))}
-                </Flex>
+        <Flex className="wrap items-center justify-center full gap-15">
+            <h2 id={props.id}>{props.title}</h2>
+            <p>{props.description}</p>
+            <Flex className="wrap justify-between gap-10 mt-10">
+                {props.programs.length &&
+                    props.programs.map((item, idx) => (
+                        <Program
+                            key={idx}
+                            program={item}
+                        />
+                    ))}
             </Flex>
-        </Section>
+        </Flex>
     );
 };

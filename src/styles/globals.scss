@@ -1,8 +1,8 @@
 :root {
   --max-width: 1100px;
-  --header-height: 70px;
+  --header-height: 50px;
   --border-radius-small: 5px;
-  --border-radius-medium: 10px;
+  --border-radius-medium: 15px;
   --border-radius-full: 50px;
   --font-mono: "Arial", "Inter", 'Roboto Mono', 'Segoe UI Mono','Cascadia Mono'
     , 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
@@ -14,13 +14,16 @@
   --background-medium: #d4d4d4;
   --background-light: #c0c0c0;
 
+  --background-green: #91dd90;
+  --background-green-secondary: #cbffc6;
+
   --background-trans-0: none;
   --background-trans-10: #00000010;
   --background-trans-25: #00000025;
 
   --foreground: #000000;
   --foreground-secondary: #333333;
-  --foreground-tetrary: #474747;
+  --foreground-tetrary: #757575;
 
   --background-message-primary: #c2ecb4;
   --background-message-secondary: #f3f3f3;
@@ -204,6 +207,15 @@ h1, h2, h3 {
   line-height: 150%;  
 }
 
+h3 {
+  font-weight: 600;
+}
+
+h4, h5, h6 {
+  font-weight: 600;
+  color: var(--foreground-secondary);
+}
+
 a {
   font-size: medium;
   color: inherit;
@@ -216,10 +228,10 @@ a {
 }
 
 p {
-  a {
-    font-weight: 600;
-    color: #4040e1;
-  }
+  // a {
+  //   font-weight: 600;
+  //   color: #4040e1;
+  // }
 }
 
 p {

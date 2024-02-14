@@ -59,7 +59,7 @@ export const QuestionnaireWizard: React.FC<IProps> = (props) => {
     // when change the your experience value.
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const _value = Number.parseInt(e.target.value);
-        if (activeMetric === "suicide") {
+        if (activeMetric === "suicidal") {
             if (activeStep === 6 && _value === 1) {
                 setIsFollow(true);
             } else {
@@ -85,7 +85,7 @@ export const QuestionnaireWizard: React.FC<IProps> = (props) => {
         if (activeStep && _value !== -1) {
             let _nextStep = !lastPage ? activeStep + 1 : 0; // default
 
-            if (activeMetric === "suicide") {
+            if (activeMetric === "suicidal") {
                 if (activeStep === 2 && _value === 0) {
                     _nextStep = 6;
                     goToStep(6);

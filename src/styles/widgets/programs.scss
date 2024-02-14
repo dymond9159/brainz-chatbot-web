@@ -1,21 +1,32 @@
 .program {
-    width: 100%;
-    padding: 20px 30px;
+    width: 49%;
+    height: 175px;
+    padding: 15px 10px;
 
     @include sm {
         width: 100%;
     }
 
-    @include xs {
-        .flex {
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+    .flex {
+        width: 100%;
+        height: 100%;
+    }
 
-            span {
-                text-align: center;
-            }
-        }
+    @include xs {
+        
+    }
+
+    .timespan, .questionspan {
+        border-radius: var(--border-radius-medium);
+        padding: 3px 15px;
+    }
+
+    .timespan {
+        background: var(--background-green-secondary);
+    }
+
+    .questionspan {
+        border: solid 1px var(--border-color-primary);
     }
 }
 
@@ -25,7 +36,10 @@
 }
 
 .program-desc {
-    color: var(--foreground-secondary);
-    font-weight: 300;
-    margin-top: 10px;
+    p {
+        color: var(--foreground-secondary);
+        font-size: small;
+        font-weight: 300;
+        margin-top: 10px;
+    }
 }

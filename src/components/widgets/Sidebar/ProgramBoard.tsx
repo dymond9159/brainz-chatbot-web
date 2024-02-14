@@ -12,7 +12,7 @@ export const ProgramBoard: React.FC = (props) => {
         >
             <Flex className="shortcut row gap-15 full">
                 <Icon name="radio-grid" />
-                <Link href={`${routes.PROGRAMS}#programs`}>Explore</Link>
+                <Link href={`${routes.EXPLORE}#programs`}>Explore</Link>
             </Flex>
         </ButtonGroup>
     );

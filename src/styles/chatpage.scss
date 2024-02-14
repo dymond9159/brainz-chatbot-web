@@ -49,7 +49,8 @@
                     .message {
                         text-align: left;                            
                         border-radius: 6px;
-                        padding: 0.6rem 1rem;
+                        padding: 12px 20px;
+                        position: relative;
 
                         ol, ul {
                             padding: 0px 20px;
@@ -67,7 +68,7 @@
 
                     .assistant {
                         color: var(--foreground-tetrary);
-                        background: var(--background-message-secondary);
+                        background: transparent; //(--background-message-secondary);
 
                         p {
                             margin-bottom: 20px;
@@ -75,7 +76,19 @@
                         
                         p:last-child {
                             margin-bottom: 0px;
-                        }
+                        }                        
+                    }
+
+                    .brinze-chat {
+                        width: 12px;
+                        height: 12px;
+                        
+                        position: absolute;
+                        left: 0px;
+                        top: 2px;
+                        margin-top: 16px;
+                        background-color: var(--background-green);
+                        border-radius: var(--border-radius-full);
                     }
 
                 }
@@ -89,6 +102,17 @@
                     width: 100%;
                 }
 
+            }
+            .start-message {
+                margin-top: 20px;
+                button {
+                    width: 48%;
+                    padding: 15px 20px;
+
+                    @include xs {
+                        width: 100%;
+                    }
+                }
             }
         }
         .chat-prompts {

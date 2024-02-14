@@ -1,76 +1,48 @@
+"use client";
+
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { CurrentProgramType, RecentProgramType } from "@/types";
+import { ChatType } from "@/types";
 
 export type ChatStateProps = {
-    recentPrograms: RecentProgramType[];
-    currentProgram?: CurrentProgramType;
+    chats?: ChatType[];
 };
 
 const initialState: ChatStateProps = {
-    recentPrograms: [],
-    currentProgram: undefined,
+    chats: [],
 };
 
 export const chatReducer = createSlice({
     name: "chat",
     initialState,
     reducers: {
-        updateRecentProgram: (
-            state,
-            action: PayloadAction<RecentProgramType>,
-        ) => {
-            const recentProgram = action.payload;
-            const findOne = state.recentPrograms.findLastIndex(
-                (_) => _.progStrId === recentProgram.progStrId,
-            );
+        setChats: (state, action: PayloadAction<ChatType>) => {
+            const payload = action.payload;
+            const _chats = state.chats;
 
-            if (findOne === -1) {
-                if (recentProgram.messages) {
-                    state.recentPrograms = [
-                        ...state.recentPrograms,
-                        recentProgram,
+            if (_chats) {
+                // find a element
+                const findOne = _chats?.findIndex(
+                    (item) => item.id === payload.id,
+                );
+
+                // update
+                if (findOne === -1) {
+                    state.chats = [payload, ..._chats];
+                } else {
+                    state.chats = [
+                        payload,
+                        ..._chats.filter((item) => item.id !== payload.id),
                     ];
                 }
-            } else {
-                state.recentPrograms = state.recentPrograms.map((_item) => {
-                    if (_item.progStrId === recentProgram.progStrId) {
-                        return {
-                            ..._item,
-                            lastMessage:
-                                recentProgram.lastMessage ?? _item.lastMessage,
-                            lastAnswers: recentProgram.lastAnswers ?? [],
-                            lastAt: recentProgram.lastAt ?? _item.lastAt,
-                            messages: [
-                                ...(_item.messages ?? []),
-                                ...(recentProgram.messages ?? []),
-                            ],
-                        };
-                    } else {
-                        return _item;
-                    }
-                });
-                // .sort((a, b) => a.lastAt.getTime() - b.lastAt.getTime());
             }
         },
-        removeRecentProgram: (state, action: PayloadAction<string>) => {
-            const progStrId = action.payload;
-            state.recentPrograms = state.recentPrograms.filter(
-                (item) => item.progStrId !== progStrId,
+        deleteChat: (state, action: PayloadAction<string>) => {
+            state.chats = state.chats?.filter(
+                (item) => item.id !== action.payload,
             );
-            state.currentProgram = undefined;
-        },
-        setCurrentProgram: (
-            state,
-            action: PayloadAction<CurrentProgramType>,
-        ) => {
-            const current = action.payload;
-            if (current) {
-                state.currentProgram = current;
-            }
         },
     },
 });
 
-export const { setCurrentProgram, updateRecentProgram, removeRecentProgram } =
-    chatReducer.actions;
+export const { setChats, deleteChat } = chatReducer.actions;

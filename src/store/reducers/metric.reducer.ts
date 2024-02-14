@@ -22,6 +22,7 @@ const initialState: MetricStateProps = {
     scores: {
         mood: {
             score: 0,
+            maxScore: 10,
             title: "Hey, Unlock Your Mood, Embrace Your Score!",
             severity: "Not measured yet",
             description: "",
@@ -32,6 +33,7 @@ const initialState: MetricStateProps = {
         },
         anxiety: {
             score: 0,
+            maxScore: 21,
             title: "",
             severity: "Not measured yet",
             description: "",
@@ -42,6 +44,7 @@ const initialState: MetricStateProps = {
         },
         depression: {
             score: 0,
+            maxScore: 27,
             title: "",
             severity: "Not measured yet",
             description: "",
@@ -52,16 +55,7 @@ const initialState: MetricStateProps = {
         },
         ptsd: {
             score: 0,
-            title: "",
-            severity: "Not measured yet",
-            description: "",
-            updatedDate: "",
-            activeStep: 0,
-            prevStep: new Array(MAX_COUNT).fill(0),
-            itemsScore: new Array(MAX_COUNT).fill(NOT_METRIC_VALUE),
-        },
-        suicide: {
-            score: 0,
+            maxScore: 80,
             title: "",
             severity: "Not measured yet",
             description: "",
@@ -92,6 +86,7 @@ export const metricReducer = createSlice({
                 state.scores[state.activeMetric].itemsScore = _updatedScore;
                 state.scores[state.activeMetric].activeStep =
                     action.payload.activeStep;
+
                 state.scores[state.activeMetric].prevStep[
                     action.payload.activeStep
                 ] = action.payload.prevStep;

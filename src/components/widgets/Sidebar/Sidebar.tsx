@@ -13,7 +13,7 @@ import {
 } from "..";
 
 export interface ISidebarProps extends React.ComponentProps<"div"> {
-    progId?: string;
+    chatId?: string;
 }
 
 export const Sidebar: React.FC<ISidebarProps> = (props) => {
@@ -27,11 +27,8 @@ export const Sidebar: React.FC<ISidebarProps> = (props) => {
             <Wrapper>
                 <Logo />
                 <Flex className="flex-board col items-start justify-start">
-                    <Section className="feature-board">
-                        <ProgramBoard />
-                    </Section>
                     <Section className="recent-board">
-                        <RecentBoard progId={props.progId} />
+                        <RecentBoard chatId={props.chatId} />
                     </Section>
                     <Section className="shortcut-board">
                         <ShortcutBoard />

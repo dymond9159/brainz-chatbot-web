@@ -16,20 +16,24 @@
         height: 100%;
 
         .scroll-content{
-            height: 80%;
+            height: 100%;
             overflow-y: auto;
-            padding: 10px 5px;
-            button {
+            // padding: 10px 5px;
+            button.last-message {
                 position: relative;
-                span .last-message {
-                    margin-top: 5px;
-                    display: inline-block;
-                    width: 100%;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;  
+                background: transparent;
+                margin-bottom: 2px;
                 
-                }
+                    span {
+                        text-align: left;
+                        margin-top: 5px;
+                        display: inline-block;
+                        width: 100%;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;  
+                    
+                    }
                 
                 .remove {
                     position: absolute;
@@ -40,11 +44,12 @@
                     padding: 0;
         
                     &:hover {
-                        color: var(--error-color, #a81d1d)
+                        color: var(--error-color, #a81d1d) !important;
                     }
                 }
         
                 &:hover, &.current {
+                    background: var(--background-trans-10);
                     .remove {
                         visibility: visible;
                     }

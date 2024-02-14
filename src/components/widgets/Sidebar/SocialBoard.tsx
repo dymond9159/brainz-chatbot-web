@@ -10,24 +10,24 @@ export const SocialBoard: React.FC = (props) => {
             groupname="Follow us"
             className="full row gap-10 justify-start"
         >
-            <Link
+            {/* <Link
                 href={_utils.routes.LINKEDIN}
                 target="_blank"
             >
                 <Button icon="linkedin"></Button>
-            </Link>
+            </Link> */}
             <Link
                 href={_utils.routes.FACEBOOK}
                 target="_blank"
             >
                 <Button icon="facebook"></Button>
             </Link>
-            <Link
+            {/* <Link
                 href={_utils.routes.INSTAGRAM}
                 target="_blank"
             >
                 <Button icon="instagram"></Button>
-            </Link>
+            </Link> */}
             <Link
                 href={_utils.routes.TIKTOK}
                 target="_blank"
