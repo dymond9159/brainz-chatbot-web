@@ -37,6 +37,7 @@ const similarityMetric = "";
 
 export interface ChatPageProps {
     id?: string;
+    initialMessage?: Message[];
 }
 
 export const Chat: React.FC<ChatPageProps> = (props) => {
@@ -66,6 +67,7 @@ export const Chat: React.FC<ChatPageProps> = (props) => {
     } = useChat({
         // api: "api/chat",
         id: props.id,
+        initialMessages: props.initialMessage ?? [],
         onError: (err: Error) => {
             console.log(err);
         },
@@ -102,6 +104,12 @@ export const Chat: React.FC<ChatPageProps> = (props) => {
             }
         },
     });
+
+    useEffect(() => {
+        if (messages.length === 0) {
+            router.push(routes.CHAT);
+        }
+    }, [messages]);
 
     useEffect(() => {
         const loadChats = async () => {
@@ -234,7 +242,7 @@ export const Chat: React.FC<ChatPageProps> = (props) => {
                                                 )}
                                         </Box>
                                     )}
-                                    {messages.length === 1 && (
+                                    {messages.length === 1 && !props.id && (
                                         <ButtonGroup className="wrap start-message gap-15">
                                             {START_PROMPTS &&
                                                 START_PROMPTS.map(

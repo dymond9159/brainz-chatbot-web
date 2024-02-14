@@ -7,6 +7,7 @@ import { cn } from "@/utils/functions";
 import { ChatType, IDivProps } from "@/types";
 import { getChats } from "@/store/actions";
 import { deleteChat } from "@/store/reducers";
+import { useSidebar } from "@/hooks";
 
 interface IProps extends IDivProps {
     chatId?: string;
@@ -15,6 +16,7 @@ interface IProps extends IDivProps {
 export const RecentBoard: React.FC<IProps> = (props) => {
     const router = useRouter();
     const dispatch = useAppDispatch();
+    const { toggleSidebar } = useSidebar();
 
     // const [chats, setChats] = useState<ChatType[]>();
     const chats = useTypedSelector((state) => state.chat.chats);
@@ -27,10 +29,12 @@ export const RecentBoard: React.FC<IProps> = (props) => {
     }, []);
 
     const handleToChat = (id: string) => {
+        toggleSidebar();
         router.push(`/chat/${id}`);
     };
 
     const handleRemove = (id: string) => {
+        toggleSidebar();
         dispatch(deleteChat(id));
     };
 

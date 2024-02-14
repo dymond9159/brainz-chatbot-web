@@ -1,6 +1,8 @@
 "use client";
 
 import { Chat } from "@/components/widgets";
+import { getChat } from "@/store/actions";
+import { Message } from "ai";
 
 export interface ChatPageProps {
     params: {
@@ -11,7 +13,17 @@ export interface ChatPageProps {
 const ChatPage = (props: ChatPageProps) => {
     const id = props.params.id;
 
-    return <Chat id={id} />;
+    const chats = getChat(id);
+    let initialMessage;
+    if (chats) {
+        initialMessage = JSON.parse(chats.messages) ?? [];
+    }
+
+    return (
+        <Chat
+            id={id}
+            initialMessage={initialMessage as Message[]}     />
+    );
 };
 
 export default ChatPage;

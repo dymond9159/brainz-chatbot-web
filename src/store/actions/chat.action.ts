@@ -37,7 +37,7 @@ export const getChats = (userId?: string) => {
     }
 };
 
-export const getChat = async (id: string) => {
+export const getChat = (id: string) => {
     const chats = getChats();
     if (chats) {
         return chats.filter((item) => item.id === id)[0];
