@@ -38,8 +38,8 @@ const DashboardPage: React.FC = () => {
                                 <MonitorBox title="">
                                     <Flex className="wrap full gap-15 items-start">
                                         <Psychometric
-                                            title="PTSD"
-                                            scores={psycometricScores?.ptsd}
+                                            title="Trauma"
+                                            scores={psycometricScores?.trauma}
                                         />
                                         <Psychometric
                                             title="Anxiety"

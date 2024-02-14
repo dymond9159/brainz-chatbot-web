@@ -27,7 +27,7 @@ import { getChat, setChat } from "@/store/actions";
 import { nanoid } from "nanoid";
 import { redirect, usePathname, useRouter } from "next/navigation";
 import { MessageType, ProfileForMetric } from "@/types";
-import { NONE } from "@/utils/constants";
+import { NONE, START_PROMPTS } from "@/utils/constants";
 import routes from "@/utils/routes";
 import { nanoId } from "@/utils/functions";
 
@@ -46,7 +46,6 @@ export const Chat: React.FC<ChatPageProps> = (props) => {
     const instructionId = "trauma";
 
     // const [chatId, setChatId] = useState<string | undefined>(props.id);
-    const [isStartChat, setIsStartChat] = useState<boolean>(false);
     const [promptMessage, setPromptMessage] = useState<Message>();
     const { formRef, onKeyDown } = useEnterSubmit();
     const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -71,7 +70,6 @@ export const Chat: React.FC<ChatPageProps> = (props) => {
             console.log(err);
         },
         onFinish: async (message) => {
-            console.log("here");
             // update message
             if (promptMessage) {
                 // update new message
@@ -88,9 +86,7 @@ export const Chat: React.FC<ChatPageProps> = (props) => {
                             createdAt: message.createdAt?.toISOString(),
                         },
                     ]);
-                    alert(1);
                     router.push(`${routes.CHAT}/${newChatId}`);
-                    setIsStartChat(false);
                 } else {
                     setChat(props.id, [
                         ...(messages as MessageType[]),
@@ -144,7 +140,7 @@ export const Chat: React.FC<ChatPageProps> = (props) => {
     }, [input]);
 
     useEffect(() => {
-        if (promptMessage && props.id && append) {
+        if (promptMessage) {
             const healthState: any = Object.entries(scores).reduce(
                 (acc, [key, value]) => ({
                     ...acc,
@@ -200,7 +196,7 @@ export const Chat: React.FC<ChatPageProps> = (props) => {
 
     const handleReset = () => {
         setMessages([]);
-        handlePrompt("Hi, there!", false);
+        // handlePrompt("Hi, there!", false);
     };
 
     return (
@@ -238,12 +234,23 @@ export const Chat: React.FC<ChatPageProps> = (props) => {
                                                 )}
                                         </Box>
                                     )}
-                                    {!props.id && (
+                                    {messages.length === 1 && (
                                         <ButtonGroup className="wrap start-message gap-15">
-                                            <Button>Check Stress Level</Button>
-                                            <Button>Check Mood Level</Button>
-                                            <Button>Check Uneasy Level</Button>
-                                            <Button>Check Sadness Level</Button>
+                                            {START_PROMPTS &&
+                                                START_PROMPTS.map(
+                                                    (item, key) => (
+                                                        <Button
+                                                            onClick={() =>
+                                                                handlePrompt(
+                                                                    item,
+                                                                )
+                                                            }
+                                                            key={key}
+                                                        >
+                                                            {item}
+                                                        </Button>
+                                                    ),
+                                                )}
                                         </ButtonGroup>
                                     )}
                                     <ChatScrollAnchor
@@ -256,12 +263,12 @@ export const Chat: React.FC<ChatPageProps> = (props) => {
                                     <Flex className="row justify-center items-center gap-10">
                                         {/* <Button>Psychometric Test</Button> */}
                                         {/* <Button icon="radio-grid">Explore</Button> */}
-                                        <Button
+                                        {/* <Button
                                             icon="arrow-clockwise"
                                             onClick={handleReset}
                                         >
                                             Reset
-                                        </Button>
+                                        </Button> */}
                                     </Flex>
                                     <form
                                         ref={formRef}

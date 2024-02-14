@@ -1,3 +1,5 @@
+"use client";
+
 import React, { HTMLInputTypeAttribute, useEffect, useState } from "react";
 
 export interface ITextareaProps extends React.ComponentProps<"textarea"> {

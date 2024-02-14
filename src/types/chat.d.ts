@@ -2,13 +2,7 @@ import { ProgramDataType } from "@/components/widgets";
 import { Message } from "ai/react";
 
 type RoleType = "function" | "user" | "assistant" | "data" | "system" | "tool";
-type ProgramType =
-    | "trauma"
-    | "mood"
-    | "ptsd"
-    | "anxiety"
-    | "depression"
-    | "suicidal";
+type ProgramType = "trauma" | "mood" | "anxiety" | "depression";
 
 type InstructionType = "trauma" | "metric_tools";
 
@@ -72,17 +66,16 @@ export interface MetricCharactersType extends MetricBasicItemType {
     title?: string;
     color?: string;
     activeStep: number;
-    itemsScore?: number[];
-    prevStep?: number[];
+    itemsScore: number[];
+    prevStep: number[];
 }
 
 export type PsychometricScoreType = {
     [key: string]: MetricCharactersType;
     mood?: MetricCharactersType;
-    ptsd?: MetricCharactersType;
+    trauma?: MetricCharactersType;
     anxiety?: MetricCharactersType;
     depression?: MetricCharactersType;
-    suicidal?: MetricCharactersType;
 };
 
 export type RecommendedOptionType = {

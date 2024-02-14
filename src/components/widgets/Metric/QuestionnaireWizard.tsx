@@ -37,7 +37,7 @@ export const QuestionnaireWizard: React.FC<IProps> = (props) => {
         (state) => state.metric.scores[activeMetric ?? ""]?.itemsScore,
     );
     const prevStep = useTypedSelector(
-        (state) => state.metric.scores[activeMetric ?? ""].prevStep,
+        (state) => state.metric.scores[activeMetric ?? ""]?.prevStep,
     );
 
     // when lasted tab, use "Finish >" button instead "Next >"

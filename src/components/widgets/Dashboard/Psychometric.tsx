@@ -33,7 +33,7 @@ export const Psychometric: React.FC<IProps> = (props) => {
                     props.h_align ?? "items-center",
                 )}
             >
-                <Flex className="row">
+                <Flex className={cn("row")}>
                     <Box
                         className="progress-box"
                         style={{ width: props.size }}
@@ -76,19 +76,16 @@ export const Psychometric: React.FC<IProps> = (props) => {
                     </Box>
 
                     {isExpand && (
-                        <Flex className="col ml-10">
+                        <Flex className="col ml-10 gap-5 items-start">
+                            {isExpand && <h3>{props?.title ?? ""}</h3>}
                             <h4>This can feel like:</h4>
                             <span style={{ color: pathColor }}>
                                 {props?.scores?.severity ?? "Not measured yet"}
                             </span>
-                            <em>
-                                <label>
-                                    Last measured:{" "}
-                                    {formatDate(
-                                        props?.scores?.updatedDate ?? "",
-                                    )}
-                                </label>
-                            </em>
+                            <label>
+                                Last updated:{" "}
+                                {formatDate(props?.scores?.updatedDate ?? "")}
+                            </label>
                         </Flex>
                     )}
                 </Flex>
@@ -103,7 +100,7 @@ export const Psychometric: React.FC<IProps> = (props) => {
                         </Markdown>
                     </React.Fragment>
                 )}
-                <h4>{props?.title ?? ""}</h4>
+                {!isExpand && <h4>{props?.title ?? ""}</h4>}
             </Flex>
         </Box>
     );

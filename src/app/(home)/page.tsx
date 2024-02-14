@@ -53,21 +53,21 @@ const HomePage: React.FC = () => {
                                 <Flex className="wrap full gap-15 items-start">
                                     <HomeShortcutItem
                                         title={"Mind Test"}
-                                        url={""}
+                                        url={routes.EXPLORE}
                                         description={
                                             "I would like to take psychological tests"
                                         }
                                     />
                                     <HomeShortcutItem
                                         title={"Mind Support"}
-                                        url={""}
+                                        url={routes.CHAT}
                                         description={
                                             "I would like to Speak to Brainz AI"
                                         }
                                     />
                                     <HomeShortcutItem
                                         title={"Mind Check"}
-                                        url={""}
+                                        url={routes.DASHBOARD}
                                         description={
                                             "I would like to see my profile insights"
                                         }

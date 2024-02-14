@@ -26,10 +26,10 @@ export const ReportWizard: React.FC<IProps> = (props) => {
     // get the monitor results
     const activeMetric = useTypedSelector((state) => state.metric.activeMetric);
     const activeScore = useTypedSelector(
-        (state) => state.metric.scores[activeMetric ?? ""].itemsScore,
+        (state) => state.metric.scores[activeMetric ?? ""]?.itemsScore,
     );
     const lastedUpdated = useTypedSelector(
-        (state) => state.metric.scores[activeMetric ?? ""].updatedDate,
+        (state) => state.metric.scores[activeMetric ?? ""]?.updatedDate,
     );
 
     // final score
@@ -40,11 +40,9 @@ export const ReportWizard: React.FC<IProps> = (props) => {
     const [isNewRecord, setIsNewRecord] = useState<boolean>(false);
     const [isOverwrite, setIsOverwrite] = useState<boolean>(false);
 
-    console.log({ activeMetric, activeScore });
-
     useEffect(() => {
         // get final score from activeScore array
-        if (activeMetric && activeScore && props.maxScore && props.report) {
+        if (activeMetric) {
             const finalScore = _utils.functions.calculateFinalScore(
                 activeMetric,
                 activeScore,
@@ -65,6 +63,7 @@ export const ReportWizard: React.FC<IProps> = (props) => {
                     description: severity[0].description,
                     updatedDate: new Date().toISOString(),
                     activeStep: 0,
+                    prevStep: [],
                     itemsScore: activeScore,
                 });
             }
@@ -72,11 +71,14 @@ export const ReportWizard: React.FC<IProps> = (props) => {
     }, [activeScore, activeMetric, props.maxScore, props.report]);
 
     useEffect(() => {
+        console.log({ score });
         if (score && dispatch) {
             const dateOld = lastedUpdated ?? "1999-01-01";
 
             const oldDay = moment(new Date(dateOld)).format("YYYY-MM-DD");
             const toDay = moment(new Date()).format("YYYY-MM-DD");
+
+            console.log(oldDay, toDay, oldDay < toDay);
 
             if (oldDay < toDay) {
                 dispatch(setPsychometricScore(score));
@@ -121,8 +123,6 @@ export const ReportWizard: React.FC<IProps> = (props) => {
                     <Psychometric
                         title="Your Score"
                         scores={score}
-                        size={"100px"}
-                        h_align="items-center"
                         collapse={true}
                     />
                     {isMeasured && (

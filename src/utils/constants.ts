@@ -26,6 +26,13 @@ export const M_COLOR: MetricColor = {
     pleasant: "",
 };
 
+export const START_PROMPTS = [
+    "Check stress level",
+    "Check mood level",
+    "Check uneasy level",
+    "Check saddness level",
+];
+
 //How would you describe your current mood?
 
 export const INSTRUCTIONS: Record<InstructionType, string> = {

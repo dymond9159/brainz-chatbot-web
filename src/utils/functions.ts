@@ -65,7 +65,7 @@ export const findLastIndex = <T>(arr: Array<T>, filter: T) => {
 };
 
 export const actualArray = (arr: number[]) => {
-    return arr.filter((value) => value !== -1) ?? [];
+    return arr?.filter((value) => value !== -1) ?? [];
 };
 
 export const calculateFinalScore = (

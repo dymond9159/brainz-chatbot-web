@@ -75,7 +75,7 @@ export async function POST(req: NextRequest) {
                     model: llm,
                     stream: true,
                     temperature: 0.7,
-                    messages: [...messages, ...newMessages],
+                    messages: [...systemPrompt, ...messages, ...newMessages],
                 });
             },
 

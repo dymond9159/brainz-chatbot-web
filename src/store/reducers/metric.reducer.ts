@@ -21,7 +21,7 @@ const initialState: MetricStateProps = {
     activeMetric: undefined,
     scores: {
         mood: {
-            score: 0,
+            score: undefined,
             maxScore: 10,
             title: "Hey, Unlock Your Mood, Embrace Your Score!",
             severity: "Not measured yet",
@@ -32,7 +32,7 @@ const initialState: MetricStateProps = {
             itemsScore: new Array(MAX_COUNT).fill(NOT_METRIC_VALUE),
         },
         anxiety: {
-            score: 0,
+            score: undefined,
             maxScore: 21,
             title: "",
             severity: "Not measured yet",
@@ -43,7 +43,7 @@ const initialState: MetricStateProps = {
             itemsScore: new Array(MAX_COUNT).fill(NOT_METRIC_VALUE),
         },
         depression: {
-            score: 0,
+            score: undefined,
             maxScore: 27,
             title: "",
             severity: "Not measured yet",
@@ -53,8 +53,8 @@ const initialState: MetricStateProps = {
             prevStep: new Array(MAX_COUNT).fill(0),
             itemsScore: new Array(MAX_COUNT).fill(NOT_METRIC_VALUE),
         },
-        ptsd: {
-            score: 0,
+        trauma: {
+            score: undefined,
             maxScore: 80,
             title: "",
             severity: "Not measured yet",
@@ -78,10 +78,10 @@ export const metricReducer = createSlice({
             if (!state.activeMetric || !state.scores) return;
 
             const _updatedScore =
-                state.scores[state.activeMetric].itemsScore ??
+                state.scores[state.activeMetric]?.itemsScore ??
                 new Array(MAX_COUNT).fill(NOT_METRIC_VALUE);
 
-            if (_updatedScore) {
+            if (_updatedScore && state.scores[state.activeMetric]) {
                 _updatedScore[action.payload.scoreIndex] = action.payload.score;
                 state.scores[state.activeMetric].itemsScore = _updatedScore;
                 state.scores[state.activeMetric].activeStep =
@@ -94,6 +94,11 @@ export const metricReducer = createSlice({
         },
         clearMetricInfo: (state) => {
             if (!state.activeMetric || !state.scores) return;
+
+            if (!state.scores[state.activeMetric]) {
+                state.scores[state.activeMetric] =
+                    initialState.scores[state.activeMetric];
+            }
 
             state.scores[state.activeMetric].itemsScore = new Array(
                 MAX_COUNT,
@@ -114,8 +119,7 @@ export const metricReducer = createSlice({
                 ...score,
                 updatedDate: new Date().toISOString(),
             };
-            const metricName = state.activeMetric;
-            state.scores[metricName] = updatedScore;
+            state.scores[state.activeMetric] = updatedScore;
         },
     },
 });
