@@ -16,7 +16,7 @@ import _utils from "@/utils";
 import { ANSWER_COLLECT } from "@/libs/questionnaires/answers/answer";
 import { useAppDispatch, useTypedSelector } from "@/store";
 import { clearMetricInfo, setActiveMetric } from "@/store/reducers";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import routes from "@/utils/routes";
 import { ProgramDataType } from "@/types";
 
@@ -30,9 +30,9 @@ export const Metric: React.FC<MetricPageProps> = (props) => {
 
     const [tool, setTool] = useState<ProgramDataType>();
 
-    const callBackUrl = useTypedSelector(
-        (state) => state.common.metricCallBackURL,
-    );
+    const params = useSearchParams();
+
+    const callBackUrl = params.get("next");
 
     useEffect(() => {
         const _tool = _utils.functions.getMetric(props.metricId);
@@ -44,7 +44,7 @@ export const Metric: React.FC<MetricPageProps> = (props) => {
         if (callBackUrl) {
             router.push(callBackUrl);
         } else {
-            router.push(routes.CHATHOME);
+            router.push(routes.EXPLORE);
         }
     };
 

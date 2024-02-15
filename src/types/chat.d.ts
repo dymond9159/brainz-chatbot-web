@@ -46,13 +46,6 @@ export type MetricColor = {
     pleasant: string;
 };
 
-export interface IConversationProps extends IDivProps {
-    last: boolean;
-    content: Message;
-    ref: React.RefObject<HTMLDivElement>;
-    onAnswerClick: (answer: string) => void;
-}
-
 export interface MessageType {
     id: string;
     createdAt?: string;

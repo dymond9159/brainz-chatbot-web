@@ -5,11 +5,7 @@
 // Main Layout
 .main-container {
     width: 100vw;
-    height: 100vh; 
-
-    .left-side {
-        
-    }
+    height: 100vh;     
 
     .main-section {
         width: 100%;
@@ -24,82 +20,7 @@
     }
 }
 
-// Sidebar Styles
-.sidebar {
-    position: relative;
-    background: var(--background-sidebar);
-    width: 280px;
-    min-width: 280px;
-    height: 100vh;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 1px 1px, rgba(0, 0, 0, 0.14) 0px 4px 5px 0px, rgba(0, 0, 0, 0.12) 0px 1px 10px 0px;
-    transition: all 0.2s;
 
-    @include md {
-         display: none;
-         position: absolute;
-         inset: 0;
-         z-index: 5;
-    }
-
-    .wrapper {
-        padding-right: 0px;
-    }
-    
-    .logo-nav {
-       
-    }
-
-    .flex-board {
-        width: 100%;
-        height: calc(100vh - var(--header-height));
-        padding-top: 30px;
-        padding-right: 20px;
-        overflow-y: auto;
-
-        .feature-board, .shortcut-board, .recent-board, .follow-us {
-            width: 100%;
-            margin-bottom: 20px;
-        }
-
-        .feature-board {
-            flex-shrink: 0;
-        }
-
-        .recent-board {
-            flex-grow: 1;
-            overflow-y: hidden;               
-        }
-    
-        .shortcut-board {
-            flex-shrink: 0;
-        }
-
-        .follow-us {
-            flex-shrink: 0;
-            
-            .button {
-                border-radius: var(--border-radius-full);
-            }
-        }
-    }
-
-    .user-profile {
-        flex-shrink: 1;
-        // overflow: hidden;
-        border-top: 1px solid #FFFFFF10;
-        padding: 15px  0px;
-        position: relative;
-    }
-
-}
-
-.sidebar[data-state=open] {
-    display: block;
-}
-
-.sidebar[data-state=close] {
-    display: none;
-}
 
 // Navbar Styles
 .nav {

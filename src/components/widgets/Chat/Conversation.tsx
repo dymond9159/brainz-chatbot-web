@@ -2,13 +2,23 @@ import React, { forwardRef } from "react";
 
 import Markdown, { ExtraProps } from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { Message } from "ai";
 
 import { Flex } from "../../container";
-import { IConversationProps, RecommendedOptionType } from "@/types/chat";
+import { RecommendedOptionType } from "@/types/chat";
 import { Button, ButtonGroup } from "@/components/ui";
 import { NONE } from "@/utils/constants";
 import { useAppDispatch, useTypedSelector } from "@/store";
 import { setMetricCallBackUrl } from "@/store/reducers";
+import { IDivProps } from "@/types";
+
+export interface IConversationProps {
+    last: boolean;
+    content: Message;
+    ref: React.RefObject<HTMLDivElement>;
+    chatId?: string;
+    onAnswerClick: (answer: string) => void;
+}
 
 export const Conversation: React.JSXElementConstructor<IConversationProps> =
     forwardRef(function Bubble(convProps, ref) {
@@ -78,7 +88,7 @@ export const Conversation: React.JSXElementConstructor<IConversationProps> =
                                     }
                                     return resultUI;
                                 },
-                                a: (props) => CustomAnchorTag(props),
+                                a: (props) => CustomAnchorTag(props, convProps),
                             }}
                         >
                             {convProps.content?.content}
@@ -110,10 +120,12 @@ const CustomAnchorTag = (
     props: React.ClassAttributes<HTMLAnchorElement> &
         React.AnchorHTMLAttributes<HTMLAnchorElement> &
         ExtraProps,
+    convProps: IConversationProps,
 ) => {
+    const nextUrl = convProps.chatId ? `?next=../chat/${convProps.chatId}` : "";
     return (
         <a
-            href={props.href}
+            href={`${props.href}${nextUrl}`}
             style={{ fontWeight: "600", color: "#4040e1" }}
         >
             {props.children}

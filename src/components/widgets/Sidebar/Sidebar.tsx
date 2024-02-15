@@ -3,14 +3,7 @@ import React from "react";
 import { cn } from "@/utils/functions";
 import { useSidebar } from "@/hooks/use-sidebar";
 import { Flex, Section, Wrapper } from "../../container";
-import {
-    Logo,
-    ProgramBoard,
-    RecentBoard,
-    ShortcutBoard,
-    SocialBoard,
-    UserProfile,
-} from "..";
+import { Logo, RecentBoard, ShortcutBoard, SocialBoard, UserProfile } from "..";
 
 export interface ISidebarProps extends React.ComponentProps<"div"> {
     chatId?: string;

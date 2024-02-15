@@ -194,6 +194,7 @@ export const Chat: React.FC<ChatPageProps> = (props) => {
                                                     (message, index) => (
                                                         <Conversation
                                                             ref={messagesEndRef}
+                                                            chatId={props.id}
                                                             key={index}
                                                             last={
                                                                 index ===
