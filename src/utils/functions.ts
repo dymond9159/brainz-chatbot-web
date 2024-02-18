@@ -9,11 +9,6 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const nanoId = (size: number = 16) => {
-    // const _id =  customAlphabet(
-    //     "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
-    //     size,
-    // ); // 16-character random string
-
     return nanoid(16);
 };
 
