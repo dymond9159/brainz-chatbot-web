@@ -108,7 +108,7 @@ export const Conversation: React.JSXElementConstructor<IConversationProps> =
         );
     });
 
-// const customeCodeUI = (
+// const customCodeUI = (
 //     node,
 //     children,
 //     props

@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/utils/functions";
 import React, { HTMLInputTypeAttribute, useEffect, useState } from "react";
 
 export interface IInputProps extends React.ComponentProps<"input"> {
@@ -13,25 +14,8 @@ export interface IInputProps extends React.ComponentProps<"input"> {
 }
 
 export const Input: React.FC<IInputProps> = (props) => {
-    const [state, setState] = useState<{
-        value?: string | number;
-    }>({
-        value: "",
-    });
-
-    const _onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        let value = event.target.value;
-
-        setState({ ...state, value: value });
-        props.onChange && props.onChange(event);
-    };
-
-    useEffect(() => {
-        setState({ ...state, value: props.value });
-    }, [props.value]);
-
     return (
-        <div className="input-area">
+        <div className={cn("input-area", props.className)}>
             <input
                 className={props.className}
                 type={props.type}
@@ -39,8 +23,8 @@ export const Input: React.FC<IInputProps> = (props) => {
                 ref={props.inputRef}
                 placeholder={props.placeholder}
                 autoComplete="off"
-                value={state.value}
-                onChange={_onChange}
+                value={props.value}
+                onChange={props.onChange && props.onChange}
                 onKeyUp={props.onKeyUp}
             />
         </div>

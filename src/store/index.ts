@@ -1,5 +1,3 @@
-"use client";
-
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 import {

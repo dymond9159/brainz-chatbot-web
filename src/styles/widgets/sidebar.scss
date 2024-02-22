@@ -30,7 +30,24 @@
     }
     
     .logo-nav {
-       
+       height: var(--header-height);
+    }
+
+    .sidebar-close {
+        display: none;
+        @include md {
+            display: block;
+        }
+    }
+
+    .logo-board {
+        padding-right: 20px;
+
+        a {
+            &:hover {
+                text-decoration: none;
+            }
+        }
     }
 
     .flex-board {

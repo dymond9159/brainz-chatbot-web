@@ -1,12 +1,8 @@
 .logo-nav {
     width: 100%;
-    height: var(--header-height);
-    padding-right: 20px !important;
-    a {
-        &:hover {
-            text-decoration: none;
-        }
-    }
+    // height: var(--header-height);
+    // padding-right: 20px !important;
+    
     .logo {
         cursor: pointer;
         .brainz-logo {
@@ -23,12 +19,5 @@
             margin-left: 10px;
             transform:scaleY(1.15);
         }
-    }
-
-    .sidebar-close {
-        display: none;
-        @include md {
-            display: block;
-        }
-    }
+    }    
 }

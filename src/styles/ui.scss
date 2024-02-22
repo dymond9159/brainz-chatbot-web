@@ -36,6 +36,27 @@ button {
     }
 }
 
+button.ghost {
+    background: transparent;
+    border-radius: var(--border-radius-full);
+    border: solid 1px var(--border-color-primary);
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+button.black {
+    background: var(--foreground-secondary);
+    span {
+        color: var(--background-medium);
+    }
+    &:hover {
+        span {
+            color: var(--background);
+        }
+    }
+}
+
 
 /*
 *   Button Group Styles

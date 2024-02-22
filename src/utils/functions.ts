@@ -78,9 +78,10 @@ export const calculateFinalScore = (
 
 // Using an async function to await the import if you're dealing with dynamic imports
 export async function loadMarkdown(filename: string) {
-    const anxietyIntro = await require("!raw-loader!@/libs/questionnaires" +
-        "/anxiety/intro.md");
-    return anxietyIntro.default as string; // Accessing the default export
+    // const anxietyIntro =
+    //     await require("!markdown-loader!@/libs/questionnaires" +
+    //         "/anxiety/intro.md");
+    // return anxietyIntro.default as string; // Accessing the default export
 }
 
 // Chat

@@ -1,0 +1,43 @@
+.main-container .main-section {
+
+    .auth-content {
+        height: calc(100vh - var(--header-height));
+        max-height: calc(100vh - var(--header-height));
+
+        width: 300px;
+        margin: auto;
+        @include xs {
+            width: 280px;
+        }
+
+        .or-separator {
+            width:100%;
+            display: flex;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            padding: 0 5px;
+            margin: 10px 0px;
+
+            span.or-text {
+                padding: 0px 20px;
+            }
+        }
+
+        .or-separator::before {
+            content: "";
+            width: 50%;
+            height: 1px;
+            background-color: var(--border-color-secondary);
+        }
+
+        .or-separator::after {
+            content: "";
+            width: 50%;
+            height: 1px;
+            background-color: var(--border-color-secondary);
+        }
+    }
+}

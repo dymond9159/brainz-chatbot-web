@@ -6,7 +6,10 @@ const routes = {
     FAQ: `${WEB_URL}/faq`,
     CONTACT: `${WEB_URL}/contact`,
     //chat
-    CHATHOME: "/",
+    INDEX: "/",
+    CHATHOME: "/home",
+    SIGNUP: "/auth/signup",
+    SIGNIN: "/auth/signin",
     EXPLORE: "/explore",
     DASHBOARD: "/dashboard",
     ACCOUNTSETTING: "/account",
