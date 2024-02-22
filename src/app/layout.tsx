@@ -9,6 +9,7 @@ import { cn } from "@/utils/functions";
 import { Providers } from "@/components/provider/store-providers";
 import AuthProvider from "@/components/provider/auth-provider";
 import { ThemeProvider } from "@/components/provider/theme-provider";
+import { auth } from "@/auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,11 +36,12 @@ export const viewport: Viewport = {
     ],
 };
 
-export default function RootLayout(props: LayoutProps) {
+export default async function RootLayout(props: LayoutProps) {
+    const session = await auth();
     return (
         <html lang="en">
             <body className={inter.className}>
-                <AuthProvider>
+                <AuthProvider session={session}>
                     <Providers>
                         <ThemeProvider>
                             <main className={cn("brainz-chat")}>

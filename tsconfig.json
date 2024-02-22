@@ -40,7 +40,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts", "src/middleware___", 
+    ".next/types/**/*.ts", "src/middleware.ts", 
   ],
   "exclude": [
     "node_modules"

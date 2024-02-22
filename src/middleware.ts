@@ -1,9 +1,8 @@
 // Importing NextAuth and the authentication configuration
-import NextAuth from "next-auth";
-import { nextAuthConfig } from "./auth.config";
+import { auth } from "@/auth";
 
 // Exporting the authentication middleware using NextAuth and the provided configuration
-export default NextAuth(nextAuthConfig).auth;
+export default auth;
 
 // Additional configuration for the middleware
 export const config = {

@@ -5,13 +5,12 @@ import { cn } from "@/utils/functions";
 import routes from "@/utils/routes";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 const UnAuthedLayout = (props: LayoutProps) => {
-    const { data: session, status } = useSession();
     const router = useRouter();
+    const { status } = useSession();
     if (status === "authenticated") {
-        return router.push(routes.CHAT);
+        return router.back();
     }
     return <div className={cn("unauthorized")}>{props.children}</div>;
 };

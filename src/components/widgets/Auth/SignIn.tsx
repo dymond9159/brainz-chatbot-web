@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { signIn } from "next-auth/react";
 import {
     Flex,
     Container,
@@ -13,13 +12,11 @@ import { Button, ButtonGroup, Input } from "@/components/ui";
 import { Logo } from "@/components/widgets";
 import routes from "@/utils/routes";
 import Link from "next/link";
+import authAction from "@/store/actions";
 
 export const SignIn: React.FC = () => {
     const handleSignIn = async (provider: string) => {
-        await signIn(provider, {
-            redirect: true,
-            callbackUrl: routes.CHAT,
-        });
+        await authAction.signin(provider);
     };
     return (
         <Container className="main-container">

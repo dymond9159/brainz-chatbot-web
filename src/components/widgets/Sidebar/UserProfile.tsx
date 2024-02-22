@@ -5,13 +5,15 @@ import { Flex } from "../../container";
 import { Button, Dropdown } from "../../ui";
 import { IDivProps } from "@/types";
 import { BrainzAvatar } from "..";
-import { useRouter } from "next/navigation";
-import { useSession, signOut } from "next-auth/react";
-import routes from "@/utils/routes";
+import { useSession } from "next-auth/react";
+import authAction from "@/store/actions";
 
 export const UserProfile: React.FC<IDivProps> = (props) => {
-    const { data: session, status } = useSession();
-    const router = useRouter();
+    const { data: session } = useSession();
+
+    const handleSignOut = async () => {
+        await authAction.signout();
+    };
 
     return (
         <Flex className={`${props.className} row gap-10`}>
@@ -27,7 +29,7 @@ export const UserProfile: React.FC<IDivProps> = (props) => {
                 <span>{session?.user?.email ?? ""}</span>
             </Flex>
             <Button
-                onClick={() => signOut({ callbackUrl: routes.INDEX })}
+                onClick={() => handleSignOut()}
                 icon="box-arrow-right"
             ></Button>
             {/* <Dropdown label="...">
