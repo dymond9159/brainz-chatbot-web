@@ -2,7 +2,6 @@
 
 import { LayoutProps } from "@/types";
 import { cn } from "@/utils/functions";
-import routes from "@/utils/routes";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 

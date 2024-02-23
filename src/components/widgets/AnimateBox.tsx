@@ -1,5 +1,4 @@
 import React, { Children } from "react";
-import Avatar from "react-avatar";
 
 import { cn } from "@/utils/functions";
 import { IDivProps } from "@/types";

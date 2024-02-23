@@ -42,7 +42,12 @@ export const nextAuthConfig = {
             return isLoggedIn;
         },
         async session({ session }) {
-            console.log(session);
+            // check new User
+
+            // if is new user
+
+            // else registered user
+
             return session;
         },
     },

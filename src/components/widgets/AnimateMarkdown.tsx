@@ -1,7 +1,4 @@
 import React, { Children } from "react";
-import Avatar from "react-avatar";
-
-import { cn } from "@/utils/functions";
 import { IDivProps } from "@/types";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
