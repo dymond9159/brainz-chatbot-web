@@ -27,9 +27,10 @@ export const Register = () => {
     const token = params.get("verified");
 
     const decode = _utils.functions.jwtDecodeToken(token ?? "");
-    if (!decode || decode?.email !== email) {
+    const isVerified = decode && decode?.email === email;
+    if (!isVerified) {
         // const verifyUrl = `${process.env.NEXT_PUBLIC_API_URL}${routes.VERIFY}?email=${email}&token=${token}`;
-        router.push(routes.SIGNUP);
+        // router.push(routes.SIGNUP);
     }
 
     const initialState: UserCreateParams = {
@@ -43,7 +44,8 @@ export const Register = () => {
         locale: decode?.locale,
         address: decode?.address,
         image: decode?.image,
-        emailVerified: true,
+        emailVerified: decode?.emailVerified ?? isVerified ?? false,
+        provider: decode?.provider ?? "credentials",
     };
     const status = useFormStatus();
     const [formState, setFormState] = useState<UserCreateParams>(initialState);
@@ -61,10 +63,21 @@ export const Register = () => {
         if (formState.name && formState.password) {
             const user = await authAction.register(formState);
             if (!!user) {
-                await authAction.signinWithEmail(
-                    user as UserCreateParams,
-                    routes.CHATHOME,
-                );
+                if (formState.provider === "credentials") {
+                    await authAction.signinWithEmail(
+                        {
+                            email: formState.email,
+                            password: formState.password,
+                        },
+                        routes.CHATHOME,
+                    );
+                } else {
+                    if (formState.provider)
+                        await authAction.signinWithProvider(
+                            formState.provider,
+                            routes.CHATHOME,
+                        );
+                }
             }
         }
     };

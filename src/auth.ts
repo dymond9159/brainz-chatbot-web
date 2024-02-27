@@ -96,6 +96,7 @@ export const nextAuthConfig = {
                         locale: profile?.locale ?? "",
                         address: profile?.address ?? undefined,
                         image: profile?.picture,
+                        provider: account?.provider,
                     };
                     const token = jwtModule.generateToken(newAccount, {
                         expiresIn: "30min",

@@ -56,6 +56,7 @@ export const creatUser = async (userData: UserCreateParams) => {
                 address: userData.address,
                 image: userData.image,
                 visits: 1,
+                provider: userData.provider,
             },
         });
         return user;

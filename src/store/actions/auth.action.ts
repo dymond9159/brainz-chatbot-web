@@ -8,9 +8,12 @@ import { UserCreateParams } from "@/types";
 import jwtModule from "@/modules/jwt.module";
 import mailModule from "@/modules/nodemailer.module";
 
-export const signinWithProvider = async (provider: string) => {
+export const signinWithProvider = async (
+    provider: string,
+    redirectTo?: string,
+) => {
     await signIn(provider, {
-        redirectTo: routes.CHAT,
+        redirectTo: redirectTo??routes.CHAT,
     });
 };
 
