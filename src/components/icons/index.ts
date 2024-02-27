@@ -20,6 +20,10 @@ export * from "./chat-icons";
 export * from "./contact-icons";
 export * from "./remove-icons";
 
+export * from "./email-icons";
+export * from "./check-icons";
+export * from "./eye-icons";
+
 //
 export * from "./x-diamond-icons";
 export * from "./grid-icons";

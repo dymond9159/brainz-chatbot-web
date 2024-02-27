@@ -35,7 +35,9 @@ export const Icon: FC<IIconProps> = (props) => {
     }, [name]);
 
     return component ? (
-        React.createElement(component, { color, size, ...rest })
+        <div className="icon">
+            {React.createElement(component, { color, size, ...rest })}
+        </div>
     ) : (
         <></>
     );

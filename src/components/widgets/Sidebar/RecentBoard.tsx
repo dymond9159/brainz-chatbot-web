@@ -41,7 +41,7 @@ export const RecentBoard: React.FC<IProps> = (props) => {
     return (
         <ButtonGroup
             groupname="Recent Mindchats"
-            className="recent-programs-scroll full col justify-start items-start"
+            className="recent-programs-scroll w-full col justify-start items-start"
         >
             <Suspense fallback={<div>Loading...</div>}>
                 {chats &&
@@ -49,7 +49,7 @@ export const RecentBoard: React.FC<IProps> = (props) => {
                         <Button
                             className={cn(
                                 item.id === props.chatId ? "current" : "",
-                                ["full", "relative", "last-message"],
+                                ["w-full", "relative", "last-message"],
                             )}
                             key={index}
                             onClick={() => handleToChat(item?.id ?? "")}

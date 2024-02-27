@@ -9,10 +9,10 @@ export const Navbar: React.FC<IDivProps> = (props) => {
     const { toggleSidebar } = useSidebar();
     return (
         <Content className={`header nav ${props.className}`}>
-            <Flex className="row items-center justify-between full">
-                <Flex className="row items-center justify-between full">
+            <Flex className="row items-center justify-between w-full">
+                <Flex className="row items-center justify-between w-full">
                     <Wrapper>
-                        <Flex className="row items-center justify-between full">
+                        <Flex className="row items-center justify-between w-full">
                             <Flex className="row gap-10">
                                 <Button
                                     className="side-toggle"

@@ -50,7 +50,7 @@ export const Home: React.FC = () => {
                                 <h3 className="sub-title">
                                     How can we help you?
                                 </h3>
-                                <Flex className="wrap full gap-15 items-start">
+                                <Flex className="wrap w-full gap-15 items-start">
                                     <HomeShortcutItem
                                         title={"Mind Test"}
                                         url={routes.EXPLORE}

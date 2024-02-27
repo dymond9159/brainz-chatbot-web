@@ -26,14 +26,6 @@ button {
         color: var(--foreground-secondary);
         text-align: center;
     }
-
-    &:disabled {
-        cursor: default;
-        color:var(--foreground-secondary);
-        &:hover {
-            background: var(--background-trans-10);
-        }
-    }
 }
 
 button.ghost {
@@ -47,15 +39,34 @@ button.ghost {
 
 button.black {
     background: var(--foreground-secondary);
+    color: var(--background-medium);
     span {
         color: var(--background-medium);
     }
     &:hover {
+        color: var(--background);
         span {
             color: var(--background);
         }
     }
 }
+
+// button:disabled {
+//     color: #333;
+//     background: #aaa;
+//     border-color: transparent;
+//     opacity: 0.5;
+//     &:hover {
+//         opacity: 0.5;
+//         color: #333;
+//         background: #aaa;
+//         border-color: transparent;
+
+//         span {
+//             color: var(--background-medium);
+//         }
+//     }
+// }
 
 
 /*
@@ -76,6 +87,25 @@ button.black {
         overflow-y: auto;
     }
 }
+
+/*
+*    ICon
+*/
+
+// div.icon {
+//     width: fit-content;
+//     height: fit-content;
+// }
+
+// .input-area {
+//     position: relative;
+//     .icon {
+//         position: absolute;
+//         right: 10px;
+//         bottom: 13px;
+//         z-index: 10;
+//     }
+// }
 
 /*
 *   Input, Textarea
@@ -109,6 +139,14 @@ input, textarea {
     
     &:focus {
         border: 1px solid var(--background-light);
+    }
+  }
+
+  .error {
+    color: var(--error-color)!important;
+
+    input, textarea {
+        border-color: var(--error-color) !important;
     }
   }
 

@@ -8,7 +8,7 @@ export const SocialBoard: React.FC = (props) => {
     return (
         <ButtonGroup
             groupname="Follow us"
-            className="full row gap-10 justify-start"
+            className="w-full row gap-10 justify-start"
         >
             {/* <Link
                 href={_utils.routes.LINKEDIN}

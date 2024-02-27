@@ -31,7 +31,7 @@ export const MobileNavigator = () => {
     const router = useRouter();
     return (
         <Content className="mobile-navigator">
-            <Flex className="row items-center justify-around full">
+            <Flex className="row items-center justify-around w-full">
                 {NAVIGATOR_MENU &&
                     NAVIGATOR_MENU.map((_, index) => (
                         <Button

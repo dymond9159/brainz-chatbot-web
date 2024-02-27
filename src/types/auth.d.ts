@@ -1,0 +1,31 @@
+export type UserCreateParams = {
+    id?: string;
+    name?: string;
+    email: string;
+    emailVerified?: boolean;
+    password?: string;
+    firstname?: string;
+    lastname?: string;
+    birthdate?: string;
+    phone?: string;
+    locale?: string;
+    address?: {
+        formatted?: string | null | undefined;
+        street_address?: string | null | undefined;
+        locality?: string | null | undefined;
+        region?: string | null | undefined;
+        postal_code?: string | null | undefined;
+        country?: string | null | undefined;
+    };
+    bio?: string;
+    image?: string;
+    customUrl?: string;
+    createdAt?: Date;
+    updatedAt?: Date;
+    online?: boolean;
+    visits?: number;
+    visitedAt?: Date;
+    billingEmail?: string;
+    subscription?: string;
+    provider?: string;
+};

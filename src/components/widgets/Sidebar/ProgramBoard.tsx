@@ -8,9 +8,9 @@ export const ProgramBoard: React.FC = (props) => {
     return (
         <ButtonGroup
             groupname="Programs"
-            className="full col gap-10 justify-start items-start"
+            className="w-full col gap-10 justify-start items-start"
         >
-            <Flex className="shortcut row gap-15 full">
+            <Flex className="shortcut row gap-15 w-full">
                 <Icon name="radio-grid" />
                 <Link href={`${routes.EXPLORE}#programs`}>Explore</Link>
             </Flex>

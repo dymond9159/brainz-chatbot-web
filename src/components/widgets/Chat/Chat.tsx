@@ -183,8 +183,8 @@ export const Chat: React.FC<ChatPageProps> = (props) => {
                 />
                 <Flex className="main-section col">
                     <Navbar className="main-nav"></Navbar>
-                    <Content className="chat-content full">
-                        <Flex className="col items-center justify-center full h-full">
+                    <Content className="chat-content w-full">
+                        <Flex className="col items-center justify-center w-full h-full">
                             <Content className="chat-area">
                                 <Wrapper>
                                     {messages.length > 0 && (
@@ -234,8 +234,8 @@ export const Chat: React.FC<ChatPageProps> = (props) => {
                                     />
                                 </Wrapper>
                             </Content>
-                            <Flex className="chat-prompts row items-end full">
-                                <Wrapper className="full">
+                            <Flex className="chat-prompts row items-end w-full">
+                                <Wrapper className="w-full">
                                     <Flex className="row justify-center items-center gap-10">
                                         {/* <Button>Psychometric Test</Button> */}
                                         {/* <Button icon="radio-grid">Explore</Button> */}
@@ -260,7 +260,7 @@ export const Chat: React.FC<ChatPageProps> = (props) => {
                                         <Textarea
                                             type="textarea"
                                             placeholder="Start chatting..."
-                                            className="full"
+                                            className="w-full"
                                             rows={1}
                                             tabIndex={0}
                                             disabled={isLoading}

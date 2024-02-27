@@ -8,6 +8,11 @@ export interface LayoutProps {
     params?: any;
 }
 
+export type ResponseData = {
+    status: "error" | "success";
+    message: string;
+};
+
 export type IDataProps = {
     type: "answer" | "score";
     result: JSONValue[] | JSONValue;

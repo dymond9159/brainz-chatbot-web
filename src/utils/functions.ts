@@ -1,7 +1,8 @@
 import { clsx, type ClassValue } from "clsx";
 import { nanoid } from "ai";
+import { jwtDecode } from "jwt-decode";
 import { INSTRUCTIONS, PROGRAMS, PSYCHOMETRICS } from "./constants";
-import { InstructionType, ProgramDataType } from "@/types";
+import { InstructionType, ProgramDataType, UserCreateParams } from "@/types";
 import _utils from ".";
 
 export function cn(...inputs: ClassValue[]) {
@@ -25,6 +26,15 @@ export function formatDate(
         day: "numeric",
         year: "numeric",
     });
+}
+
+export function jwtDecodeToken(token: string) {
+    try {
+        const decoded = jwtDecode<UserCreateParams>(token);
+        return decoded;
+    } catch (err) {
+        return null;
+    }
 }
 
 export function compareDate(oldDate?: string, newDate?: string): number {

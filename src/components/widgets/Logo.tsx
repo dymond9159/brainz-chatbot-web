@@ -13,7 +13,7 @@ export const Logo = (props: IProps) => {
         <Content className="logo-nav">
             <Flex
                 className={cn(
-                    "items-center justify-between full gap-5",
+                    "items-center justify-between w-full gap-5",
                     props.dir ?? "row",
                 )}
             >

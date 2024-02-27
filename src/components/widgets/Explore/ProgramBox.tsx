@@ -12,7 +12,7 @@ interface IProps extends IDivProps {
 
 export const ProgramBox: React.FC<IProps> = (props) => {
     return (
-        <Flex className="wrap items-center justify-center full gap-15">
+        <Flex className="wrap items-center justify-center w-full gap-15">
             <h2 id={props.id}>{props.title}</h2>
             <p>{props.description}</p>
             <Flex className="wrap justify-between gap-10 mt-10">

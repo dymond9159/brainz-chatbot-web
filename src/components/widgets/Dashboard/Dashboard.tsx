@@ -36,7 +36,7 @@ export const Dashboard: React.FC = () => {
                             {/* <MonitorBox title="Calendar"></MonitorBox> */}
                             <Section>
                                 <MonitorBox title="">
-                                    <Flex className="wrap full gap-15 items-start">
+                                    <Flex className="wrap w-full gap-15 items-start">
                                         <Psychometric
                                             title="Trauma"
                                             scores={psycometricScores?.trauma}

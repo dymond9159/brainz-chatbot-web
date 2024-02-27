@@ -34,13 +34,13 @@ export const ShortcutBoard: React.FC = (props) => {
     return (
         <ButtonGroup
             groupname=""
-            className="shortcut-button full col gap-10 justify-start"
+            className="shortcut-button w-full col gap-10 justify-start"
         >
             {SHORTCUTS &&
                 SHORTCUTS.map((item, i) => (
                     <Flex
                         key={i}
-                        className="shortcut row gap-15 full"
+                        className="shortcut row gap-15 w-full"
                     >
                         <Icon name={item.icon} />
                         <Link

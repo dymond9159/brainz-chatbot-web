@@ -22,7 +22,7 @@ export const Button: React.FC<ButtonProps> = (props) => {
             onClick={(e) => props.onClick && props.onClick(e)}
             {...props}
         >
-            <Flex className={cn("gap-5 full", vertical)}>
+            <Flex className={cn("gap-5 w-full", vertical)}>
                 {!props.supicon && (
                     <Icon
                         size="16"
@@ -30,7 +30,7 @@ export const Button: React.FC<ButtonProps> = (props) => {
                     />
                 )}
                 {props.children && (
-                    <span className="button-text full">{props.children}</span>
+                    <span className="button-text w-full">{props.children}</span>
                 )}
                 {props.supicon && (
                     <Icon

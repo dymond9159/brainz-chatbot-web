@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { signIn } from "next-auth/react";
 import {
     Flex,
@@ -13,32 +13,78 @@ import { Button, ButtonGroup, Input } from "@/components/ui";
 import { Logo } from "@/components/widgets";
 import routes from "@/utils/routes";
 import Link from "next/link";
+import authAction from "@/store/actions";
 import { OrElement } from ".";
+import { UserCreateParams } from "@/types";
+import { useRouter } from "next/navigation";
+import { cn } from "@/utils/functions";
 
 export const SignUp: React.FC = () => {
-    const handleSignUp = async (provider: string) => {
-        await signIn(provider);
+    const router = useRouter();
+
+    const initialState: UserCreateParams = {
+        email: "",
     };
+    const [formState, setFormState] = useState<UserCreateParams>(initialState);
+    const [errorMessage, setErrorMessage] = useState<string>();
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormState((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+        setErrorMessage(undefined);
+    };
+
+    const handleSignUp = async (provider: string) => {
+        if (provider === "credentials") {
+            if (formState.email.trim() === "") {
+                return;
+            }
+            const response = await authAction
+                .signupWithEmail(formState)
+                .catch((reason) => {
+                    setErrorMessage("Your email and password is invalid.");
+                    return;
+                });
+            if (typeof response === "string") {
+                if (response.includes("verification_sent")) {
+                    router.push(response);
+                } else {
+                    setErrorMessage(response);
+                }
+            }
+        } else {
+            await authAction.signinWithProvider(provider);
+        }
+    };
+
     return (
         <Container className="main-container">
             <Flex className="main-section">
                 <Wrapper className="">
                     <Content className="auth-content">
-                        <Section className="flex col items-center justify-center">
+                        <Section className="flex col items-center justify-center h-full">
                             <Logo dir="col" />
                             <br />
                             <br />
                             <br />
                             <h1 className="page-title">Sign up</h1>
-                            <ButtonGroup className="col gap-15">
+                            <form
+                                className={cn(
+                                    "flex col gap-15",
+                                    errorMessage ? "error" : "",
+                                )}
+                            >
                                 <Button
-                                    className="full ghost p-10"
+                                    className="w-full ghost p-10"
                                     onClick={() => handleSignUp("facebook")}
                                 >
                                     Sign up With Facebook
                                 </Button>
                                 <Button
-                                    className="full ghost p-10"
+                                    className="w-full ghost p-10"
                                     onClick={() => handleSignUp("google")}
                                 >
                                     Sign up With Google
@@ -46,17 +92,22 @@ export const SignUp: React.FC = () => {
                                 <OrElement />
                                 <Input
                                     type="text"
-                                    name="username"
+                                    name="email"
                                     placeholder="email"
-                                    className="full"
+                                    className="w-full"
+                                    required
+                                    value={formState.email}
+                                    onChange={handleChange}
                                 />
-                                <Input
-                                    type="password"
-                                    name="password"
-                                    placeholder="password"
-                                    className="full"
-                                />
-                                <Button className="full ghost black p-10">
+                                {errorMessage && (
+                                    <span className="error">
+                                        {errorMessage}
+                                    </span>
+                                )}
+                                <Button
+                                    className="w-full ghost black p-10"
+                                    onClick={() => handleSignUp("credentials")}
+                                >
                                     SIGN UP
                                 </Button>
                                 <br></br>
@@ -64,7 +115,7 @@ export const SignUp: React.FC = () => {
                                     {"Do you have an account?"}{" "}
                                     <Link href={routes.SIGNIN}>Sign in</Link>
                                 </p>
-                            </ButtonGroup>
+                            </form>
                         </Section>
                     </Content>
                 </Wrapper>

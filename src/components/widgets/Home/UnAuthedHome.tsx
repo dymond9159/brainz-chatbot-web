@@ -41,17 +41,17 @@ export const UnAuthedHome: React.FC = () => {
                             <ButtonGroup className="col gap-15">
                                 <Button
                                     onClick={handleSignUp}
-                                    className="full black"
+                                    className="w-full black"
                                 >
                                     SIGN UP FREE
                                 </Button>
                                 <Button
                                     onClick={handleSignIn}
-                                    className="full"
+                                    className="w-full"
                                 >
                                     LOG IN
                                 </Button>
-                                <Button className="full">
+                                <Button className="w-full">
                                     EXPLORE ANONYMOUSLY
                                 </Button>
                             </ButtonGroup>

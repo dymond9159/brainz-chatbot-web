@@ -15,13 +15,22 @@ export default function Error({
     }, [error]);
 
     return (
-        <div>
+        <div
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100vw",
+                height: "100vh",
+            }}
+        >
+            <h1 style={{ fontSize: "102px", opacity: 0.1 }}>500!</h1>
             <h2>Something went wrong!</h2>
+            <br />
             <button
-                onClick={
-                    // Attempt to recover by trying to re-render the segment
-                    () => reset()
-                }
+                className="ghost black"
+                onClick={() => reset()}
             >
                 Try again
             </button>
