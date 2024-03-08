@@ -1,8 +1,8 @@
 "use client";
 
 import { cn } from "@/utils/functions";
-import React, { HTMLInputTypeAttribute, useEffect, useState } from "react";
-import { Button, Icon } from "..";
+import React, { HTMLInputTypeAttribute } from "react";
+import { Icon } from "..";
 
 export interface IInputProps extends React.ComponentProps<"input"> {
     type: HTMLInputTypeAttribute;

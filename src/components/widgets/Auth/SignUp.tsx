@@ -56,7 +56,7 @@ export const SignUp: React.FC = () => {
                 }
             }
         } else {
-            await authAction.signinWithProvider(provider);
+            await authAction.signinWithProvider(provider, routes.ONBOARD);
         }
     };
 

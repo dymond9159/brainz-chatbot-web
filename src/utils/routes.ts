@@ -9,6 +9,7 @@ const routes = {
     PRIVACY: `${WEB_URL}/policy/privacy`,
     //chat
     INDEX: `/`,
+    ONBOARD: `/onboard`,
     CHATHOME: `/home`,
     SIGNUP: `/auth/signup`,
     SIGNIN: `/auth/signin`,

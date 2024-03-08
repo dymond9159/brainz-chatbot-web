@@ -7,6 +7,6 @@ export default auth;
 // Additional configuration for the middleware
 export const config = {
     // Defining a matcher to specify routes where the middleware should be applied
-    matcher: ["/chat", "/dashboard", "/explore", "/home", "/test"],
+    matcher: ["/onboard", "/chat", "/dashboard", "/explore", "/home", "/test"],
 };
 // "/((?!api|_next/static|_next/image|.*\\.png$).*)"

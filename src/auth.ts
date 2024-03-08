@@ -11,6 +11,7 @@ import type { NextAuthConfig, User } from "next-auth";
 import { UserCreateParams } from "./types";
 import jwtModule from "./modules/jwt.module";
 import routes from "./utils/routes";
+import { redirect } from "next/dist/server/api-utils";
 
 // declare module "next-auth" {
 //     interface Session {
@@ -41,7 +42,6 @@ export const nextAuthConfig = {
         Credentials({
             name: "credentials",
             async authorize(credentials, request) {
-                const { mode } = credentials;
                 // Parsing and validating incoming credentials using Zod
                 const parsedCredentials = z
                     .object({
@@ -85,7 +85,7 @@ export const nextAuthConfig = {
             }
             if (account?.provider !== "credentials") {
                 if (await authModule.isNewUser(user.email)) {
-                    const newAccount: UserCreateParams = {
+                    const userData: UserCreateParams = {
                         email: profile?.email ?? user.email ?? "",
                         name: profile?.nickname ?? profile?.name ?? "",
                         emailVerified: profile?.email_verified ?? false,
@@ -98,32 +98,25 @@ export const nextAuthConfig = {
                         image: profile?.picture,
                         provider: account?.provider,
                     };
-                    const token = jwtModule.generateToken(newAccount, {
-                        expiresIn: "30min",
-                    });
-                    const url = `${routes.REGISTER}?email=${newAccount.email}&verified=${token}`;
-                    return url;
+
+                    const response = await authModule.creatUser(userData);
+                    if (response) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
             }
             return true;
         },
         async authorized({ auth, request }) {
             const isLoggedIn = !!auth?.user;
-            // console.log("authorized >>> ", isLoggedIn, auth, request.url);
             return isLoggedIn;
         },
         async session({ session, token, trigger }) {
-            // console.log("session >>> ");
             return session;
         },
         async jwt({ token, user, account, profile, trigger }) {
-            // console.log("jwt >>> ", { token, user, account, profile, trigger });
-
-            if (user && user.email) {
-                if (await authModule.isNewUser(user?.email)) {
-                    // redirect register - new user
-                }
-            }
             return token;
         },
     },
@@ -134,7 +127,7 @@ export const nextAuthConfig = {
         signIn: "/auth/signin",
         newUser: "/auth/register",
         verifyRequest: "/auth/verify",
-        error: "/error",
+        error: "/auth/signin",
     },
     // debug: true,
 } satisfies NextAuthConfig;

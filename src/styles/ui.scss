@@ -51,22 +51,26 @@ button.black {
     }
 }
 
-// button:disabled {
-//     color: #333;
-//     background: #aaa;
-//     border-color: transparent;
-//     opacity: 0.5;
-//     &:hover {
-//         opacity: 0.5;
-//         color: #333;
-//         background: #aaa;
-//         border-color: transparent;
+button:disabled {
+    cursor: default;
+    color: #333;
+    background: #aaa;
+    border-color: transparent;
+    opacity: 0.5;
+    span {
+        color: var(--forground-medium);
+    }
+    &:hover {
+        opacity: 0.5;
+        color: #333;
+        background: #aaa;
+        border-color: transparent;
 
-//         span {
-//             color: var(--background-medium);
-//         }
-//     }
-// }
+        span {
+            color: var(--forground-medium);
+        }
+    }
+}
 
 
 /*

@@ -8,13 +8,10 @@ import {
     Section,
     Content,
     Wrapper,
-    Box,
 } from "@/components/container";
-import { Button } from "@/components/ui";
 import {
     HomeShortcutItem,
     MobileNavigator,
-    MoodScale,
     Navbar,
     Sidebar,
 } from "@/components/widgets";
@@ -23,14 +20,6 @@ import routes from "@/utils/routes";
 
 export const Home: React.FC = () => {
     const router = useRouter();
-
-    const handleTest = () => {
-        router.push(`${routes.EXPLORE}#psychometric`);
-    };
-
-    const handleGoProgram = () => {
-        router.push(`${routes.EXPLORE}#programs`);
-    };
 
     return (
         <Container className="main-container">

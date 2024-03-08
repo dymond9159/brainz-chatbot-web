@@ -38,9 +38,11 @@ export const isNewUser = async (email: string) => {
 };
 
 export const creatUser = async (userData: UserCreateParams) => {
-    if (!userData.email || !userData.password || !userData.name) return null;
-
-    const hashed = await generatePasswordHash(userData.password);
+    if (!userData.email || !userData.name) return null;
+    let hashed = undefined;
+    if (userData.password) {
+        hashed = await generatePasswordHash(userData.password ?? "");
+    }
     try {
         const user = await prisma.user.create({
             data: {
@@ -61,6 +63,6 @@ export const creatUser = async (userData: UserCreateParams) => {
         });
         return user;
     } catch (err) {
-        throw err;
+        console.log(err);
     }
 };

@@ -15,21 +15,20 @@ interface IProps extends IDivProps {
 export const AnimateBox: React.FC<IProps> = (props) => {
     return (
         <motion.div
-            className="relative h-8"
             variants={{
                 initial: {
-                    height: 0,
+                    // height: 0,
                     ...props.initial,
                 },
                 animate: {
-                    height: "auto",
+                    // height: "auto",
                     ...props.animate,
                 },
             }}
             initial={"initial"}
             animate={"animate"}
             transition={{
-                duration: props.duration ?? 0.3,
+                duration: props.duration ?? 0.5,
                 ease: "easeIn",
             }}
         >

@@ -13,7 +13,7 @@ import { UserCreateParams } from "@/types";
 import { cn } from "@/utils/functions";
 import routes from "@/utils/routes";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormStatus } from "react-dom";
 
 import authAction from "@/store/actions";
@@ -69,14 +69,8 @@ export const Register = () => {
                             email: formState.email,
                             password: formState.password,
                         },
-                        routes.CHATHOME,
+                        routes.ONBOARD,
                     );
-                } else {
-                    if (formState.provider)
-                        await authAction.signinWithProvider(
-                            formState.provider,
-                            routes.CHATHOME,
-                        );
                 }
             }
         }
@@ -133,7 +127,7 @@ export const Register = () => {
                                 <Button
                                     type="submit"
                                     className="w-full ghost black p-10"
-                                    disabled={status.pending || !email}
+                                    disabled={status.pending || !isVerified}
                                     onClick={() => handleRegister()}
                                 >
                                     CONTINUE
