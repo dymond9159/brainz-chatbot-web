@@ -37,7 +37,7 @@
 
 }
 
-.dark {
+:root[data-theme=dark] {
     --background: #313951;
     --background-sidebar: #283046;
     --background-heavy: #283046;

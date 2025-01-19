@@ -23,7 +23,7 @@ export const Navbar: React.FC<IDivProps> = (props) => {
                                 />
                                 <h4>{props.children}</h4>
                             </Flex>
-                            {/* <ThemeToggle /> */}
+                            <ThemeToggle />
                         </Flex>
                     </Wrapper>
                 </Flex>
