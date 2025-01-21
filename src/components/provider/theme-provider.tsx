@@ -5,10 +5,9 @@ import { SidebarProvider } from '@/hooks/use-sidebar';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { ThemeProviderProps } from 'next-themes/dist/types';
 
-export const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
+export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   return (
     <NextThemesProvider
-      {...props}
       storageKey='brainz-theme'
       defaultTheme='dark'
       enableSystem={true}

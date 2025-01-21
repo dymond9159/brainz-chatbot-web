@@ -1,13 +1,13 @@
-import { SessionProvider, SessionProviderProps } from 'next-auth/react';
-import type { Session } from 'next-auth';
+'use client';
 
-const AuthProvider = ({
-  children,
-  session,
-}: React.PropsWithChildren<{ session: Session | null }>) => {
+import { SessionProvider, SessionProviderProps } from 'next-auth/react';
+
+interface IAuthProviderProps extends SessionProviderProps {}
+
+const AuthProvider = ({ session, ...rest }: IAuthProviderProps) => {
   return (
-    <SessionProvider session={session} refetchOnWindowFocus={true}>
-      {children}
+    <SessionProvider session={session} {...rest} refetchOnWindowFocus={true}>
+      {rest.children}
     </SessionProvider>
   );
 };
